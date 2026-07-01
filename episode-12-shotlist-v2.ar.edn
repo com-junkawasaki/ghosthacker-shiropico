@@ -1,0 +1,71 @@
+[
+ {:type "scene", :scene_key "earth_from_space", :scene_prompt "Anime wide shot from orbit: night Earth, teal glowing city grids across continents, suddenly washing into corrupted noise-colored static, ominous epic finale mood, no characters", :sfx "ambient", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Epic anime cyber city under total assault, traffic lights all dark, automatic doors slamming open and shut, three swirling storms of red gear icons, cyan ghost particles, blue Zzz sleep marks raging over the skyline, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "scene", :scene_key "ghost_silhouette_tower", :scene_prompt "Anime menacing shot: faceless cyan ghost silhouette wavering in noise atop a ruined skyscraper, red countdown digits 05 04 03 blinking in the air, dread suspense, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "...الجميع يتحرّكون في آنٍ واحد. الـGhost يربط الثلاثة معًا.", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "لكننا اليوم سننهي كلّ شيء! ——اتركه لي!", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "أولًا الـZombie! إيقاظ جامح!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "dialogue", :speaker "pico", :text "ثم الـDaemon! قطع الجذور!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "وجدتُ الـGhost أيضًا! تتبّع الحرارة!", :shiro_emo "thinking", :pico_emo "smug", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Anime chaos: just-woken devices instantly infecting neighbors with sleep, a gear daemon restarting itself with kacon kacon, a heat trail splitting into three branching ghost paths, generic cyber street", :sfx "alarm", :fx "shake", :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "م-ماذا؟! الـZombie يتكاثر من جديد والـDaemon عاد أيضًا؟!", :shiro_emo "normal", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "pico", :text "لا أستطيع مجاراة كلّ هذا وحدي! وااااه!", :shiro_emo "thinking", :pico_emo "panic", :sfx "pop", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——بيكو. أنت تدور في حلقة مفرغة لأنّك تحمل كلّ شيء وحدك.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "التحديد، الحماية، الكشف، الاستجابة، التعافي. من يتحرّك في كلّ مرحلة؟", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...نفرز، ونوزّع الأدوار، ونتحرّك بالترتيب. فهمت.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "بالضبط. عدوّ اليوم ضخم. لذا سنبذل قصارى جهدنا.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "henshin_bank", :scene_prompt "Anime transformation bank shot: brilliant teal light cocoon of data particles erupting in a cyber city, long shadows stretching, extra-bright climactic finale glow, generic energy burst, no faces", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "أخبريني بالخطّة.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "بترتيب NIST CSF. أولًا التحديد. نرى هدف العدوّ.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "siem_log_field", :scene_prompt "Anime SIEM visualization: thousands of city log streams converging into glowing lines of light suspended in midair, teal data threads forming a defense analysis grid, epic, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "الـGhost يتجسّس على كلّ السجلّات. هدفه هو المعلومات نفسها.", :shiro_emo "surprised", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "إذًا التالي هو الحماية! نرفع جدارًا قبل أن تُسرَق!", :shiro_emo "normal", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "سقوط الحاجز!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "barrier_wall", :scene_prompt "Anime epic shot: a teal membrane of light shielding deployed across cyber city streets, cyan ghost tendrils bouncing off the barrier wall, NIST-CSF protect grid glowing, generic", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "التالي، الكشف. ——أين جذور الـDaemon؟", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "الخادم القديم تحت الأرض. الجذر هناك.", :shiro_emo "normal", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime cavernous shot: a colossal gear-machine daemon towering to the ceiling of an old underground server room, restarting endlessly kacon kacon, orange root cables sprawling, ominous, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "ما أضخمه! لكنّي أعرف الطريقة. الاستجابة——يكفي أن نقطع الجذور.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "سآتي معك.", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "شيرو، سأفتح الطريق إلى الجذور! الآن!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——قطع الجذور، الطبقة العميقة.", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime climactic shot: giant daemon gears freezing one by one then going still, orange root cables dimming as the deepest core is touched, teal light spreading in the server cavern, generic", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "قُطِعت الجذور. التالي هو الـZombie. ——حان وقت التعافي، بيكو.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "أتفقّد كلّ الأجهزة، أعزلها ثم أوقظها. فهمت!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "نداء النوم، انتشار كامل!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_recover_ripple", :scene_prompt "Anime hopeful shot: teal ripples of light spreading omnidirectionally across cyber city, sleeping device icons waking up and brightening one by one, EDR isolation glow, recovery, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "...صرتُ أفضل قليلًا ممّا كنتُ في الحلقة الأولى، أليس كذلك.", :shiro_emo "happy", :pico_emo "smug", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime ominous shot: cyan ghost particles condensing and materializing into a faceless wavering form atop the ruined tower, swirling vortex sucking city log-light inward, epic dread, generic", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "shiro", :text "...ها قد جاء. الـGhost. ظهرت هيئته الحقيقية لأوّل مرّة هذا الموسم.", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "إنّه يريد أخذ كلّ السجلّات!", :shiro_emo "angry", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "المعلومات مادّية. حتى لو زالت، يبقى أثرها. ——أراها بالفعل.", :shiro_emo "angry", :pico_emo "surprised", :sfx nil, :fx "flash"}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime tense shot: faceless ghost form momentarily wavering, its noisy outline briefly resolving toward a human shape, cyan particles trembling against the night skyline, generic", :sfx "ghost", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "...شيرو، لا تتوتّري. المعلومات لا تهرب، صحيح؟", :shiro_emo "surprised", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——نعم.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "لا تستهيني بمهارة يدي. ——والآن، هي من أجل أصدقائنا.", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——تتبّع الحرارة، تحليل كامل.", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "heat_trace_reveal", :scene_prompt "Anime epic shot: a beam of white light from a fingertip fully illuminating a ghost's heat trail, the faceless cyan outline rising sharply into view glowing teal over a night cityscape, generic", :sfx "whoosh", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "وجدتُك——! اختراق كامل!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "scene", :scene_key "double_heat_break", :scene_prompt "Anime climactic finish: cyan ghost core shattering into scattering particles transforming into white heat light, dramatic dual hero finishing-pose silhouette against the night skyline, brushstroke energy, generic", :sfx "whoosh", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "——اختراق حراري مزدوج!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "ما زلتم لا تعرفون شيئًا—— هذا ما قاله الـGhost.", :shiro_emo "sad", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "هل هرب؟!", :shiro_emo "surprised", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "لم يهرب. بل انسحب. هذا كلّ شيء لليوم.", :shiro_emo "thinking", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "لم نتمكّن من هزيمته. لكنّ الـGhost تراجع لأوّل مرّة.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "rooftop_night", :scene_prompt "Anime quiet shot: city lights settling back to peaceful teal, a ruined building rooftop overlooking the calm night skyline, gentle wind, reflective finale mood, character-free", :sfx "ambient", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "حين وزّعنا الأدوار وتحرّكنا بالترتيب، نجح الأمر حقًّا.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "نبني بالترتيب، لذا لا ينهار. هذا هو معنى النضج.", :shiro_emo "normal", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "اليوم، ولأوّل مرّة—— وجدتَ نواة الـGhost قبلي.", :shiro_emo "happy", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...هذا مجحف بعض الشيء. أن تقولي مثل هذا الكلام.", :shiro_emo "smug", :pico_emo "embarrassed", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...ذلك الصوت. أنا سمعته. ——إنّه صوت أعرفه.", :shiro_emo "sad", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...هل ستخبرينني يومًا ما؟", :shiro_emo "sad", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——نعم. يومًا ما، حتمًا. هيّا بنا، بيكو.", :shiro_emo "normal", :pico_emo "normal", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "zukan_board", :scene_prompt "Anime educational corner: a clean whiteboard reading NIST CSF with five circles labeled identify protect detect respond recover, bright friendly studio lighting, character-free", :sfx "chime", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "وما هو الـNIST CSF اليوم؟", :shiro_emo "normal", :pico_emo "confused", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "إنّه إطار يُنظّم الأمن في خمس مراحل.", :shiro_emo "happy", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "تحديد ← حماية ← كشف ← استجابة ← تعافٍ. كدّسها فلا يصمد أيّ هجوم.", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "اكشف بـSplunk أو Sentinel، واستجب بـCrowdStrike، واقطع الجذور بـMandiant.", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "كان كلّ شيء مترابطًا—— كلّ ما تعلّمته حتى الآن!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "من أراد أن يعرف المزيد، فليأتِ إلى قناة Yukkuri Cyber!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ed_ghost_hide", :scene_prompt "Anime ED shot: a cute ghost peeking out then hiding shyly, but for one instant its outline resolves into a human shape against a soft teal night background, gentle, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+]

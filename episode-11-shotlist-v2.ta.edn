@@ -1,0 +1,86 @@
+[
+ {:type "scene", :scene_key "geothermal_plant_dawn", :scene_prompt "Aerial wide shot of a massive geothermal power plant on a black lava plateau at near-arctic dawn, pale sky, quiet steam columns rising, cyber neon teal data lines faintly overlaying the pipework, ominous calm", :sfx "ambient", :fx nil, :dur 3.5}
+ {:type "scene", :scene_key "control_room", :scene_prompt "Dim power plant control room, wall of monitors glowing teal and amber, night shift, coffee cups, a single white heat-residue afterimage flickering at a screen edge then vanishing like noise", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "scene", :scene_key "corridor_shadow", :scene_prompt "Dark plant corridor, a faceless human silhouette made of white heat-haze briefly appears on the wall then dissolves into digital noise, cyber neon, ominous", :sfx "ghost", :fx "flash", :dur 2.5}
+ {:type "dialogue", :speaker "shiro", :text "…அதோ இருக்கு।", :shiro_emo "thinking", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "plant_fence", :scene_prompt "Exterior chain-link fence before the glowing geothermal plant at dawn, teal data motes drifting in cold air, steam behind, cyber neon dusk light", :sfx "ambient", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "நில்லு SHIRO~! திடீர்னு ஏன் ஓடுற!?", :shiro_emo "normal", :pico_emo "panic", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "உள்ள போவோம். இங்க ஏதோ தப்பா இருக்கு.", :shiro_emo "normal", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "எப்படி தப்பு? logs எல்லாம் clean-ஆ இருந்துச்சே, இல்ல?", :shiro_emo "normal", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "…உண்மையாவே அப்படி நெனக்கிறயா?", :shiro_emo "smug", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "நிச்சயமா. இல்லாதது இல்லதான்.", :shiro_emo "thinking", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "control_room", :scene_prompt "Anteroom of the control room, holographic log panel summoned from a wall terminal, rows of green OK entries, all clean, teal cyber glow, calm before trouble", :sfx "chime", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "பாரு~ சொன்னேனில்ல. logs எல்லாம் clean! சுலபம், நான் மேதை.", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "என்ன? தீர்ந்துடுச்சே. வீட்டுக்கு போவோம்~", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "deep_pipes", :scene_prompt "Deep inside the plant, dense steel pipework and a temperature sensor readout ticking up by a fraction, faint white heat-haze creeping along a valve, ominous cyber neon", :sfx "alarm", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "shiro", :text "…", :shiro_emo "thinking", :pico_emo "happy", :sfx "alarm", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "அடேங்கப்பா!? ஏன்!? இப்பதான் எல்லாம் clean-ஆ இருந்துச்சே!", :shiro_emo "surprised", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "scene", :scene_key "control_room", :scene_prompt "Control room monitors flooding red one by one, numeric values rewriting themselves, logs overwriting and vanishing, alarm strobe, chaotic cyber neon, ominous", :sfx "alarm", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "வாவ்! ஓடி பிடிக்க முடியல! மறுபடியும் மறைஞ்சுடுச்சு!", :shiro_emo "thinking", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "pico", :text "மறையுதே, ஆனா அதிகரிக்கிறது எப்படி!!", :shiro_emo "thinking", :pico_emo "panic", :sfx nil, :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "PICO. \"மறைஞ்சுது\"—உண்மையாவா?", :shiro_emo "normal", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "உண்மைதான்! logs அது—", :shiro_emo "normal", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "\"மறைஞ்சாப்போல காட்டப்படுது\" அவ்வளவுதான்.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "தகவல் என்பது பௌதிகம். அழிச்சா, வெப்பம் கண்டிப்பா மிஞ்சும்.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "…பாரு. வெள்ளை வெப்பம், இன்னும் மிஞ்சி இருக்கு.", :shiro_emo "thinking", :pico_emo "surprised", :sfx "ghost", :fx "flash"}
+ {:type "scene", :scene_key "heat_residue", :scene_prompt "Close cyber view of a wall corner where faint white heat-haze residue drifts at every spot a log was erased, glowing teal traces marking deletions, eerie data remanence, neon", :sfx "ghost", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "…ஆஹா. இருக்கு. அந்த இடத்துல.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "மறைஞ்சுன்னு நெனச்சாலும், ஒளி மிஞ்சும். போவோம்.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "henshin_bank", :scene_prompt "Transformation bank: a teal cocoon of light envelops two figures, data particles swirling, the cocoon bursts into radiant teal bloom, dynamic hero pose silhouettes, cyber neon spectacle", :sfx "chime", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "shiro", :text "SHIRO-PICO, ON!", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "Information-space layer overlaid on plant corridors, data flows glowing as light lines over pipes and walls, teal streams, white heat-trace dots forming a path, cyber neon depth", :sfx "whoosh", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "PICO, வெள்ளை வெப்ப தடத்தை தொடர். வேகத்துல நீதான் மேல.", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "என்கிட்ட விடு! நகர்வு, Heat-Trace Rush!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "High-speed dash through information space, white heat-trace points connecting dot to line to plane, an erased log shape reconstructing in reverse, motion-blur teal light streaks, cyber neon", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "இணையுது! எல்லாம் core server பக்கம் போகுது!", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "அதுதான், நுழைவாயில்.", :shiro_emo "thinking", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "core_server", :scene_prompt "Dim core server room, rows of server racks, at the center a slow swirl of white heat-haze coalescing, ominous cyber neon, teal data motes, dread", :sfx "ghost", :fx nil, :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "…அது, என்ன?", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "—Ghost.", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx "flash"}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "The Ghost's full silhouette revealed: a faceless humanoid figure formed of shimmering white heat-noise particles holding human shape, no face, blurred outline, towering and ominous, cyber neon teal backlight, server racks behind", :sfx "ghost", :fx "flash", :dur 4.0}
+ {:type "dialogue", :speaker "pico", :text "…வந்துடுச்சு. ஒரிஜினல்.", :shiro_emo "surprised", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "The faceless white-heat Ghost slowly raises one arm; every monitor in the core room flares to blank white at once, all logs erasing, blinding flash, ominous cyber neon", :sfx "alarm", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "PICO, தள்ளி நில்.", :shiro_emo "angry", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "இப்பவே.", :shiro_emo "angry", :pico_emo "panic", :sfx nil, :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "—Visible Thread.", :shiro_emo "thinking", :pico_emo "surprised", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "Thin teal threads of light extend trying to trace and outline the faceless white-heat Ghost silhouette, the threads strike its edge and snap back repelled, recoil shockwave, ominous cyber neon", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "SHIRO!?", :shiro_emo "thinking", :pico_emo "panic", :sfx nil, :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "…பலசாலி. இன்னைய தொழில்நுட்பத்துல, முழுசா தெரியல.", :shiro_emo "sad", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "துரத்த மாட்டியா!?", :shiro_emo "sad", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "…முடியாது. இப்போ முடியாது.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "The faceless Ghost silhouette dissolving back into white heat particles, and at the instant of vanishing a single teal mote of light glows within its outline then fades, ominous and mysterious, cyber neon", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "SHIRO. அதுக்கு உள்ள—பச்சை-நீல, ஒளி.", :shiro_emo "surprised", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "…நீயும் பார்த்தியா?", :shiro_emo "surprised", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "தகவல் என்பது பௌதிகம். மறைஞ்சாலும், தடம் கண்டிப்பா மிஞ்சும்.", :shiro_emo "thinking", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Ghost மாத்தின command எல்லாத்தையும் மறுபடி சரிசெய்வோம்.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "நகர்வு, Heat-Memory Restore!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "Streams of white heat particles flowing into server racks, overwritten commands restoring to original form, teal restore-light spreading across the data layer, cyber neon recovery glow", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "நகர்வு, Full-Spectrum Scan—எல்லாத்தையும் எடுப்போம்.", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "Plant-wide teal scan light sweeping across the whole facility, every spot the Ghost touched lighting up as white heat afterimages, altered values and fake commands all exposed, cyber neon", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "சரி!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "—Double Remanence Reset!", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "dialogue", :speaker "pico", :text "—Double Remanence Reset!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "plant_restored", :scene_prompt "Teal and white light merging in a ripple across the whole geothermal plant, red values reverting to normal, pipe pressure easing, steam settling, alarms silenced, triumphant cyber neon dawn", :sfx "ambient", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "geothermal_plant_dawn", :scene_prompt "Exterior plant wall at brightening dawn, two small chibi hero silhouettes sitting side by side on the wall, steam columns flushed with morning light, calm teal sky, quiet aftermath", :sfx "ambient", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "…SHIRO. Ghost, பலசாலியா இருந்துச்சு இல்ல.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "ஆமா.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "…SHIRO-வாலயும் ஜெயிக்க முடியாதா?", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Ghost, அழிக்கறதுல ரொம்ப கெட்டிக்காரன்.", :shiro_emo "thinking", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "ஆனா முழுசா அழியாது. எப்பவாவது கண்டிப்பா தெரியும்.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "அது என்னவா இருக்கும். அந்த ஒளி.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "…எனக்கும், இன்னும் தெரியல.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "முன்னாடி நான் logs அழிக்கறதுல கெட்டி. யாருக்கும் தெரியாம.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "…ஆனா இன்னைக்கு, ஒண்ணும் மறையல. எல்லாம் மிஞ்சி இருக்கு.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "…நான் செஞ்சதும், மிஞ்சி இருக்குமோ.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "போவோம், PICO. —அடுத்த ஊருக்கு.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "…மறையலன்னா, எதிர்கொள்ளணும்தான்.", :shiro_emo "normal", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "geothermal_plant_dawn", :scene_prompt "Distant plant view in morning light, for one instant white heat-haze forms a faceless humanoid silhouette then vanishes, a single teal mote glowing within its outline before fading, ominous mysterious cyber neon, To be continued", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "zukan_corner", :scene_prompt "Bright clean whiteboard channel-style corner, friendly studio lighting, a hand cupping glowing white light particles, teal accent graphics, cheerful educational cyber vibe, character-free", :sfx "chime", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "இன்னைக்கி \"data remanence\" என்னா!?", :shiro_emo "normal", :pico_emo "happy", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Data remanence＝தரவு எச்சம். அழிச்சாலும் தடம் மிஞ்சும்.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "லாண்டாயர் தத்துவம். அழிக்க கண்டிப்பா வெப்பம் தேவை.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "அதனால log மறைஞ்சாலும், மாட்டிக்குவாங்களா?", :shiro_emo "happy", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "ஆமா. forensics tools தடங்களை தோண்டி எடுக்கும்.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "தகவல் என்பது பௌதிகம். மறைஞ்சாலும், ஒளி மிஞ்சும்✨", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "ed_hideandseek", :scene_prompt "Soft teal cyber dusk ED scene, a faceless white heat-haze Ghost silhouette peeking shyly then hiding, within its outline a single teal mote of light stays glowing and does not fade, gentle ominous warmth, neon", :sfx "ghost", :fx nil, :dur 3.0}
+]

@@ -1,0 +1,71 @@
+[
+ {:type "scene", :scene_key "earth_from_space", :scene_prompt "Anime wide shot from orbit: night Earth, teal glowing city grids across continents, suddenly washing into corrupted noise-colored static, ominous epic finale mood, no characters", :sfx "ambient", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Epic anime cyber city under total assault, traffic lights all dark, automatic doors slamming open and shut, three swirling storms of red gear icons, cyan ghost particles, blue Zzz sleep marks raging over the skyline, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "scene", :scene_key "ghost_silhouette_tower", :scene_prompt "Anime menacing shot: faceless cyan ghost silhouette wavering in noise atop a ruined skyscraper, red countdown digits 05 04 03 blinking in the air, dread suspense, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "...Sie bewegen sich alle gleichzeitig. Der Ghost bündelt alle drei.", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Aber heute beenden wir alles! ——Überlass das mir!", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Zuerst der Zombie! Wildes Aufwecken!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "dialogue", :speaker "pico", :text "Jetzt der Daemon! Wurzel-Schnitt!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Den Ghost hab ich auch gefunden! Hitze-Spur!", :shiro_emo "thinking", :pico_emo "smug", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Anime chaos: just-woken devices instantly infecting neighbors with sleep, a gear daemon restarting itself with kacon kacon, a heat trail splitting into three branching ghost paths, generic cyber street", :sfx "alarm", :fx "shake", :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "W-was?! Der Zombie vermehrt sich wieder und der Daemon ist auch zurück?!", :shiro_emo "normal", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "pico", :text "Ganz allein komm ich da nicht hinterher! Wääh!", :shiro_emo "thinking", :pico_emo "panic", :sfx "pop", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——Pico. Du drehst durch, weil du alles allein trägst.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Identifizieren, schützen, erkennen, reagieren, wiederherstellen. Wer handelt in welcher Phase?", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Aufteilen, die Rollen verteilen und der Reihe nach handeln. Verstehe.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Genau. Der heutige Feind ist riesig. Deshalb geben wir alles.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "henshin_bank", :scene_prompt "Anime transformation bank shot: brilliant teal light cocoon of data particles erupting in a cyber city, long shadows stretching, extra-bright climactic finale glow, generic energy burst, no faces", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "Sag mir den Plan.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "In der Reihenfolge des NIST CSF. Zuerst identifizieren. Das Ziel des Feindes erkennen.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "siem_log_field", :scene_prompt "Anime SIEM visualization: thousands of city log streams converging into glowing lines of light suspended in midair, teal data threads forming a defense analysis grid, epic, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "Der Ghost späht alle Logs aus. Sein Ziel ist die Information selbst.", :shiro_emo "surprised", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Dann jetzt schützen! Wir ziehen eine Mauer, bevor es gestohlen wird!", :shiro_emo "normal", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Barrieren-Fall!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "barrier_wall", :scene_prompt "Anime epic shot: a teal membrane of light shielding deployed across cyber city streets, cyan ghost tendrils bouncing off the barrier wall, NIST-CSF protect grid glowing, generic", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "Jetzt erkennen. ——Wo sind die Wurzeln des Daemon?", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Der alte Server im Untergrund. Dort ist die Wurzel.", :shiro_emo "normal", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime cavernous shot: a colossal gear-machine daemon towering to the ceiling of an old underground server room, restarting endlessly kacon kacon, orange root cables sprawling, ominous, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "Riesig! Aber ich weiß, wie's geht. Reagieren——einfach die Wurzeln durchtrennen.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Ich komme mit.", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Shiro, ich öffne den Weg bis zu den Wurzeln! Jetzt!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——Wurzel-Schnitt, tiefe Schicht.", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime climactic shot: giant daemon gears freezing one by one then going still, orange root cables dimming as the deepest core is touched, teal light spreading in the server cavern, generic", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "Die Wurzeln sind durchtrennt. Jetzt der Zombie. ——Zeit zum Wiederherstellen, Pico.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Alle Geräte überblicken, isolieren und dann aufwecken. Verstanden!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Schlaf-Ruf, volle Entfaltung!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_recover_ripple", :scene_prompt "Anime hopeful shot: teal ripples of light spreading omnidirectionally across cyber city, sleeping device icons waking up and brightening one by one, EDR isolation glow, recovery, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "...Ich bin ein bisschen besser als in Folge 1, was?", :shiro_emo "happy", :pico_emo "smug", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime ominous shot: cyan ghost particles condensing and materializing into a faceless wavering form atop the ruined tower, swirling vortex sucking city log-light inward, epic dread, generic", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "shiro", :text "...Da kommt er. Der Ghost. Seine wahre Gestalt zeigt sich zum ersten Mal in dieser Staffel.", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Er will alle Logs mitnehmen!", :shiro_emo "angry", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "Information ist physisch. Selbst wenn sie verschwindet, bleibt eine Spur. ——Ich sehe sie schon.", :shiro_emo "angry", :pico_emo "surprised", :sfx nil, :fx "flash"}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime tense shot: faceless ghost form momentarily wavering, its noisy outline briefly resolving toward a human shape, cyan particles trembling against the night skyline, generic", :sfx "ghost", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "...Shiro, keine Panik. Information läuft nicht weg, oder?", :shiro_emo "surprised", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——Ja.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Unterschätz mein Händchen nicht. ——Und jetzt ist es für unsere Freunde.", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——Hitze-Spur, vollständige Analyse.", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "heat_trace_reveal", :scene_prompt "Anime epic shot: a beam of white light from a fingertip fully illuminating a ghost's heat trail, the faceless cyan outline rising sharply into view glowing teal over a night cityscape, generic", :sfx "whoosh", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "Gefunden——! Voller Bruch!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "scene", :scene_key "double_heat_break", :scene_prompt "Anime climactic finish: cyan ghost core shattering into scattering particles transforming into white heat light, dramatic dual hero finishing-pose silhouette against the night skyline, brushstroke energy, generic", :sfx "whoosh", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "——Doppelter Hitze-Bruch!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "Ihr wisst noch gar nichts—— das hat der Ghost gesagt.", :shiro_emo "sad", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Er ist entkommen?!", :shiro_emo "surprised", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Er ist nicht geflohen. Er hat sich zurückgezogen. Für heute reicht's.", :shiro_emo "thinking", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Wir konnten ihn nicht besiegen. Aber der Ghost ist zum ersten Mal zurückgewichen.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "rooftop_night", :scene_prompt "Anime quiet shot: city lights settling back to peaceful teal, a ruined building rooftop overlooking the calm night skyline, gentle wind, reflective finale mood, character-free", :sfx "ambient", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "Als wir die Rollen aufgeteilt und der Reihe nach gehandelt haben, hat's wirklich geklappt.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Wir bauen der Reihe nach auf, deshalb stürzt es nicht ein. Das ist Reife.", :shiro_emo "normal", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Heute, zum ersten Mal—— hast du den Kern des Ghost vor mir gefunden.", :shiro_emo "happy", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Das ist irgendwie unfair. So was zu sagen.", :shiro_emo "smug", :pico_emo "embarrassed", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...Diese Stimme. Ich konnte sie hören. ——Es ist eine Stimme, die ich kenne.", :shiro_emo "sad", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Erzählst du es mir irgendwann?", :shiro_emo "sad", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——Ja. Irgendwann, ganz bestimmt. Gehen wir, Pico.", :shiro_emo "normal", :pico_emo "normal", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "zukan_board", :scene_prompt "Anime educational corner: a clean whiteboard reading NIST CSF with five circles labeled identify protect detect respond recover, bright friendly studio lighting, character-free", :sfx "chime", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "Und was ist das heutige NIST CSF eigentlich?", :shiro_emo "normal", :pico_emo "confused", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Ein Rahmenwerk, das Sicherheit in fünf Phasen ordnet.", :shiro_emo "happy", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Identifizieren, schützen, erkennen, reagieren, wiederherstellen. Stapelt man sie, hält jeder Angriff stand.", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Mit Splunk oder Sentinel erkennen, mit CrowdStrike reagieren, mit Mandiant die Wurzeln kappen.", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Es hing alles zusammen—— alles, was ich bisher gelernt habe!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "Wer mehr wissen will, ab zum Yukkuri-Cyber-Kanal!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ed_ghost_hide", :scene_prompt "Anime ED shot: a cute ghost peeking out then hiding shyly, but for one instant its outline resolves into a human shape against a soft teal night background, gentle, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+]

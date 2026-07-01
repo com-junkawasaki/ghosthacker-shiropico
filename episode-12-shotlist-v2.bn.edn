@@ -1,0 +1,71 @@
+[
+ {:type "scene", :scene_key "earth_from_space", :scene_prompt "Anime wide shot from orbit: night Earth, teal glowing city grids across continents, suddenly washing into corrupted noise-colored static, ominous epic finale mood, no characters", :sfx "ambient", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Epic anime cyber city under total assault, traffic lights all dark, automatic doors slamming open and shut, three swirling storms of red gear icons, cyan ghost particles, blue Zzz sleep marks raging over the skyline, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "scene", :scene_key "ghost_silhouette_tower", :scene_prompt "Anime menacing shot: faceless cyan ghost silhouette wavering in noise atop a ruined skyscraper, red countdown digits 05 04 03 blinking in the air, dread suspense, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "...সবাই একসাথে নড়ছে। Ghost তিনটাকেই বেঁধে রেখেছে।", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "কিন্তু আজ সব শেষ করে দেব! ——আমার উপর ছেড়ে দাও!", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "প্রথমে Zombie! ওয়াইল্ড ওয়েক-আপ!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "dialogue", :speaker "pico", :text "এবার Daemon! রুট-কাট!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Ghost-ও খুঁজে পেয়েছি! হিট-ট্রেস!", :shiro_emo "thinking", :pico_emo "smug", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Anime chaos: just-woken devices instantly infecting neighbors with sleep, a gear daemon restarting itself with kacon kacon, a heat trail splitting into three branching ghost paths, generic cyber street", :sfx "alarm", :fx "shake", :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "এ-একী?! Zombie আবার বাড়ছে আর Daemon-ও ফিরে এসেছে?!", :shiro_emo "normal", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "pico", :text "একা সব করতে গিয়ে কুলিয়ে উঠতে পারছি না! ওয়াআআ!", :shiro_emo "thinking", :pico_emo "panic", :sfx "pop", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——পিকো। একা সব বইছ বলেই বৃথা পরিশ্রম হচ্ছে।", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "শনাক্ত করা, রক্ষা করা, ধরা, সাড়া দেওয়া, পুনরুদ্ধার। কোন ধাপে কে কাজ করবে?", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...আলাদা করা, ভূমিকা ভাগ করা, আর ক্রম অনুযায়ী চলা। বুঝলাম।", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "হ্যাঁ। আজকের শত্রু বিশাল। তাই পুরো শক্তি দিয়ে লড়ব।", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "henshin_bank", :scene_prompt "Anime transformation bank shot: brilliant teal light cocoon of data particles erupting in a cyber city, long shadows stretching, extra-bright climactic finale glow, generic energy burst, no faces", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "পরিকল্পনাটা বলো।", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "NIST CSF-এর ক্রম অনুযায়ী। প্রথমে শনাক্ত করা। শত্রুর লক্ষ্য দেখা।", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "siem_log_field", :scene_prompt "Anime SIEM visualization: thousands of city log streams converging into glowing lines of light suspended in midair, teal data threads forming a defense analysis grid, epic, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "Ghost সব log লুকিয়ে দেখছে। ওর লক্ষ্য হলো তথ্য নিজেই।", :shiro_emo "surprised", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "তাহলে এবার রক্ষা! চুরি যাওয়ার আগে দেয়াল তুলে দিই!", :shiro_emo "normal", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "ব্যারিয়ার ফল!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "barrier_wall", :scene_prompt "Anime epic shot: a teal membrane of light shielding deployed across cyber city streets, cyan ghost tendrils bouncing off the barrier wall, NIST-CSF protect grid glowing, generic", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "এবার ধরা। ——Daemon-এর শিকড় কোথায়?", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "মাটির নিচের পুরোনো সার্ভার। শিকড় ওখানেই।", :shiro_emo "normal", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime cavernous shot: a colossal gear-machine daemon towering to the ceiling of an old underground server room, restarting endlessly kacon kacon, orange root cables sprawling, ominous, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "কী বিশাল! কিন্তু কীভাবে করতে হয় জানি। সাড়া দেওয়া——শুধু শিকড় কেটে দিলেই হলো।", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "আমিও তোমার সাথে যাব।", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "শিরো, শিকড় পর্যন্ত পথ খুলে দিচ্ছি! এখনই!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——রুট-কাট, গভীর স্তর।", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime climactic shot: giant daemon gears freezing one by one then going still, orange root cables dimming as the deepest core is touched, teal light spreading in the server cavern, generic", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "শিকড় কেটে গেছে। এবার Zombie। ——এবার পুনরুদ্ধারের সময়, পিকো।", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "সব মেশিন দেখে, আলাদা করে তারপর জাগাব। বুঝেছি!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "স্লিপ কল, পুরো বিস্তার!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_recover_ripple", :scene_prompt "Anime hopeful shot: teal ripples of light spreading omnidirectionally across cyber city, sleeping device icons waking up and brightening one by one, EDR isolation glow, recovery, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "...প্রথম পর্বের চেয়ে একটু ভালো হয়ে গেছি, তাই না।", :shiro_emo "happy", :pico_emo "smug", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime ominous shot: cyan ghost particles condensing and materializing into a faceless wavering form atop the ruined tower, swirling vortex sucking city log-light inward, epic dread, generic", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "shiro", :text "...এসে গেছে। Ghost। এই সিজনে প্রথমবার আসল রূপ সামনে এল।", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "ও সব log নিয়ে যেতে চায়!", :shiro_emo "angry", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "তথ্য বাস্তব জিনিস। মুছে গেলেও, চিহ্ন থেকে যায়। ——আমি দেখতে পাচ্ছি।", :shiro_emo "angry", :pico_emo "surprised", :sfx nil, :fx "flash"}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime tense shot: faceless ghost form momentarily wavering, its noisy outline briefly resolving toward a human shape, cyan particles trembling against the night skyline, generic", :sfx "ghost", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "...শিরো, ঘাবড়িও না। তথ্য তো পালায় না, তাই না?", :shiro_emo "surprised", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——হ্যাঁ।", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "আমার হাতের কাজকে হালকা ভেবো না। ——আর এবার, বন্ধুদের জন্য।", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——হিট-ট্রেস, পূর্ণ বিশ্লেষণ।", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "heat_trace_reveal", :scene_prompt "Anime epic shot: a beam of white light from a fingertip fully illuminating a ghost's heat trail, the faceless cyan outline rising sharply into view glowing teal over a night cityscape, generic", :sfx "whoosh", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "পেয়ে গেছি——! ফুল ব্রেক!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "scene", :scene_key "double_heat_break", :scene_prompt "Anime climactic finish: cyan ghost core shattering into scattering particles transforming into white heat light, dramatic dual hero finishing-pose silhouette against the night skyline, brushstroke energy, generic", :sfx "whoosh", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "——ডাবল হিট ব্রেক!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "তোমরা এখনো কিছুই জানো না—— Ghost এটাই বলল।", :shiro_emo "sad", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "পালিয়ে গেল?!", :shiro_emo "surprised", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "পালায়নি। পিছু হটেছে। আজকের মতো এ পর্যন্তই।", :shiro_emo "thinking", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "হারাতে পারিনি। কিন্তু Ghost প্রথমবার পিছিয়ে গেল।", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "rooftop_night", :scene_prompt "Anime quiet shot: city lights settling back to peaceful teal, a ruined building rooftop overlooking the calm night skyline, gentle wind, reflective finale mood, character-free", :sfx "ambient", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "ভূমিকা ভাগ করে ক্রম অনুযায়ী চললাম, আর সত্যিই কাজ হলো।", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "ক্রম অনুযায়ী গড়ি বলেই ভেঙে পড়ে না। পরিপক্বতা মানে এটাই।", :shiro_emo "normal", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "আজ, প্রথমবার—— আমার আগে তুমি Ghost-এর কেন্দ্র খুঁজে পেলে।", :shiro_emo "happy", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...একটু অন্যায় হলো না? এমন কথা বলা।", :shiro_emo "smug", :pico_emo "embarrassed", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...ওই কণ্ঠ। আমি শুনতে পেয়েছিলাম। ——এটা আমার চেনা কণ্ঠ।", :shiro_emo "sad", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...কখনো কি আমাকে বলবে?", :shiro_emo "sad", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——হ্যাঁ। কখনো না কখনো, নিশ্চয়ই। চলো, পিকো।", :shiro_emo "normal", :pico_emo "normal", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "zukan_board", :scene_prompt "Anime educational corner: a clean whiteboard reading NIST CSF with five circles labeled identify protect detect respond recover, bright friendly studio lighting, character-free", :sfx "chime", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "আজকের এই NIST CSF জিনিসটা আসলে কী?", :shiro_emo "normal", :pico_emo "confused", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "এটা নিরাপত্তাকে পাঁচ ধাপে সাজানো একটা কাঠামো।", :shiro_emo "happy", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "শনাক্ত→রক্ষা→ধরা→সাড়া→পুনরুদ্ধার। সাজিয়ে নিলে কোনো আক্রমণই টেকে না।", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Splunk বা Sentinel দিয়ে ধরো, CrowdStrike দিয়ে সাড়া দাও, Mandiant দিয়ে শিকড় কাটো।", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "সব কিছু যুক্ত ছিল—— এতদিন যা যা শিখেছি!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "আরও জানতে চাইলে Yukkuri Cyber চ্যানেলে এসো!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ed_ghost_hide", :scene_prompt "Anime ED shot: a cute ghost peeking out then hiding shyly, but for one instant its outline resolves into a human shape against a soft teal night background, gentle, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+]

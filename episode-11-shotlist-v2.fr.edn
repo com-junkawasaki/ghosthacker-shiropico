@@ -1,0 +1,86 @@
+[
+ {:type "scene", :scene_key "geothermal_plant_dawn", :scene_prompt "Aerial wide shot of a massive geothermal power plant on a black lava plateau at near-arctic dawn, pale sky, quiet steam columns rising, cyber neon teal data lines faintly overlaying the pipework, ominous calm", :sfx "ambient", :fx nil, :dur 3.5}
+ {:type "scene", :scene_key "control_room", :scene_prompt "Dim power plant control room, wall of monitors glowing teal and amber, night shift, coffee cups, a single white heat-residue afterimage flickering at a screen edge then vanishing like noise", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "scene", :scene_key "corridor_shadow", :scene_prompt "Dark plant corridor, a faceless human silhouette made of white heat-haze briefly appears on the wall then dissolves into digital noise, cyber neon, ominous", :sfx "ghost", :fx "flash", :dur 2.5}
+ {:type "dialogue", :speaker "shiro", :text "...Le voilà.", :shiro_emo "thinking", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "plant_fence", :scene_prompt "Exterior chain-link fence before the glowing geothermal plant at dawn, teal data motes drifting in cold air, steam behind, cyber neon dusk light", :sfx "ambient", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "Attends, SHIRO ! Pourquoi tu pars en courant comme ça ?!", :shiro_emo "normal", :pico_emo "panic", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "On entre. Il y a quelque chose de bizarre ici.", :shiro_emo "normal", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Bizarre comment ? Les logs étaient tous propres, non ?", :shiro_emo "normal", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...Tu crois vraiment ?", :shiro_emo "smug", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Bah oui. S'il n'y a rien, il n'y a rien.", :shiro_emo "thinking", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "control_room", :scene_prompt "Anteroom of the control room, holographic log panel summoned from a wall terminal, rows of green OK entries, all clean, teal cyber glow, calm before trouble", :sfx "chime", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "Tu vois ? Je te l'avais dit. Logs tous propres ! Trop facile, je suis un génie.", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Quoi ? C'est déjà réglé. On rentre.", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "deep_pipes", :scene_prompt "Deep inside the plant, dense steel pipework and a temperature sensor readout ticking up by a fraction, faint white heat-haze creeping along a valve, ominous cyber neon", :sfx "alarm", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "shiro", :text "...", :shiro_emo "thinking", :pico_emo "happy", :sfx "alarm", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Hein ?! Pourquoi ?! C'était tout propre !", :shiro_emo "surprised", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "scene", :scene_key "control_room", :scene_prompt "Control room monitors flooding red one by one, numeric values rewriting themselves, logs overwriting and vanishing, alarm strobe, chaotic cyber neon, ominous", :sfx "alarm", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "Wouah ! Je n'arrive pas à suivre ! Ça a encore disparu !", :shiro_emo "thinking", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "pico", :text "Comment ça augmente alors que ça n'arrête pas de disparaître ?!", :shiro_emo "thinking", :pico_emo "panic", :sfx nil, :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "PICO. « Disparu »... vraiment ?", :shiro_emo "normal", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "C'est vrai ! Les logs...", :shiro_emo "normal", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "On les fait juste SEMBLER disparus.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "L'information est physique. Quand on l'efface, il reste toujours de la chaleur.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...Tu vois ? La chaleur blanche est encore là.", :shiro_emo "thinking", :pico_emo "surprised", :sfx "ghost", :fx "flash"}
+ {:type "scene", :scene_key "heat_residue", :scene_prompt "Close cyber view of a wall corner where faint white heat-haze residue drifts at every spot a log was erased, glowing teal traces marking deletions, eerie data remanence, neon", :sfx "ghost", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "...Ah. La voilà. Là-bas, au loin.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Même quand tu crois que c'est parti, la lumière reste. On y va.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "henshin_bank", :scene_prompt "Transformation bank: a teal cocoon of light envelops two figures, data particles swirling, the cocoon bursts into radiant teal bloom, dynamic hero pose silhouettes, cyber neon spectacle", :sfx "chime", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "shiro", :text "SHIRO-PICO, ON !", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "Information-space layer overlaid on plant corridors, data flows glowing as light lines over pipes and walls, teal streams, white heat-trace dots forming a path, cyber neon depth", :sfx "whoosh", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "PICO, suis les traces de chaleur blanche. C'est toi le plus rapide.", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Compte sur moi ! Technique : Heat-Trace Rush !", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "High-speed dash through information space, white heat-trace points connecting dot to line to plane, an erased log shape reconstructing in reverse, motion-blur teal light streaks, cyber neon", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "Ça se relie ! Tout va vers le core server !", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "C'est ça, l'entrée.", :shiro_emo "thinking", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "core_server", :scene_prompt "Dim core server room, rows of server racks, at the center a slow swirl of white heat-haze coalescing, ominous cyber neon, teal data motes, dread", :sfx "ghost", :fx nil, :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "...C'est quoi, ça ?", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "—Ghost.", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx "flash"}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "The Ghost's full silhouette revealed: a faceless humanoid figure formed of shimmering white heat-noise particles holding human shape, no face, blurred outline, towering and ominous, cyber neon teal backlight, server racks behind", :sfx "ghost", :fx "flash", :dur 4.0}
+ {:type "dialogue", :speaker "pico", :text "...Il est apparu. Le vrai.", :shiro_emo "surprised", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "The faceless white-heat Ghost slowly raises one arm; every monitor in the core room flares to blank white at once, all logs erasing, blinding flash, ominous cyber neon", :sfx "alarm", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "PICO, recule.", :shiro_emo "angry", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Tout de suite.", :shiro_emo "angry", :pico_emo "panic", :sfx nil, :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "—Visible Thread.", :shiro_emo "thinking", :pico_emo "surprised", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "Thin teal threads of light extend trying to trace and outline the faceless white-heat Ghost silhouette, the threads strike its edge and snap back repelled, recoil shockwave, ominous cyber neon", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "SHIRO ?!", :shiro_emo "thinking", :pico_emo "panic", :sfx nil, :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "...Il est puissant. La technologie d'aujourd'hui ne peut pas tout révéler.", :shiro_emo "sad", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Tu ne le poursuis pas ?!", :shiro_emo "sad", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...Je ne peux pas. Pas maintenant.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "ghost_reveal", :scene_prompt "The faceless Ghost silhouette dissolving back into white heat particles, and at the instant of vanishing a single teal mote of light glows within its outline then fades, ominous and mysterious, cyber neon", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "SHIRO. À l'intérieur... une lumière turquoise.", :shiro_emo "surprised", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...Toi aussi tu l'as vue ?", :shiro_emo "surprised", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "L'information est physique. Même effacée, il reste toujours une trace.", :shiro_emo "thinking", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "On va annuler chaque commande que le Ghost a réécrite.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Technique : Heat-Memory Restore !", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "Streams of white heat particles flowing into server racks, overwritten commands restoring to original form, teal restore-light spreading across the data layer, cyber neon recovery glow", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "Technique : Full-Spectrum Scan... on récupère tout.", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "info_layer", :scene_prompt "Plant-wide teal scan light sweeping across the whole facility, every spot the Ghost touched lighting up as white heat afterimages, altered values and fake commands all exposed, cyber neon", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "C'est parti !", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "—Double Remanence Reset !", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "dialogue", :speaker "pico", :text "—Double Remanence Reset !", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "plant_restored", :scene_prompt "Teal and white light merging in a ripple across the whole geothermal plant, red values reverting to normal, pipe pressure easing, steam settling, alarms silenced, triumphant cyber neon dawn", :sfx "ambient", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "geothermal_plant_dawn", :scene_prompt "Exterior plant wall at brightening dawn, two small chibi hero silhouettes sitting side by side on the wall, steam columns flushed with morning light, calm teal sky, quiet aftermath", :sfx "ambient", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "...SHIRO. Le Ghost était fort, hein.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Ouais.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Même toi, tu ne peux pas le battre ?", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Le Ghost efface beaucoup trop bien.", :shiro_emo "thinking", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Mais il ne peut pas tout effacer. Un jour, on le verra, c'est sûr.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Je me demande ce que c'était. Cette lumière.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...Moi non plus, je ne sais pas encore.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Avant, j'étais doué pour effacer les logs. Pour qu'on ne remarque rien.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Mais aujourd'hui, rien n'a disparu. Tout est encore là.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Je me demande si ce que j'ai fait est encore là aussi.", :shiro_emo "sad", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "On y va, PICO. —Vers la prochaine ville.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...Si ce n'est pas parti, alors je dois y faire face.", :shiro_emo "normal", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "geothermal_plant_dawn", :scene_prompt "Distant plant view in morning light, for one instant white heat-haze forms a faceless humanoid silhouette then vanishes, a single teal mote glowing within its outline before fading, ominous mysterious cyber neon, To be continued", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "zukan_corner", :scene_prompt "Bright clean whiteboard channel-style corner, friendly studio lighting, a hand cupping glowing white light particles, teal accent graphics, cheerful educational cyber vibe, character-free", :sfx "chime", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "C'est quoi, le « data remanence » d'aujourd'hui ?!", :shiro_emo "normal", :pico_emo "happy", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Data remanence = données résiduelles. Même effacées, il reste une trace.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Le principe de Landauer. Effacer coûte toujours de la chaleur.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Donc même si un log disparaît, on se fait prendre ?", :shiro_emo "happy", :pico_emo "confused", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Exact. Les outils de forensics ressortent les traces.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "L'information est physique. Même effacée, la lumière reste.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "scene", :scene_key "ed_hideandseek", :scene_prompt "Soft teal cyber dusk ED scene, a faceless white heat-haze Ghost silhouette peeking shyly then hiding, within its outline a single teal mote of light stays glowing and does not fade, gentle ominous warmth, neon", :sfx "ghost", :fx nil, :dur 3.0}
+]

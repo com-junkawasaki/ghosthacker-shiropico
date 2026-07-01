@@ -1,0 +1,71 @@
+[
+ {:type "scene", :scene_key "earth_from_space", :scene_prompt "Anime wide shot from orbit: night Earth, teal glowing city grids across continents, suddenly washing into corrupted noise-colored static, ominous epic finale mood, no characters", :sfx "ambient", :fx "flash", :dur 3.5}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Epic anime cyber city under total assault, traffic lights all dark, automatic doors slamming open and shut, three swirling storms of red gear icons, cyan ghost particles, blue Zzz sleep marks raging over the skyline, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "scene", :scene_key "ghost_silhouette_tower", :scene_prompt "Anime menacing shot: faceless cyan ghost silhouette wavering in noise atop a ruined skyscraper, red countdown digits 05 04 03 blinking in the air, dread suspense, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "...எல்லாமே ஒரே நேரத்தில் நகர்கின்றன. Ghost மூன்றையும் இணைத்து வைத்திருக்கிறது.", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "ஆனா இன்னைக்கு எல்லாத்தையும் முடிச்சிடுவோம்! ——என்கிட்ட விட்டுடு!", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "முதல்ல Zombie! வைல்ட் வேக்-அப்!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "dialogue", :speaker "pico", :text "அடுத்து Daemon! ரூட்-கட்!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "Ghost-ஐயும் கண்டுபிடிச்சிட்டேன்! ஹீட்-ட்ரேஸ்!", :shiro_emo "thinking", :pico_emo "smug", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_total_assault", :scene_prompt "Anime chaos: just-woken devices instantly infecting neighbors with sleep, a gear daemon restarting itself with kacon kacon, a heat trail splitting into three branching ghost paths, generic cyber street", :sfx "alarm", :fx "shake", :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "எ-என்ன?! Zombie மறுபடியும் பெருகுது, Daemon-ம் திரும்பி வந்துடுச்சு?!", :shiro_emo "normal", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "pico", :text "தனியா எல்லாத்தையும் செய்ய முடியலையே! ஆஆஆ!", :shiro_emo "thinking", :pico_emo "panic", :sfx "pop", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——பிக்கோ. தனியா எல்லாத்தையும் சுமக்கிறதால தான் வீண் முயற்சி ஆகுது.", :shiro_emo "normal", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "அடையாளம், பாதுகாப்பு, கண்டறிதல், பதில், மீட்பு. எந்த நிலையில் யார் செயல்படணும்?", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...பிரிச்சு, பங்குகளைப் பிரிச்சு, வரிசையா செயல்படணும். புரிஞ்சுது.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "ஆமா. இன்னைக்கி எதிரி பெரியவன். அதனால முழு பலத்தோட போராடுவோம்.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "henshin_bank", :scene_prompt "Anime transformation bank shot: brilliant teal light cocoon of data particles erupting in a cyber city, long shadows stretching, extra-bright climactic finale glow, generic energy burst, no faces", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "திட்டத்தைச் சொல்லு.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "NIST CSF வரிசைப்படி. முதல்ல அடையாளம். எதிரியின் இலக்கைப் பார்.", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "siem_log_field", :scene_prompt "Anime SIEM visualization: thousands of city log streams converging into glowing lines of light suspended in midair, teal data threads forming a defense analysis grid, epic, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "Ghost எல்லா log-களையும் ஒளிஞ்சு பார்க்குது. அதோட இலக்கு தகவல் தான்.", :shiro_emo "surprised", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "அப்போ அடுத்தது பாதுகாப்பு! திருடுறதுக்கு முன்னாடி சுவர் எழுப்புவோம்!", :shiro_emo "normal", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "பாரியர் ஃபால்!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "barrier_wall", :scene_prompt "Anime epic shot: a teal membrane of light shielding deployed across cyber city streets, cyan ghost tendrils bouncing off the barrier wall, NIST-CSF protect grid glowing, generic", :sfx "whoosh", :fx "shake", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "அடுத்து, கண்டறிதல். ——Daemon-ஓட வேர்கள் எங்க இருக்கு?", :shiro_emo "thinking", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "நிலத்தடியில் இருக்குற பழைய சர்வர். வேர் அங்க தான்.", :shiro_emo "normal", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime cavernous shot: a colossal gear-machine daemon towering to the ceiling of an old underground server room, restarting endlessly kacon kacon, orange root cables sprawling, ominous, character-free", :sfx "alarm", :fx "shake", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "எவ்ளோ பெரிசு! ஆனா எப்படி செய்யணும்னு தெரியும். பதில்——வேரை வெட்டினா போதும்.", :shiro_emo "normal", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "நானும் உன்கூட வரேன்.", :shiro_emo "normal", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "ஷிரோ, வேர் வரைக்கும் வழி திறக்குறேன்! இப்போவே!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "——ரூட்-கட், ஆழ்ந்த அடுக்கு.", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "underground_daemon", :scene_prompt "Anime climactic shot: giant daemon gears freezing one by one then going still, orange root cables dimming as the deepest core is touched, teal light spreading in the server cavern, generic", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "shiro", :text "வேர் வெட்டியாச்சு. அடுத்து Zombie. ——இப்போ மீட்பு நேரம், பிக்கோ.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "எல்லா மெஷின்களையும் பார்த்து, தனிமைப்படுத்தி அப்புறம் எழுப்புவேன். புரிஞ்சுது!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "ஸ்லீப் கால், முழு விரிவாக்கம்!", :shiro_emo "normal", :pico_emo "happy", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "city_recover_ripple", :scene_prompt "Anime hopeful shot: teal ripples of light spreading omnidirectionally across cyber city, sleeping device icons waking up and brightening one by one, EDR isolation glow, recovery, character-free", :sfx "chime", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "...முதல் எபிசோடை விட கொஞ்சம் சிறப்பா ஆயிட்டேன்ல, நான்.", :shiro_emo "happy", :pico_emo "smug", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime ominous shot: cyan ghost particles condensing and materializing into a faceless wavering form atop the ruined tower, swirling vortex sucking city log-light inward, epic dread, generic", :sfx "ghost", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "shiro", :text "...வந்துடுச்சு. Ghost. இந்த சீசன்ல முதல்முறையா அதோட உண்மை வடிவம் வந்தது.", :shiro_emo "surprised", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "அது எல்லா log-களையும் எடுத்துக்கப் பாக்குது!", :shiro_emo "angry", :pico_emo "panic", :sfx "alarm", :fx "shake"}
+ {:type "dialogue", :speaker "shiro", :text "தகவல் என்பது பௌதிகமானது. அழிஞ்சாலும், சுவடு மீதம் இருக்கும். ——எனக்கு ஏற்கனவே தெரியுது.", :shiro_emo "angry", :pico_emo "surprised", :sfx nil, :fx "flash"}
+ {:type "scene", :scene_key "ghost_materialize", :scene_prompt "Anime tense shot: faceless ghost form momentarily wavering, its noisy outline briefly resolving toward a human shape, cyan particles trembling against the night skyline, generic", :sfx "ghost", :fx nil, :dur 2.5}
+ {:type "dialogue", :speaker "pico", :text "...ஷிரோ, பதறாதே. தகவல் ஓடிப் போகாதுல்ல?", :shiro_emo "surprised", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——ஆமா.", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "என் கைவண்ணத்தைக் குறைச்சு மதிக்காதே. ——இப்போ, நண்பர்களுக்காக.", :shiro_emo "normal", :pico_emo "smug", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——ஹீட்-ட்ரேஸ், முழு பகுப்பாய்வு.", :shiro_emo "normal", :pico_emo "thinking", :sfx "whoosh", :fx "flash"}
+ {:type "scene", :scene_key "heat_trace_reveal", :scene_prompt "Anime epic shot: a beam of white light from a fingertip fully illuminating a ghost's heat trail, the faceless cyan outline rising sharply into view glowing teal over a night cityscape, generic", :sfx "whoosh", :fx "flash", :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "கண்டுபிடிச்சிட்டேன்——! ஃபுல் பிரேக்!", :shiro_emo "normal", :pico_emo "angry", :sfx "whoosh", :fx "shake"}
+ {:type "scene", :scene_key "double_heat_break", :scene_prompt "Anime climactic finish: cyan ghost core shattering into scattering particles transforming into white heat light, dramatic dual hero finishing-pose silhouette against the night skyline, brushstroke energy, generic", :sfx "whoosh", :fx "flash", :dur 3.5}
+ {:type "dialogue", :speaker "pico", :text "——டபுள் ஹீட் பிரேக்!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "நீங்க இன்னும் எதையும் தெரிஞ்சுக்கல——அப்படின்னு Ghost சொன்னது.", :shiro_emo "sad", :pico_emo "surprised", :sfx "ghost", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "தப்பிச்சிடுச்சா?!", :shiro_emo "surprised", :pico_emo "panic", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "தப்பிக்கல. பின்வாங்கிடுச்சு. இன்னைக்கு இவ்ளோதான்.", :shiro_emo "thinking", :pico_emo "sad", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "வீழ்த்த முடியல. ஆனா Ghost முதல்முறையா பின்வாங்கிடுச்சு.", :shiro_emo "normal", :pico_emo "normal", :sfx nil, :fx nil}
+ {:type "scene", :scene_key "rooftop_night", :scene_prompt "Anime quiet shot: city lights settling back to peaceful teal, a ruined building rooftop overlooking the calm night skyline, gentle wind, reflective finale mood, character-free", :sfx "ambient", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "பங்குகளைப் பிரிச்சு வரிசையா செயல்பட்டப்போ, உண்மையாவே வேலை செஞ்சது.", :shiro_emo "happy", :pico_emo "happy", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "வரிசையா கட்டுறதால இடிஞ்சு விழாது. முதிர்ச்சின்னா இதுதான்.", :shiro_emo "normal", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "இன்னைக்கு, முதல்முறையா—— என்னை விட முன்னாடி நீ Ghost-ஓட மையத்தைக் கண்டுபிடிச்ச.", :shiro_emo "happy", :pico_emo "surprised", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...கொஞ்சம் அநியாயம் தான். இப்படியெல்லாம் சொல்றது.", :shiro_emo "smug", :pico_emo "embarrassed", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "...அந்தக் குரல். எனக்குக் கேட்டுச்சு. ——எனக்குத் தெரிஞ்ச குரல்.", :shiro_emo "sad", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "...எப்பவாவது எனக்குச் சொல்லுவியா?", :shiro_emo "sad", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "——ஆமா. எப்பவாவது, நிச்சயமா. போலாம், பிக்கோ.", :shiro_emo "normal", :pico_emo "normal", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "zukan_board", :scene_prompt "Anime educational corner: a clean whiteboard reading NIST CSF with five circles labeled identify protect detect respond recover, bright friendly studio lighting, character-free", :sfx "chime", :fx nil, :dur 3.0}
+ {:type "dialogue", :speaker "pico", :text "இன்னைக்கி இந்த NIST CSF-ன்னா என்ன?", :shiro_emo "normal", :pico_emo "confused", :sfx "pop", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "இது பாதுகாப்பை ஐந்து நிலைகளா ஒழுங்குபடுத்துற ஒரு கட்டமைப்பு.", :shiro_emo "happy", :pico_emo "thinking", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "அடையாளம்→பாதுகாப்பு→கண்டறிதல்→பதில்→மீட்பு. அடுக்கினா எந்தத் தாக்குதலும் தாங்காது.", :shiro_emo "normal", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "dialogue", :speaker "shiro", :text "Splunk அல்லது Sentinel-ல கண்டறி, CrowdStrike-ல பதிலளி, Mandiant-ல வேரை வெட்டு.", :shiro_emo "thinking", :pico_emo "surprised", :sfx nil, :fx nil}
+ {:type "dialogue", :speaker "pico", :text "எல்லாமே இணைஞ்சு இருந்துச்சு—— இதுவரைக்கும் நான் கத்துக்கிட்டதெல்லாம்!", :shiro_emo "happy", :pico_emo "idea", :sfx "pop", :fx "flash"}
+ {:type "dialogue", :speaker "shiro", :text "இன்னும் தெரிஞ்சுக்கணும்னா Yukkuri Cyber சேனலுக்கு வாங்க!", :shiro_emo "happy", :pico_emo "happy", :sfx "chime", :fx nil}
+ {:type "scene", :scene_key "ed_ghost_hide", :scene_prompt "Anime ED shot: a cute ghost peeking out then hiding shyly, but for one instant its outline resolves into a human shape against a soft teal night background, gentle, generic", :sfx "ghost", :fx "flash", :dur 3.0}
+]

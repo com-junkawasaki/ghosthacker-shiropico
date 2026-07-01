@@ -1,0 +1,6 @@
+# Binary assets (character refs, generated panels, motion comic) route to
+# DataLad + git-annex (B2/IPFS), not git. See ASSETS-DATALAD.md.
+character-refs/
+resources/
+
+.DS_Store

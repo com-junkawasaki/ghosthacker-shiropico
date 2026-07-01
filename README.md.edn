@@ -1,0 +1,3 @@
+{:name "ai-gftd-ghosthacker-shiropico"
+ :source "orgs/gftdcojp/ai-gftd-mangaka/data/ghosthacker-shiropico"
+ :note "Split from ai-gftd-mangaka for west-managed project ownership. SHIRO & PICO is a sibling work to Ren's Ghost Hacker (`orgs/com-junkawasaki/ghosthacker`, `orgs/gftdcojp/ai-gftd-mangaka/data/ghosthacker`) in the same GFTD cyber universe (\"information is physical\" / Landauer's principle), aimed at global kids' audiences (India / Gulf-MENA). See SERIES-BIBLE.md. Binary assets (character refs, generated panels, motion comic) live in a separate DataLad dataset `~/gftdcojp/ghosthacker-shiropico-assets` (see ASSETS-DATALAD.md), not in this repo."}

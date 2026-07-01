@@ -1,0 +1,21 @@
+{
+  "name": "henshin-bank",
+  "title": "変身バンク「シロピコ、オン！」",
+  "duration_sec": 3.5,
+  "reuse": "identical cut every episode (kids chant along)",
+  "particleColor": "#1FB6A6 (teal, fixed)",
+  "constraints": "no religious/occult iconography; world-wide neutral",
+  "cuts": [
+    { "n": 1, "shot": "close-up (Pico)", "image": "chibi Pico grins, thumbs up", "fx": "background switches to teal", "sfx": "キュピン" },
+    { "n": 2, "shot": "close-up (Shiro)", "image": "chibi Shiro half-eyes → snaps open", "fx": "teal eyes glow", "sfx": "ゴゥ…" },
+    { "n": 3, "shot": "bust 2-shot", "image": "'シロピコ、オン！' simultaneous high-five", "fx": "light bursts on contact", "sfx": "パァン！" },
+    { "n": 4, "shot": "scale change (MAIN)", "image": "chibi → 5-6 head (cocoon of light unravels)", "fx": "teal particles spiral up", "sfx": "シャアアッ" },
+    { "n": 5, "shot": "full pose", "image": "Shiro (static, single-finger stance) + Pico (dynamic, leaning)", "fx": "data ripple at feet, hair billows", "sfx": "ドン！" }
+  ],
+  "pipelineInput": {
+    "story": "チビのシロとピコがハイタッチし、ティールの光の粒子に包まれて等身が上がり、決めポーズを取る変身シーン",
+    "pageCount": 1,
+    "panelsPerPage": 5,
+    "style": "shonen"
+  }
+}
