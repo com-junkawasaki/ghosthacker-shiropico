@@ -4,26 +4,37 @@
  ;; independent PolicyGovernor + append-only ledger (CLAUDE.md "Actors"),
  ;; self-sovereign kotoba-server identity (no owner hand-off). Ported from
  ;; com-etzhayyim-tsumugu's shape (Spirit in Physics' publish actor), adapted
- ;; to animeka's cut domain and built directly on kotoba-lang/genapp-clj for
- ;; rendering (see 90-docs/adr/2607011900-genapp-clj-mangaka-animeka-commons.md
- ;; and 90-docs/adr/2607011816-ghosthacker-shiropico-standalone-repo.md).
+ ;; to animeka's cut domain and built directly on kotoba-lang/comfyui's
+ ;; `comfyui.gateway` for rendering (see
+ ;; 90-docs/adr/2607011900-genapp-clj-mangaka-animeka-commons.md and
+ ;; 90-docs/adr/2607011816-ghosthacker-shiropico-standalone-repo.md).
  ;;
  ;; Lives inside this content repo (not a separate com-etzhayyim-* actor
  ;; repo) — SHIRO & PICO's publish actor stays co-located with the content
  ;; it publishes, same as mangaka/animeka keep their app + data together.
+ ;;
+ ;; All four in-repo portable libs are kotoba-lang (the com-junkawasaki/*
+ ;; originals are mid-migration out per repos.edn's :orgs taxonomy note).
  :deps
  {org.clojure/clojure {:mvn/version "1.12.0"}
-  io.github.com-junkawasaki/langgraph-clj {:git/sha "c7daa07d4e50f55d7e2a02e4b89dbeb2b200961d"}
-  io.github.com-junkawasaki/langchain-clj {:git/tag "v0.1.0" :git/sha "ae475c9"}
-  io.github.kotoba-lang/genapp-clj        {:git/sha "69abd6bcc50fd05a3c4e28d9730fc2b30e9cc19a"}}
+  io.github.kotoba-lang/langgraph {:git/sha "5b4e5e70837b849b14b6a5800894e3be202ad5fa"}
+  io.github.kotoba-lang/langchain {:git/sha "c7943d7542f28242a654ff3e0c37100b48a9417d"}
+  io.github.kotoba-lang/comfyui   {:git/sha "4ef264754b8531acbf1f44e2015ec9f0f9b04486"}
+
+  ;; comfyui.gateway / langchain.jvm are JVM-only host-fn adapters that
+  ;; deliberately don't pull http-kit/jsonista into their own repos' main
+  ;; :deps (keeps the pure cores SCI/WASM/CLJS-clean) -- every consumer
+  ;; brings its own, same as mangaka/animeka do for their own server needs.
+  http-kit/http-kit   {:mvn/version "2.8.0"}
+  metosin/jsonista     {:mvn/version "0.3.11"}}
 
  :aliases
  {;; Workspace development — use the local lib checkouts (no git fetch).
   :dev
   {:override-deps
-   {io.github.com-junkawasaki/langgraph-clj {:local/root "../../../com-junkawasaki/langgraph-clj"}
-    io.github.com-junkawasaki/langchain-clj {:local/root "../../../com-junkawasaki/langchain-clj"}
-    io.github.kotoba-lang/genapp-clj        {:local/root "../../../kotoba-lang/genapp-clj"}}}
+   {io.github.kotoba-lang/langgraph {:local/root "../../../kotoba-lang/langgraph"}
+    io.github.kotoba-lang/langchain {:local/root "../../../kotoba-lang/langchain"}
+    io.github.kotoba-lang/comfyui   {:local/root "../../../kotoba-lang/comfyui"}}}
 
   :test
   {:extra-paths ["test"]
