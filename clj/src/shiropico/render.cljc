@@ -1,7 +1,9 @@
 (ns shiropico.render
   "Cut keyframe rendering for the shiropico actor, built directly on
-  `genapp.comfy` (the shared LangGraph-app scaffolding extracted from
-  `ai-gftd-mangaka`/`ai-gftd-animeka`, see
+  `comfyui.gateway` (the JVM I/O adapter living in `kotoba-lang/comfyui`
+  next to the pure engine it drives — originally extracted from
+  `ai-gftd-mangaka`/`ai-gftd-animeka` via a short-lived
+  `kotoba-lang/genapp-clj`, see
   90-docs/adr/2607011900-genapp-clj-mangaka-animeka-commons.md). shiropico
   does not call into `ai-gftd-animeka` itself (an actor should not depend on
   another app's deploy artifact) — it is a third, independent consumer of
@@ -12,7 +14,7 @@
   a placeholder SVG, same as mangaka/animeka — the actor's containment node
   (`shiropico.advisor`) reads the render result's `:source` field
   (\"gateway\" vs \"stub\") as its confidence signal for the PolicyGovernor."
-  (:require [genapp.comfy :as comfy]))
+  (:require [comfyui.gateway :as comfy]))
 
 (def default-ckpt #?(:clj (or (System/getenv "SHIROPICO_DEFAULT_CKPT") "animagine-xl-4.0.safetensors")
                      :cljs "animagine-xl-4.0.safetensors"))
