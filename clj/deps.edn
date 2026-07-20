@@ -22,7 +22,7 @@
   io.github.kotoba-lang/comfyui   {:git/sha "4ef264754b8531acbf1f44e2015ec9f0f9b04486"}
   ;; JVM application host: compile the confined Kotoba decision module once,
   ;; then execute its checked IR at the operation boundary.
-  io.github.kotoba-lang/compiler  {:git/sha "f0941b0db47abe7bf00f74e69911f2cac385a815"}
+  io.github.kotoba-lang/compiler  {:git/sha "2ba4e08dc39edc28b9f341254a66623f2dc48ea6"}
 
   ;; comfyui.gateway / langchain.jvm are JVM-only host-fn adapters that
   ;; deliberately don't pull http-kit/jsonista into their own repos' main
