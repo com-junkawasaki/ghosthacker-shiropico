@@ -7,10 +7,12 @@
 ;; effect: 0 noop, 1 render; confidence-milli: 0..1000; high-stakes: 0|1;
 ;; phase: 0 read-only, 1 assisted, 2 supervised-auto.
 (defn decide [effect :i64 confidence-milli :i64 high-stakes :i64 phase :i64] :i64
-  (cond
-    (= effect 0) 0
-    (= phase 0) 0
-    (= high-stakes 1) 1
-    (< confidence-milli 400) 1
-    (= phase 1) 1
-    :else 2))
+  (if (= effect 0)
+    0
+    (if (= phase 0)
+      0
+      (if (= high-stakes 1)
+        1
+        (if (< confidence-milli 400)
+          1
+          (if (= phase 1) 1 2))))))

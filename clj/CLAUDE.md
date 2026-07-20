@@ -18,9 +18,14 @@ fact.
 ## Conventions
 
 - `.kotoba` is the authority for newly migrated application decisions. The
-  first slice is `src/shiropico/publish_decision.kotoba`; the existing
-  `.cljc` policy/phase implementation remains a compatibility oracle until
-  the operation host invokes the compiled artifact in production.
+  first migrated application is `src/shiropico/publish_decision.kotoba`;
+  `shiropico.kotoba-operation/build` is the canonical JVM host and invokes
+  its compiled checked artifact. The existing `.cljc` policy/phase path is
+  only a portability oracle/fallback, not the production authority.
+- Application effects are explicit injected host capabilities. Durable
+  commit intent uses `kotoba-operation/atomic-checkpoint`, fixed to one file
+  beneath one configured root; a confinement/write failure must happen
+  before and prevent any SSoT mutation.
 - `.cljc` for portable compatibility code (store/phase/policy/operation/
   advisor/render) — `.clj` only for JVM-only I/O (cacao, kotoba).
 - `shiropico.render` builds directly on `kotoba-lang/genapp-clj` (own

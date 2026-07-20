@@ -10,6 +10,8 @@
   rewrite:
     - the Store   (MemStore | DatomicStore | kotoba-server) — `store` arg
     - the Advisor (render-backed | future coscientist-backed)  — :advisor opt
+    - the Decision (portable oracle | Kotoba application)      — :decision opt
+    - the Checkpoint (host-confined durable intent)            — :checkpoint! opt
     - the Phase   (0→2 rollout)                                — :phase in ctx
 
   One graph run = one cut render (intake → advise → govern → decide →
@@ -41,13 +43,26 @@
    :path    [(:cut-id request)]
    :payload (assoc (:value proposal) :by (:actor-id context))})
 
+(defn compatibility-decision
+  "Legacy portable decision path. JVM application hosts should inject the
+  authoritative Kotoba decision adapter; this function remains as a CLJC
+  compatibility oracle and for runtimes that cannot yet load a Kotoba host."
+  [request context _proposal verdict]
+  (let [base (phase/verdict->disposition verdict)
+        ph   (:phase context phase/default-phase)]
+    (phase/gate ph request base)))
+
 (defn build
   "Compiles an OperationActor graph bound to `store` (any `shiropico.store/
   Store`). opts:
     :advisor      — a `shiropico.advisor/Advisor` (default: render-advisor)
+    :decision     — authoritative decision fn (default: compatibility oracle)
+    :checkpoint!  — durable pre-commit intent writer (default: no-op)
     :checkpointer — langgraph checkpointer (default: in-mem)"
-  [store & [{:keys [advisor checkpointer]
+  [store & [{:keys [advisor checkpointer decision checkpoint!]
              :or   {advisor      (advisor/render-advisor)
+                    decision     compatibility-decision
+                    checkpoint!  (fn [_] nil)
                     checkpointer (cp/mem-checkpointer)}}]]
   (-> (g/state-graph
        {:channels
@@ -77,9 +92,9 @@
       ;; only add caution). HARD policy violations → HOLD (no override).
       (g/add-node :decide
         (fn [{:keys [request context proposal verdict]}]
-          (let [base (phase/verdict->disposition verdict)
-                ph   (:phase context phase/default-phase)
-                {:keys [disposition reason]} (phase/gate ph request base)]
+          (let [ph (:phase context phase/default-phase)
+                {:keys [disposition reason]}
+                (decision request context proposal verdict)]
             (case disposition
               :hold
               {:disposition :hold
@@ -119,8 +134,13 @@
       ;; Commit — the ONLY node that writes the SSoT + audit ledger.
       (g/add-node :commit
         (fn [{:keys [request context proposal record]}]
-          (store/commit-cut! store (:cut-id request) (:payload record))
           (let [f (commit-fact request context proposal)]
+            ;; Write durable intent first. If confinement or persistence
+            ;; fails, no SSoT mutation occurs; replay can reconcile an intent
+            ;; written immediately before a process failure.
+            (checkpoint! {:request request :context context
+                          :record record :fact f})
+            (store/commit-cut! store (:cut-id request) (:payload record))
             (store/append-ledger! store f)
             {:audit [f]})))
 
