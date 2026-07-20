@@ -17,8 +17,12 @@ fact.
 
 ## Conventions
 
-- `.cljc` for anything portable (store/phase/policy/operation/advisor/
-  render) — `.clj` only for JVM-only I/O (cacao, kotoba).
+- `.kotoba` is the authority for newly migrated application decisions. The
+  first slice is `src/shiropico/publish_decision.kotoba`; the existing
+  `.cljc` policy/phase implementation remains a compatibility oracle until
+  the operation host invokes the compiled artifact in production.
+- `.cljc` for portable compatibility code (store/phase/policy/operation/
+  advisor/render) — `.clj` only for JVM-only I/O (cacao, kotoba).
 - `shiropico.render` builds directly on `kotoba-lang/genapp-clj` (own
   `MichibikiKSampler`-equivalent config, `ShiropicoKSampler`) — it does
   **not** depend on `ai-gftd-animeka` itself (an actor shouldn't depend on

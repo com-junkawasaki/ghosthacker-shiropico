@@ -38,7 +38,8 @@
 
   :test
   {:extra-paths ["test"]
-   :extra-deps {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+   :extra-deps {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1" :git/sha "dfb30dd"}
+                io.github.kotoba-lang/compiler {:git/sha "f0941b0db47abe7bf00f74e69911f2cac385a815"}}
    :main-opts ["-m" "cognitect.test-runner"]
    :exec-fn cognitect.test-runner.api/test}
 
