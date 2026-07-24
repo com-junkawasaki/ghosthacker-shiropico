@@ -1,0 +1,89 @@
+{:jobs
+ {:ep02-reboot
+  {:keyframe_job "2f9a8991-a323-49de-bc70-876a7e777f77",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163049_2f9a8991-a323-49de-bc70-876a7e777f77.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep02-reboot.png",
+   :clip_job "87deb2a4-f92b-4f18-9f81-f9ce9121fe02",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163716_87deb2a4-f92b-4f18-9f81-f9ce9121fe02.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep02-reboot.mp4"},
+  :ep02-root-cut
+  {:keyframe_job "564be3fa-03c0-4280-b2e0-60b63c94f22f",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163156_564be3fa-03c0-4280-b2e0-60b63c94f22f.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep02-root-cut.png",
+   :clip_job "154709f2-6a4b-4144-b4d3-bd5441692086",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163954_154709f2-6a4b-4144-b4d3-bd5441692086.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep02-root-cut.mp4"},
+  :ep03-wrong-tool
+  {:keyframe_job "e6cf6876-ff3b-4583-b504-204143ed6228",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163235_e6cf6876-ff3b-4583-b504-204143ed6228.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep03-wrong-tool.png",
+   :clip_job "70b6bfc5-0e0a-4724-bfe8-1d0281b711e6",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_164233_70b6bfc5-0e0a-4724-bfe8-1d0281b711e6.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep03-wrong-tool.mp4"},
+  :ep03-track-beast
+  {:keyframe_job "5e947ce7-7563-4abc-b1d9-d062af8db742",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163313_5e947ce7-7563-4abc-b1d9-d062af8db742.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep03-track-beast.png",
+   :clip_job "3cdcd6bf-46e3-42b4-839c-eab21d6725b4",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_164453_3cdcd6bf-46e3-42b4-839c-eab21d6725b4.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep03-track-beast.mp4"},
+  :ep04-alert-forest
+  {:keyframe_job "04b998e0-9cff-467e-b3d5-0d29c20888f6",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163353_04b998e0-9cff-467e-b3d5-0d29c20888f6.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep04-alert-forest.png",
+   :clip_job "63017e86-e84b-4eff-bcb8-e8503869b01d",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_164915_63017e86-e84b-4eff-bcb8-e8503869b01d.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep04-alert-forest.mp4"},
+  :ep04-correlate
+  {:keyframe_job "3a1b6d3f-fbf9-457f-89a4-763d4ceb5733",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163434_3a1b6d3f-fbf9-457f-89a4-763d4ceb5733.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep04-correlate.png",
+   :clip_job "40f6b656-f0bf-4ae6-85e2-aae85026cc0e",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_165132_40f6b656-f0bf-4ae6-85e2-aae85026cc0e.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep04-correlate.mp4"},
+  :ep05-trusted-face
+  {:keyframe_job "57aef589-0031-45ac-a575-4940ee417b22",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163514_57aef589-0031-45ac-a575-4940ee417b22.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep05-trusted-face.png",
+   :clip_job "54293086-d1fb-4566-9669-aa0cd536e558",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_165343_54293086-d1fb-4566-9669-aa0cd536e558.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep05-trusted-face.mp4"},
+  :ep05-verify-gate
+  {:keyframe_job "8591d0e6-8a3b-4451-bb02-2b0bb0bf055d",
+   :keyframe_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_163629_8591d0e6-8a3b-4451-bb02-2b0bb0bf055d.png",
+   :keyframe_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep05-verify-gate.png",
+   :clip_job "de8c29a7-5a7d-40b3-8312-5afb9fcfb0ac",
+   :clip_url
+   "https://d8j0ntlcm91z4.cloudfront.net/user_316u340JjaR6roDSY6NakAVJEy8/hf_20260719_165611_de8c29a7-5a7d-40b3-8312-5afb9fcfb0ac.mp4",
+   :clip_path
+   "/Users/junkawasaki/github/com-junkawasaki/orgs/gftdcojp/ai-gftd-ghosthacker-shiropico/shorts/renders/ep05-verify-gate.mp4"}}}
