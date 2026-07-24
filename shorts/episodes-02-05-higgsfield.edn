@@ -1,0 +1,68 @@
+{:format
+ {:aspectRatio "9:16",
+  :targetSeconds 40,
+  :videoModel "seedance_2_0",
+  :clipSeconds 10,
+  :clipsPerEpisode 2},
+ :characterReference "/private/tmp/shiropico-canonical-kaizen-g1.png",
+ :episodes
+ [{:episode 2,
+   :title "It Keeps Coming Back",
+   :lesson
+   "Persistent malware returns until every root is found and removed.",
+   :shots
+   [{:id "reboot",
+     :keyframe
+     "Vertical anime production keyframe in a Mumbai smart factory before dawn. Preserve the attached exact SHIRO and PICO character designs: Shiro is the calm short platinum-haired girl in an oversized white hoodie; Pico is the grey-green-haired boy in a dark green hoodie. Pico slams a power switch with a cocky grin while cute factory machines wake again behind him, orange reboot lights multiplying. A tiny charming gear-legged Daemon with orange eyes stands on the control panel. Thick clean linework, two-value cel shading, PG, stable anatomy, no text, no logo.",
+     :motion
+     "Single continuous vertical anime action shot. Preserve exact characters and costumes. Pico force-switches the factory off and grins; after a beat, orange reboot lights snap on one after another and the cute gear-legged Daemon runs across the panel. Pico's expression turns to comic panic while Shiro remains calm. Stable faces and hands, no injury, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: heavy power switch, silence, three reboot chimes, mechanical clatter, comic percussion over tense cyber music."}
+    {:id "root-cut",
+     :keyframe
+     "Vertical anime climax in the same Mumbai factory. Preserve exact SHIRO and PICO designs. Shiro raises one finger before three luminous malware roots labelled only by distinct visual layers: startup circuit, firmware gear, hidden partition crystal. Pico restrains the cute Daemon with a lime light cord. Shiro severs the final root with a precise teal beam; orange factory lights become cyan. Heroic PG composition, thick clean linework, no readable text, no logo.",
+     :motion
+     "Single continuous vertical anime climax. Preserve exact characters. Three glowing malware roots become visible beneath the factory. Pico pulls the cute Daemon away with a lime energy cord; Shiro calmly cuts the roots in one precise teal sequence. The final root dissolves into clean particles, Daemon's orange eyes turn cyan, and the factory settles into a safe rhythm. Stable faces, hands and costumes, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: forensic scan sweep, three clean energy cuts, gear wind-down, warm success chime and heroic cyber music."}]}
+  {:episode 3,
+   :title "Holes and Beasts Are Different",
+   :lesson
+   "Vulnerability scanners find your holes; threat intelligence tracks adversaries.",
+   :shots
+   [{:id "wrong-tool",
+     :keyframe
+     "Vertical anime production keyframe at a Singapore smart factory at dawn. Preserve exact SHIRO and PICO character designs from the reference. Pico enthusiastically aims his sticker-covered scanner gadget at a fast cute gear-legged Daemon, but lime scan grids lock onto harmless holes in walls and machines instead. Shiro watches with calm concern. Dynamic comedy, clean two-value cel shading, stable anatomy, no text, no logo.",
+     :motion
+     "Single continuous vertical anime comedy-action shot. Preserve exact characters. Pico sweeps a lime vulnerability scanner after the running Daemon; the scan repeatedly highlights harmless holes in factory panels while the Daemon dodges untouched. Pico changes from confidence to baffled panic; Shiro points toward the creature's fading trail. Stable anatomy and costumes, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: scanner pings, playful misses, tiny gear footsteps, comic drum hit, energetic cyber music."}
+    {:id "track-beast",
+     :keyframe
+     "Vertical anime climax at the Singapore smart factory. Preserve exact SHIRO and PICO designs. Shiro gathers floating threat-intelligence clues into a glowing cyan trail shaped like footprints, while Pico follows it and safely traps the cute Daemon inside a transparent teal sphere. Behind the Daemon, a subtle faceless white data-noise Ghost shadow leaves a luminous scent. Heroic mystery, PG, clean cel shading, no text, no logo.",
+     :motion
+     "Single continuous vertical anime hero shot. Preserve exact characters. Scattered indicators of compromise rise and connect into one cyan footprint trail. Shiro traces it calmly; Pico follows and closes a transparent containment sphere around the cute Daemon. A faceless white data-noise Ghost shadow flickers behind them and vanishes, briefly cracking Shiro's calm expression. Stable faces and costumes, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: data ticks joining, quick footsteps, containment pulse, reversed digital whisper, mystery sting."}]}
+  {:episode 4,
+   :title "Lost in the Alert Forest",
+   :lesson
+   "Correlate alerts and automate routine response instead of clicking everything.",
+   :shots
+   [{:id "alert-forest",
+     :keyframe
+     "Vertical anime production keyframe in a Singapore smart city morning. Preserve exact SHIRO and PICO designs. Hundreds of bright red alert cards grow like a dense digital forest around Pico as he frantically taps them one by one. Cute hijacked smart appliances shuffle in the background like harmless zombies. Shiro stands above the noise, studying patterns. Comedic urgency, PG, crisp cel shading, no readable text, no logo.",
+     :motion
+     "Single continuous vertical anime comedy shot. Preserve exact characters. Red alert cards multiply around Pico every time he taps one, growing into a towering forest; harmless zombie-like smart appliances shuffle closer. Pico flails in comic alert fatigue while Shiro calmly watches repeating signals. Stable faces, hands and costumes, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: rapid notification pings building into noise, frantic taps, appliance beeps, comic percussion."}
+    {:id "correlate",
+     :keyframe
+     "Vertical anime climax over Singapore smart city. Preserve exact SHIRO and PICO designs. Shiro compresses hundreds of red alerts into three cyan incident clusters with elegant hand motions; Pico triggers a single safe orchestration wave that restores all cute smart appliances. The alert forest clears into a clean teal skyline. Heroic, readable visual hierarchy without text, thick clean anime linework, no logo.",
+     :motion
+     "Single continuous vertical anime climax. Preserve exact characters. Shiro draws hundreds of red alerts together by shared patterns until only three cyan incident clusters remain. Pico presses one glowing orchestration control; a teal response wave crosses the city and every cute appliance wakes safely. The visual noise clears completely. Stable anatomy, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: alerts merging into chords, automation click, broad restoration wave, cheerful device chimes, triumphant cyber music."}]}
+  {:episode 5,
+   :title "One Gate. Everyone Gets Checked.",
+   :lesson
+   "Zero Trust verifies every request, even when the face looks familiar.",
+   :shots
+   [{:id "trusted-face",
+     :keyframe
+     "Vertical anime production keyframe at Singapore smart port before dawn. Preserve exact SHIRO and PICO designs. Pico cheerfully opens a glowing access gate for what looks like a friendly Shiro, while the real Shiro behind him notices the visitor's edges breaking into white data-noise particles. Containers and cranes glow teal. Suspenseful but child-safe, crisp cel shading, stable anatomy, no text, no logo.",
+     :motion
+     "Single continuous vertical anime suspense-comedy shot. Preserve exact characters. Pico waves a familiar-looking Shiro through the glowing port gate without checking. The visitor smiles, then its edges flicker into white data-noise; the real Shiro steps into frame and Pico freezes in comic shock. Stable faces and costumes, no horror, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: access chime, footsteps, subtle glitch crackle, record scratch, tense cyber pulse."}
+    {:id "verify-gate",
+     :keyframe
+     "Vertical anime climax at Singapore smart port. Preserve exact SHIRO and PICO designs. Shiro creates one luminous cyan verification gate that checks identity, device and context as three clear icon-like rings. Pico redirects every visitor through it. The impersonation Ghost loses its borrowed face, becomes a harmless faceless white data silhouette, and dissolves outside the gate. Heroic PG anime, clean cel shading, no text, no logo.",
+     :motion
+     "Single continuous vertical anime hero shot. Preserve exact characters. A cyan Zero Trust gate scans each visitor with three concentric rings for identity, device and context. Real Shiro passes cleanly; the impersonation Ghost is stopped, loses its borrowed face and dissolves harmlessly into white pixels. Pico salutes as the port becomes secure. Stable anatomy and costumes, no text, no logo. NATIVE AUDIO ONLY, NO SPEECH: three verification tones, denied buzz, soft pixel dissolve, secure gate chime, triumphant cyber music."}]}]}
