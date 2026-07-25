@@ -1,8 +1,7 @@
-# Binary assets (character refs, generated panels, motion comic) route to
-# DataLad + git-annex (B2/IPFS), not git. See ASSETS-DATALAD.md.
-character-refs/
-resources/
+# Binary assets (character refs, generated panels, Seedance renders, motion
+# comic, narration audio) are NOT git-ignored anymore — this repo is itself a
+# DataLad dataset, so .gitattributes routes binary content to git-annex and
+# pushes it to the `b2` special remote. Only annex pointers land in git.
+# See ASSETS-DATALAD.md.
 
 .DS_Store
-shorts/renders/
-shorts/masters/
