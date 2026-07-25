@@ -55,38 +55,50 @@ The shiro/pico gen2 refs + 12-emotion sets are alive and **git-tracked** in
 files plus `emotions/{shiro,pico}` (24 files = 12 emotions × 2 characters).
 No annex or B2 dependency. Use these as the reference source.
 
-### ❌ ep01 panels + motion comic are gone
+### ✅ ep01 was NOT lost — recovered 2026-07-25
 
-The 5 panels and the 26s motion comic (1080×1920) were not recovered. Every lead
-was tried and failed:
+An earlier pass in this file claimed the 5 panels and the 26s motion comic were
+unrecoverable. **That was wrong.** Everything is intact in B2 bucket
+`ai-gftd-datasets` under `ghosthacker-shiropico/` — 297 files, 9.9 GB:
 
-| Lead | Result |
+| Path | Contents |
 |---|---|
-| IPFS local pin / block | not pinned; block absent offline |
-| IPFS network (daemon up, peers connected, 120s) | did not resolve |
-| Gateways ipfs.io / dweb.link / w3s.link / 4everland.io (both CIDs, redirects followed) | **HTTP 504** on all |
-| B2 bucket `ai-gftd-datasets` | current key is bucket-scoped → `not entitled` (even ListBuckets) |
-| Keychain `gftd.b2` `DATASETS_KEY_ID` / `DATASETS_APPLICATION_KEY` | not found |
-| `data/ghosthacker-shiropico/` in `ai-gftd-apps-gftdcojp/60-apps/ai-gftd-project-mangaka` | exists, but **text only** (1.8M); no `character-refs/`, no `resources/`, zero png/mp4/jpg/wav |
+| `panels/` | all 5 (`sp-ep01-p01-coldopen` … `p05-ghost`, 832×1216 PNG) |
+| `motion-comic/` | `sp-ep01-motion-comic.mp4` (8.60 MB, measured 26.000 s) + `-v2.mp4` |
+| `episode/` | **82 files, 9.58 GB** — ep01–ep07 full episodes in 11 languages (ar bn de en es fr hi ja pt ta zh), ep08–ep12 in ja |
+| `ep-scenes/` `bgm/` `opening/` `op-cuts/` `thumbnails/` `ads/` `coscientist/` | 178 stills, 8 BGM tracks, OP cuts, etc. |
 
-Dead CIDs, for the record:
-`bafybeib7ylao5c6bw45flkuwrnjrz4xgb7idpvo3qqzwvst6uqnclgdq7y` (top),
-`bafybeigoeuzoisczxqozbnz2lvsnbp6tagyf342yvmmqpwrpvj6hzdv2yy` (motion comic).
+The panels and motion comic are now recovered into `ep01/` in this repo,
+annexed, and pushed to `gftdcojp-m365-annex`, so they are covered by
+`scripts/annex-custody-verify.cljs`.
 
-### 🔄 ep01 is regenerable, though
+**Why the earlier pass got it wrong** (worth knowing, it will happen again):
+the sweep tried the current annex key (bucket-scoped → `not entitled`) and
+Keychain `gftd.b2` `DATASETS_KEY_ID`/`DATASETS_APPLICATION_KEY` (absent), then
+concluded no surviving key could reach the bucket. It never consulted the
+`secrets-location-map` skill, which documents an **account-wide Backblaze Master
+Application Key** — 1Password item `BACKBLAZE 260225 application keys`, fields
+`260421-BACKBLAZE_MASTER_KEY_ID` / `260421-BACKBLAZE_MASTER_KEY`. With that key
+the bucket opens normally. **When a credential seems missing, read
+secrets-location-map before concluding the data is gone.**
 
-Both the inputs and the generators survive, so ep01 can be rebuilt (it will not
-be byte-identical to the original art):
+The IPFS finding stands: both CIDs return **504** on ipfs.io / dweb.link /
+w3s.link / 4everland.io and are absent locally, so those pins really did lapse
+(`bafybeib7ylao5c6bw45flkuwrnjrz4xgb7idpvo3qqzwvst6uqnclgdq7y`,
+`bafybeigoeuzoisczxqozbnz2lvsnbp6tagyf342yvmmqpwrpvj6hzdv2yy`). One dead
+backup route is not a dead asset — that conflation was the actual mistake.
 
-- Inputs: `episode-01-shotlist{,-v2}.json` in 11 languages, `episode-01.md`,
-  `SERIES-BIBLE.md`, `character-design-spec.json`
-- Generators: `comfy/scripts/shiropico-ep01-gen.py`,
-  `shiropico-motion-comic{,-v2}.py`, `shiropico-build-episode{,-v2,-v3}.py`,
-  `shiropico-opening{,-v2}.py`, `shiropico-thumbnail.py`
+### ⚠️ The 9.58 GB episode catalog has no custody
 
-Remaining unexplored lead: a 1Password item holding a key entitled for
-`ai-gftd-datasets`. Its identifier is unknown and was **not** guessed at (vault
-enumeration is disallowed) — ask the owner for the exact item name.
+`episode/` (ep01–07 × 11 languages, ep08–12 ja) belongs to **no git repo and no
+DataLad dataset**, so `annex-custody-verify` does not see it, and its bucket
+opens only with the account master key. This is the same exposure that nearly
+lost ep01, at ~70× the size. Needs a custody decision.
+
+Regeneration is still possible if ever needed (inputs
+`episode-01-shotlist{,-v2}.json` in 11 languages + `episode-01.md` +
+`SERIES-BIBLE.md`, generators `comfy/scripts/shiropico-*.py`), but it is no
+longer the only option.
 
 That older note also claimed *"git-annex S3 special-remote hangs on B2 'checking
 bucket'"* and worked around it with direct boto3 uploads. **That no longer
