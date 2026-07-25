@@ -1,0 +1,15 @@
+1
+00:00:00,350 --> 00:00:03,263
+Pico cuts the power, but the malware comes right back.
+
+2
+00:00:03,263 --> 00:00:06,247
+Shiro maps every persistence layer and removes the root.
+
+3
+00:00:06,247 --> 00:00:07,989
+Rebooting is not remediation.
+
+4
+00:00:07,989 --> 00:00:10,787
+Find every foothold, then remove it completely.

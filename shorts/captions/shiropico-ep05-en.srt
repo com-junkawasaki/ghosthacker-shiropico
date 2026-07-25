@@ -1,0 +1,15 @@
+1
+00:00:00,350 --> 00:00:03,848
+The visitor looks exactly like Shiro, so Pico lets it through.
+
+2
+00:00:03,848 --> 00:00:04,869
+That is the trap.
+
+3
+00:00:04,869 --> 00:00:09,630
+Zero Trust verifies identity, device, and context on every request.
+
+4
+00:00:09,630 --> 00:00:13,275
+Familiar face or not: never trust, always verify.
