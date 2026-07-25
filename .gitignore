@@ -5,3 +5,7 @@
 # See ASSETS-DATALAD.md.
 
 .DS_Store
+
+# Python bytecode (make_captions.py imports assemble_localized_shorts)
+__pycache__/
+*.pyc
