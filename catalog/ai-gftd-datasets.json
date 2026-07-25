@@ -1,0 +1,1791 @@
+{
+  "bucket": "ai-gftd-datasets",
+  "prefix": "ghosthacker-shiropico/",
+  "note": "Inventory only — bytes are not annexed. See tools/b2_catalog.py.",
+  "files": 297,
+  "bytes": 10382188991,
+  "objects": [
+    {
+      "path": "ASSETS-DATALAD.md",
+      "size": 1848,
+      "sha1": "unverified:01509f979ba7c7d2bd6bf470e69ceac19c8e4d2d",
+      "uploaded": 1781964153089
+    },
+    {
+      "path": "SERIES-BIBLE.md",
+      "size": 12908,
+      "sha1": "unverified:e0c43446aecaf4332c8cbda8e901a1201c7812b6",
+      "uploaded": 1781964150933
+    },
+    {
+      "path": "ads/ep01-ads-plan.csv",
+      "size": 5066,
+      "sha1": "unverified:4b2dd9aee3966f56d635b6ffaece4515dde5a59f",
+      "uploaded": 1782359675835
+    },
+    {
+      "path": "ads/ep01-ads-plan.md",
+      "size": 2403,
+      "sha1": "unverified:842893a09b5fdfd4d43cfa594f85e6f98b93f6a6",
+      "uploaded": 1782359675395
+    },
+    {
+      "path": "bgm/action.wav",
+      "size": 2139228,
+      "sha1": "unverified:a5bc7e23987626600b0473c1ad7599ecebd7bf18",
+      "uploaded": 1782115309989
+    },
+    {
+      "path": "bgm/codex.wav",
+      "size": 2263634,
+      "sha1": "unverified:33672947c50b1b2050fe07f5aaa546645e66dbc9",
+      "uploaded": 1782115310593
+    },
+    {
+      "path": "bgm/comedy.wav",
+      "size": 2414834,
+      "sha1": "unverified:2930c24f2d7f5c8f143c7bbf36386d9d10da1944",
+      "uploaded": 1782115309089
+    },
+    {
+      "path": "bgm/daily.wav",
+      "size": 3252248,
+      "sha1": "unverified:2f228dd190612f1919607b9ed3d0d74df42d2691",
+      "uploaded": 1782115305598
+    },
+    {
+      "path": "bgm/emotional.wav",
+      "size": 3523634,
+      "sha1": "unverified:c26a31b2d86e0401dfd6a93b33da2448d28722b5",
+      "uploaded": 1782115308480
+    },
+    {
+      "path": "bgm/mystery.wav",
+      "size": 3252248,
+      "sha1": "unverified:5ea25178b1b79660df60bba463591a57d9d91caa",
+      "uploaded": 1782115307421
+    },
+    {
+      "path": "bgm/tension.wav",
+      "size": 2310884,
+      "sha1": "unverified:fa649ae3eec4e482426dbd62537b1669fa28d0ad",
+      "uploaded": 1782115309424
+    },
+    {
+      "path": "bgm/victory.wav",
+      "size": 1971314,
+      "sha1": "unverified:1220e85e0d0102533d3de9b6acb8f89e3193a398",
+      "uploaded": 1782115308126
+    },
+    {
+      "path": "character-design-spec.json",
+      "size": 4852,
+      "sha1": "unverified:80aadede694a897f65bbb1a8361cfa19292cb517",
+      "uploaded": 1781964151934
+    },
+    {
+      "path": "coscientist/shiropico-cosci-best-score92.png",
+      "size": 1723580,
+      "sha1": "unverified:f9c92a018a27d20f17226347e05ad5db8d09d7e8",
+      "uploaded": 1782008940980
+    },
+    {
+      "path": "ep-scenes/address_magnify.png",
+      "size": 1241557,
+      "sha1": "unverified:9fb6143557daea9b8a49cc5fad0dd2af7cab0f33",
+      "uploaded": 1782310389400
+    },
+    {
+      "path": "ep-scenes/admin_key_gate.png",
+      "size": 1244557,
+      "sha1": "unverified:80a43ee27452031c7eeb217f52632a0817ec5234",
+      "uploaded": 1782310359567
+    },
+    {
+      "path": "ep-scenes/alert_clearing_burst.png",
+      "size": 1301561,
+      "sha1": "unverified:34b97d6f11dcfb2ace540f1b20cd3420cf7bea49",
+      "uploaded": 1782310372057
+    },
+    {
+      "path": "ep-scenes/alert_storm.png",
+      "size": 1373714,
+      "sha1": "unverified:33795af80819ec540dbedec9c289642eeef6e29b",
+      "uploaded": 1782310397714
+    },
+    {
+      "path": "ep-scenes/antenna-purify-wave.png",
+      "size": 1473158,
+      "sha1": "unverified:2f0b390e718ade75228ad3fabab174e3c3e26894",
+      "uploaded": 1782310422844
+    },
+    {
+      "path": "ep-scenes/barrier_wall.png",
+      "size": 1216646,
+      "sha1": "unverified:b4a3e0e454eaa8ce2715a19b7c5dc4e1e678b973",
+      "uploaded": 1782310391352
+    },
+    {
+      "path": "ep-scenes/blast_pulse.png",
+      "size": 1524679,
+      "sha1": "unverified:0693f27192067d849f60a42c7736b49115f15773",
+      "uploaded": 1782310408993
+    },
+    {
+      "path": "ep-scenes/c2-tower-antenna.png",
+      "size": 1240614,
+      "sha1": "unverified:a1ff1f29e26e71761c06d8a7734f6d341599612c",
+      "uploaded": 1782310394303
+    },
+    {
+      "path": "ep-scenes/c2_router_pulse.png",
+      "size": 1351419,
+      "sha1": "unverified:d045924f5db8681b86c9cc9667ff494dda62d651",
+      "uploaded": 1782310418980
+    },
+    {
+      "path": "ep-scenes/c2_turns_teal.png",
+      "size": 1359722,
+      "sha1": "unverified:03061de79795ee61cc70fd427ae82729c7dd2c32",
+      "uploaded": 1782310423234
+    },
+    {
+      "path": "ep-scenes/car-isolated-safe.png",
+      "size": 1341591,
+      "sha1": "unverified:20ef832fd02243e7ccabf8f77f1db4986e1b7f1d",
+      "uploaded": 1782310352972
+    },
+    {
+      "path": "ep-scenes/cars-falling-asleep.png",
+      "size": 1326206,
+      "sha1": "unverified:fe5cca22401f07d064f7eac21200c23f1d5c60a0",
+      "uploaded": 1782310377267
+    },
+    {
+      "path": "ep-scenes/chase_action.png",
+      "size": 1463279,
+      "sha1": "unverified:f942e35bf4c9eec3a79af2ddeec0198e9738e149",
+      "uploaded": 1782310407108
+    },
+    {
+      "path": "ep-scenes/city_recover_ripple.png",
+      "size": 1483954,
+      "sha1": "unverified:87982ba854a786d0c1e2ed6e7c91cb69dfb451b9",
+      "uploaded": 1782310376203
+    },
+    {
+      "path": "ep-scenes/city_total_assault.png",
+      "size": 1658022,
+      "sha1": "unverified:ff7a2bb9d121ca91f00667c362385f7019e80526",
+      "uploaded": 1782310392502
+    },
+    {
+      "path": "ep-scenes/cloud_clear_finisher.png",
+      "size": 1342946,
+      "sha1": "unverified:4c0ef78d08b223c389e962cf5c1c1a9462f57493",
+      "uploaded": 1782310408001
+    },
+    {
+      "path": "ep-scenes/cnapp_overview_map.png",
+      "size": 1301409,
+      "sha1": "unverified:a1484ed69d20ce4ceecef52bc820efe7eb840c99",
+      "uploaded": 1782310334756
+    },
+    {
+      "path": "ep-scenes/codex_whiteboard.png",
+      "size": 1450327,
+      "sha1": "unverified:c35b5e37ef24c7ee5a8a23fbc6761bf47b830621",
+      "uploaded": 1782310328842
+    },
+    {
+      "path": "ep-scenes/combo_charge.png",
+      "size": 1459953,
+      "sha1": "unverified:f8c8eff0f00b47cb070a26e13338f8bb76324d6f",
+      "uploaded": 1782310351055
+    },
+    {
+      "path": "ep-scenes/config_cube_crack.png",
+      "size": 1556200,
+      "sha1": "unverified:6a289aeb6e4985719f13e11997cb0744e4f5e186",
+      "uploaded": 1782310360880
+    },
+    {
+      "path": "ep-scenes/control_center_alerts.png",
+      "size": 1373714,
+      "sha1": "unverified:33795af80819ec540dbedec9c289642eeef6e29b",
+      "uploaded": 1782310424359
+    },
+    {
+      "path": "ep-scenes/control_room.png",
+      "size": 1363928,
+      "sha1": "unverified:4eec69d09afadc09f465562312e9a89ce9f5699b",
+      "uploaded": 1782310416730
+    },
+    {
+      "path": "ep-scenes/control_room_alarm.png",
+      "size": 1452053,
+      "sha1": "unverified:af9737978aa0e70d0095185ab1eb4764ddc962ca",
+      "uploaded": 1782310391758
+    },
+    {
+      "path": "ep-scenes/control_room_blanks.png",
+      "size": 1477235,
+      "sha1": "unverified:6d68ee072d37b46a2947ed7333b1491edd2b0a4b",
+      "uploaded": 1782310352356
+    },
+    {
+      "path": "ep-scenes/control_room_recover.png",
+      "size": 1384966,
+      "sha1": "unverified:86f3d544282932521353b40defbf422057a0d428",
+      "uploaded": 1782310337612
+    },
+    {
+      "path": "ep-scenes/core_seal.png",
+      "size": 1361604,
+      "sha1": "unverified:eded4a51ceb1d899c35dae67a3148d75664856c5",
+      "uploaded": 1782310355032
+    },
+    {
+      "path": "ep-scenes/core_server.png",
+      "size": 1438121,
+      "sha1": "unverified:aba5ce78171313c71b7c277c65b9f54317cd4fe7",
+      "uploaded": 1782310363770
+    },
+    {
+      "path": "ep-scenes/corridor_shadow.png",
+      "size": 1258042,
+      "sha1": "unverified:1e8aaf8f6f093f27f672f2d445a4d6b39f448dd1",
+      "uploaded": 1782310381960
+    },
+    {
+      "path": "ep-scenes/cranes_freeze_red.png",
+      "size": 1634574,
+      "sha1": "unverified:03984755b59bb527de7cb488facbc5c8a9e7ad12",
+      "uploaded": 1782310339438
+    },
+    {
+      "path": "ep-scenes/cranes_reverse.png",
+      "size": 1455154,
+      "sha1": "unverified:ddd62266f8ba35302f1a66c1271923d63084e68c",
+      "uploaded": 1782310387415
+    },
+    {
+      "path": "ep-scenes/crosswalk-parent-child.png",
+      "size": 969630,
+      "sha1": "unverified:8ad742f0d4994594e36ca7177264757f62b590ba",
+      "uploaded": 1782310364728
+    },
+    {
+      "path": "ep-scenes/cyan_scouts_sea.png",
+      "size": 1188197,
+      "sha1": "unverified:c28f2bffe1165db6b5caefae7241a78ed3801677",
+      "uploaded": 1782310335398
+    },
+    {
+      "path": "ep-scenes/daemon_appears.png",
+      "size": 1452551,
+      "sha1": "unverified:074a793448132d74ab7dff7988199d3bdb669e57",
+      "uploaded": 1782310398568
+    },
+    {
+      "path": "ep-scenes/daemon_lurking.png",
+      "size": 1354499,
+      "sha1": "unverified:1d6105c02a2dadaec7b238269e947100f213e869",
+      "uploaded": 1782310363216
+    },
+    {
+      "path": "ep-scenes/daemon_sleeps.png",
+      "size": 1301076,
+      "sha1": "unverified:6cd5978cceed491357cd39a7a16f910dc3f09e0c",
+      "uploaded": 1782310387989
+    },
+    {
+      "path": "ep-scenes/deep_pipes.png",
+      "size": 1643180,
+      "sha1": "unverified:265c8489531d49befc8a38f23a1d606480309604",
+      "uploaded": 1782310421241
+    },
+    {
+      "path": "ep-scenes/demon_swarm_market.png",
+      "size": 1456524,
+      "sha1": "unverified:33793540f6a7309a5f42da88a79f9ca09eca4b02",
+      "uploaded": 1782310340929
+    },
+    {
+      "path": "ep-scenes/door_stamp_action.png",
+      "size": 1433284,
+      "sha1": "unverified:b0a9f5b3c1fc9ee76deb2bd160e5704f2f42872e",
+      "uploaded": 1782310336880
+    },
+    {
+      "path": "ep-scenes/doors_unlocking.png",
+      "size": 1622704,
+      "sha1": "unverified:01cdb5515839b168670ee8be6badb9533ef9dacf",
+      "uploaded": 1782310379130
+    },
+    {
+      "path": "ep-scenes/double_heat_break.png",
+      "size": 1305475,
+      "sha1": "unverified:178124420b877772ddacadb2654919eea20851e4",
+      "uploaded": 1782310366058
+    },
+    {
+      "path": "ep-scenes/dubai-aerial-night.png",
+      "size": 1160782,
+      "sha1": "unverified:19e499eec30dd7958910f91884ef3bff835fd447",
+      "uploaded": 1782310369407
+    },
+    {
+      "path": "ep-scenes/dubai_golden_morning.png",
+      "size": 1095824,
+      "sha1": "unverified:7ec2e5e7e3340fb4902268022885d2fa91c22fb7",
+      "uploaded": 1782310344266
+    },
+    {
+      "path": "ep-scenes/earth_from_space.png",
+      "size": 1512856,
+      "sha1": "unverified:bc6af4147b22b2d7c4ca51ad975ba19b83e50143",
+      "uploaded": 1782310368776
+    },
+    {
+      "path": "ep-scenes/ed_ghost.png",
+      "size": 1250684,
+      "sha1": "unverified:2d32f0b34bad14ea43dd9c6ef5e4b9960c7160b6",
+      "uploaded": 1782310371626
+    },
+    {
+      "path": "ep-scenes/ed_ghost_hide.png",
+      "size": 1239555,
+      "sha1": "unverified:f88dcb0f776f99f591ed29329331a3fa2c5c0748",
+      "uploaded": 1782310354699
+    },
+    {
+      "path": "ep-scenes/ed_hide.png",
+      "size": 1097850,
+      "sha1": "unverified:0dff441cd7b8811fbd0d7b72178d66ce58bea004",
+      "uploaded": 1782310393105
+    },
+    {
+      "path": "ep-scenes/ed_hideandseek.png",
+      "size": 1328254,
+      "sha1": "unverified:d7dbb3c5cd2528990fd94c292352c6f6cb45e0a7",
+      "uploaded": 1782310410647
+    },
+    {
+      "path": "ep-scenes/factory_dawn.png",
+      "size": 1362707,
+      "sha1": "unverified:4e91ee8d2129b80eb884c5dc4d688c6a14d1e3bb",
+      "uploaded": 1782310378686
+    },
+    {
+      "path": "ep-scenes/factory_exterior_dawn.png",
+      "size": 1267674,
+      "sha1": "unverified:a77ccd2e50db05608168d584b07639781c5b8204",
+      "uploaded": 1782310402811
+    },
+    {
+      "path": "ep-scenes/factory_faster_restart.png",
+      "size": 1408121,
+      "sha1": "unverified:178d1ca577083b9e153cc5f669f1ae56ae939bc6",
+      "uploaded": 1782310413165
+    },
+    {
+      "path": "ep-scenes/factory_floor.png",
+      "size": 1570647,
+      "sha1": "unverified:b9fea0b40a3cac415571bc94be44e506a958278a",
+      "uploaded": 1782310330597
+    },
+    {
+      "path": "ep-scenes/factory_frozen.png",
+      "size": 1620625,
+      "sha1": "unverified:bc28f4d157389e7ce95769635e4c8b2e276873e5",
+      "uploaded": 1782310344720
+    },
+    {
+      "path": "ep-scenes/factory_interior_move.png",
+      "size": 1551245,
+      "sha1": "unverified:b893662d59cb1fd6c5cb21aa74d7d36445945f16",
+      "uploaded": 1782310385929
+    },
+    {
+      "path": "ep-scenes/factory_restored.png",
+      "size": 1381130,
+      "sha1": "unverified:6d910115308523d7ec3b2277d3100c7be38bc023",
+      "uploaded": 1782310383577
+    },
+    {
+      "path": "ep-scenes/factory_self_restart.png",
+      "size": 1590566,
+      "sha1": "unverified:58281a3268693b1e70508dca6992c8461224d919",
+      "uploaded": 1782310355515
+    },
+    {
+      "path": "ep-scenes/fake_shiro_message.png",
+      "size": 1185996,
+      "sha1": "unverified:87952b98276194d985c94a61a697125a618f7bef",
+      "uploaded": 1782310338832
+    },
+    {
+      "path": "ep-scenes/floating_cloud_island_hole.png",
+      "size": 1184744,
+      "sha1": "unverified:c1efbe39d1147a97845a30077d98ae73de1a0952",
+      "uploaded": 1782310379662
+    },
+    {
+      "path": "ep-scenes/fog_wall.png",
+      "size": 1313496,
+      "sha1": "unverified:9a98c6d4c9e93f52c93069bf485273cc5e4a4bbb",
+      "uploaded": 1782310332783
+    },
+    {
+      "path": "ep-scenes/forced_shutdown.png",
+      "size": 1290240,
+      "sha1": "unverified:bdbc68d40b4a2610beed4bc153dc3cbee222f3a3",
+      "uploaded": 1782310390982
+    },
+    {
+      "path": "ep-scenes/forensic_infospace.png",
+      "size": 1409785,
+      "sha1": "unverified:d6774212540a433ee9f3a7790859bd0f122ac5ca",
+      "uploaded": 1782310357003
+    },
+    {
+      "path": "ep-scenes/forensic_ray.png",
+      "size": 1456420,
+      "sha1": "unverified:fe1c6a391579541c226074c23cf8c0f6a6da4c3c",
+      "uploaded": 1782310360530
+    },
+    {
+      "path": "ep-scenes/gate_opens_fog.png",
+      "size": 1281309,
+      "sha1": "unverified:34cd1d06551af16fc6082fef454976388df675b5",
+      "uploaded": 1782310396929
+    },
+    {
+      "path": "ep-scenes/geothermal_plant_dawn.png",
+      "size": 950623,
+      "sha1": "unverified:719341adfdeeae76d2131ee032c96d86dd3250d9",
+      "uploaded": 1782310370018
+    },
+    {
+      "path": "ep-scenes/ghost-afterimage.png",
+      "size": 1258859,
+      "sha1": "unverified:65db4deb5443be37e2a3e749b5704af71b831763",
+      "uploaded": 1782310368422
+    },
+    {
+      "path": "ep-scenes/ghost-silhouette-fade.png",
+      "size": 1314876,
+      "sha1": "unverified:528d4f97269181cf9e16f44994ab9ec5577cab49",
+      "uploaded": 1782310356651
+    },
+    {
+      "path": "ep-scenes/ghost_cpart.png",
+      "size": 1228212,
+      "sha1": "unverified:a0022ac893d097ce7c6f58bd1b534b55e6d6ccc5",
+      "uploaded": 1782310419807
+    },
+    {
+      "path": "ep-scenes/ghost_materialize.png",
+      "size": 1155683,
+      "sha1": "unverified:3bbd04ce84ed4af45ac0a397ba3f49c780195694",
+      "uploaded": 1782310420180
+    },
+    {
+      "path": "ep-scenes/ghost_pinned.png",
+      "size": 1112903,
+      "sha1": "unverified:019455b5da64c55011bc641ef539fae22f2e6fd1",
+      "uploaded": 1782310343475
+    },
+    {
+      "path": "ep-scenes/ghost_reveal.png",
+      "size": 1066074,
+      "sha1": "unverified:bceb8ba3d67d77345785dd5d2cce9995763ae276",
+      "uploaded": 1782310390256
+    },
+    {
+      "path": "ep-scenes/ghost_scar_wall.png",
+      "size": 1417360,
+      "sha1": "unverified:c84144c8aaf2258d2490c8656af513ef33c86732",
+      "uploaded": 1782310385292
+    },
+    {
+      "path": "ep-scenes/ghost_scent.png",
+      "size": 1426807,
+      "sha1": "unverified:50b28f3b4f0b5ecc2262d7c5512f90f6e7156c71",
+      "uploaded": 1782310365461
+    },
+    {
+      "path": "ep-scenes/ghost_shapeshift.png",
+      "size": 1311112,
+      "sha1": "unverified:b74c339e3493bb28049d0e1a732b693407d36d64",
+      "uploaded": 1782310388941
+    },
+    {
+      "path": "ep-scenes/ghost_silhouette.png",
+      "size": 1189962,
+      "sha1": "unverified:880b96b097f1c80f135538949a28e99ad682fc57",
+      "uploaded": 1782310386464
+    },
+    {
+      "path": "ep-scenes/ghost_silhouette_tower.png",
+      "size": 1239915,
+      "sha1": "unverified:61fd9a4615e9d580caca5bd7d0a3a24daf82aea3",
+      "uploaded": 1782310342542
+    },
+    {
+      "path": "ep-scenes/ghost_silhouette_void.png",
+      "size": 1216755,
+      "sha1": "unverified:1cb90d4a24c44ae2cf163e57391ea53682eeb17a",
+      "uploaded": 1782310410142
+    },
+    {
+      "path": "ep-scenes/ghost_trace.png",
+      "size": 1148718,
+      "sha1": "unverified:a4b9dce1871ed632c239c77f328f7b2f24e1f1cf",
+      "uploaded": 1782310332208
+    },
+    {
+      "path": "ep-scenes/ghost_trace_wall.png",
+      "size": 1330175,
+      "sha1": "unverified:63487aae2ceb05156cc5a8a9e8af3c50908d9322",
+      "uploaded": 1782310351811
+    },
+    {
+      "path": "ep-scenes/glowing_key_object.png",
+      "size": 915157,
+      "sha1": "unverified:831acfe57515917e60b11ab5167b8c56f4426a1e",
+      "uploaded": 1782310370734
+    },
+    {
+      "path": "ep-scenes/golden_fishline.png",
+      "size": 1280468,
+      "sha1": "unverified:6575210db9985ddb2e42160605b91de6f2de0463",
+      "uploaded": 1782310348166
+    },
+    {
+      "path": "ep-scenes/golden_key_tower.png",
+      "size": 1352211,
+      "sha1": "unverified:f36def1bc7054ef01bdb571b9feea4735c39ab78",
+      "uploaded": 1782310370355
+    },
+    {
+      "path": "ep-scenes/golden_keys_sky.png",
+      "size": 1478423,
+      "sha1": "unverified:b15c3c665ed272ff9131c2cf845b8d82f35a3913",
+      "uploaded": 1782310371075
+    },
+    {
+      "path": "ep-scenes/haze_gathering_key.png",
+      "size": 1164189,
+      "sha1": "unverified:c62902c586824484abac079f63efaeebd1ff4ae1",
+      "uploaded": 1782310351454
+    },
+    {
+      "path": "ep-scenes/heat_fragment_memory.png",
+      "size": 1000703,
+      "sha1": "unverified:3b8f1d8e3e109db29412dc35a4c9a08180231cce",
+      "uploaded": 1782310414397
+    },
+    {
+      "path": "ep-scenes/heat_residue.png",
+      "size": 858937,
+      "sha1": "unverified:4d69c6dbddd4c8bd9e1aafe2700da797e2548d19",
+      "uploaded": 1782310384537
+    },
+    {
+      "path": "ep-scenes/heat_trace_charge.png",
+      "size": 1344162,
+      "sha1": "unverified:ebcee547430193a2f0d5c3e2dc5d7e40a95073f7",
+      "uploaded": 1782310327426
+    },
+    {
+      "path": "ep-scenes/heat_trace_reveal.png",
+      "size": 1266132,
+      "sha1": "unverified:b695c6dabcff11c964d3c82d36557fba8c5f57bf",
+      "uploaded": 1782310422386
+    },
+    {
+      "path": "ep-scenes/henshin-bank.png",
+      "size": 1267339,
+      "sha1": "unverified:c1c27460375acd382414def716cedb8c3752dafc",
+      "uploaded": 1782310345726
+    },
+    {
+      "path": "ep-scenes/henshin-pose.png",
+      "size": 1227504,
+      "sha1": "unverified:c9f0966a88d29fa577c85db2775627e28e84396d",
+      "uploaded": 1782310408523
+    },
+    {
+      "path": "ep-scenes/henshin.png",
+      "size": 1451345,
+      "sha1": "unverified:70ebf7de4ce3445c2913ca6d14dd9bb26cc1fc33",
+      "uploaded": 1782310405236
+    },
+    {
+      "path": "ep-scenes/henshin_bank.png",
+      "size": 1310930,
+      "sha1": "unverified:8e3bfbfe095e1e77ea782048379f7750ec281865",
+      "uploaded": 1782310389750
+    },
+    {
+      "path": "ep-scenes/hole_burst.png",
+      "size": 1482604,
+      "sha1": "unverified:7d41152fb5a566116fe1f1eec61ad565aee676ed",
+      "uploaded": 1782310380145
+    },
+    {
+      "path": "ep-scenes/hooks_multiply.png",
+      "size": 1266362,
+      "sha1": "unverified:2eb98fb851580dd55f20489bc03a4d2e786e32a7",
+      "uploaded": 1782310394793
+    },
+    {
+      "path": "ep-scenes/iam_access_map.png",
+      "size": 1278148,
+      "sha1": "unverified:f9aea4607f55e21ad703d02fc8d40f7c38555541",
+      "uploaded": 1782310366706
+    },
+    {
+      "path": "ep-scenes/impersonating_ghost.png",
+      "size": 1296762,
+      "sha1": "unverified:06e9bf91486ec92e6c64fbb0d698767b719924f1",
+      "uploaded": 1782310374663
+    },
+    {
+      "path": "ep-scenes/info_layer.png",
+      "size": 1464776,
+      "sha1": "unverified:7abf6c9815e2315e6e8d787f5306c5d84869de23",
+      "uploaded": 1782310358114
+    },
+    {
+      "path": "ep-scenes/info_map.png",
+      "size": 1261218,
+      "sha1": "unverified:5f5dbb5da1b310c96aed0ddb808e6de282940562",
+      "uploaded": 1782310331382
+    },
+    {
+      "path": "ep-scenes/info_maze.png",
+      "size": 1425737,
+      "sha1": "unverified:f635fe546e530b0e44fb9f01f39741163e7abe4d",
+      "uploaded": 1782310418409
+    },
+    {
+      "path": "ep-scenes/intrusion_counter.png",
+      "size": 1362092,
+      "sha1": "unverified:88a5c00c1b1b72ea73bd3f8e658b6d01b4ab20e3",
+      "uploaded": 1782310349286
+    },
+    {
+      "path": "ep-scenes/key_thief_monster.png",
+      "size": 1296773,
+      "sha1": "unverified:d0f681d8bbf72024e5f03f9420b828f0396bb93d",
+      "uploaded": 1782310328172
+    },
+    {
+      "path": "ep-scenes/kids-rooftop-drop.png",
+      "size": 1321225,
+      "sha1": "unverified:f7da2f27cdb8d4cbfdea1148ac6bb4ca97b6f43b",
+      "uploaded": 1782310343903
+    },
+    {
+      "path": "ep-scenes/laksa_stall.png",
+      "size": 1055028,
+      "sha1": "unverified:0a3347c19f37918db6e1adf550e05ffb09154bcb",
+      "uploaded": 1782310361905
+    },
+    {
+      "path": "ep-scenes/light_gate_entrance.png",
+      "size": 1371971,
+      "sha1": "unverified:d28082bab233717de79c70a72678d687edc7cf5a",
+      "uploaded": 1782310404592
+    },
+    {
+      "path": "ep-scenes/light_thread_warehouse.png",
+      "size": 1400168,
+      "sha1": "unverified:05adabfdfaa404e6fa5cb6683c79c52116b3899e",
+      "uploaded": 1782310362255
+    },
+    {
+      "path": "ep-scenes/lights_dying.png",
+      "size": 1477469,
+      "sha1": "unverified:fd91f4c6a32f326b396d7efeb25e80e642c0d94e",
+      "uploaded": 1782310413900
+    },
+    {
+      "path": "ep-scenes/lock_reset_blast.png",
+      "size": 1407693,
+      "sha1": "unverified:6de14a020fa825d7ec7bc68504a1e58c26b18215",
+      "uploaded": 1782310425795
+    },
+    {
+      "path": "ep-scenes/log_finale_strike.png",
+      "size": 1375829,
+      "sha1": "unverified:0d91e6f6aa31f71dcc4d508c9bf960087be0a182",
+      "uploaded": 1782310341494
+    },
+    {
+      "path": "ep-scenes/machines_multiply.png",
+      "size": 1414113,
+      "sha1": "unverified:caedf30485041f130b3625093819da5268f62a2f",
+      "uploaded": 1782310411768
+    },
+    {
+      "path": "ep-scenes/map_black.png",
+      "size": 1497089,
+      "sha1": "unverified:156baebc5deeff9ce5b6527d6e347b034773385b",
+      "uploaded": 1782310412337
+    },
+    {
+      "path": "ep-scenes/map_complete.png",
+      "size": 1454362,
+      "sha1": "unverified:edb9c61d43835c50ed76e82307eb46013ae28107",
+      "uploaded": 1782310361446
+    },
+    {
+      "path": "ep-scenes/master_demon_box.png",
+      "size": 1392682,
+      "sha1": "unverified:1b3c8d816a15c00993a4ab8b6054477ac8697e2a",
+      "uploaded": 1782310396117
+    },
+    {
+      "path": "ep-scenes/mfa_light_wall.png",
+      "size": 1389450,
+      "sha1": "unverified:90048761345a8ba31929e5321af8be4ac8271855",
+      "uploaded": 1782310426128
+    },
+    {
+      "path": "ep-scenes/monster_sleeps.png",
+      "size": 919352,
+      "sha1": "unverified:9151b14304d77e63d159151e10f0ba4b7a11233a",
+      "uploaded": 1782310381265
+    },
+    {
+      "path": "ep-scenes/mumbai_dawn.png",
+      "size": 1257175,
+      "sha1": "unverified:17d4c05e1c7250f3f686a967b19010983666e12b",
+      "uploaded": 1782310395134
+    },
+    {
+      "path": "ep-scenes/mumbai_dawn_skyline.png",
+      "size": 1293196,
+      "sha1": "unverified:5e81f8ad959d16fbde998531dabbc8aa450e5edd",
+      "uploaded": 1782310424989
+    },
+    {
+      "path": "ep-scenes/mumbai_morning.png",
+      "size": 1406601,
+      "sha1": "unverified:c39e55e6256064479500b5e3d8146c34196fea3d",
+      "uploaded": 1782310347459
+    },
+    {
+      "path": "ep-scenes/network_corridors.png",
+      "size": 1393913,
+      "sha1": "unverified:7c0d349fde1b7f0fb165eca59be8d10097715fab",
+      "uploaded": 1782310367051
+    },
+    {
+      "path": "ep-scenes/network_map_red.png",
+      "size": 1693800,
+      "sha1": "unverified:18c1ec85c85dc6e78a51d303e28a3767c22cf088",
+      "uploaded": 1782310398944
+    },
+    {
+      "path": "ep-scenes/official_screen_alert.png",
+      "size": 1287457,
+      "sha1": "unverified:6eb7b028159941bc7909c0ffcad05b79dcd0078f",
+      "uploaded": 1782310355904
+    },
+    {
+      "path": "ep-scenes/phantom_young_pico.png",
+      "size": 1287445,
+      "sha1": "unverified:8b7f446fbfe01c1551fcc3f5e2b2e05d88108b09",
+      "uploaded": 1782310420627
+    },
+    {
+      "path": "ep-scenes/pico-lure-run.png",
+      "size": 1289635,
+      "sha1": "unverified:1e1872a5ba032dfd2d7a5820d93ae9430493b426",
+      "uploaded": 1782310399315
+    },
+    {
+      "path": "ep-scenes/pico_pulse_rush.png",
+      "size": 1493132,
+      "sha1": "unverified:11b0e43029fdb53d11795a0a5eac1fc40febd34f",
+      "uploaded": 1782310333415
+    },
+    {
+      "path": "ep-scenes/plant_fence.png",
+      "size": 1443707,
+      "sha1": "unverified:fb78e7f0d3ef741faa7eac57aa58bef08d8138b7",
+      "uploaded": 1782310388548
+    },
+    {
+      "path": "ep-scenes/plant_restored.png",
+      "size": 1572018,
+      "sha1": "unverified:48f2bb29bd546c6574ad3bd30cdea15e81fad342",
+      "uploaded": 1782310364294
+    },
+    {
+      "path": "ep-scenes/port_control_room.png",
+      "size": 1492978,
+      "sha1": "unverified:941ce13dd7bb23c1875d6d198d1e2ec275a97eb5",
+      "uploaded": 1782310384848
+    },
+    {
+      "path": "ep-scenes/port_dawn.png",
+      "size": 1444528,
+      "sha1": "unverified:890afc2a6e4d4c6bac3982459fd297ba8d52deb6",
+      "uploaded": 1782310393929
+    },
+    {
+      "path": "ep-scenes/port_restored.png",
+      "size": 1116701,
+      "sha1": "unverified:2fa767a04bd3dc62ce1efd1eebb8bac8e49615f9",
+      "uploaded": 1782310404022
+    },
+    {
+      "path": "ep-scenes/port_terminal_glitch.png",
+      "size": 1349100,
+      "sha1": "unverified:7aaf3db1fa59e22b9556e7edc7caf0a1266f7750",
+      "uploaded": 1782310397370
+    },
+    {
+      "path": "ep-scenes/red_flood_drown.png",
+      "size": 1438053,
+      "sha1": "unverified:89b99d16aa628ac84d4e81abfd435c919dbc5693",
+      "uploaded": 1782310386856
+    },
+    {
+      "path": "ep-scenes/relay_tower.png",
+      "size": 1475782,
+      "sha1": "unverified:b05e8b93a168c59b5426de0d8071e9b458d2a8cc",
+      "uploaded": 1782310401446
+    },
+    {
+      "path": "ep-scenes/river_of_light.png",
+      "size": 1490837,
+      "sha1": "unverified:c3b6343f3de255422be544ebcf99f2fa71ee7035",
+      "uploaded": 1782310362712
+    },
+    {
+      "path": "ep-scenes/rooftop_arrival.png",
+      "size": 1406692,
+      "sha1": "unverified:1d5b295d2c8d87b118b2151fcfbede91f9f6b3f4",
+      "uploaded": 1782310335921
+    },
+    {
+      "path": "ep-scenes/rooftop_morning.png",
+      "size": 1286069,
+      "sha1": "unverified:ac5bc6ec6b181083e643e71cb0fad111ba4d4881",
+      "uploaded": 1782310338250
+    },
+    {
+      "path": "ep-scenes/rooftop_night.png",
+      "size": 1434727,
+      "sha1": "unverified:ec533023d04d44b565113b1cf1172886bb5eec24",
+      "uploaded": 1782310329682
+    },
+    {
+      "path": "ep-scenes/rooftop_peek.png",
+      "size": 1300369,
+      "sha1": "unverified:c561fef05616f85a08eacae6a15a8d55133db02e",
+      "uploaded": 1782310353889
+    },
+    {
+      "path": "ep-scenes/root_cut.png",
+      "size": 1217626,
+      "sha1": "unverified:e2ffc37f7d9aee363df913ccf2866a3f8d380e98",
+      "uploaded": 1782310402101
+    },
+    {
+      "path": "ep-scenes/route_silence.png",
+      "size": 993862,
+      "sha1": "unverified:6e2032941f70a87a979c7f12149b0fe3d90f414d",
+      "uploaded": 1782310346123
+    },
+    {
+      "path": "ep-scenes/second_gate_breach.png",
+      "size": 1187521,
+      "sha1": "unverified:70e8c57e7bdc43c27d7070447499f684c04048f0",
+      "uploaded": 1782310409633
+    },
+    {
+      "path": "ep-scenes/security_room_red.png",
+      "size": 1041329,
+      "sha1": "unverified:a9bfc837a9130efb6a9509df380876b2da96c4ff",
+      "uploaded": 1782310414862
+    },
+    {
+      "path": "ep-scenes/self_mapping.png",
+      "size": 1574948,
+      "sha1": "unverified:9585c258c1086af8a7825df28e85a4b036fa156a",
+      "uploaded": 1782310384019
+    },
+    {
+      "path": "ep-scenes/server_room.png",
+      "size": 1433216,
+      "sha1": "unverified:09798467a766d424422954720cf7e5c67f669e62",
+      "uploaded": 1782310365070
+    },
+    {
+      "path": "ep-scenes/shiro-antenna-base.png",
+      "size": 1136930,
+      "sha1": "unverified:a8dc442145ad6714c9df5edb134df83fbd44d839",
+      "uploaded": 1782310360048
+    },
+    {
+      "path": "ep-scenes/shiro-finger-touch.png",
+      "size": 1301994,
+      "sha1": "unverified:a3ad903352736521a8401d31e84455bf2e5472d2",
+      "uploaded": 1782310340144
+    },
+    {
+      "path": "ep-scenes/shiro_kneels_daemon.png",
+      "size": 1274883,
+      "sha1": "unverified:9bfd9d6f63d18f33772bfc0605d1cd2041cef85a",
+      "uploaded": 1782310346466
+    },
+    {
+      "path": "ep-scenes/shop_red_alert.png",
+      "size": 1474448,
+      "sha1": "unverified:ea678c62fb510fad9dafa8c7b33fb3ecfe4f0749",
+      "uploaded": 1782310359088
+    },
+    {
+      "path": "ep-scenes/siem-log-convergence.png",
+      "size": 1346903,
+      "sha1": "unverified:dea6452a0c475765bcbe10e867cfb70675d7f761",
+      "uploaded": 1782310398166
+    },
+    {
+      "path": "ep-scenes/siem_correlation.png",
+      "size": 1342125,
+      "sha1": "unverified:e254cf09f2427232875d9c8fe3fa1a5eb302d263",
+      "uploaded": 1782310342102
+    },
+    {
+      "path": "ep-scenes/siem_log_field.png",
+      "size": 1291087,
+      "sha1": "unverified:101c9e219a542568656078f8b85eac9ee79e2ad2",
+      "uploaded": 1782310403501
+    },
+    {
+      "path": "ep-scenes/siem_overview.png",
+      "size": 1394159,
+      "sha1": "unverified:3262a8447a4b21b6e3fa7c5f640e3b3086b5dc3c",
+      "uploaded": 1782310392158
+    },
+    {
+      "path": "ep-scenes/single_gate.png",
+      "size": 1347854,
+      "sha1": "unverified:37a50edb8f43300ba6fd92f74c8508c49fd99203",
+      "uploaded": 1782310373783
+    },
+    {
+      "path": "ep-scenes/sleep-contagion-spread.png",
+      "size": 1461540,
+      "sha1": "unverified:a11e67b726d7bc6d50bcc78ad4b03397e04a02b9",
+      "uploaded": 1782310426492
+    },
+    {
+      "path": "ep-scenes/sleeping-car-horde.png",
+      "size": 1332307,
+      "sha1": "unverified:8fe30ef0140b20ad3768c2ab475c7ddcae2ccb2b",
+      "uploaded": 1782310357582
+    },
+    {
+      "path": "ep-scenes/sleeping_appliances.png",
+      "size": 1354809,
+      "sha1": "unverified:5a21c408c5b4ef4b511fb460fc7b47fce3dbae80",
+      "uploaded": 1782310395778
+    },
+    {
+      "path": "ep-scenes/smart_city_dawn.png",
+      "size": 1393396,
+      "sha1": "unverified:afee877161ec7848ade46f203994141e30ced7c7",
+      "uploaded": 1782310425371
+    },
+    {
+      "path": "ep-scenes/smart_port_dawn.png",
+      "size": 1335837,
+      "sha1": "unverified:5c772e4e7147c0d18a5fcd8e3bf2afe0575cd6d4",
+      "uploaded": 1782310367615
+    },
+    {
+      "path": "ep-scenes/soar_ring_triage.png",
+      "size": 1448628,
+      "sha1": "unverified:ec930562fcbe6a27ef6136839895e7fdce27f8ab",
+      "uploaded": 1782310421609
+    },
+    {
+      "path": "ep-scenes/spam_crusher_fists.png",
+      "size": 1676786,
+      "sha1": "unverified:9c8512979bfdfb8b7279f3fa25d903a66cfd7368",
+      "uploaded": 1782310374167
+    },
+    {
+      "path": "ep-scenes/spark_drive_hit.png",
+      "size": 1473401,
+      "sha1": "unverified:9041d4094fdd25c233f3cffc017d7a73db153c39",
+      "uploaded": 1782310378182
+    },
+    {
+      "path": "ep-scenes/stationery_shop.png",
+      "size": 917005,
+      "sha1": "unverified:d80327efaa3eecbc43f674f14e555eb57caafb4e",
+      "uploaded": 1782310348913
+    },
+    {
+      "path": "ep-scenes/street_phones_pinging.png",
+      "size": 1723759,
+      "sha1": "unverified:dd9a0900d89c10658f12a484152e4ca8e68069b9",
+      "uploaded": 1782310345192
+    },
+    {
+      "path": "ep-scenes/sunset_pier.png",
+      "size": 1547801,
+      "sha1": "unverified:cb3cd3cc5085a6c1e2fa559ff394c263462bc4a9",
+      "uploaded": 1782310372699
+    },
+    {
+      "path": "ep-scenes/teal_barrier.png",
+      "size": 1504012,
+      "sha1": "unverified:6c7864fa09f7acb20d675ca628bb3f7e33946079",
+      "uploaded": 1782310416236
+    },
+    {
+      "path": "ep-scenes/threads_recalled.png",
+      "size": 1386049,
+      "sha1": "unverified:d6970f4848a9fa543c0bf6e43c69d39dabaa66c1",
+      "uploaded": 1782310375149
+    },
+    {
+      "path": "ep-scenes/traffic-signals-red-flash.png",
+      "size": 1642218,
+      "sha1": "unverified:cb137516315d65da42e1f3f9db90b8256e693612",
+      "uploaded": 1782310342950
+    },
+    {
+      "path": "ep-scenes/transparent_roots.png",
+      "size": 1655679,
+      "sha1": "unverified:adf26335af04ba063a9c9f4618d19e6c0d04ee62",
+      "uploaded": 1782310380730
+    },
+    {
+      "path": "ep-scenes/triple_wake_dash.png",
+      "size": 1355077,
+      "sha1": "unverified:0a04fc397c58ea471b4391e1ba2e3b260fe7bec0",
+      "uploaded": 1782310422036
+    },
+    {
+      "path": "ep-scenes/underground_daemon.png",
+      "size": 1509258,
+      "sha1": "unverified:494ac762eb4d0a7e5ecf1574a56e18cf760f1cd6",
+      "uploaded": 1782310368043
+    },
+    {
+      "path": "ep-scenes/victory-pose-skyline.png",
+      "size": 1496027,
+      "sha1": "unverified:65990a94d3b1508c08631346d4e57fce869bbe3d",
+      "uploaded": 1782310417932
+    },
+    {
+      "path": "ep-scenes/victory_pose.png",
+      "size": 1471474,
+      "sha1": "unverified:b059911d41add8011b5e8a290cf7d4d0b7640e25",
+      "uploaded": 1782310411181
+    },
+    {
+      "path": "ep-scenes/vuln_scan.png",
+      "size": 1518031,
+      "sha1": "unverified:8f31af87662433590209abae102534b6fcd2e7cf",
+      "uploaded": 1782310415383
+    },
+    {
+      "path": "ep-scenes/wall_of_warning.png",
+      "size": 1297595,
+      "sha1": "unverified:daa2a6da822b091c52a96cc4b7dda6d655cddd26",
+      "uploaded": 1782310390620
+    },
+    {
+      "path": "ep-scenes/warehouse_awaken.png",
+      "size": 1381765,
+      "sha1": "unverified:1a1f29f9618e237e7c769da1ad3fb13bab2853b1",
+      "uploaded": 1782310399778
+    },
+    {
+      "path": "ep-scenes/warehouse_zombie_horde.png",
+      "size": 1423798,
+      "sha1": "unverified:a05ce20ff6d879a951b6a0517ef7255e419755dc",
+      "uploaded": 1782310406132
+    },
+    {
+      "path": "ep-scenes/web_of_threads.png",
+      "size": 1395449,
+      "sha1": "unverified:7449fc558bbb64f44b77487508f662c103ab68ef",
+      "uploaded": 1782310373291
+    },
+    {
+      "path": "ep-scenes/wild-ping-pulse.png",
+      "size": 1146506,
+      "sha1": "unverified:78a12ef93868bf66977ce13302bcc90142189691",
+      "uploaded": 1782310334102
+    },
+    {
+      "path": "ep-scenes/zero_gate_judge.png",
+      "size": 1332182,
+      "sha1": "unverified:b245a81beea7d72033e797314384b3aaff78f401",
+      "uploaded": 1782310354263
+    },
+    {
+      "path": "ep-scenes/zukan_board.png",
+      "size": 1557682,
+      "sha1": "unverified:8f18317f9cc46afbf3c1bed66779038a25735f4a",
+      "uploaded": 1782310417254
+    },
+    {
+      "path": "ep-scenes/zukan_corner.png",
+      "size": 1300804,
+      "sha1": "unverified:f766d37df6568c62aea9bbfad48bbb6f7c816dba",
+      "uploaded": 1782310353426
+    },
+    {
+      "path": "ep-scenes/zukan_whiteboard.png",
+      "size": 1540370,
+      "sha1": "unverified:6691429e0113644d15078aa50164fdadc1be553e",
+      "uploaded": 1782310358543
+    },
+    {
+      "path": "episode-01.md",
+      "size": 7639,
+      "sha1": "unverified:dd36d0e2a414aa6915a3a91c27a1fbcced6b68d7",
+      "uploaded": 1781964151299
+    },
+    {
+      "path": "episode/sp-ep01-full.mp4",
+      "size": 92557874,
+      "sha1": "none",
+      "uploaded": 1782111393641
+    },
+    {
+      "path": "episode/sp-ep01-v2.mp4",
+      "size": 91416737,
+      "sha1": "none",
+      "uploaded": 1782122211541
+    },
+    {
+      "path": "episode/sp-ep01-v3-ar.mp4",
+      "size": 107025946,
+      "sha1": "none",
+      "uploaded": 1782183665190
+    },
+    {
+      "path": "episode/sp-ep01-v3-bn.mp4",
+      "size": 99255378,
+      "sha1": "none",
+      "uploaded": 1782183654172
+    },
+    {
+      "path": "episode/sp-ep01-v3-de.mp4",
+      "size": 103262867,
+      "sha1": "none",
+      "uploaded": 1782183675209
+    },
+    {
+      "path": "episode/sp-ep01-v3-en.mp4",
+      "size": 98098045,
+      "sha1": "none",
+      "uploaded": 1782183626758
+    },
+    {
+      "path": "episode/sp-ep01-v3-es.mp4",
+      "size": 98632024,
+      "sha1": "none",
+      "uploaded": 1782183677789
+    },
+    {
+      "path": "episode/sp-ep01-v3-fr.mp4",
+      "size": 99765322,
+      "sha1": "none",
+      "uploaded": 1782183622802
+    },
+    {
+      "path": "episode/sp-ep01-v3-hi.mp4",
+      "size": 102895620,
+      "sha1": "none",
+      "uploaded": 1782183634433
+    },
+    {
+      "path": "episode/sp-ep01-v3-ja.mp4",
+      "size": 92601411,
+      "sha1": "none",
+      "uploaded": 1782183639848
+    },
+    {
+      "path": "episode/sp-ep01-v3-pt.mp4",
+      "size": 96092785,
+      "sha1": "none",
+      "uploaded": 1782183670739
+    },
+    {
+      "path": "episode/sp-ep01-v3-ta.mp4",
+      "size": 96423666,
+      "sha1": "none",
+      "uploaded": 1782183650461
+    },
+    {
+      "path": "episode/sp-ep01-v3-zh.mp4",
+      "size": 93019341,
+      "sha1": "none",
+      "uploaded": 1782183658523
+    },
+    {
+      "path": "episode/sp-ep02-v3-ar.mp4",
+      "size": 116710006,
+      "sha1": "none",
+      "uploaded": 1782226224050
+    },
+    {
+      "path": "episode/sp-ep02-v3-bn.mp4",
+      "size": 110685716,
+      "sha1": "none",
+      "uploaded": 1782226207829
+    },
+    {
+      "path": "episode/sp-ep02-v3-de.mp4",
+      "size": 114609723,
+      "sha1": "none",
+      "uploaded": 1782226194636
+    },
+    {
+      "path": "episode/sp-ep02-v3-en.mp4",
+      "size": 110421920,
+      "sha1": "none",
+      "uploaded": 1782226249082
+    },
+    {
+      "path": "episode/sp-ep02-v3-es.mp4",
+      "size": 108501138,
+      "sha1": "none",
+      "uploaded": 1782226199693
+    },
+    {
+      "path": "episode/sp-ep02-v3-fr.mp4",
+      "size": 107988330,
+      "sha1": "none",
+      "uploaded": 1782226232711
+    },
+    {
+      "path": "episode/sp-ep02-v3-hi.mp4",
+      "size": 114999718,
+      "sha1": "none",
+      "uploaded": 1782226243463
+    },
+    {
+      "path": "episode/sp-ep02-v3-ja.mp4",
+      "size": 102640334,
+      "sha1": "none",
+      "uploaded": 1782226237228
+    },
+    {
+      "path": "episode/sp-ep02-v3-pt.mp4",
+      "size": 107908195,
+      "sha1": "none",
+      "uploaded": 1782226190615
+    },
+    {
+      "path": "episode/sp-ep02-v3-ta.mp4",
+      "size": 110292942,
+      "sha1": "none",
+      "uploaded": 1782226204282
+    },
+    {
+      "path": "episode/sp-ep02-v3-zh.mp4",
+      "size": 106582168,
+      "sha1": "none",
+      "uploaded": 1782226218856
+    },
+    {
+      "path": "episode/sp-ep03-v3-ar.mp4",
+      "size": 131203996,
+      "sha1": "none",
+      "uploaded": 1782354856998
+    },
+    {
+      "path": "episode/sp-ep03-v3-bn.mp4",
+      "size": 123516634,
+      "sha1": "none",
+      "uploaded": 1782354844778
+    },
+    {
+      "path": "episode/sp-ep03-v3-de.mp4",
+      "size": 126541974,
+      "sha1": "none",
+      "uploaded": 1782354784229
+    },
+    {
+      "path": "episode/sp-ep03-v3-en.mp4",
+      "size": 119112956,
+      "sha1": "none",
+      "uploaded": 1782354834386
+    },
+    {
+      "path": "episode/sp-ep03-v3-es.mp4",
+      "size": 122367141,
+      "sha1": "none",
+      "uploaded": 1782354790817
+    },
+    {
+      "path": "episode/sp-ep03-v3-fr.mp4",
+      "size": 120041959,
+      "sha1": "none",
+      "uploaded": 1782354814894
+    },
+    {
+      "path": "episode/sp-ep03-v3-hi.mp4",
+      "size": 129779693,
+      "sha1": "none",
+      "uploaded": 1782354821779
+    },
+    {
+      "path": "episode/sp-ep03-v3-ja.mp4",
+      "size": 110943370,
+      "sha1": "none",
+      "uploaded": 1782354830096
+    },
+    {
+      "path": "episode/sp-ep03-v3-pt.mp4",
+      "size": 121563091,
+      "sha1": "none",
+      "uploaded": 1782354778359
+    },
+    {
+      "path": "episode/sp-ep03-v3-ta.mp4",
+      "size": 122769183,
+      "sha1": "none",
+      "uploaded": 1782354837224
+    },
+    {
+      "path": "episode/sp-ep03-v3-zh.mp4",
+      "size": 117608250,
+      "sha1": "none",
+      "uploaded": 1782354850168
+    },
+    {
+      "path": "episode/sp-ep04-v3-ar.mp4",
+      "size": 148638697,
+      "sha1": "none",
+      "uploaded": 1782383419742
+    },
+    {
+      "path": "episode/sp-ep04-v3-bn.mp4",
+      "size": 138561515,
+      "sha1": "none",
+      "uploaded": 1782383435024
+    },
+    {
+      "path": "episode/sp-ep04-v3-de.mp4",
+      "size": 145048966,
+      "sha1": "none",
+      "uploaded": 1782383412684
+    },
+    {
+      "path": "episode/sp-ep04-v3-en.mp4",
+      "size": 136890433,
+      "sha1": "none",
+      "uploaded": 1782383449440
+    },
+    {
+      "path": "episode/sp-ep04-v3-es.mp4",
+      "size": 141483211,
+      "sha1": "none",
+      "uploaded": 1782383402256
+    },
+    {
+      "path": "episode/sp-ep04-v3-fr.mp4",
+      "size": 138635504,
+      "sha1": "none",
+      "uploaded": 1782383454394
+    },
+    {
+      "path": "episode/sp-ep04-v3-hi.mp4",
+      "size": 146221643,
+      "sha1": "none",
+      "uploaded": 1782383439221
+    },
+    {
+      "path": "episode/sp-ep04-v3-ja.mp4",
+      "size": 128843735,
+      "sha1": "none",
+      "uploaded": 1782383444421
+    },
+    {
+      "path": "episode/sp-ep04-v3-pt.mp4",
+      "size": 137032173,
+      "sha1": "none",
+      "uploaded": 1782383408195
+    },
+    {
+      "path": "episode/sp-ep04-v3-ta.mp4",
+      "size": 131450280,
+      "sha1": "none",
+      "uploaded": 1782383425671
+    },
+    {
+      "path": "episode/sp-ep04-v3-zh.mp4",
+      "size": 134097020,
+      "sha1": "none",
+      "uploaded": 1782383430206
+    },
+    {
+      "path": "episode/sp-ep05-v3-ar.mp4",
+      "size": 143456031,
+      "sha1": "none",
+      "uploaded": 1782412631973
+    },
+    {
+      "path": "episode/sp-ep05-v3-bn.mp4",
+      "size": 136297866,
+      "sha1": "none",
+      "uploaded": 1782412651886
+    },
+    {
+      "path": "episode/sp-ep05-v3-de.mp4",
+      "size": 135846728,
+      "sha1": "none",
+      "uploaded": 1782412605670
+    },
+    {
+      "path": "episode/sp-ep05-v3-en.mp4",
+      "size": 133983955,
+      "sha1": "none",
+      "uploaded": 1782412622344
+    },
+    {
+      "path": "episode/sp-ep05-v3-es.mp4",
+      "size": 133228454,
+      "sha1": "none",
+      "uploaded": 1782412597225
+    },
+    {
+      "path": "episode/sp-ep05-v3-fr.mp4",
+      "size": 134028607,
+      "sha1": "none",
+      "uploaded": 1782412625494
+    },
+    {
+      "path": "episode/sp-ep05-v3-hi.mp4",
+      "size": 144486449,
+      "sha1": "none",
+      "uploaded": 1782412617305
+    },
+    {
+      "path": "episode/sp-ep05-v3-ja.mp4",
+      "size": 128136650,
+      "sha1": "none",
+      "uploaded": 1782412608834
+    },
+    {
+      "path": "episode/sp-ep05-v3-pt.mp4",
+      "size": 131460901,
+      "sha1": "none",
+      "uploaded": 1782412602213
+    },
+    {
+      "path": "episode/sp-ep05-v3-ta.mp4",
+      "size": 132028409,
+      "sha1": "none",
+      "uploaded": 1782412637187
+    },
+    {
+      "path": "episode/sp-ep05-v3-zh.mp4",
+      "size": 128478380,
+      "sha1": "none",
+      "uploaded": 1782412640586
+    },
+    {
+      "path": "episode/sp-ep06-v3-ar.mp4",
+      "size": 153520789,
+      "sha1": "none",
+      "uploaded": 1782436929072
+    },
+    {
+      "path": "episode/sp-ep06-v3-bn.mp4",
+      "size": 144033384,
+      "sha1": "none",
+      "uploaded": 1782436950230
+    },
+    {
+      "path": "episode/sp-ep06-v3-de.mp4",
+      "size": 145356571,
+      "sha1": "none",
+      "uploaded": 1782437000857
+    },
+    {
+      "path": "episode/sp-ep06-v3-en.mp4",
+      "size": 136110395,
+      "sha1": "none",
+      "uploaded": 1782436961551
+    },
+    {
+      "path": "episode/sp-ep06-v3-es.mp4",
+      "size": 140359068,
+      "sha1": "none",
+      "uploaded": 1782436989304
+    },
+    {
+      "path": "episode/sp-ep06-v3-fr.mp4",
+      "size": 137863646,
+      "sha1": "none",
+      "uploaded": 1782436984881
+    },
+    {
+      "path": "episode/sp-ep06-v3-hi.mp4",
+      "size": 154931323,
+      "sha1": "none",
+      "uploaded": 1782436966480
+    },
+    {
+      "path": "episode/sp-ep06-v3-ja.mp4",
+      "size": 130277221,
+      "sha1": "none",
+      "uploaded": 1782436979263
+    },
+    {
+      "path": "episode/sp-ep06-v3-pt.mp4",
+      "size": 134936804,
+      "sha1": "none",
+      "uploaded": 1782436993731
+    },
+    {
+      "path": "episode/sp-ep06-v3-ta.mp4",
+      "size": 143019608,
+      "sha1": "none",
+      "uploaded": 1782436934115
+    },
+    {
+      "path": "episode/sp-ep06-v3-zh.mp4",
+      "size": 130197775,
+      "sha1": "none",
+      "uploaded": 1782436946513
+    },
+    {
+      "path": "episode/sp-ep07-v3-bn.mp4",
+      "size": 147686078,
+      "sha1": "none",
+      "uploaded": 1782714365019
+    },
+    {
+      "path": "episode/sp-ep07-v3-de.mp4",
+      "size": 145857639,
+      "sha1": "none",
+      "uploaded": 1782714383539
+    },
+    {
+      "path": "episode/sp-ep07-v3-en.mp4",
+      "size": 138947911,
+      "sha1": "none",
+      "uploaded": 1782714345404
+    },
+    {
+      "path": "episode/sp-ep07-v3-es.mp4",
+      "size": 140891604,
+      "sha1": "none",
+      "uploaded": 1782714368898
+    },
+    {
+      "path": "episode/sp-ep07-v3-fr.mp4",
+      "size": 140548939,
+      "sha1": "none",
+      "uploaded": 1782714357361
+    },
+    {
+      "path": "episode/sp-ep07-v3-hi.mp4",
+      "size": 155670190,
+      "sha1": "none",
+      "uploaded": 1782714353505
+    },
+    {
+      "path": "episode/sp-ep07-v3-ja.mp4",
+      "size": 87823401,
+      "sha1": "none",
+      "uploaded": 1782714350631
+    },
+    {
+      "path": "episode/sp-ep07-v3-pt.mp4",
+      "size": 140418144,
+      "sha1": "none",
+      "uploaded": 1782714372312
+    },
+    {
+      "path": "episode/sp-ep07-v3-zh.mp4",
+      "size": 133967579,
+      "sha1": "none",
+      "uploaded": 1782714361224
+    },
+    {
+      "path": "episode/sp-ep08-v3-ja.mp4",
+      "size": 89403686,
+      "sha1": "none",
+      "uploaded": 1782714394749
+    },
+    {
+      "path": "episode/sp-ep09-v3-ja.mp4",
+      "size": 76676676,
+      "sha1": "none",
+      "uploaded": 1782714400145
+    },
+    {
+      "path": "episode/sp-ep10-v3-ja.mp4",
+      "size": 88816666,
+      "sha1": "none",
+      "uploaded": 1782714406038
+    },
+    {
+      "path": "episode/sp-ep11-v3-ja.mp4",
+      "size": 90227766,
+      "sha1": "none",
+      "uploaded": 1782714414184
+    },
+    {
+      "path": "episode/sp-ep12-v3-ja.mp4",
+      "size": 83699900,
+      "sha1": "none",
+      "uploaded": 1782714421307
+    },
+    {
+      "path": "henshin-bank.json",
+      "size": 1341,
+      "sha1": "unverified:739e27cd229d14a80077696cad79074d76fba841",
+      "uploaded": 1781964152303
+    },
+    {
+      "path": "motion-comic/sp-ep01-motion-comic-v2.mp4",
+      "size": 7077936,
+      "sha1": "unverified:7b2eb66060748e1e710347c1fad0cec6dc2b2513",
+      "uploaded": 1782030847436
+    },
+    {
+      "path": "motion-comic/sp-ep01-motion-comic.mp4",
+      "size": 9017564,
+      "sha1": "none",
+      "uploaded": 1781964148357
+    },
+    {
+      "path": "op-cuts-v2/shiro-ipa-w0.7.png",
+      "size": 1200281,
+      "sha1": "unverified:a57ef37d0b213d074222fedc3cc8f8822f95789e",
+      "uploaded": 1782034962026
+    },
+    {
+      "path": "op-cuts-v2/shiro-ipa-w0.9.png",
+      "size": 1236445,
+      "sha1": "unverified:6f4297498316302819d88c1b3446442261202529",
+      "uploaded": 1782034961681
+    },
+    {
+      "path": "op-cuts/01-city.png",
+      "size": 1747763,
+      "sha1": "unverified:3cf83bbd1e1ea3d00b43c3e66994175a79251f32",
+      "uploaded": 1782042690622
+    },
+    {
+      "path": "op-cuts/02-shiro-eye.png",
+      "size": 1276776,
+      "sha1": "unverified:3ae065ed70fdfb8d464a2b35b9ee8bcbe4ae280c",
+      "uploaded": 1782042692816
+    },
+    {
+      "path": "op-cuts/03-shiro-action.png",
+      "size": 1228205,
+      "sha1": "unverified:1ae57eac81aca8a45b0575269e4211a3f5319e70",
+      "uploaded": 1782042691273
+    },
+    {
+      "path": "op-cuts/04-pico-face.png",
+      "size": 1315574,
+      "sha1": "unverified:7697a18dbbecd0faa51dd3e7cb7453a87aded517",
+      "uploaded": 1782042692391
+    },
+    {
+      "path": "op-cuts/05-pico-action.png",
+      "size": 1208512,
+      "sha1": "unverified:88cbc3b6123a7adbf889b61dfada93f49fb327dc",
+      "uploaded": 1782042690936
+    },
+    {
+      "path": "op-cuts/06-ghost.png",
+      "size": 1572326,
+      "sha1": "unverified:3e88183385cc52c6413d01aeff8fba71af26e46c",
+      "uploaded": 1782042691633
+    },
+    {
+      "path": "op-cuts/07-duo.png",
+      "size": 1283688,
+      "sha1": "unverified:0f6ab63eba1c15bf7ca2ac0fcf248c1238cef012",
+      "uploaded": 1782042691981
+    },
+    {
+      "path": "opening/sp-opening-v2.mp4",
+      "size": 25783002,
+      "sha1": "none",
+      "uploaded": 1782042688098
+    },
+    {
+      "path": "opening/sp-opening.mp4",
+      "size": 7984976,
+      "sha1": "unverified:493235bcebc1f62d2e8d0113659995dd360debc2",
+      "uploaded": 1782030845717
+    },
+    {
+      "path": "panels/sp-ep01-p01-coldopen.png",
+      "size": 1332905,
+      "sha1": "unverified:14043f85d3a1bcec0d9173dcdaa90eaf15356822",
+      "uploaded": 1781964147830
+    },
+    {
+      "path": "panels/sp-ep01-p02-pico-iki.png",
+      "size": 1334624,
+      "sha1": "unverified:14efcbcabe8065615c8e1ade145771aea989989a",
+      "uploaded": 1781964144565
+    },
+    {
+      "path": "panels/sp-ep01-p03-shiro-fix.png",
+      "size": 1323398,
+      "sha1": "unverified:8f8164cf3b7e75734c932fde67faddd2b00607bb",
+      "uploaded": 1781964145662
+    },
+    {
+      "path": "panels/sp-ep01-p04-henshin.png",
+      "size": 1440826,
+      "sha1": "unverified:976efb22e3203f3cb360981af46816b60d6af9c2",
+      "uploaded": 1781964146447
+    },
+    {
+      "path": "panels/sp-ep01-p05-ghost.png",
+      "size": 1434145,
+      "sha1": "unverified:6d7c638a9bd22443daf014ffb2ea14e02e3e7fab",
+      "uploaded": 1781964147327
+    },
+    {
+      "path": "pipeline-specs.json",
+      "size": 1666,
+      "sha1": "unverified:4fd75397bea3bc49bf68e7583ac0a4d8e3cf5196",
+      "uploaded": 1781964152601
+    },
+    {
+      "path": "thumbnails/ep01.png",
+      "size": 1118010,
+      "sha1": "unverified:4a5ead95ac593739c02a9a11f5dac47f7fa3e57c",
+      "uploaded": 1782185990334
+    },
+    {
+      "path": "thumbnails/ep02.png",
+      "size": 1281868,
+      "sha1": "unverified:591d289bb44da072bbf9bcc212e68b2115182f7c",
+      "uploaded": 1782185991803
+    }
+  ]
+}
