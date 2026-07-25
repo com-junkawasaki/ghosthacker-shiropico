@@ -1,0 +1,15 @@
+1
+00:00:00,350 --> 00:00:04,146
+Pico uses a vulnerability scanner to chase an attacker, and misses.
+
+2
+00:00:04,146 --> 00:00:06,549
+A scanner finds holes in your own systems.
+
+3
+00:00:06,549 --> 00:00:09,417
+Threat intelligence follows the adversary's clues.
+
+4
+00:00:09,417 --> 00:00:11,390
+Different question, different tool.

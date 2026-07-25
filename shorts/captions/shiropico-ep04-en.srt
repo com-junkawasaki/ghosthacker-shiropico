@@ -1,0 +1,15 @@
+1
+00:00:00,350 --> 00:00:03,217
+Pico clicks every alert until the noise becomes a forest.
+
+2
+00:00:03,217 --> 00:00:06,270
+Shiro correlates related signals into real incidents.
+
+3
+00:00:06,270 --> 00:00:08,836
+Then automation handles the routine response.
+
+4
+00:00:08,836 --> 00:00:12,354
+Group first, automate second, investigate what matters.
