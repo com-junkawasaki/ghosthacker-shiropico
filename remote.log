@@ -1,1 +1,2 @@
 ed33e32a-8cba-4cb0-80ac-97a7b4f5c197 bucket=gftdcojp-m365-annex chunk=50MiB datacenter=US encryption=none fileprefix=ai-gftd-ghosthacker-shiropico/ host=s3.us-west-004.backblazeb2.com name=b2 port=443 protocol=https signature=v4 storageclass=STANDARD type=S3 timestamp=1784942253s
+fb5fce30-9445-4187-a9a3-6c72a29c2ac4 bucket=ai-gftd-datasets datacenter=US encryption=none fileprefix=ghosthacker-shiropico/ host=s3.us-west-004.backblazeb2.com importtree=yes name=datasets port=443 protocol=https signature=v4 storageclass=STANDARD type=S3 timestamp=1784979645s
