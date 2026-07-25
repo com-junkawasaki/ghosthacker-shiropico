@@ -1,0 +1,11 @@
+# Binary assets (character refs, generated panels, Seedance renders, motion
+# comic, narration audio) are NOT git-ignored anymore — this repo is itself a
+# DataLad dataset, so .gitattributes routes binary content to git-annex and
+# pushes it to the `b2` special remote. Only annex pointers land in git.
+# See ASSETS-DATALAD.md.
+
+.DS_Store
+
+# Python bytecode (make_captions.py imports assemble_localized_shorts)
+__pycache__/
+*.pyc

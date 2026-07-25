@@ -1,0 +1,77 @@
+{
+  "channel": {
+    "id": "UCTisE2aPQp3i8i6JUVIUoiw",
+    "title": "ゆっくりサイバーch"
+  },
+  "privacy": "public",
+  "episodes": {
+    "2": {
+      "en": {
+        "id": "kbb63YpOJzI",
+        "caption": "en",
+        "privacy": "public"
+      },
+      "hi": {
+        "id": "zzaXOyik49U",
+        "caption": "hi",
+        "privacy": "public"
+      },
+      "ar": {
+        "id": "vZTQgeahbHg",
+        "caption": "ar",
+        "privacy": "public"
+      }
+    },
+    "3": {
+      "en": {
+        "id": "bp2WRWVN1EU",
+        "caption": "en",
+        "privacy": "public"
+      },
+      "hi": {
+        "id": "5dCulOcyqVE",
+        "caption": "hi",
+        "privacy": "public"
+      },
+      "ar": {
+        "id": "p7rspanRbZM",
+        "caption": "ar",
+        "privacy": "public"
+      }
+    },
+    "4": {
+      "en": {
+        "id": "ifvdGAIPryw",
+        "caption": "en",
+        "privacy": "public"
+      },
+      "hi": {
+        "id": "9RVFAJ3w9l8",
+        "caption": "hi",
+        "privacy": "public"
+      },
+      "ar": {
+        "id": "mujvb88YEAc",
+        "caption": "ar",
+        "privacy": "public"
+      }
+    },
+    "5": {
+      "en": {
+        "id": "r1vfNklcOdU",
+        "caption": "en",
+        "privacy": "public"
+      },
+      "hi": {
+        "id": "D0tO0KNLoFc",
+        "caption": "hi",
+        "privacy": "public"
+      },
+      "ar": {
+        "id": "nLOKlHgj6Aw",
+        "caption": "ar",
+        "privacy": "public"
+      }
+    }
+  }
+}

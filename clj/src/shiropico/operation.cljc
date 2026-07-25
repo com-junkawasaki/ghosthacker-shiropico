@@ -1,0 +1,175 @@
+(ns shiropico.operation
+  "OperationActor — one cut render = one supervised actor run, expressed as
+  a langgraph-clj StateGraph. shiropico.advisor (the contained intelligence
+  node) is sealed into a single node (:advise); its proposal is ALWAYS
+  routed through the PolicyGovernor (:govern) and the rollout phase gate
+  (:decide) before anything commits to the SSoT. Ported from
+  `tsumugu.operation` / `talent.operation`'s topology.
+
+  Everything the actor depends on is injected, so each is a swap, not a
+  rewrite:
+    - the Store   (MemStore | DatomicStore | kotoba-server) — `store` arg
+    - the Advisor (render-backed | future coscientist-backed)  — :advisor opt
+    - the Decision (portable oracle | Kotoba application)      — :decision opt
+    - the Checkpoint (host-confined durable intent)            — :checkpoint! opt
+    - the Phase   (0→2 rollout)                                — :phase in ctx
+
+  One graph run = one cut render (intake → advise → govern → decide →
+  commit | hold | approval). No unbounded inner loop — each cut is auditable
+  and checkpointed.
+
+  Human-in-the-loop = real approval workflow: `interrupt-before
+  #{:request-approval}` pauses the actor and hands the decision to a human
+  reviewer. The approver resumes with `{:approval {:status :approved}}`
+  (or :rejected)."
+  (:require [langgraph.graph :as g]
+            [langgraph.checkpoint :as cp]
+            [shiropico.advisor :as advisor]
+            [shiropico.policy :as policy]
+            [shiropico.phase :as phase]
+            [shiropico.store :as store]))
+
+(defn- commit-fact [request context proposal]
+  {:t          :committed
+   :op         (:op request)
+   :actor      (:actor-id context)
+   :cut        (:cut-id request)
+   :disposition :commit
+   :basis      (:cites proposal)
+   :summary    (:summary proposal)})
+
+(defn- commit-record [request context proposal]
+  {:effect  (:effect proposal)
+   :path    [(:cut-id request)]
+   :payload (assoc (:value proposal) :by (:actor-id context))})
+
+(defn compatibility-decision
+  "Legacy portable decision path. JVM application hosts should inject the
+  authoritative Kotoba decision adapter; this function remains as a CLJC
+  compatibility oracle and for runtimes that cannot yet load a Kotoba host."
+  [request context _proposal verdict]
+  (let [base (phase/verdict->disposition verdict)
+        ph   (:phase context phase/default-phase)]
+    (phase/gate ph request base)))
+
+(defn build
+  "Compiles an OperationActor graph bound to `store` (any `shiropico.store/
+  Store`). opts:
+    :advisor      — a `shiropico.advisor/Advisor` (default: render-advisor)
+    :decision     — authoritative decision fn (default: compatibility oracle)
+    :checkpoint!  — durable pre-commit intent writer (default: no-op)
+    :checkpointer — langgraph checkpointer (default: in-mem)"
+  [store & [{:keys [advisor checkpointer decision checkpoint!]
+             :or   {advisor      (advisor/render-advisor)
+                    decision     compatibility-decision
+                    checkpoint!  (fn [_] nil)
+                    checkpointer (cp/mem-checkpointer)}}]]
+  (-> (g/state-graph
+       {:channels
+        {:request     {:default nil}
+         :context     {:default nil}   ; injected purpose/phase
+         :proposal    {:default nil}
+         :verdict     {:default nil}
+         :disposition {:default nil}   ; :commit | :hold | :escalate
+         :record      {:default nil}
+         :approval    {:default nil}
+         :audit       {:reducer into :default []}}})
+
+      (g/add-node :intake (fn [s] s))
+
+      ;; shiropico.advisor (the contained intelligence node) — proposal only.
+      (g/add-node :advise
+        (fn [{:keys [request]}]
+          (let [p (advisor/-advise advisor store request)]
+            {:proposal p :audit [(advisor/trace request p)]})))
+
+      ;; PolicyGovernor — independent censor (separate system than advisor).
+      (g/add-node :govern
+        (fn [{:keys [request context proposal]}]
+          {:verdict (policy/check request context proposal)}))
+
+      ;; Decide: policy disposition, then the rollout-phase gate (which can
+      ;; only add caution). HARD policy violations → HOLD (no override).
+      (g/add-node :decide
+        (fn [{:keys [request context proposal verdict]}]
+          (let [ph (:phase context phase/default-phase)
+                {:keys [disposition reason]}
+                (decision request context proposal verdict)]
+            (case disposition
+              :hold
+              {:disposition :hold
+               :audit [(cond-> (policy/hold-fact request context verdict)
+                         reason (assoc :phase-reason reason :phase ph))]}
+
+              :escalate
+              {:disposition :escalate
+               :audit [{:t :approval-requested
+                        :op (:op request) :cut (:cut-id request)
+                        :reason (or reason
+                                    (cond (:high-stakes? verdict) :high-stakes
+                                          :else :low-confidence))
+                        :phase ph
+                        :confidence (:confidence verdict)}]}
+
+              :commit
+              {:disposition :commit
+               :record (commit-record request context proposal)}))))
+
+      ;; Approval handoff — paused by interrupt-before; a human reviewer
+      ;; resumes with :approval. Then route commit/hold.
+      (g/add-node :request-approval
+        (fn [{:keys [request context proposal approval verdict]}]
+          (if (= :approved (:status approval))
+            {:disposition :commit
+             :record (assoc (commit-record request context proposal)
+                            :payload (assoc (:value proposal) :approved-by (:by approval)))
+             :audit [{:t :approval-granted :op (:op request)
+                      :cut (:cut-id request) :by (:by approval)}]}
+            {:disposition :hold
+             :audit [(merge (policy/hold-fact request context
+                                              (assoc verdict :violations
+                                                     [{:rule :approver-rejected}]))
+                            {:t :approval-rejected})]})))
+
+      ;; Commit — the ONLY node that writes the SSoT + audit ledger.
+      (g/add-node :commit
+        (fn [{:keys [request context proposal record]}]
+          (let [f (commit-fact request context proposal)]
+            ;; Write durable intent first. If confinement or persistence
+            ;; fails, no SSoT mutation occurs; replay can reconcile an intent
+            ;; written immediately before a process failure.
+            (checkpoint! {:request request :context context
+                          :record record :fact f})
+            (store/commit-cut! store (:cut-id request) (:payload record))
+            (store/append-ledger! store f)
+            {:audit [f]})))
+
+      ;; Hold — write the rejection to the ledger; no SSoT mutation.
+      (g/add-node :hold
+        (fn [{:keys [audit]}]
+          (when-let [hf (last (filter #(#{:policy-hold :approval-rejected} (:t %)) audit))]
+            (store/append-ledger! store (assoc hf :disposition :hold)))
+          {}))
+
+      (g/set-entry-point :intake)
+      (g/add-edge :intake :advise)
+      (g/add-edge :advise :govern)
+      (g/add-edge :govern :decide)
+
+      (g/add-conditional-edges :decide
+        (fn [{:keys [disposition]}]
+          (case disposition
+            :commit   :commit
+            :escalate :request-approval
+            :hold)))
+
+      (g/add-conditional-edges :request-approval
+        (fn [{:keys [disposition]}]
+          (if (= :commit disposition) :commit :hold)))
+
+      (g/set-finish-point :commit)
+      (g/set-finish-point :hold)
+
+      (g/compile-graph
+       {:checkpointer     checkpointer
+        :interrupt-before #{:request-approval}})))
