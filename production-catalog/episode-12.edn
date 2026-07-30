@@ -1,0 +1,20 @@
+;; SHIRO & PICO — episode 12 production plan. See episode-11.edn for why the
+;; shape is one file per episode with languages inside.
+{:plan/version 1
+ :plan/id "episode-12"
+ :plan/episode 12
+ :plan/shots 17
+ :plan/dialogue 52
+ :plan/primary-language :en
+ :plan/shotlists
+ {:ar "episode-12-shotlist-v2.ar.edn"
+  :bn "episode-12-shotlist-v2.bn.edn"
+  :de "episode-12-shotlist-v2.de.edn"
+  :en "episode-12-shotlist-v2.en.edn"
+  :es "episode-12-shotlist-v2.es.edn"
+  :fr "episode-12-shotlist-v2.fr.edn"
+  :hi "episode-12-shotlist-v2.hi.edn"
+  :pt "episode-12-shotlist-v2.pt.edn"
+  :ta "episode-12-shotlist-v2.ta.edn"
+  :zh "episode-12-shotlist-v2.zh.edn"}
+ :plan/attr-namespace-template "shotlist.episode%s.%s"}

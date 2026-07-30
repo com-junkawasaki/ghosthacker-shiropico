@@ -1,0 +1,36 @@
+;; SHIRO & PICO — episode 11 production plan.
+;;
+;; One file per episode, because loop-ka-production's catalog listing takes the
+;; `.edn` basenames in sorted order as the running order, and the loop produces
+;; one episode per slot per night. Languages live INSIDE the plan rather than
+;; as separate catalog entries: ten catalog ids per episode would make the
+;; running order ten nights long for one episode.
+;;
+;; Every field here is derived from files that already exist in this repo. No
+;; title, synopsis or runtime is asserted, because nothing in the repo states
+;; them in a machine-readable form and inventing them would put fabricated
+;; metadata into the plan the producer trusts.
+{:plan/version 1
+ :plan/id "episode-11"
+ :plan/episode 11
+ ;; Counted from the shotlist by row :type. The file has 84 rows total;
+ ;; only the "scene" rows are shots, the rest are dialogue lines.
+ :plan/shots 23
+ :plan/dialogue 61
+ :plan/primary-language :en
+ :plan/shotlists
+ {:ar "episode-11-shotlist-v2.ar.edn"
+  :bn "episode-11-shotlist-v2.bn.edn"
+  :de "episode-11-shotlist-v2.de.edn"
+  :en "episode-11-shotlist-v2.en.edn"
+  :es "episode-11-shotlist-v2.es.edn"
+  :fr "episode-11-shotlist-v2.fr.edn"
+  :hi "episode-11-shotlist-v2.hi.edn"
+  :pt "episode-11-shotlist-v2.pt.edn"
+  :ta "episode-11-shotlist-v2.ta.edn"
+  :zh "episode-11-shotlist-v2.zh.edn"}
+ ;; The shotlist is datomize-style tx-data whose attributes are namespaced per
+ ;; episode+language (`:shotlist.episode11.en/scene_prompt`). The producer
+ ;; derives the namespace from :plan/episode and the language it is rendering,
+ ;; rather than each plan repeating it.
+ :plan/attr-namespace-template "shotlist.episode%s.%s"}
