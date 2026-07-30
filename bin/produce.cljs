@@ -28,6 +28,11 @@
     (when (seq data) (println (pr-str data))))
   (js/process.exit 1))
 
+;; Args come from `*command-line-args*`, not from process.argv. Dropping a fixed
+;; prefix off process.argv leaves nbb's own flags in the list, so
+;; `--classpath src bin/produce.cljs <id>` puts "src" in the plan-id slot. This
+;; loop happened to survive that by letting the LAST non-flag token win, which
+;; is luck rather than parsing.
 (defn- parse-args [argv]
   (loop [[a & more] argv acc {}]
     (cond
@@ -100,4 +105,4 @@
                           :lines (count lines)
                           :legs (legs/report scenes lines b)}))))))
 
-(apply -main (drop 2 (js->clj js/process.argv)))
+(apply -main *command-line-args*)
