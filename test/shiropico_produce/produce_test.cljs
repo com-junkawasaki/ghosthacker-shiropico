@@ -10,6 +10,7 @@
 (ns shiropico-produce.produce-test
   (:require [clojure.test :refer [deftest is testing run-tests]]
             [shiropico-produce.legs :as legs]
+            [shiropico-produce.prompt :as prompt]
             [shiropico-produce.shotlist :as shotlist]))
 
 (def ^:private tmpl "shotlist.episode%s.%s")
@@ -72,6 +73,35 @@
     (is (false? bed) "shiropico shotlists carry no music bed")
     (is (= ["ambient"] sfx))
     (is (= 1 overlays))))
+
+(deftest prose-is-resegmented-not-rewritten
+  (let [p "Aerial wide shot of a massive geothermal power plant on a black lava plateau at near-arctic dawn, pale sky, quiet steam columns rising"
+        t (prompt/tags p)]
+    (testing "the subject stops being buried mid-clause"
+      (is (= "Aerial wide shot" (first t)))
+      (is (some #(clojure.string/includes? % "geothermal power plant") t)))
+    (testing "short fragments are left alone — `pale sky` is already a tag"
+      (is (some #(= "pale sky" %) t)))
+    (testing "nothing is invented"
+      (doseq [tag t]
+        (is (clojure.string/includes? (clojure.string/lower-case p)
+                                      (clojure.string/lower-case tag))
+            (str tag " came from the prose"))))))
+
+(deftest only-the-first-joint-is-cut
+  ;; Cutting at every joint shreds "a black lava plateau at near-arctic dawn"
+  ;; into fragments that each lose their referent.
+  ;; " of a " is the joint, so the article goes with it; the remainder stays
+  ;; whole rather than being cut again at " on a " / " at ". "x" is the second
+  ;; comma fragment and is short, so it is left alone.
+  (is (= ["wide shot" "plant on a hill at dawn" "x"]
+         (prompt/tags "wide shot of a plant on a hill at dawn, x" {:long-fragment 5}))
+      "one cut, then the remainder stays whole"))
+
+(deftest style-tags-are-appended-not-mixed-in
+  (let [pos (prompt/positive {:shot/prompt "dark room"})]
+    (is (= "dark room" (first pos)))
+    (is (= prompt/style-tags (vec (take-last (count prompt/style-tags) pos))))))
 
 (defn -main [& _] (run-tests 'shiropico-produce.produce-test))
 (-main)
