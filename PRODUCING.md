@@ -94,39 +94,38 @@ PNGs land in `production-out/<plan-id>/<lang>/`, named by `scene_key`, and are
 gitignored: large binaries stay out of git history and a run is reproducible
 from the shotlist plus the seed.
 
-### Prompts are re-segmented into tags, and that only partly helps
+### Prompts are re-segmented into tags
 
-These shotlists carry prose. Fed verbatim, the first render of
-`geothermal_plant_dawn` produced the plateau, the dawn and the teal data lines
-but **no power plant** — the subject sat mid-clause in a long leading fragment
-and was lost. SDXL weights early, short tokens.
+These shotlists carry prose. `shiropico-produce.prompt` splits on commas (the
+prose is already comma-delimited fragments) and cuts a long fragment once at the
+preposition separating subject from setting, so the subject stops sitting
+mid-clause where SDXL loses it. Nothing is invented and nothing is dropped — a
+test asserts every emitted tag appears in the source prose.
 
-`shiropico-produce.prompt` splits on commas (the prose is already comma-delimited
-fragments) and cuts long fragments once at the preposition that separates a
-subject from its setting:
+### The scene checkpoint is `animagine-xl-4.0`, chosen by measurement
 
-```
-"Aerial wide shot of a massive geothermal power plant on a black lava
- plateau at near-arctic dawn, pale sky, ..."
- ->
-["Aerial wide shot"
- "massive geothermal power plant on a black lava plateau at near-arctic dawn"
- "pale sky" ...]
-```
+Tagging alone did **not** fix the shot. The same prompt was then rendered
+through all four checkpoints the server has (2026-07-31,
+`geothermal_plant_dawn`):
 
-Nothing is invented and nothing is dropped — a test asserts every tag appears in
-the source prose.
+| checkpoint | result |
+|---|---|
+| `Illustrious-XL-v2.0` (library default) | landscape and neon lines, **no plant** |
+| **`animagine-xl-4.0`** | **pipework, plant structure, teal data lines** |
+| `noobai-XL-1.1` | atmospheric abstract towers, not a plant |
+| `waiREALCN_v150` | photoreal single tower — wrong style for the series |
 
-**It did not fix the shot.** Re-rendered with tags, the plant still did not
-appear; two faint towers showed on the horizon. A hand variant with the subject
-moved to the very front and cut shorter got closer — pipework and a plume
-appeared — but still not an aerial wide shot of a plant.
+Illustrious is a **character** model, which is why it kept dropping industrial
+subjects; shiropico's shots are establishing shots. `scene-config` in
+`bin/produce.cljs` overrides the library default for this channel.
 
-The likely constraint is the checkpoint: `Illustrious-XL` is an anime/character
-model and industrial architecture is not its strength. Choosing a different one
-for scene shots is an open **craft** question and not this loop's to settle
-(`loop-*` `:must-not :own-domain-scoring-truth`). Recorded with the evidence so
-the next person starts from what was actually tried.
+ghosthacker deliberately keeps Illustrious: its panels are character-heavy manga
+and 255 of arc0-1's 257 are already drawn with that look, so switching would
+make one episode inconsistent with itself.
+
+Still not perfect — the re-render came out at a low angle rather than the aerial
+wide the prompt asks for. Framing is a further craft question and not this
+loop's to settle.
 
 ## Tests
 

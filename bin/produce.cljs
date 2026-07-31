@@ -25,6 +25,27 @@
 
 (def ^:private catalog-dir "production-catalog")
 
+(def ^:private scene-config
+  "shiropico's shots are establishing/scene shots — plants, control rooms,
+  corridors — not character panels.
+
+  `animagine-xl-4.0` rather than the library default `Illustrious-XL-v2.0`,
+  chosen by rendering the SAME prompt through all four checkpoints the server
+  has (2026-07-31, geothermal_plant_dawn):
+
+  | checkpoint | result |
+  |---|---|
+  | Illustrious-XL-v2.0 | landscape and neon lines, **no plant** |
+  | **animagine-xl-4.0** | **pipework, plant structure, teal data lines, aerial** |
+  | noobai-XL-1.1 | atmospheric abstract towers, not a plant |
+  | waiREALCN_v150 | photoreal single tower — wrong style for the series |
+
+  Illustrious is a character model; that is why it kept dropping industrial
+  subjects. ghosthacker deliberately keeps it: its panels are character-heavy
+  manga and 255 of arc0-1's 257 are already drawn with that look, so switching
+  would make one episode inconsistent with itself."
+  {:checkpoint "animagine-xl-4.0.safetensors"})
+
 (defn- die [msg data]
   (binding [*out* *err*]
     (println (str "produce: " msg))
@@ -65,7 +86,8 @@
                                                  ;; the subject was being lost mid-clause. See shiropico-produce.prompt.
                                                  :prompt (prompt/positive shot)
                                                  :key (str plan-id "/" (name lang) "/"
-                                                           (or (:shot/key shot) idx))}})
+                                                           (or (:shot/key shot) idx))}
+                                           :config scene-config})
                            (.then (fn [{:keys [ok? file reason]}]
                                     (note (if ok? "rendered" "FAILED") "scene" idx
                                           (if ok? file (str reason)))
