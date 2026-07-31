@@ -21,6 +21,7 @@
             [comfyui.native-client :as comfy]
             [shiropico-produce.legs :as legs]
             [shiropico-produce.prompt :as prompt]
+            [shiropico-produce.tts :as tts]
             [shiropico-produce.shotlist :as shotlist]))
 
 (def ^:private catalog-dir "production-catalog")
@@ -97,11 +98,65 @@
           (js/Promise.resolve {})
           indexed))
 
+(defn- speak-sequentially
+  "One line at a time. kokoro-http holds a single onnxruntime session behind a
+  lock, so concurrency would only queue inside the service."
+  [base out-dir indexed]
+  (reduce (fn [p [idx line]]
+            (.then p (fn [acc]
+                       (-> (tts/speak! {:base base :out-dir out-dir :line line :idx idx})
+                           (.then (fn [{:keys [ok? file reason]}]
+                                    (assoc acc idx (if ok?
+                                                     {:status :spoken :backend :kokoro :file file}
+                                                     {:status :failed :reason reason}))))))))
+          (js/Promise.resolve {})
+          indexed))
+
+(defn- produce-images
+  "Promise of scene outcomes. Unreachable or unconfigured -> everything skipped,
+  never a served leg for a URL nothing is listening on."
+  [{:keys [base out-dir plan-id lang scenes limit]}]
+  (if (str/blank? (str base))
+    (do (note "no COMFY_URL / MURAKUMO_BACKEND_URL — nothing rendered")
+        (js/Promise.resolve (legs/dry-outcomes scenes)))
+    (-> (comfy/reachable? base)
+        (.then (fn [up]
+                 (if-not up
+                   (do (note "image backend configured but unreachable:" base)
+                       (legs/dry-outcomes scenes))
+                   (let [todo (cond->> (map-indexed vector scenes)
+                                true (filter (fn [[_ s]] (shotlist/renderable? s)))
+                                limit (take limit))]
+                     (note "rendering" (count todo) "of" (count scenes) "scenes")
+                     (-> (render-sequentially base out-dir plan-id lang todo)
+                         (.then (fn [done]
+                                  (vec (map-indexed (fn [i o] (get done i o))
+                                                    (legs/dry-outcomes scenes)))))))))))))
+
+(defn- produce-voice
+  "Promise of line outcomes. Same discipline as images."
+  [{:keys [out-dir lines limit]}]
+  (let [base (tts/base-url)]
+    (if (str/blank? (str base))
+      (do (note "no TTS_URL — nothing spoken")
+          (js/Promise.resolve (legs/dry-outcomes lines)))
+      (-> (tts/reachable? base)
+          (.then (fn [up]
+                   (if-not up
+                     (do (note "TTS configured but unreachable:" base)
+                         (legs/dry-outcomes lines))
+                     (let [todo (cond->> (map-indexed vector lines) limit (take limit))]
+                       (note "speaking" (count todo) "of" (count lines) "lines")
+                       (-> (speak-sequentially base (path/join out-dir "voice") todo)
+                           (.then (fn [done]
+                                    (vec (map-indexed (fn [i o] (get done i o))
+                                                      (legs/dry-outcomes lines)))))))))))))) 
+
 (defn -main [& argv]
   (let [{:keys [plan-id lang dry-run] :as a} (parse-args argv)
         ;; A per-run cap the SCHEDULER can set without editing the channel
-        ;; registry. One episode is 23 scenes and the fleet has one shared GPU,
-        ;; so a nightly tick renders a slice rather than the whole thing.
+        ;; registry. One episode is 23 scenes / 61 lines and the fleet has one
+        ;; shared GPU, so a nightly tick produces a slice.
         limit (or (:limit a)
                   (let [v (aget js/process.env "LOOP_KA_PANEL_LIMIT")]
                     (when-not (str/blank? (str v)) (js/parseInt v))))]
@@ -126,37 +181,29 @@
                                          ["dialogue" (:plan/dialogue plan) (count lines)]]]
           (when (and expected (not= expected actual))
             (note "warning —" (str "plan/" label) "says" expected "but the shotlist has" actual)))
-        (let [base (comfy/base-url)
-              emit (fn [outcomes]
+        (let [emit (fn [{:keys [scenes-out lines-out]}]
                      (println (pr-str
                                (merge {:plan/id plan-id
                                        :lang lang
                                        :shotlist file
                                        :shots (count scenes)
                                        :lines (count lines)
-                                       :backend base
-                                       :legs (legs/report outcomes lines scenes)}
+                                       :image-backend (comfy/base-url)
+                                       :tts-backend (tts/base-url)
+                                       :legs (legs/report scenes-out lines-out scenes)}
                                       (into {} (map (fn [[k v]] [(keyword (str "scenes-" (name k))) v]))
-                                            (legs/counts outcomes))))))]
-          (if (or dry-run (str/blank? (str base)))
-            (do (when-not base (note "no COMFY_URL / MURAKUMO_BACKEND_URL — nothing rendered"))
-                (emit (legs/dry-outcomes scenes)))
-            (-> (comfy/reachable? base)
-                (.then
-                 (fn [up]
-                   (if-not up
-                     ;; Configured but not answering. Never report a served leg
-                     ;; for a URL nothing is listening on.
-                     (do (note "backend configured but unreachable:" base)
-                         (emit (legs/dry-outcomes scenes)))
-                     (let [todo (cond->> (map-indexed vector scenes)
-                                  true (filter (fn [[_ s]] (shotlist/renderable? s)))
-                                  limit (take limit))]
-                       (note "rendering" (count todo) "of" (count scenes) "scenes")
-                       (-> (render-sequentially base out-dir plan-id lang todo)
-                           (.then (fn [rendered]
-                                    (emit (vec (map-indexed
-                                                (fn [i o] (get rendered i o))
-                                                (legs/dry-outcomes scenes))))))))))))))))))
+                                            (legs/counts scenes-out))
+                                      (into {} (map (fn [[k v]] [(keyword (str "lines-" (name k))) v]))
+                                            (legs/counts lines-out))))))]
+          (if dry-run
+            (emit {:scenes-out (legs/dry-outcomes scenes)
+                   :lines-out (legs/dry-outcomes lines)})
+            (-> (produce-images {:base (comfy/base-url) :out-dir out-dir
+                                 :plan-id plan-id :lang lang :scenes scenes :limit limit})
+                (.then (fn [scenes-out]
+                         (-> (produce-voice {:out-dir out-dir :lines lines :limit limit})
+                             (.then (fn [lines-out]
+                                      (emit {:scenes-out scenes-out
+                                             :lines-out lines-out}))))))))))))) 
 
 (apply -main *command-line-args*)
