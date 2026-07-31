@@ -76,7 +76,13 @@
           indexed))
 
 (defn -main [& argv]
-  (let [{:keys [plan-id lang dry-run limit]} (parse-args argv)]
+  (let [{:keys [plan-id lang dry-run] :as a} (parse-args argv)
+        ;; A per-run cap the SCHEDULER can set without editing the channel
+        ;; registry. One episode is 23 scenes and the fleet has one shared GPU,
+        ;; so a nightly tick renders a slice rather than the whole thing.
+        limit (or (:limit a)
+                  (let [v (aget js/process.env "LOOP_KA_PANEL_LIMIT")]
+                    (when-not (str/blank? (str v)) (js/parseInt v))))]
     (when (str/blank? (str plan-id)) (die "usage: produce.cljs <plan-id> [--lang en]" {}))
     (let [plan (read-edn (path/join catalog-dir (str plan-id ".edn")))
           lang (keyword (or lang (name (:plan/primary-language plan :en))))
