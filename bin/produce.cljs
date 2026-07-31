@@ -20,6 +20,7 @@
             [clojure.string :as str]
             [comfyui.native-client :as comfy]
             [shiropico-produce.legs :as legs]
+            [shiropico-produce.prompt :as prompt]
             [shiropico-produce.shotlist :as shotlist]))
 
 (def ^:private catalog-dir "production-catalog")
@@ -60,7 +61,9 @@
             (.then p (fn [acc]
                        (-> (comfy/render! {:base base
                                            :out-dir out-dir
-                                           :req {:prompt (:shot/prompt shot)
+                                           :req {;; Tag-form, not the raw prose: SDXL weights early short tokens and
+                                                 ;; the subject was being lost mid-clause. See shiropico-produce.prompt.
+                                                 :prompt (prompt/positive shot)
                                                  :key (str plan-id "/" (name lang) "/"
                                                            (or (:shot/key shot) idx))}})
                            (.then (fn [{:keys [ok? file reason]}]
