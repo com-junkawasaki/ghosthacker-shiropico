@@ -66,17 +66,26 @@ have different lengths (episode 11: 23 and 61). `loop-ka.evaluate` treats them
 as independent, so that is correct — but `silent-shots` for this channel returns
 **line** indices.
 
-### Voice is `:silent`, and that is not a configuration problem
+### Voice
 
 shiropico is a video channel, so unlike a manga it genuinely **has** a voice leg
-per dialogue line. There is simply no TTS wired: murakumo's `:tts` backend is
-`:via :proc` (CosyVoice2/Kokoro), not an HTTP endpoint, and nothing answered on
-the fleet head node. So every voice leg is `:silent`, the loop grades the run
-`:degraded`, and it holds.
+per dialogue line — and as of 2026-07-31 there is a speech backend, so the leg
+is a result rather than a standing `:silent`.
 
-That should stay visible. Leaving `:voice` empty would grade the run `:thin` and
-hide a missing half of the pipeline behind a passing verdict. Empty is right for
-a manga, which has no voice leg at all; it is wrong here.
+```
+TTS_URL=http://100.82.98.110:8190     # kokoro-http on the fleet head node
+```
+
+| line | voice leg |
+|---|---|
+| this run spoke it | `:kokoro` |
+| failed, no text, or no backend | `:silent` |
+
+Speaker → voice is in `shiropico-produce.tts/voices`: SHIRO and PICO are the two
+leads and get their own; anything else (narration, incidental) gets the
+narration voice rather than silently borrowing a lead's.
+
+Files land in `production-out/<plan>/<lang>/voice/<n>-<speaker>.wav`.
 
 ## The image backend is ComfyUI, spoken natively
 
