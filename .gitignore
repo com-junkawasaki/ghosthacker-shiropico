@@ -9,3 +9,7 @@
 # Python bytecode (make_captions.py imports assemble_localized_shorts)
 __pycache__/
 *.pyc
+
+# Rendered scenes. Large binaries stay out of git history; a run is
+# reproducible from the shotlist plus the seed.
+production-out/

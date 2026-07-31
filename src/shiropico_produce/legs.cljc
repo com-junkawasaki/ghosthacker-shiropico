@@ -1,59 +1,60 @@
 (ns shiropico-produce.legs
   "Pure legs reporting — the shape `loop-ka.evaluate` grades.
 
-  The loop's whole reason for existing is that a pipeline can degrade and still
-  emit a file that plays. So this namespace's contract is: **a leg names what
-  actually ran, never what was intended.** If no image backend is configured,
-  every video leg is `:placeholder` and the loop grades the run `:degraded` and
-  holds it. That is the correct outcome, not a bug to work around — the wrong
-  outcome would be reporting `:murakumo` because a URL was present in the plan.
+  A leg answers the question `evaluate` is actually asking: **did this leg's
+  generative step run, or did the pipeline fall back?**
 
-  Leg vocabularies are fixed by `loop-ka.evaluate`:
-    video  :murakumo | :comfy | :placeholder   (:placeholder is degraded)
-    voice  :murakumo | :local  | :silent       (:silent is degraded)"
-  (:require [clojure.string :as str]
-            [shiropico-produce.shotlist :as shotlist]))
+  | scene | video leg |
+  |---|---|
+  | this run rendered it | the backend that served it |
+  | failed, or never attempted | `:placeholder` |
 
-(defn image-leg
-  "Which image backend actually served this shot.
+  An earlier version derived legs from *whether an env var was set*. That is a
+  claim about configuration, not about work — it reported a served leg for a URL
+  nothing was listening on.
 
-  `backends` is what the caller could *reach*, already resolved — this fn does
-  no probing, so a caller that guesses from env vars alone is the one making
-  the claim, and the shape below makes that claim explicit and reviewable."
-  [{:keys [murakumo comfy]} shot]
-  (cond
-    (not (shotlist/renderable? shot)) :placeholder
-    murakumo :murakumo
-    comfy    :comfy
-    :else    :placeholder))
+  ## Voice is `:silent`, and that is not a configuration problem
 
-(defn voice-leg
-  "A voice leg is per DIALOGUE LINE, not per scene. shiropico shotlists keep the
-  two as separate row types (episode 11: 23 scenes, 61 lines), so indexing voice
-  by scene would both mis-count and mislabel which thing went silent."
-  [{:keys [murakumo local]} line]
-  (cond
-    (str/blank? (str (:line/text line))) :silent
-    murakumo :murakumo
-    local    :local
-    :else    :silent))
+  shiropico is a video channel, so unlike a manga it genuinely HAS a voice leg
+  per dialogue line. There is simply no TTS wired: murakumo's `:tts` backend is
+  `:via :proc` (CosyVoice2/Kokoro), not an HTTP endpoint, and nothing was
+  answering on the fleet head node when this was written. So every voice leg is
+  `:silent` and the loop grades the run `:degraded` and holds it.
+
+  That is correct and should stay visible. Reporting anything else — or leaving
+  `:voice` empty so the run grades `:thin` — would hide a missing half of the
+  pipeline behind a passing verdict. Empty is right for a manga, which has no
+  voice leg at all; it is wrong here, where the leg exists and is not being run."
+  (:require [clojure.string :as str]))
+
+(defn scene-leg
+  [{:keys [status backend]}]
+  (case status
+    :rendered (or backend :comfy)
+    :placeholder))
 
 (defn report
-  "Scenes + dialogue + reachable backends -> the `:legs` map the loop reads.
+  "Scene outcomes + dialogue lines -> the `:legs` map the loop reads.
 
-  `:video` indexes scenes and `:voice` indexes dialogue lines. `loop-ka.evaluate`
-  treats them as two independent vectors (`degraded-shots` / `silent-shots`
-  return indices into their own list), so the differing lengths are correct
-  rather than a mismatch — but a reader of `silent-shots` for this channel is
-  looking at line indices, which is why it is stated here.
-
-  `:sfx` is the cue list rather than a count because `loop-ka.evaluate` counts
-  it itself; `:bed` is false and deliberately so — shiropico shotlists carry
-  per-shot sfx and fx but no music bed, so claiming one would be the same lie in
-  a different leg. A channel with no bed grades `:thin`, which is accurate."
-  [scenes lines {:keys [image voice]}]
-  {:video    (mapv #(image-leg image %) scenes)
-   :voice    (mapv #(voice-leg voice %) lines)
-   :bed      false
-   :sfx      (vec (keep :shot/sfx scenes))
+  `:video` indexes scenes and `:voice` indexes dialogue lines, so the two
+  vectors have different lengths (episode 11: 23 and 61). `loop-ka.evaluate`
+  treats them as independent, so that is correct rather than a mismatch — but a
+  reader of `silent-shots` for this channel is looking at LINE indices."
+  [scene-outcomes lines scenes]
+  {:video (mapv scene-leg scene-outcomes)
+   ;; No TTS is wired; see the ns docstring. A line with no text would be silent
+   ;; regardless, so both reasons land on the same honest value.
+   :voice (mapv (constantly :silent) lines)
+   :bed false
+   :sfx (vec (keep :shot/sfx scenes))
    :overlays (count (keep :shot/fx scenes))})
+
+(defn dry-outcomes
+  "Scenes -> outcomes for a run that renders nothing."
+  [scenes]
+  (mapv (constantly {:status :skipped}) scenes))
+
+(defn counts [outcomes]
+  {:rendered (count (filter #(= :rendered (:status %)) outcomes))
+   :failed (count (filter #(= :failed (:status %)) outcomes))
+   :skipped (count (filter #(= :skipped (:status %)) outcomes))})

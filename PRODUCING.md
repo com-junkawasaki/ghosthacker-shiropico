@@ -10,9 +10,17 @@ the `shiropico` channel. The split is the loop's, not ours:
 | **producing one episode, and reporting what actually ran** | **this repo** |
 
 ```bash
-nbb --classpath src bin/produce.cljs episode-11
-nbb --classpath src bin/produce.cljs episode-12 --lang zh
+CP=src:../../kotoba-lang/comfyui/src
+nbb --classpath $CP bin/produce.cljs episode-11              # render what is missing
+nbb --classpath $CP bin/produce.cljs episode-12 --lang zh
+nbb --classpath $CP bin/produce.cljs episode-11 --dry-run    # report without rendering
+nbb --classpath $CP bin/produce.cljs episode-11 --limit 2    # bound a run
 ```
+
+`kotoba-lang/comfyui` supplies `comfyui.native` / `comfyui.native-client` — the
+node-graph builder and the client for ComfyUI's own protocol. It is on the
+classpath rather than copied here, because ghosthacker needs the same thing and
+a copy in two content repos would diverge.
 
 It prints one EDN map:
 
@@ -44,41 +52,60 @@ the loop would admit it and then grade the result.
 
 ## Legs are a report, not an intention
 
-`:legs` names **what actually served each leg**, which is the one thing the loop
-cannot find out for itself:
+`:legs` names **what actually served each leg**, derived from render results —
+not from whether an env var is set. That earlier version made a claim about
+configuration, and reported a served leg for a URL nothing was listening on.
 
-| leg | values | degraded |
-|---|---|---|
-| `:video` (per scene) | `:murakumo` `:comfy` `:placeholder` | `:placeholder` |
-| `:voice` (per dialogue line) | `:murakumo` `:local` `:silent` | `:silent` |
-
-With no backend configured every leg is degraded, the loop grades the run
-`:degraded`, and it holds instead of publishing. That is the correct outcome —
-`loop-ka-production` exists because two weeks of flat pastel cards shipped
-nightly while nothing asked whether the generative legs had run.
+| scene | video leg |
+|---|---|
+| this run rendered it | `:comfy` |
+| failed, or never attempted | `:placeholder` |
 
 `:video` indexes scenes and `:voice` indexes dialogue lines, so the two vectors
-have different lengths (episode 11: 23 and 61). `loop-ka.evaluate`'s
-`silent-shots` therefore returns **line** indices for this channel.
+have different lengths (episode 11: 23 and 61). `loop-ka.evaluate` treats them
+as independent, so that is correct — but `silent-shots` for this channel returns
+**line** indices.
 
-`:bed` is always `false`: these shotlists carry per-shot `sfx` and `fx` but no
-music bed, so a run grades `:thin` at best. Claiming a bed to reach `:clean`
-would be the same lie in a different leg.
+### Voice is `:silent`, and that is not a configuration problem
 
-## Backends
+shiropico is a video channel, so unlike a manga it genuinely **has** a voice leg
+per dialogue line. There is simply no TTS wired: murakumo's `:tts` backend is
+`:via :proc` (CosyVoice2/Kokoro), not an HTTP endpoint, and nothing answered on
+the fleet head node. So every voice leg is `:silent`, the loop grades the run
+`:degraded`, and it holds.
 
-Read from the environment; presence of a URL is taken as reachability.
+That should stay visible. Leaving `:voice` empty would grade the run `:thin` and
+hide a missing half of the pipeline behind a passing verdict. Empty is right for
+a manga, which has no voice leg at all; it is wrong here.
 
-| var | serves |
-|---|---|
-| `MURAKUMO_BACKEND_URL` | images and voice |
-| `COMFY_URL` | images |
-| `VOICE_LOCAL_CMD` | voice |
+## The image backend is ComfyUI, spoken natively
 
-That is an assumption and the weakest link here: an unreachable URL is reported
-as a served leg. On the murakumo task plane the node's own `:requires` gate is
-what establishes the capability. Replacing this with a real probe is the obvious
-next step.
+```
+COMFY_URL=http://100.82.98.110:8188   # murakumo fleet head node `gad`, over Tailscale
+```
+
+`MURAKUMO_BACKEND_URL` is accepted as a fallback name.
+
+**murakumo.cloud does not serve images** — that Worker proxies
+`/api/v1/chat/completions`, `/responses` and `/messages`, text only.
+
+Rendering is sequential (one ComfyUI, one GPU) and `--limit N` bounds a run.
+PNGs land in `production-out/<plan-id>/<lang>/`, named by `scene_key`, and are
+gitignored: large binaries stay out of git history and a run is reproducible
+from the shotlist plus the seed.
+
+### Known: prose prompts under-perform here
+
+These shotlists carry **prose** `scene_prompt`s ("Aerial wide shot of a massive
+geothermal power plant on a black lava plateau at near-arctic dawn, ..."). The
+first render produced the plateau, the dawn and the teal data lines but **no
+power plant** — the subject was dropped.
+
+SDXL checkpoints respond to tag lists, which is the form ghosthacker's panels
+use. Converting these prompts to tags, or choosing a checkpoint that handles
+prose, is an open craft question. It is not this loop's to settle
+(`loop-*` `:must-not :own-domain-scoring-truth`) — recorded so nobody reads
+"it produced a PNG" as "it produced the right shot".
 
 ## Tests
 
