@@ -43,32 +43,35 @@
     (is (= 2 (count (shotlist/dialogue rows ns-str))) "only dialogue rows are lines")
     (is (= 4 (count rows)) "and the row total is neither of those")))
 
-(deftest legs-name-what-ran
+(deftest legs-come-from-results-not-configuration
+  (testing "a video leg names what served the scene"
+    (is (= :comfy (legs/scene-leg {:status :rendered :backend :comfy})))
+    (is (= :placeholder (legs/scene-leg {:status :failed})))
+    (is (= :placeholder (legs/scene-leg {:status :skipped})))))
+
+(deftest voice-is-silent-and-that-is-not-configuration
+  ;; shiropico is a VIDEO channel, so unlike a manga it genuinely has a voice
+  ;; leg per dialogue line. No TTS is wired (murakumo's :tts is :via :proc, and
+  ;; nothing answered on the fleet head node), so every line is :silent and the
+  ;; run is graded :degraded. Leaving :voice empty would grade it :thin and hide
+  ;; a missing half of the pipeline behind a passing verdict.
   (let [ns-str (shotlist/attr-ns tmpl 11 :en)
         scenes (shotlist/shots rows ns-str)
-        lines (shotlist/dialogue rows ns-str)]
-    (testing "no backend reachable -> every leg degraded"
-      (let [{:keys [video voice]} (legs/report scenes lines {:image {} :voice {}})]
-        (is (= [:placeholder :placeholder] video))
-        (is (= [:silent :silent] voice))))
-    (testing "murakumo reachable -> served, except what cannot be served"
-      (let [{:keys [video voice]}
-            (legs/report scenes lines {:image {:murakumo true} :voice {:murakumo true}})]
-        ;; scene "b" has an empty prompt: reachable backend or not, there is
-        ;; nothing to render, so it stays :placeholder.
-        (is (= [:murakumo :placeholder] video))
-        ;; the second line has nil text: nothing to speak.
-        (is (= [:murakumo :silent] voice))))
-    (testing "comfy only -> images served, voice still silent"
-      (let [{:keys [video voice]}
-            (legs/report scenes lines {:image {:comfy true} :voice {}})]
-        (is (= [:comfy :placeholder] video))
-        (is (= [:silent :silent] voice))))
-    (testing "cues and overlays come from scenes, and no bed is claimed"
-      (let [{:keys [bed sfx overlays]} (legs/report scenes lines {:image {} :voice {}})]
-        (is (false? bed) "shiropico shotlists carry no music bed")
-        (is (= ["ambient"] sfx))
-        (is (= 1 overlays))))))
+        lines (shotlist/dialogue rows ns-str)
+        {:keys [voice video]} (legs/report (legs/dry-outcomes scenes) lines scenes)]
+    (is (= (count lines) (count voice)) "one voice leg per dialogue line")
+    (is (every? #(= :silent %) voice))
+    (is (seq voice) "NOT empty — empty is right for a manga, wrong here")
+    (is (= (count scenes) (count video)) "and video indexes scenes, a different length")))
+
+(deftest cues-and-overlays-come-from-scenes
+  (let [ns-str (shotlist/attr-ns tmpl 11 :en)
+        scenes (shotlist/shots rows ns-str)
+        lines (shotlist/dialogue rows ns-str)
+        {:keys [bed sfx overlays]} (legs/report (legs/dry-outcomes scenes) lines scenes)]
+    (is (false? bed) "shiropico shotlists carry no music bed")
+    (is (= ["ambient"] sfx))
+    (is (= 1 overlays))))
 
 (defn -main [& _] (run-tests 'shiropico-produce.produce-test))
 (-main)
