@@ -13,3 +13,7 @@ __pycache__/
 # Rendered scenes. Large binaries stay out of git history; a run is
 # reproducible from the shotlist plus the seed.
 production-out/
+
+# 生成したキャラクターアート（バイナリは git 履歴に入れない — 大容量方針）
+# 再生成: nbb jump/tools/generate-character-art.cljs
+jump/art/

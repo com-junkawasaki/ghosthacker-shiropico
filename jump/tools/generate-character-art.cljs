@@ -1,0 +1,123 @@
+#!/usr/bin/env nbb
+;; ジャンプ版キャラクターアートを murakumo generation で生成する。
+;;
+;;   nbb jump/tools/generate-character-art.cljs [--out DIR] [--only id,id] [--all]
+;;
+;; プロンプトの正本は jump/tools/character-art-prompts.edn（実測メモつき）。
+;; 既定では :status :approved のものだけを回す。:needs-work も含めるなら --all。
+;;
+;; 認証:
+;;   MURAKUMO_GENERATION_TOKEN に scope=generation の mk1 トークンを入れる。
+;;   持っていなければ発行する（署名鍵は kagi、compartment gftdcojp):
+;;     SECRET=$(KAGI_HOME=$HOME/.kagi orgs/kotoba-lang/kagi/bin/kagi get MURAKUMO_GENERATION_TOKEN_SECRET)
+;;     cd orgs/gftdcojp/cloud-murakumo
+;;     MURAKUMO_TOKEN_SECRET=$SECRET clojure -M:token issue <sub> generation 604800
+;;
+;; ホストの注意: 実 API は generation.murakumo.cloud。
+;; API が返す statusUrl / artifact url は murakumo.cloud を指すので、
+;; 引くときはホストを差し替える（下の `->gen-host`）。ADR-2607161750 / secrets-location-map 参照。
+
+(ns generate-character-art
+  (:require ["fs" :as fs]
+            ["path" :as path]
+            [clojure.edn :as edn]
+            [clojure.string :as str]
+            [promesa.core :as p]))
+
+(def api-host "https://generation.murakumo.cloud")
+(def submit-url (str api-host "/api/v1/generation"))
+
+(defn ->gen-host
+  "API は murakumo.cloud を指す URL を返すが、実体は generation.murakumo.cloud にある。"
+  [u]
+  (str/replace u #"^https://murakumo\.cloud" api-host))
+
+(def token (or (some-> js/process.env.MURAKUMO_GENERATION_TOKEN str/trim not-empty)
+               (throw (ex-info "MURAKUMO_GENERATION_TOKEN が未設定（scope=generation の mk1 トークンが要る。発行手順はこのファイルの先頭コメント）" {}))))
+
+(defn auth-headers [] #js {"authorization" (str "Bearer " token)})
+
+(defn args []
+  ;; nbb の process.argv は [node nbb script.cljs ...] だが要素数が環境で変わるので、
+  ;; 位置ではなく「最初の --foo」以降を引数とみなす（実測: drop 2 だとスクリプト名が
+  ;; 先頭に残り、以降の対がすべて 1 つずれて --out/--only が黙って無視された）。
+  (let [a (->> (js->clj js/process.argv)
+               (drop-while #(not (str/starts-with? % "--")))
+               vec)
+        m (into {} (map vec (partition 2 (remove #{"--all"} a))))]
+    {:out   (get m "--out" "jump/art")
+     :only  (some-> (get m "--only") (str/split #",") set)
+     :all?  (boolean (some #{"--all"} a))}))
+
+(defn read-prompts []
+  (-> (fs/readFileSync "jump/tools/character-art-prompts.edn" "utf8")
+      edn/read-string))
+
+(defn submit! [prompt]
+  (p/let [res  (js/fetch submit-url
+                 #js {:method "POST"
+                      :headers #js {"authorization" (str "Bearer " token)
+                                    "content-type" "application/json"}
+                      :body (js/JSON.stringify #js {:type "image"
+                                                    :input #js {:prompt prompt}})})
+          body (.json res)
+          m    (js->clj body :keywordize-keys true)]
+    (or (:jobId m)
+        (throw (ex-info "submit 失敗" {:response m})))))
+
+(defn poll!
+  "done になるまで待つ。25 回 x 8 秒 = 最大 200 秒。"
+  [job-id]
+  (p/loop [n 0]
+    (p/let [res  (js/fetch (str api-host "/api/v1/generation/jobs/" job-id) #js {:headers (auth-headers)})
+            body (.json res)
+            m    (js->clj body :keywordize-keys true)
+            st   (:status m)]
+      (cond
+        (= "done" st)                      m
+        (contains? #{"failed" "error"} st) (throw (ex-info "生成失敗" {:job job-id :response m}))
+        (>= n 25)                          (throw (ex-info "タイムアウト" {:job job-id :last st}))
+        :else (p/do (p/delay 8000) (p/recur (inc n)))))))
+
+(defn download! [job-id out-file]
+  (p/let [res (js/fetch (->gen-host (str "https://murakumo.cloud/api/v1/generation/jobs/" job-id "/artifact"))
+                        #js {:headers (auth-headers) :redirect "follow"})
+          buf (.arrayBuffer res)]
+    (fs/writeFileSync out-file (js/Buffer.from buf))
+    (.-size (fs/statSync out-file))))
+
+(defn run-one! [out-dir {:keys [id name prompt]}]
+  (p/let [_   (println (str "  → " (clj->js id) " " name " ... submitting"))
+          job (submit! prompt)
+          _   (println (str "     job " job))
+          _   (poll! job)
+          f   (path/join out-dir (str (clj->js id) ".png"))
+          n   (download! job f)]
+    (println (str "     ✓ " f " (" n " bytes)"))
+    {:id id :job job :file f :bytes n}))
+
+(defn -main []
+  (let [{:keys [out only all?]} (args)
+        {:keys [prompts]} (read-prompts)
+        sel (cond->> prompts
+              (not all?) (filter #(= :approved (:status %)))
+              only       (filter #(only (name (:id %)))))]
+    (fs/mkdirSync out #js {:recursive true})
+    (println (str "murakumo generation → " out " (" (count sel) " 件)"))
+    (when (empty? sel)
+      (println "対象なし。--all で :needs-work も含める。"))
+    ;; 直列に回す。並列にすると 1024px x N でキューが詰まり、
+    ;; どのジョブが遅いのか分からなくなるため（実測 1 枚 20-60 秒）。
+    (-> (p/loop [xs sel acc []]
+          (if-let [x (first xs)]
+            (p/let [r (run-one! out x)]
+              (p/recur (rest xs) (conj acc r)))
+            acc))
+        (p/then (fn [rs]
+                  (println (str "\n完了: " (count rs) " 枚"))
+                  (println "⚠ 採用前に必ず目視する — 透かし混入と 7+ 逸脱（ホラー顔）は実際に起きている")))
+        (p/catch (fn [e]
+                   (println "失敗:" (ex-message e) (pr-str (ex-data e)))
+                   (js/process.exit 1))))))
+
+(-main)
