@@ -114,6 +114,31 @@ genko の `panel-presets` は `1 / 2h / 2v / 3h / 2x2` しか持たないが、�
 
 ---
 
+## 安く上げる道（2026-08-03 調査）
+
+**今すぐ使える、seedance-2.0-fast より安い経路は無い。**
+（※ `seedance-2.5` は存在しない。live にあるのは `seedance-2.0` と `-fast` の2つで、
+`-fast` のほうが安い＝既に安いほうを使っている。`seedance-2.0` は最大4kで**高い**。）
+
+### ただし、構造的に無駄がある
+**動画を買って、静止画だけ使っている。** 15秒クリップは 24fps で約360フレームあるのに、
+コマに使うのは4〜6枚。**残り 98% は捨てている。**
+
+### いちばん効く手（購入ではなくコード変更）
+フリートの画像経路 `animagine-xl-4.0` は **$0** だが、
+**参照画像に対応していない**（`comfy_image_graph` に ref_image 引数が無く、`denoise 1.0` の純 t2i）。
+
+→ **ここに IP-Adapter 等の参照条件付けを足せば、$0 で canon キャラの静止画が出る。**
+`kotoba-lang/murakumo` の `scripts/hunyuan3d-generation-api` への変更で、支払いは発生しない。
+video 経路（`ltx_video_graph` / `wan_video_graph`）は既に `ref_image` を取っているので、
+**画像側だけが対応していない**という非対称。
+
+### 参考: アグリゲータは未実装
+ADR-2608026000（fal / Modal / ModelsLab / Higgsfield を1つの面で売る）は
+**`:adr/status "proposed"`** で、live には fal しか繋がっていない。
+
+---
+
 ## 既知の未了
 
 - **コマの比率に合わせて生成していない。** いまは 960×960 や 768×448 で撮って
