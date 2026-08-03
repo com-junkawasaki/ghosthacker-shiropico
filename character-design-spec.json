@@ -23,11 +23,11 @@
       "name": "シロ",
       "role": "protagonist / world-top white-hat hacker / mentor-guardian (static) — calm, composed (girl)",
       "refImages": [
-        "character-refs/kamishibai-shiro-gen2.png",
-        "character-refs/emotions/shiro/"
+        "character-refs/emotions/shiro/normal.png",
+        "character-refs/emotions/shiro/（12表情）"
       ],
-      "silhouette": "white oversized hoodie (deep hood), small and round",
-      "hairEyes": "short platinum/white hair, teal #1FB6A6 eyes, sleepy/calm",
+      "silhouette": "白い衣装＋つばの短い白いキャップ、小柄",
+      "hairEyes": "銀白の髪にシアンのメッシュ、大きなシアンの目",
       "colors": {
         "hood": "#F4F8F7",
         "accent": "#1FB6A6",
@@ -36,9 +36,9 @@
       "props": "thin laptop (teal glow), hood strings like antennae",
       "battleMode": "scale up, hood billows, teal eyes glow strong",
       "pose": "single-finger quiet tap — 'もう、視えてる'",
-      "ng": "weapons, blood, exposure, aggressive angularity",
+      "ng": "weapons, blood, exposure, aggressive angularity, フードをかぶせない（キャップが正）",
       "voice": "voicevox:2 (四国めたん)",
-      "comfyPrompt": "cute chibi white-hooded hacker kid, platinum short hair, teal eyes, oversized hoodie, calm sleepy expression, teal cyber glow, clean anime line, flat shading",
+      "comfyPrompt": "cute chibi girl hacker, silver white hair with cyan streaks, large cyan eyes, white outfit with white cap, calm gentle expression, clean anime line, flat shading",
       "gender": "female (1girl)"
     },
     {
@@ -46,25 +46,27 @@
       "name": "ピコ",
       "role": "sidekick / ex-crypto-kiddie growing into white-hat (dynamic, audience proxy)",
       "refImages": [
-        "character-refs/kamishibai-pico-gen2.png",
-        "character-refs/kamishibai-pico.png",
-        "character-refs/emotions/pico/"
+        "character-refs/kamishibai-pico.png（旧世代・基準）",
+        "character-refs/emotions/pico/normal.png",
+        "character-refs/emotions/pico/（12表情）"
       ],
       "silhouette": "small, energetic; spiky hair tuft; dynamic clothing",
-      "hairEyes": "grey-green #7F9C6E spiky hair, lime #A8E05F eyes, mischievous",
+      "hairEyes": "グレー〜チャコールの髪に淡い黄緑のハイライト。大きな白目に小さい黒い瞳",
       "colors": {
-        "hair": "#7F9C6E",
-        "hoodie": "#3E5B3A",
+        "hair": "#7F8A80",
+        "highlight": "#C7E3B0",
+        "hoodie": "#A8E05F",
         "accent": "#A8E05F"
       },
-      "props": "worn small device covered in stickers, small number motif (128)",
+      "props": "ノートPC（常に抱えている）",
       "battleMode": "scale up, gallant; hair bristles, lime speed lines",
       "growth": "early=flippant/sloppy → late=careful gestures; color unchanged, growth via expression+posture",
       "ng": "delinquent signifiers (cigarettes/weapons); stays mischievous",
       "voice": "voicevox:3 (ずんだもん)",
-      "comfyPrompt": "cute chibi mischievous boy hacker, spiky grey-green hair, lime eyes, hoodie with stickers, cocky grin, small gadget, energetic pose, clean anime line, flat shading",
+      "comfyPrompt": "cute chibi boy hacker, messy grey charcoal hair with pale yellow-green highlights, big round eyes with small dark pupils, light lime green hoodie, holding a white laptop, clean anime line, flat shading",
       "gender": "male (1boy)",
-      "personality": "genius but a bit airheaded/ditzy kiddie with moments of brilliance (zundamon-like energy)"
+      "personality": "genius but a bit airheaded/ditzy kiddie with moments of brilliance (zundamon-like energy)",
+      "colorNote": "ライムは目ではなくパーカー。旧記述の lime eyes は誤り"
     }
   ],
   "monsters": [
@@ -112,5 +114,11 @@
       "ng": "rot, zombie skin, moaning, missing parts — just drowsy faces",
       "comfyPrompt": "cute sleepy frozen gadget characters, smart-car and devices with closed eyes and Zzz, dull blue glow, hypnotic spiral eyes when controlled, harmless drowsy, anime"
     }
-  ]
+  ],
+  "refPolicy": {
+    "decidedAt": "2026-08-03",
+    "canonical": "character-refs/kamishibai-pico.png（ピコ 旧世代）＋ character-refs/emotions/{shiro,pico}/*.png（各12表情）",
+    "removed": "character-refs/kamishibai-{shiro,pico}-gen2*.png（全11枚）— 本作のシロ/ピコではない。オーナー判断で除去",
+    "detail": "jump/ART-DIRECTION.md §0.5 が正本"
+  }
 }

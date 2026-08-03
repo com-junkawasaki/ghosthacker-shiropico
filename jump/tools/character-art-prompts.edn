@@ -71,5 +71,5 @@
 
  ;; シロとピコは生成しない。既存立ち絵をそのまま使う（ART-DIRECTION §0 / §12）
  :do-not-generate
- [{:id :shiro :reason "既存立ち絵を使う: ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2.png ＋表情4種。追加は右耳のイヤーカフのみ（塗り足し）"}
-  {:id :pico  :reason "既存立ち絵を使う: ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2.png ＋表情4種。追加は左耳のイヤーカフのみ（塗り足し）"}]}
+ [{:id :shiro :reason "既存立ち絵を使う: character-refs/emotions/shiro/*.png（12表情）。女の子・白い衣装＋白いキャップ。追加なし（2026-08-03 訂正: 旧記述の kamishibai-shiro-gen2 は誤り、除去対象）"}
+  {:id :pico  :reason "既存立ち絵を使う: character-refs/kamishibai-pico.png（旧世代・基準）＋ emotions/pico/*.png（12表情）。追加は左耳のイヤーカフのみ（2026-08-03 訂正: 旧記述の kamishibai-pico-gen2 は誤り、除去対象）"}]}

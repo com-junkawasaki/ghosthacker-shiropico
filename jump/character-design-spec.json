@@ -5,7 +5,13 @@
   "styleGuide": {
     "medium": "monochrome manga (screentone + beta). color only for cover / color splash pages",
     "linework": "clean anime line, thick outline for foreground, thin for background",
-    "headCounts": { "pico": 5, "shiro": 5, "pup": 6, "howl": 7, "kuro": "indeterminate" },
+    "headCounts": {
+      "pico": 5,
+      "shiro": 5,
+      "pup": 6,
+      "howl": 7,
+      "kuro": "indeterminate"
+    },
     "sdMode": "gag beats only — never during episodes 8, 9, 12",
     "rankExpression": "accent color only. NOBODY WEARS A HAT. the terms white/green/purple/black hat are titles, not headwear.",
     "sharedItem": "single ear cuff (badge, non-functional). worn differently per character.",
@@ -13,10 +19,26 @@
     "ageRating": "7+/PG; no blood, gore, horror, religious or occult iconography"
   },
   "rankColors": {
-    "white": { "hex": "#1FB6A6", "who": "shiro", "means": "守る人" },
-    "green": { "hex": "#A8E05F", "who": "pico", "means": "みならい。これから決める人" },
-    "purple": { "hex": "#7B5EA7", "who": "pup", "means": "両方 知ってる人" },
-    "black": { "hex": "#14161A", "who": "wolves", "means": "盗る人" }
+    "white": {
+      "hex": "#1FB6A6",
+      "who": "shiro",
+      "means": "守る人"
+    },
+    "green": {
+      "hex": "#A8E05F",
+      "who": "pico",
+      "means": "みならい。これから決める人"
+    },
+    "purple": {
+      "hex": "#7B5EA7",
+      "who": "pup",
+      "means": "両方 知ってる人"
+    },
+    "black": {
+      "hex": "#14161A",
+      "who": "wolves",
+      "means": "盗る人"
+    }
   },
   "characters": [
     {
@@ -26,22 +48,30 @@
       "role": "protagonist / 11yo genius but airheaded kiddie / audience proxy",
       "reuseExistingRefs": true,
       "refImages": [
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2-happy.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2-sad.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2-surprised.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2-open.png"
+        "ghosthacker-shiropico-assets/character-refs/kamishibai-pico.png（旧世代・基準）",
+        "ghosthacker-shiropico-assets/character-refs/emotions/pico/normal.png",
+        "…/emotions/pico/{happy,sad,angry,surprised,confused,embarrassed,idea,panic,sleepy,smug,thinking}.png（計12表情）"
       ],
-      "changeFromExisting": "左耳に ライムのイヤーカフを1つ足すだけ。他は既存立ち絵のまま",
-      "silhouette": "small; three spiky tufts of hair; limbs always thrown wide (movement)",
-      "hairEyes": "grey-green #7F9C6E spiky hair, lime #A8E05F eyes",
-      "colors": { "hoodie": "#3E5B3A", "accent": "#A8E05F", "hair": "#7F9C6E" },
-      "earCuff": { "side": "left", "color": "#A8E05F", "detail": "小さなチャームが下がっていて、動くたび チャリ と鳴る（うるさい主人公を音で表す）" },
-      "props": "sticker-covered handheld device, number motif 128",
+      "changeFromExisting": "旧世代（kamishibai-pico.png）を軸にする。追加は左耳のライムのイヤーカフ1点のみ。",
+      "silhouette": "くしゃっと大きく外へはねた髪。小柄。ノートPCを抱えている（これが最大の識別記号）",
+      "hairEyes": "グレー〜チャコールの髪に淡い黄緑のハイライト。大きな白目に小さい黒い瞳（茶の縁取り）",
+      "colors": {
+        "hair": "#7F8A80",
+        "highlight": "#C7E3B0",
+        "hoodie": "#A8E05F",
+        "accent": "#A8E05F"
+      },
+      "earCuff": {
+        "side": "left",
+        "color": "#A8E05F",
+        "detail": "小さなチャームが下がっていて、動くたび チャリ と鳴る（うるさい主人公を音で表す）"
+      },
+      "props": "ノートPC（常に抱えている）。ステッカーは旧世代の絵には無いので足すなら控えめに",
       "monochrome": "hoodie at ~10% tone; hair rendered as line only",
       "balloon": "丸みがあって、少しギザついた楕円。線が太い",
       "ng": "delinquent signifiers (cigarettes, weapons, multiple piercings); never make him look reformed — he stays mischievous",
-      "comfyPrompt": "cute mischievous boy hacker, 5-head proportion, spiky grey-green hair with three tufts, lime green eyes, dark green hoodie covered in stickers, small lime ear cuff on left ear, cocky open-mouth grin, dynamic pose, clean anime line, flat shading, monochrome manga style"
+      "comfyPrompt": "cute chibi boy hacker, messy grey charcoal hair with pale yellow-green highlights, big round eyes with small dark pupils, light lime green hoodie, holding a white laptop, curious expression, clean anime line, flat shading",
+      "colorNote": "ライムは『目』ではなく『パーカー』にある。旧仕様の lime eyes は誤り。"
     },
     {
       "id": "shiro",
@@ -50,22 +80,28 @@
       "role": "mentor / world-top white hat / identity, nationality, age all unknown",
       "reuseExistingRefs": true,
       "refImages": [
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2-happy.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2-sad.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2-surprised.png",
-        "ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2-open.png"
+        "ghosthacker-shiropico-assets/character-refs/emotions/shiro/normal.png",
+        "…/emotions/shiro/{happy,sad,angry,surprised,confused,embarrassed,idea,panic,sleepy,smug,thinking}.png（計12表情）"
       ],
-      "changeFromExisting": "右耳に 白〜ティールのイヤーカフを1つ足すだけ。普段はフードに隠れて見えない（第1話ラストで初めて見える）",
-      "silhouette": "small; ROUND drooping hood; limbs kept inside the body outline (stillness)",
-      "hairEyes": "short platinum/white hair, teal #1FB6A6 eyes, half-lidded",
-      "colors": { "hood": "#F4F8F7", "accent": "#1FB6A6", "inner": "#2B3A42" },
-      "earCuff": { "side": "right", "color": "#1FB6A6", "detail": "普段はフードで見えない" },
+      "changeFromExisting": "既存立ち絵をそのまま使う。追加なし（白い衣装と白い帽子で『白』は既に成立している）。",
+      "silhouette": "つばの短い白いキャップ／ベレー。銀白の髪に外はねのボリューム。小柄。手にカードや端末を持つ",
+      "hairEyes": "銀白の髪にシアンのメッシュ、大きなシアンの目",
+      "colors": {
+        "outfit": "#F4F8F7",
+        "cap": "#F4F8F7",
+        "accent": "#1FB6A6",
+        "mesh": "#5FE3D6"
+      },
+      "earCuff": {
+        "note": "キャップに隠れて基本は見えない。第1話ラストで初めて読者に見える、という使い方は維持できる"
+      },
       "monochrome": "almost no tone — the brightest thing on the page",
       "balloon": "細い線・小さめの楕円。ときどき枠が途切れる（声が小さい）",
-      "ng": "weapons, aggressive angularity, exposure. never let his hood get pointed ears (that reads as Wolves)",
+      "ng": "フードをかぶせない（旧記述の『白いフード』は誤り）。武器・露出・攻撃的な角張り",
       "criticalContrast": "Wolves もフードなので、シロのフードは必ず ROUND に垂らす。Wolves は三角の耳を立てる",
-      "comfyPrompt": "small calm hooded child hacker, 5-head proportion, oversized white hoodie with deep ROUND drooping hood, platinum short hair, teal eyes, sleepy half-lidded calm expression, tiny teal ear cuff on right ear, standing still hands inside sleeves, clean anime line, flat shading, monochrome manga style"
+      "comfyPrompt": "cute chibi girl hacker, silver white hair with cyan streaks, large cyan eyes, white outfit with white cap, calm gentle smile, holding a small glowing card, soft clean anime line, flat shading",
+      "gender": "female — 女の子（オーナー確認 2026-08-03）",
+      "headwear": "白いキャップ。『ホワイトハット』という階級名と視覚的に一致するが、これは衣装であって階級バッジではない（バッジは廃止済み）"
     },
     {
       "id": "olio",
@@ -76,9 +112,21 @@
       "silhouette": "a perfectly round dot at Pico's shoulder height",
       "size": "fits on Pico's shoulder; can be held in two hands",
       "design": "very round white dove, oddly intelligent eyes, small lime feet",
-      "colors": { "body": "#F2F2EE", "accent": "#A8E05F" },
-      "abilities": ["飛ぶ", "見つける", "必ず帰る"],
-      "techniques": ["帰巣（ホーミング）", "伝書（メッセンジャー）", "置き羽（マーカー）", "ただいま（オールウェイズ・ホーム）"],
+      "colors": {
+        "body": "#F2F2EE",
+        "accent": "#A8E05F"
+      },
+      "abilities": [
+        "飛ぶ",
+        "見つける",
+        "必ず帰る"
+      ],
+      "techniques": [
+        "帰巣（ホーミング）",
+        "伝書（メッセンジャー）",
+        "置き羽（マーカー）",
+        "ただいま（オールウェイズ・ホーム）"
+      ],
       "balloon": "角の立った、几帳面な角丸長方形",
       "ng": "never enlarge in battle. speed is shown by light trails, not size",
       "comfyPrompt": "very round cute white dove, small lime green feet, unusually intelligent deadpan eyes, sitting on a child's shoulder, soft feathers, clean anime line, flat shading"
@@ -92,9 +140,20 @@
       "silhouette": "a fluffy cloud grazing the ground",
       "size": "hug-pillow sized — Pico must be able to cling to it (core gag device)",
       "design": "extremely fluffy round white sheep, mochi texture, tiny hooves, teal eyes",
-      "colors": { "body": "#F5F0E4", "accent": "#1FB6A6" },
-      "abilities": ["包む", "数える", "刈る"],
-      "techniques": ["カウント・シープ", "ウール・ウォール", "シアリング"],
+      "colors": {
+        "body": "#F5F0E4",
+        "accent": "#1FB6A6"
+      },
+      "abilities": [
+        "包む",
+        "数える",
+        "刈る"
+      ],
+      "techniques": [
+        "カウント・シープ",
+        "ウール・ウォール",
+        "シアリング"
+      ],
       "balloon": "もこもこした雲形",
       "comfyPrompt": "extremely fluffy round white sheep, mochi-like soft texture, tiny hooves, calm teal eyes, hug-pillow sized, sitting, clean anime line, flat shading"
     },
@@ -115,7 +174,10 @@
       "earCuff": {
         "side": "left",
         "count": 2,
-        "colors": ["#7B5EA7", "#14161A"],
+        "colors": [
+          "#7B5EA7",
+          "#14161A"
+        ],
         "detail": "紫と、黒。黒は Wolves 時代のもので、まだ外していない。第10話で黒を置いてくる＝もう黒として通れない＝群れに戻れない"
       },
       "hairEyes": "near-black ash hair, long bangs hiding one eye, pale violet #9B87C4 eyes",
@@ -136,9 +198,20 @@
       "silhouette": "a single long thin line emerging from Pup's collar or sleeve",
       "size": "thin enough to coil around a neck; ~1.5m extended",
       "design": "slender white snake, red eyes, surprisingly expressive face, purple tongue",
-      "colors": { "body": "#F2F2EE", "eyes": "#D9455F", "tongue": "#7B5EA7" },
-      "abilities": ["脱皮＝姿を変える", "音を消す", "熱を見る"],
-      "techniques": ["脱皮（シェッド）", "ヒートサーチ"],
+      "colors": {
+        "body": "#F2F2EE",
+        "eyes": "#D9455F",
+        "tongue": "#7B5EA7"
+      },
+      "abilities": [
+        "脱皮＝姿を変える",
+        "音を消す",
+        "熱を見る"
+      ],
+      "techniques": [
+        "脱皮（シェッド）",
+        "ヒートサーチ"
+      ],
       "shedForm": "black snake #1A1C20 when Pup is running black (infiltration)",
       "balloon": "細長く、うねった吹き出し",
       "ng": "no fangs bared, no menace — he is a comedian",
@@ -158,7 +231,11 @@
         "meaning": "四牙は耳ではなく喉に着ける。声のモチーフ＋『飼われている』暗示。第12話「呼んでくれるやつが いなかった」と響く"
       },
       "design": "tall slim adult, high-collared black long coat, greyish-white long hair tied back, heavy shadows under the eyes, yellow eyes",
-      "colors": { "coat": "#1A1C20", "hair": "#B9BCC0", "eyes": "#D9C24A" },
+      "colors": {
+        "coat": "#1A1C20",
+        "hair": "#B9BCC0",
+        "eyes": "#D9C24A"
+      },
       "monochrome": "coat is beta; ONLY the collar and the throat choker are left white — so the eye goes to the throat",
       "balloon": {
         "stolen": "元の持ち主の吹き出しの形を そのまま使う。ただし しっぽ（尻尾）だけが ハウルを 指している",
@@ -175,7 +252,10 @@
       "role": "head of Wolves / Shiro's opposite / face, nationality, gender all unknown / series final boss",
       "silhouette": "human-shaped but the outline never resolves",
       "design": "a human-shaped absence. no drawn contour line. filled with black and white particle noise. the OVERALL shape is oddly neat and straight (suit-like)",
-      "colors": { "body": "#0B0D10", "noise": "#F4F8F7" },
+      "colors": {
+        "body": "#0B0D10",
+        "noise": "#F4F8F7"
+      },
       "earCuff": null,
       "earCuffReason": "名乗る必要がない",
       "balloon": "枠が無い。地の文のように、コマの中に文字だけが浮く",
@@ -190,11 +270,45 @@
     "mark": "三本の爪あと（どの拠点にも刻まれている）",
     "namingRule": "動物のハンドルネーム。狼に近い名前ほど位が上。末端はネズミ・ハエ・モグラ",
     "members": [
-      { "id": "rat", "name": "ラット", "episodes": [1], "design": "ネズミ耳のフード、丸い前歯、細い尻尾", "speech": "〜チュウ", "comfyPrompt": "cartoon villain in charcoal hoodie with round mouse ears, buck teeth, thin tail, sneaky pose, clean anime line, flat shading" },
-      { "id": "mole", "name": "モグラ", "episodes": [2, 7], "design": "土まみれ、ゴーグル、手が大きい", "speech": "〜モグ", "comfyPrompt": "cartoon villain in dirt-covered charcoal hoodie with mole ears, big goggles, oversized digging hands, clean anime line, flat shading" },
-      { "id": "fly", "name": "フライ", "episodes": [3, 5], "design": "背中に薄い羽、細身、録音機を持つ", "speech": "〜チュウ（ラットの弟分）", "comfyPrompt": "thin cartoon villain in charcoal hoodie with translucent insect wings on the back, holding a small recorder, clean anime line, flat shading" }
+      {
+        "id": "rat",
+        "name": "ラット",
+        "episodes": [
+          1
+        ],
+        "design": "ネズミ耳のフード、丸い前歯、細い尻尾",
+        "speech": "〜チュウ",
+        "comfyPrompt": "cartoon villain in charcoal hoodie with round mouse ears, buck teeth, thin tail, sneaky pose, clean anime line, flat shading"
+      },
+      {
+        "id": "mole",
+        "name": "モグラ",
+        "episodes": [
+          2,
+          7
+        ],
+        "design": "土まみれ、ゴーグル、手が大きい",
+        "speech": "〜モグ",
+        "comfyPrompt": "cartoon villain in dirt-covered charcoal hoodie with mole ears, big goggles, oversized digging hands, clean anime line, flat shading"
+      },
+      {
+        "id": "fly",
+        "name": "フライ",
+        "episodes": [
+          3,
+          5
+        ],
+        "design": "背中に薄い羽、細身、録音機を持つ",
+        "speech": "〜チュウ（ラットの弟分）",
+        "comfyPrompt": "thin cartoon villain in charcoal hoodie with translucent insect wings on the back, holding a small recorder, clean anime line, flat shading"
+      }
     ],
-    "fourFangs": ["グレイ", "ファング", "ハウル", "ムーン"],
+    "fourFangs": [
+      "グレイ",
+      "ファング",
+      "ハウル",
+      "ムーン"
+    ],
     "fourFangsNote": "Arc 1 で登場するのはハウルのみ。残り3体は Arc 2"
   },
   "monsters": {
@@ -217,5 +331,14 @@
     "盗まれた声の吹き出しの しっぽが、必ず ハウルを 指しているか（11〜14話）",
     "エージェントが戦闘中に大きくなっていないか",
     "8・9・12話に SD コマが混ざっていないか"
-  ]
+  ],
+  "refPolicy": {
+    "decidedAt": "2026-08-03",
+    "decidedBy": "owner",
+    "canonical": "character-refs/kamishibai-pico.png（ピコ 旧世代）＋ character-refs/emotions/{shiro,pico}/*.png（各12表情）",
+    "removed": "character-refs/kamishibai-{shiro,pico}-gen2*.png（全11枚）",
+    "removedReason": "シロがティールのパーカー＋フードに獣耳＋黒目、ピコがオレンジ髪＋オレンジのパーカー＋茶色の目。本作のシロ/ピコではない。ASSETS-DATALAD.md によれば『ゆっくり』チャンネルの既存キャストからの流用素材で、本作の設定と1項目も一致しない。オーナー判断で不適切として除去。",
+    "note": "実ファイルの削除は ghosthacker-shiropico-assets 側だが、同 repo は 2026-07-29 に GitHub 上で archive され read-only。削除は owner の unarchive 後。それまでは本 policy が『使ってはいけない』の正本。",
+    "previousError": "jump/ART-DIRECTION.md は当初 gen2 を『既存立ち絵をそのまま使う』対象として明記していた。誤り。仕様書の色は最初から emotions/ 系を指していた。"
+  }
 }
