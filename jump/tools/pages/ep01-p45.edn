@@ -1,0 +1,11 @@
+;; 第1話 P.45 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "第1話 P.45"
+ :rows
+ [[{:id "p0", :dir "シロの指が、なにか 小さなものを、ぴん と 弾く"}]
+
+  [{:id "p1", :dir "ピコ、慌てて 両手で 受け止める", :sfx "ぱしっ"}
+   {:id "p2", :dir "ピコの手のひら・大アップ ——ちいさな、ライム色の イヤーカフ。"}]
+
+  [{:id "p3", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["……なんなのだ、" "これ"], :who "ピコ"}}
+   {:id "p4", :dir "シロ、振り返らない", :fuki {:type "oval", :tail "right", :lines ["みならい"], :who "シロ"}}]]}

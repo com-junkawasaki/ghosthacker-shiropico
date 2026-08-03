@@ -1,0 +1,12 @@
+;; 第1話 P.19 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "第1話 P.19"
+ :rows
+ [[{:id "p0", :dir "オーリオ、ピコの目の前にふわりと降りる"}
+   {:id "p1", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["ピコ様"], :who "オーリオ"}}]
+
+  [{:id "p2", :dir "ピコ、顔を上げない", :fuki {:type "oval", :tail "right", :lines ["……オーリオ。" "オレ、わるいこと" " したのだ？"], :who "ピコ"}}
+   {:id "p3", :dir "オーリオ・即答", :fuki {:type "square", :tail "left", :lines ["はい"], :who "オーリオ"}}]
+
+  [{:id "p4", :dir "ピコ、びくっと肩がはねる"}
+   {:id "p5", :dir "オーリオ、まっすぐ", :fuki {:type "square", :tail "left", :lines ["ですが。——それ" "が分かった今のあ" "なたは、さっきの" "あなたではありま" "せん"], :who "オーリオ"}}]]}

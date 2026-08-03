@@ -1,0 +1,12 @@
+;; 第1話 P.26 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :araki :page "第1話 P.26"
+ :rows
+ [[{:id "p0", :dir "黒の中に、無数の糸の音がひしめいている 細い線が視覚化されて画面を埋める。", :sfx "ジジジ ザザ ジジ ザ ジ ザザザ"}
+   {:id "p1", :dir "ピコ・M", :fuki {:type "square", :tail "top", :lines ["うるさい。" "音が、多すぎるのだ"], :who "M"}}]
+
+  [{:id "p2", :dir "シロの声だけ", :fuki {:type "oval", :tail "right", :lines ["うるさいの、" "ぜんぶ消して"], :who "シロ"}}
+   {:id "p3", :dir "ピコ・M 黒の中で顔が歪む。", :fuki {:type "square", :tail "top", :lines ["できないのだ。" "……たのしいのが" "、いっぱいあって"], :who "M"}}]
+
+  [{:id "p4", :dir "ピコ、目を開けそうになる まぶたが震える。"}
+   {:id "p5", :dir "そのとき ぽつ、と、やわらかい羽音がひとつ。", :sfx "ぱさ"}]]}

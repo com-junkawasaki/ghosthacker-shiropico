@@ -1,0 +1,14 @@
+;; 第1話 P.46 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "第1話 P.46"
+ :rows
+ [[{:id "p0", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["みならい？"], :who "ピコ"}}]
+
+  [{:id "p1", :dir "プロック、指を1本立てる", :fuki {:type "oval", :tail "left", :lines ["その色が、" "あんさんの" "立場ですねん"], :who "プロック"}}
+   {:id "p2", :dir "イメージ・4つのイヤーカフが、闇の中にずらりと浮かぶ", :fuki [{:type "square", :tail "right", :lines ["白は、守る人。" "緑は、これから決" "める人"], :who "オーリオ"} {:type "oval", :tail "left", :lines ["で、黒が——さっ" "きのネズミの、" "お仲間ですわ"], :who "プロック"}]}]
+
+  [{:id "p3", :dir "ピコ", :fuki [{:type "oval", :tail "left", :lines ["その4つ、" "ぼうしって" "呼ぶんだろ?" "なんでなのだ。" "だれも かぶって" "ないのだ"], :who "ピコ"} {:type "oval", :tail "right", :lines ["むかしの" "呼び方ですわ。" "……かぶってた人" "らが、おったんで" "す。むかし"], :who "プロック"}]}
+   {:id "p4", :dir "ピコ、左耳に つける 不器用に手間取ってから、かちり。"}]
+
+  [{:id "p5", :dir "ピコ、耳に手をやったまま 見上げる チャームが、チャリ、と鳴る。", :fuki {:type "oval", :tail "left", :lines ["なぁ師匠。" "これ、いつか白く" "なるのだ？"], :who "ピコ"}}
+   {:id "p6", :dir "シロ、背中のまま。声だけ、ほんの少しやわらかい", :fuki {:type "oval", :tail "right", :lines ["……なるかもね"], :who "シロ"}}]]}

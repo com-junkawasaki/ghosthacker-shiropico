@@ -1,0 +1,12 @@
+;; 第1話 P.30 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "第1話 P.30"
+ :rows
+ [[{:id "p0", :dir "シロ、ピコの隣", :fuki {:type "oval", :tail "right", :lines ["ピコ"], :who "シロ"}}
+   {:id "p1", :dir "シロ", :fuki {:type "oval", :tail "left", :lines ["あんたは、" "ぜんぶに届かせよ" "うとした"], :who "シロ"}}]
+
+  [{:id "p2", :dir "シロ", :fuki {:type "oval", :tail "right", :lines ["だから、どこにも" "届かなかった"], :who "シロ"}}
+   {:id "p3", :dir "シロ、1本指", :fuki {:type "oval", :tail "left", :lines ["——1個に、" "届かせな"], :who "シロ"}}]
+
+  [{:id "p4", :dir "ピコの目・大アップ", :fuki {:type "oval", :tail "right", :lines ["……1個"], :who "ピコ"}}
+   {:id "p5", :dir "ピコ、肩のオーリオを見る"}]]}

@@ -1,0 +1,11 @@
+;; 第1話 P.15 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "第1話 P.15"
+ :rows
+ [[{:id "p0", :dir "ピコの部屋の窓 ピコ、外を見て固まっている。", :fuki {:type "oval", :tail "right", :lines ["……なに、" "あれ"], :who "ピコ"}}]
+
+  [{:id "p1", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["ピコ様。あれは——"], :who "オーリオ"}}
+   {:id "p2", :dir "窓の下を、ゾンビ化した自販機が通り過ぎる 目ぐるぐる、Zzz。"}]
+
+  [{:id "p3", :dir "ピコ・アップ 見知った顔だ、という顔。", :fuki {:type "oval", :tail "left", :lines ["じはんきの" "おっちゃん……?"], :who "ピコ"}}
+   {:id "p4", :dir "ピコ、窓から飛び出す"}]]}

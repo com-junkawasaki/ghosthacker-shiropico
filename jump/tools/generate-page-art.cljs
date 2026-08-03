@@ -59,7 +59,18 @@
    ["ラット"   "RAT"
     "slim figure in a dark hooded coat with round mouse ears on the hood, red scarf, face in shadow"]
    ["竹内"     "TAKEUCHI"
-    "big quiet man in his 60s, baker, apron, very large hands, stubble"]])
+    "big quiet man in his 60s, baker, apron, very large hands, stubble"]
+   ;; --- 第1話で増えた面々。**外見を書かずに名前だけ足さないこと**（lock が効かない）。
+   ;; 照合は :dir に出てくる**表記そのもの**なので、和名の欄には md で実際に
+   ;; 使われている語を入れる（「コートの少年」は話者名にしか出ないので「黒いコート」）。
+   ["デーモン" "DEMON"
+    "tiny palm-sized clockwork homunculus made of brass gears, holding a small balance scale, NO horns, not scary"]
+   ["黒いコート" "COATBOY"
+    "teenage boy, black coat worn over the shoulders, the lining showing DEEP PURPLE, long bangs hiding his eyes, only the mouth visible"]
+   ["白い蛇"   "SNAKE"
+    "slender white snake coiled around a person's neck, small calm eyes"]
+   ["自販機"   "VENDING"
+    "ordinary Japanese vending machine, walking on stubby legs, two spiral swirl eyes, fast asleep, undamaged"]])
 
 (defn present
   "そのページに出るキャラの [和名 タグ 説明]。"
@@ -162,10 +173,11 @@
         (println (str "  " id ".jpg  t=" (.toFixed t 2) "s"
                       (when-not (zero? (:code r)) (str "  ← ffmpeg 失敗: " (:err r)))))))))
 
-(defn page-file [n] (path/join PAGES (str "oneshot-p" (if (< n 10) (str "0" n) n) ".edn")))
+(defn page-file [prefix n]
+  (path/join PAGES (str prefix "-p" (if (< n 10) (str "0" n) n) ".edn")))
 
-(defn run-page! [token base out n dry?]
-  (let [f (page-file n)]
+(defn run-page! [token base out prefix n dry?]
+  (let [f (page-file prefix n)]
     (if-not (fs/existsSync f)
       (do (println (str "P." n ": " f " が無い")) (js/Promise.resolve nil))
       (let [d (edn/read-string (fs/readFileSync f "utf8"))
@@ -224,6 +236,10 @@
       out  (opt "--out" "jump/tools/art")
       ns*  (map #(js/parseInt % 10) (str/split (opt "--pages" "6") #","))
       job  (opt "--job" nil)
+      ;; 作品（読切 / 各話）の prefix は works.edn 由来。--work 無指定は読切。
+      wid  (keyword (opt "--work" "oneshot"))
+      pfx  (or (:prefix (get (edn/read-string (fs/readFileSync "jump/tools/works.edn" "utf8")) wid))
+               (throw (js/Error. (str "works.edn に " wid " が無い"))))
       tok  (or (.-MURAKUMO_GENERATION_TOKEN js/process.env) "")]
   (cond
     (and (not dry?) (str/blank? tok))
@@ -232,7 +248,7 @@
     ;; 既に done になっているジョブから回収する（poll のバグで取り逃した分の救済）
     job
     (let [n (first ns*)
-          d (edn/read-string (fs/readFileSync (page-file n) "utf8"))
+          d (edn/read-string (fs/readFileSync (page-file pfx n) "utf8"))
           ids (mapv :id (mapcat identity (:rows d)))
           mp4 (path/join out (str "p" n ".mp4"))]
       (fs/mkdirSync out #js {:recursive true})
@@ -247,6 +263,6 @@
     :else
     ((fn step [xs]
        (when (seq xs)
-         (let [p (run-page! tok base out (first xs) dry?)]
+         (let [p (run-page! tok base out pfx (first xs) dry?)]
            (if p (.then p (fn [_] (step (rest xs)))) (step (rest xs))))))
      ns*)))

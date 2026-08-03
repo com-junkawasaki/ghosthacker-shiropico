@@ -1,0 +1,12 @@
+;; 第1話 P.39 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :araki :page "第1話 P.39"
+ :rows
+ [[{:id "p0", :dir "デーモン、天秤をこてんと傾ける"}
+   {:id "p1", :dir "天秤の皿が、じわりと赤く光る"}]
+
+  [{:id "p2", :dir "まゆの中のラット すう、と目が閉じる。（※眠らされる。壊れない）", :fuki {:type "wavy", :tail "right", :lines ["あ……れ……なに" "を、しに……来た" "、んだった、" "チュウ……"], :who "ラット"}}
+   {:id "p3", :dir "デーモン、ぺこりと一礼して、ふっと消える"}]
+
+  [{:id "p4", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……いまの、" "なに"], :who "ピコ"}}
+   {:id "p5", :dir "シロ、小さく", :fuki {:type "oval", :tail "left", :lines ["……デーモン。" "消しても、" "消えないやつ"], :who "シロ"}}]]}

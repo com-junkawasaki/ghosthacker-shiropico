@@ -1,0 +1,12 @@
+;; 第1話 P.28 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :araki :page "第1話 P.28"
+ :rows
+ [[{:id "p0", :dir "ピコ、かっと目を開く"}
+   {:id "p1", :dir "ピコの視界 何百本の糸が見える。そのぜんぶが、たった1本から枝分かれしている。"}]
+
+  [{:id "p2", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……見えた"], :who "ピコ"}}
+   {:id "p3", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["ぜんぶ、1本から" "のびてるのだ"], :who "ピコ"}}]
+
+  [{:id "p4", :dir "シロ、ほんのすこしだけ口角が上がる"}
+   {:id "p5", :dir "シロ・アップ", :fuki {:type "oval", :tail "left", :lines ["——もう、" "視えてるし"], :who "シロ"}}]]}

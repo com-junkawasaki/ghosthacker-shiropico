@@ -1,0 +1,57 @@
+#!/usr/bin/env nbb
+;; ページ EDN + コマ画像 → 原稿 SVG → PNG（1作品ぶんまとめて）
+;;
+;;   nbb jump/tools/compose-pages.cljs --work ep01 \
+;;     --art /tmp/art-ep01 --out /tmp/pages-ep01 \
+;;     --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src"
+;;
+;; **なぜ別スクリプトにするか。** build-page.cljs は 1 ページ 1 呼び出しの設計で、
+;; 45 ページ回すのは呼び出し側の仕事。これを毎回シェルの for 文で書いていると、
+;; zsh が変数を単語分割しないことに気づかず1件しか回らない、という事故が起きる
+;; （実測、読切のとき）。回す側もコードにして目に見える形で残す。
+;;
+;; build-page.cljs は nbb を子プロセスで起動して呼ぶ（あちらはトップレベルで
+;; 副作用を持つスクリプトであってライブラリではないため、require できない）。
+
+(ns compose-pages
+  (:require ["fs" :as fs] ["path" :as path] ["child_process" :as cp]
+            [clojure.edn :as edn] [clojure.string :as str]))
+
+(def PAGES "jump/tools/pages")
+(def WORKS "jump/tools/works.edn")
+
+(defn sh [cmd args]
+  (let [r (cp/spawnSync cmd (clj->js args) #js {:encoding "utf8"})]
+    {:code (.-status r) :out (str (.-stdout r)) :err (str (.-stderr r))}))
+
+(let [argv (vec (drop-while #(not (str/ends-with? % ".cljs")) (js->clj js/process.argv)))
+      a    (rest argv)
+      opt  (fn [k d] (or (second (drop-while #(not= k %) a)) d))
+      wid  (keyword (opt "--work" "oneshot"))
+      pfx  (or (:prefix (get (edn/read-string (fs/readFileSync WORKS "utf8")) wid))
+               (throw (js/Error. (str "works.edn に " wid " が無い"))))
+      art  (opt "--art" "jump/tools/art")
+      out  (opt "--out" "jump/tools/composed")
+      cp*  (opt "--classpath" (or (.-SHIROPICO_CLASSPATH js/process.env) ""))
+      files (->> (fs/readdirSync PAGES)
+                 (filter #(re-find (re-pattern (str "^" pfx "-p\\d+\\.edn$")) %))
+                 sort vec)]
+  (when (str/blank? cp*)
+    (println "⚠ --classpath が空。kami-genko / kami-mangaka-page / canvaskit の src を渡すこと"))
+  (fs/mkdirSync out #js {:recursive true})
+  (doseq [f files]
+    (let [n    (js/parseInt (second (re-find #"-p(\d+)\.edn$" f)) 10)
+          shots (path/join art (str "p" n))
+          svg  (path/join out (str "p" (if (< n 10) (str "0" n) n) ".svg"))
+          png  (str/replace svg #"\.svg$" ".png")
+          r1   (sh "nbb" ["--classpath" cp* "jump/tools/build-page.cljs"
+                          shots svg (path/join PAGES f)])
+          ;; rsvg-convert は SVG を実寸で焼く。原稿は B4 なので幅で揃える。
+          r2   (when (zero? (:code r1))
+                 (sh "rsvg-convert" ["-w" "1400" "-o" png svg]))]
+      (println (str "P." n
+                    (if (fs/existsSync shots) "" "  ← コマ画像なし")
+                    (if (zero? (:code r1)) "" (str "  ✗ build-page: " (str/trim (:err r1))))
+                    (if (and r2 (not (zero? (:code r2)))) (str "  ✗ rsvg: " (str/trim (:err r2))) "")
+                    (when (fs/existsSync png)
+                      (str "  " (Math/round (/ (.-size (fs/statSync png)) 1024)) " KB")))))))

@@ -1,5 +1,23 @@
 # ページ絵の生成
 
+## 作品の切り替え（読切 / 各話）
+
+ネームの md は作品ごとに別ファイル（読切 `oneshot-45p.md`、連載 `name-01.md`〜
+`name-15.md`）。**どれを通すかは `--work` で選ぶ**。定義は `jump/tools/works.edn`
+——md のパス・ページ EDN の接頭辞・表示名・ページごとの作画スタイルがそこにある。
+
+```bash
+nbb jump/tools/md-to-pages.cljs   --work ep01          # → pages/ep01-pNN.edn
+nbb jump/tools/generate-page-art.cljs --work ep01 --pages 1,2,3
+nbb jump/tools/compose-pages.cljs --work ep01 --art /tmp/art-ep01 --out /tmp/pages-ep01 \
+  --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src"
+```
+
+`--work` 無指定は `:oneshot`（読切）。作品を足すときは **works.edn に 1 エントリ
+足すだけ**で、変換器・生成器は触らない。
+
+## 手順
+
 ```bash
 # 1) 参照画像ホスト（一時インフラ）を立てる ※ 既に立っていれば不要
 cd <scratchpad>/refhost && npx wrangler deploy
@@ -56,3 +74,14 @@ seedance-2.0-fast は **1クリップ $0.22**。1ページ1クリップなので
 プロンプトが 2000 字を超えるときも **lock ブロックは削らない**（削ると再発する）。
 
 キャラを増やしたら `CHAR-LOCK` に 1 行足すこと。**外見を書かずに名前だけ足さない。**
+
+照合は `:dir` に出てくる**表記そのもの**（`str/includes?`）なので、和名の欄には
+md で実際に使われている語を入れる。第1話の「コートの少年」は**話者名にしか出ず
+地の文には「黒いコート」としか書かれていない**ので、和名は `黒いコート` にした。
+セリフだけに出るキャラは lock に載らない——絵に出るなら地の文に書くこと。
+
+## 番号付きコマが無いページ
+
+見開きだけでなく、**扉**（1コマ・地の文しかない）もここに来る。`md-to-pages.cljs`
+は「コマが空なら地の文で大ゴマ1つ」にするので、扉を見開き扱いにしなくても白紙に
+ならない。見開き限定にすると `:rows` が空になって白紙が焼ける（実測: 第1話 P.1）。

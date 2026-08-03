@@ -1,0 +1,12 @@
+;; 第1話 P.8 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "第1話 P.8"
+ :rows
+ [[{:id "p0", :dir "シロ", :fuki {:type "oval", :tail "right", :lines ["……ふさいどきなよ"], :who "シロ"}}
+   {:id "p1", :dir "ピコ 心底わからない顔。", :fuki {:type "oval", :tail "left", :lines ["え、なんで？" "通っただけなのだ" "。なにも壊してな" "いのだ"], :who "ピコ"}}]
+
+  [{:id "p2", :dir "シロ・アップ 口を開く。……が、言葉が出てこない。"}
+   {:id "p3", :dir "間・シロの目だけ 困っている。"}]
+
+  [{:id "p4", :dir "シロ", :fuki {:type "oval", :tail "right", :lines ["……えっと。" "……あの"], :who "シロ"}}
+   {:id "p5", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["？"], :who "ピコ"}}]]}

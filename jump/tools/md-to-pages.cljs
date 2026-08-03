@@ -1,7 +1,9 @@
 #!/usr/bin/env nbb
-;; oneshot-45p.md（正本）→ jump/tools/pages/oneshot-pNN.edn（コマ割りの入力）
+;; ネームの md（正本）→ jump/tools/pages/<prefix>-pNN.edn（コマ割りの入力）
 ;;
-;;   nbb jump/tools/md-to-pages.cljs [--force] [--only 6,7,8]
+;;   nbb jump/tools/md-to-pages.cljs [--work ep01] [--force] [--only 6,7,8]
+;;
+;; 作品（読切 / 各話）の定義は jump/tools/works.edn。--work 無指定は :oneshot。
 ;;
 ;; **なぜ変換器を書くか。** ページ EDN を手書きすると md と二重管理になり、
 ;; 台詞を md で直したのに EDN が古いまま、という drift が必ず起きる（実際に
@@ -15,25 +17,11 @@
 ;; 手で調整した :beat/weight や :beat/intensity を黙って捨てないため。
 
 (ns md-to-pages
-  (:require ["fs" :as fs] ["path" :as path] [clojure.string :as str]))
+  (:require ["fs" :as fs] ["path" :as path]
+            [clojure.edn :as edn] [clojure.string :as str]))
 
-(def MD   "jump/oneshot-45p.md")
-(def OUT  "jump/tools/pages")
-
-;; ---------------------------------------------------------------------------
-;; ページごとの作画スタイル。komawari_styles.edn の 5 作家から選ぶ。
-;; **無指定で全ページ同じにしない** — 45P 通して同じ段組だと читатель が飽きる。
-;; ---------------------------------------------------------------------------
-(def STYLE
-  {1 :urasawa  2 :urasawa  3 :urasawa  4 :urasawa  5 :togashi
-   6 :araki    7 :araki    8 :urasawa  9 :urasawa 10 :araki
-   11 :urasawa 12 :toriyama 13 :araki  15 :araki  16 :inoue
-   17 :urasawa 18 :urasawa 19 :toriyama 20 :togashi 21 :araki
-   22 :togashi 23 :inoue   24 :inoue   25 :inoue  27 :inoue
-   28 :araki   29 :urasawa 30 :inoue   31 :inoue  32 :urasawa
-   33 :toriyama 34 :araki  35 :araki   36 :togashi 37 :togashi
-   38 :inoue   39 :togashi 40 :togashi 41 :araki  43 :urasawa
-   44 :inoue   45 :inoue})
+(def OUT   "jump/tools/pages")
+(def WORKS "jump/tools/works.edn")
 
 ;; ---------------------------------------------------------------------------
 ;; 段の分け方。コマ数だけから決める既定値（手で上書き可）。
@@ -159,8 +147,10 @@
         ;; **見開きには番号付きコマが無い。** 地の文（【…】と説明行）を拾わないと
         ;; 生成プロンプトが「見開き・大ゴマ。md 本文を参照」という無意味な文字列になり、
         ;; 中身と何の関係も無い絵が返る（実測: 洞窟・巨大な卵。P.25 は content filter で落ちた）。
+        ;; ※ で始まる行は担当編集向けの注記（「名前は出さない」等）。絵の指示では
+        ;; ないので落とす。残すと生成プロンプトに編集メモがそのまま乗る（実測: 第1話 P.47）。
         prose (->> body
-                   (remove #(re-find #"^\s*(>|-|◀|---|\||\*\*煽り)" %))
+                   (remove #(re-find #"^\s*(>|-|◀|---|\||※|\*\*煽り)" %))
                    (map strip-md)
                    (remove str/blank?)
                    (map #(-> % (str/replace #"^【" "") (str/replace #"】" " ")))
@@ -169,20 +159,23 @@
      :spread? spread? :panels groups :prose prose}))
 
 ;; ---------------------------------------------------------------------------
-(defn edn-str [{:keys [n n2 spread? panels prose]}]
-  (let [style (get STYLE n :urasawa)
-        label (if n2 (str "oneshot P." n "-" n2) (str "oneshot P." n))
-        rows  (if spread?
-                ;; 見開きは1コマの大ゴマとして出す。分割は人が決める。
-                [[{:id "s1" :beat/weight :large :beat/breakout true
-                   :dir (if (str/blank? prose)
-                          (or (:dir (first panels)) "見開き・大ゴマ")
-                          (subs prose 0 (min (count prose) 420)))}]]
-                (split-rows panels))]
-    (str ";; " label " — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。\n"
+(defn edn-str [{:keys [md label style]} {:keys [n n2 spread? panels prose]}]
+  (let [sty (get style n :urasawa)
+        lbl (if n2 (str label " P." n "-" n2) (str label " P." n))
+        ;; **番号付きコマが無いページは大ゴマ1つとして出す。** 見開きだけでなく
+        ;; 扉（1コマ・地の文しかない）もここに来る。見開き限定にすると扉の :rows が
+        ;; 空になり、白紙が焼ける（実測: 第1話 P.1）。分割は人が決める。
+        big? (or spread? (empty? panels))
+        rows (if big?
+               [[{:id "s1" :beat/weight :large :beat/breakout true
+                  :dir (if (str/blank? prose)
+                         (or (:dir (first panels)) "大ゴマ")
+                         (subs prose 0 (min (count prose) 420)))}]]
+               (split-rows panels))]
+    (str ";; " lbl " — " md " から自動生成（md-to-pages.cljs）。\n"
          ";; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。\n"
-         (when spread? ";; ⚠ 見開きは大ゴマ1つとして出してある。割り方は人が決める。\n")
-         "{:style " style " :page \"" label "\"\n :rows\n [" 
+         (when big? ";; ⚠ 大ゴマ1つとして出してある。割り方は人が決める。\n")
+         "{:style " sty " :page \"" lbl "\"\n :rows\n ["
          (str/join "\n\n  "
            (for [row rows]
              (str "[" (str/join "\n   " (map pr-str row)) "]")))
@@ -193,19 +186,24 @@
       force? (contains? opts "--force")
       only  (when-let [o (second (drop-while #(not= "--only" %) (rest argv)))]
               (set (map #(js/parseInt % 10) (str/split o #","))))
-      md    (fs/readFileSync MD "utf8")
+      wid   (keyword (or (second (drop-while #(not= "--work" %) (rest argv))) "oneshot"))
+      works (edn/read-string (fs/readFileSync WORKS "utf8"))
+      work  (or (get works wid)
+                (throw (js/Error. (str "works.edn に " wid " が無い。ある: "
+                                       (str/join ", " (map name (keys works)))))))
+      md    (fs/readFileSync (:md work) "utf8")
       blocks (->> (str/split md #"(?m)^## ")
                   (filter #(re-find #"^P\.\d" %))
                   (map #(str "## " %)))
       pages (map parse-page blocks)]
   (doseq [{:keys [n panels] :as p} pages
-          :let [f (path/join OUT (str "oneshot-p" (if (< n 10) (str "0" n) n) ".edn"))
+          :let [f (path/join OUT (str (:prefix work) "-p" (if (< n 10) (str "0" n) n) ".edn"))
                 exists? (fs/existsSync f)
                 gen? (and exists? (str/includes? (fs/readFileSync f "utf8") "自動生成"))
                 skip? (or (and only (not (only n)))
                           (and exists? (not gen?) (not force?)))]]
     (if skip?
       (println (str "skip  P." n (when exists? "  ← 手で作り込み済み")))
-      (do (fs/writeFileSync f (edn-str p))
+      (do (fs/writeFileSync f (edn-str work p))
           (println (str "write P." n "  コマ " (count panels))))))
-  (println (str "\nページ " (count pages) " 件")))
+  (println (str "\n" (name wid) ": ページ " (count pages) " 件")))
