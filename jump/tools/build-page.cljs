@@ -110,6 +110,12 @@
                 " href='data:image/jpeg;base64," image-b64 "'/>")
     "")))
 
+(def vertical-rotate
+  "縦組みで 90° 回さないといけない字。
+   横組みのまま出すと、長音符が「オ ー リオ」のように横に寝る（実際にそうなった）。
+   括弧・ダッシュ・三点リーダも同じ扱い。"
+  (set "ー〜～－‐—–…‥「」『』（）()【】〔〕〈〉《》＝=｜|─―"))
+
 (defn fuki-text-svg
   "吹き出しの中身。genko は glyph を描かない（text node は 8x8 のマーカ矩形だけ）ので
    ここが host の責任。writing-mode='tb' は rsvg 等で位置が揃わなかったため、
@@ -126,11 +132,15 @@
                    n (count line)
                    ytop (- cy (* (/ (dec n) 2.0) fs))]
              [j ch] (map-indexed vector (seq line))]
-         (str "<text x='" (.toFixed x 1) "' y='" (.toFixed (+ ytop (* j fs)) 1)
-              "' font-size='" (.toFixed fs 1) "' text-anchor='middle'"
-              " dominant-baseline='central'"
-              " font-family=\"'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif\""
-              " fill='#141414'>" (str/replace (str ch) #"[<>&]" "") "</text>"))))))
+         (let [cy* (+ ytop (* j fs))
+               rot? (contains? vertical-rotate ch)]
+           (str "<text x='" (.toFixed x 1) "' y='" (.toFixed cy* 1)
+                "' font-size='" (.toFixed fs 1) "' text-anchor='middle'"
+                " dominant-baseline='central'"
+                (when rot?
+                  (str " transform='rotate(90 " (.toFixed x 1) " " (.toFixed cy* 1) ")'"))
+                " font-family=\"'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif\""
+                " fill='#141414'>" (str/replace (str ch) #"[<>&]" "") "</text>")))))))
 
 (defn youshi-svg []
   (let [p g/youshi-paper-bounds t g/youshi-trim-bounds
