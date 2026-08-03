@@ -1,0 +1,75 @@
+;; ジャンプ版キャラクターアート生成プロンプト集
+;;
+;; 実行: jump/tools/generate-character-art.cljs（README は同ディレクトリ）
+;; 設定の正本は jump/character-design-spec.json ／ 作画規約は jump/ART-DIRECTION.md
+;;
+;; 実測で分かったこと（2026-08-03、murakumo generation で 9 枚生成した結果）:
+;;
+;;   1. **色は 1 キャラ 1 主張まで。** 「黒いコート＋紫の裏地」を最初の版で
+;;      "black long coat ... purple lining" と書いたら、コート全体が白くなり
+;;      裾だけ紫になった。BLACK を大文字で強調し、lining を独立した節に分けると通る。
+;;   2. **小さい装飾（イヤーカフ）は絶対に出ない。** 1024px では潰れる。
+;;      生成では省き、**塗り足しのディテールとして扱う**。
+;;   3. **"sinister" / "unsettling" はホラーに振れる**（7+ 逸脱）。
+;;      Howl の初回はグロテスクな顔のアップが出た。"calm and stylish not scary" で戻る。
+;;   4. **"character design sheet" と書くと複数ビュー＋表情差分の並びになる。**
+;;      設定資料としてそのまま使えるので、キャラ表は常にこれを付ける。
+;;   5. **透かし（Weibo 風の署名）が混入することがある。** "no text no watermark
+;;      no signature" を入れても完全には消えない。**採用前に必ず目視し、
+;;      混入していたら再生成する**（公開物にそのまま使わない）。
+;;   6. 年齢は明示しないと上振れする（Pup は「14歳」と書いても 16-17 相当で出る）。
+;;
+;; :status — :approved = 実際に生成して採用した版／:needs-work = 要再生成
+
+{:style-notes
+ {:sheet   "shonen manga character design sheet, plain white background, clean anime linework, cel shading"
+  :safety  "comical, friendly, for children, not scary, no blood, no horror"
+  :cleanup "no text no watermark no signature"}
+
+ :prompts
+ [{:id      :pup
+   :name    "Pup（パープルハット）"
+   :status  :approved
+   :note    "黒コート＋紫の裏地が正しく出た版。年齢は 16-17 相当で出るが 兄貴分としては許容。蛇は肩に乗らず別カットに出やすい"
+   :prompt  "14 year old boy, cool teenage hacker, dark charcoal almost black short hair with long bangs falling over one eye, light violet eyes, wearing a BLACK long coat draped over both shoulders like a cape with empty sleeves, the inside lining of the coat is bright violet, plain black t-shirt and dark cargo pants underneath, a small slender white snake resting across his shoulders, confident smirk, shonen manga character design sheet, front and back view, plain white background, clean anime linework, cel shading"}
+
+  {:id      :howl
+   :name    "ハウル（四牙）"
+   :status  :approved
+   :note    "高い立ち襟の黒ロングコート・後ろで結んだ銀髪・黄の目・喉のチョーカーが全部出た版。menace は弱めだが 7+ 側に倒してある。'sinister/unsettling' を入れるとホラー顔になるので入れない"
+   :prompt  "young adult man wearing a long BLACK coat reaching his ankles, buttoned closed, with a very high stand up collar that covers his jaw, black gloves, silver white long hair tied back in a low ponytail, yellow eyes with dark circles beneath, a plain black choker visible at his throat, calm thin smile, shonen manga villain character design sheet, front full body view, plain white background, clean anime linework, cel shading"}
+
+  {:id      :olio
+   :name    "オーリオ（ピコのエージェント・白鳩）"
+   :status  :approved
+   :note    "まんまる＋ライムのくちばしと足＋半目の無表情。表情差分シートで出る。狙いどおり"
+   :prompt  "a very round chubby cute white dove with small bright lime green feet and beak, unusually intelligent deadpan half lidded eyes, sitting still, tiny wings, mascot character design sheet with several expressions, plain white background, clean anime linework, cel shading, kawaii"}
+
+  {:id      :proc
+   :name    "プロック（シロのエージェント・羊）"
+   :status  :approved
+   :note    "雲形のもこもこ。目はティール指定だが青で出る（許容）。抱き枕サイズ感も出ている"
+   :prompt  "an extremely fluffy round white sheep mascot, soft mochi like cloud shaped wool, tiny hooves, calm gentle teal blue eyes, hug pillow sized, sitting, mascot character design sheet with several expressions, plain white background, clean anime linework, cel shading, kawaii"}
+
+  {:id      :stealth
+   :name    "ステルス（Pup のエージェント・白蛇）"
+   :status  :approved
+   :note    "初回は顔だけ＋透かし混入だった。'full body ... entire body visible coiled in a spiral' と 'several full body poses' を明示して解決"
+   :prompt  "full body of a long slender cute white snake mascot, entire body visible coiled in a spiral, round red eyes, small purple forked tongue, smooth simple scales, cheerful chatty expression, several full body poses on one sheet, plain white background, clean anime linework, cel shading, kawaii, friendly, no text no watermark no signature"}
+
+  {:id      :kuro
+   :name    "クロ（Wolves の頭）"
+   :status  :approved
+   :note    "第15話 P.19 のラストコマにそのまま使える。顔・輪郭が解けないのが正しい"
+   :prompt  "a mysterious human shaped silhouette made entirely of black and white digital particle noise, no face, no eyes, no visible outline, neat straight slim suit like proportions, standing on clouds, ominous but not gory, shonen manga concept art, plain pale background, high contrast, monochrome"}
+
+  {:id      :wolves
+   :name    "Wolves 雑魚（ラット／モグラ／フライ）"
+   :status  :needs-work
+   :note    "パック感とフードは出るが ①透かしが入る ②3体の描き分け（モグラのゴーグル・フライの羽）が弱く全部ネズミ寄りになる ③指定していない赤マフラーが出る（制服として採用してもよいが未決）。要再生成"
+   :prompt  "three separate adult cartoon henchmen villains standing side by side in a row with clear space between them, each wearing a dark charcoal hoodie, LEFT one has round mouse ears and two big front teeth and a thin tail, MIDDLE one is covered in brown dirt wearing large aviator goggles with huge shovel like hands, RIGHT one is skinny with two translucent insect wings on his back holding a small tape recorder, sneaky mischievous grins, full body, shonen manga villain group design sheet, plain white background, clean anime linework, cel shading, comical, no text no watermark"}]
+
+ ;; シロとピコは生成しない。既存立ち絵をそのまま使う（ART-DIRECTION §0 / §12）
+ :do-not-generate
+ [{:id :shiro :reason "既存立ち絵を使う: ghosthacker-shiropico-assets/character-refs/kamishibai-shiro-gen2.png ＋表情4種。追加は右耳のイヤーカフのみ（塗り足し）"}
+  {:id :pico  :reason "既存立ち絵を使う: ghosthacker-shiropico-assets/character-refs/kamishibai-pico-gen2.png ＋表情4種。追加は左耳のイヤーカフのみ（塗り足し）"}]}
