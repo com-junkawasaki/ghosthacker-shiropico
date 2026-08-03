@@ -1,0 +1,29 @@
+;; 読書体験のダイナミクス係数。
+;;
+;; **これは観測ではなく仮説（:design-value）。** 実測（コマ数・字数・無音率など）を
+;; 緊張／疲労／勢いに変換する率で、正解は分かっていない。
+;; **人間が回して直す面はここ。** score-komawari.cljs --coeffs で差し替える。
+;;
+;; 直し方: 1つだけ動かして軌跡がどう変わるか見る。3つのスコア
+;; （pull / swing / fatigue-peak）が同時に良くなる係数の組が「良い dynamics」。
+{:grade :design-value
+
+ ;; 緊張 tension ── 何が緊張を作り、何が解くか
+ :hook->tension      0.55  ; めくりコマの重み
+ :intensity->tension 0.40  ; beat の :beat/intensity
+ :sfx->tension       0.10  ; SFX 密度
+ :talk->release      0.35  ; セリフが多いほど解ける（説明は緊張を下げる、という仮説）
+ :tension-decay      0.22
+
+ ;; 疲労 fatigue ── 情報密度で溜まり、無音で抜ける
+ :density->fatigue   0.45
+ :silence->recovery  0.50
+ :fatigue-decay      0.18
+
+ ;; 勢い momentum ── 緊張が押し、疲労が引く
+ :tension->momentum  0.70
+ :fatigue-drag       0.60
+ :momentum-decay     0.25
+
+ ;; メリハリ（コマ面積のばらつき）は緊張の増幅器
+ :variance-gain      0.30}

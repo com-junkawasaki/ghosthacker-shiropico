@@ -1,13 +1,14 @@
-;; 読切 P.2（左・5コマ）。1段目=全幅、2-3段目=右→左。
-;; SFX は動画側に描き込ませる（:sfx はその指示の記録。genko は描かない）。
-[{:shot "b1" :rect [0 0 1 0.34]
-  :dir "朝の商店街。シャッターが次々に上がっていく" :sfx "ガラガラ" :fuki nil}
- {:shot "b2" :rect [0.5 0.34 1 0.67]
-  :dir "一軒のパン屋。看板『たけうちベーカリー』。奥で窯に火が入る" :sfx "ゴォ" :fuki nil}
- {:shot "b3" :rect [0 0.34 0.5 0.67]
-  :dir "ピコが猛ダッシュで突っ込んでくる" :sfx "ダダダッ" :fuki nil}
- {:shot "b4" :rect [0.5 0.67 1 1]
-  :dir "店主・竹内さん（60代・無口・でかい手）が、なにも言わずに紙袋を差し出す" :sfx nil :fuki nil}
- {:shot "b5" :rect [0 0.67 0.5 1]
-  :dir "ピコ、ひったくるように受け取って走り去る" :sfx nil
-  :fuki {:type "oval" :tail "left" :lines ["ありがとなのだ〜！"]}}]
+;; 読切 P.2 — beats + style。幾何は書かない。
+;; コマ割りは kami.mangaka.komawari/propose-page-layout が :style から導く
+;; （φ加重・右綴じ順・tilt・inset はカタログ側の責任。ADR-2607051530/2607172200）。
+;; :rows は「段」、段の中は読み順＝右から左。
+{:style :urasawa            ; 朝の日常 → 定点・水平バンド・tilt なし（浦沢）
+ :page  "oneshot P.2"
+ :rows
+ [[{:id "b1" :beat/weight :large
+    :dir "朝の商店街。シャッターが次々に上がっていく" :sfx "ガラガラ"}]
+  [{:id "b2" :dir "一軒のパン屋。看板『たけうちベーカリー』。奥で窯に火が入る" :sfx "ゴォ"}
+   {:id "b3" :beat/intensity 0.6 :dir "ピコが猛ダッシュで突っ込んでくる" :sfx "ダダダッ"}]
+  [{:id "b4" :dir "店主・竹内さん（60代・無口・でかい手）が、なにも言わずに紙袋を差し出す"}
+   {:id "b5" :dir "ピコ、ひったくるように受け取って走り去る"
+    :fuki {:type "oval" :tail "left" :lines ["ありがとなのだ〜！"]}}]]}

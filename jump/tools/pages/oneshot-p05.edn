@@ -1,14 +1,12 @@
-;; 読切 P.5（右・5コマ）。2-2-1。最後の全幅コマが テーマ文①（軽口として置く）。
-[{:shot "e1" :rect [0.5 0 1 0.33]
-  :dir "ピコ、きょとんとした顔" :sfx nil
-  :fuki {:type "oval" :tail "bottom" :lines ["はんざい？" "なにそれ、" "おいしいのだ？"]}}
- {:shot "e2" :rect [0 0 0.5 0.33]
-  :dir "駅の電光掲示板のアップ。『つぎの でんしゃ ： こない』と表示されている" :sfx nil :fuki nil}
- {:shot "e3" :rect [0.5 0.33 1 0.66]
-  :dir "駅のホームがざわつく。駅員が走っていく" :sfx "ざわ ざわ" :fuki nil}
- {:shot "e4" :rect [0 0.33 0.5 0.66]
-  :dir "ピコ、ころんと寝転がる" :sfx nil
-  :fuki {:type "oval" :tail "right" :lines ["オーリオは" "かたいのだ〜"]}}
- {:shot "e5" :rect [0 0.66 1 1]
-  :dir "ピコが空を見上げて寝転がっている引きの絵。朝の空。なんでもないことのように言う" :sfx nil
-  :fuki {:type "oval" :tail "top" :lines ["オレ、なんにも" "こわしてないのだ"]}}]
+;; 最終コマ（全幅）がテーマ文①。ここは静かに置く。
+{:style :urasawa :page "oneshot P.5"
+ :rows
+ [[{:id "e1" :dir "ピコ、きょとんとした顔"
+    :fuki {:type "oval" :tail "bottom" :lines ["はんざい？" "なにそれ、" "おいしいのだ？"]}}
+   {:id "e2" :dir "駅の電光掲示板のアップ。『つぎの でんしゃ ： こない』"}]
+  [{:id "e3" :dir "駅のホームがざわつく。駅員が走っていく" :sfx "ざわ ざわ"}
+   {:id "e4" :dir "ピコ、ころんと寝転がる"
+    :fuki {:type "oval" :tail "right" :lines ["オーリオは" "かたいのだ〜"]}}]
+  [{:id "e5" :beat/weight :large
+    :dir "ピコが空を見上げて寝転がっている引きの絵。朝の空"
+    :fuki {:type "oval" :tail "top" :lines ["オレ、なんにも" "こわしてないのだ"]}}]]}
