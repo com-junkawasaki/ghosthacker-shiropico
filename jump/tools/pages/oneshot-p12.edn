@@ -1,0 +1,10 @@
+[{:shot "k1" :dir "路上。眠った機械の行進のまんなかに、ちいさなピコ。" :fuki nil}
+ {:shot "k2" :dir "ピコ、目がキラキラ"
+  :fuki {:type "jagged" :tail "bottom"
+         :lines ["うっわ、街ぜんぶ" "お寝坊なのだ！" "ウケる！"]}}
+ {:shot "k3" :dir "オーリオ"
+  :fuki {:type "square" :tail "left"
+         :lines ["笑い事では" "ありません"]}}
+ {:shot "k4" :dir "頭上から、声"
+  :fuki {:type "wavy" :tail "top"
+         :lines ["めっけたチュウ"]}}]
