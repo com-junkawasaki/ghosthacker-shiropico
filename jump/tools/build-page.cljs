@@ -27,11 +27,29 @@
 
 ;; ---- ネーム P.12（4コマ）------------------------------------------------
 ;; 正本: jump/oneshot-45p.md の P.12。セリフはそこからそのまま持ってくる。
+(defn spread?
+  "見開きか。page ラベルが \"oneshot P.13-14\" のように範囲を持つか、:spread? が真。
+   **見開きは紙 2 枚。** 1 枚の B4 に組むと、45P と言いながら実際は 42 枚しか無い
+   ことになる（実測: P.13-14 と P.6 の viewBox が同一だった）。"
+  [page] (boolean (or (:spread? page)
+                      (re-find #"P\.\d+-\d+" (str (:page page))))))
+
+(defn widen
+  "右綴じの見開きは、**奇数ページが右／偶数ページが左**。単ページの矩形を
+   左へ 1 ページぶん伸ばして、2 ページを跨ぐ 1 枚の面にする。"
+  [{:keys [x1 y1 x2 y2]}] {:x1 (- x1 (- x2 x1)) :y1 y1 :x2 x2 :y2 y2})
+
+(defn bounds
+  "そのページの [paper trim frame safe]。見開きなら全部 2 ページ幅。"
+  [sp?]
+  (let [b [g/youshi-paper-bounds g/youshi-trim-bounds g/youshi-frame-bounds g/youshi-safe-bounds]]
+    (if sp? (mapv widen b) b)))
+
 (defn panel->rect
   "komawari の :panel/rect [x y w h]（基本枠内の正規化）→ world 矩形。
    gutter は komawari 側が既に引いているので、ここでは足さない。"
-  [[nx ny nw nh]]
-  (let [{:keys [x1 y1 x2 y2]} g/youshi-frame-bounds
+  [[nx ny nw nh] frame]
+  (let [{:keys [x1 y1 x2 y2]} frame
         w (- x2 x1) h (- y2 y1)]
     {:x1 (+ x1 (* nx w)) :y1 (+ y1 (* ny h))
      :x2 (+ x1 (* (+ nx nw) w)) :y2 (+ y1 (* (+ ny nh) h))}))
@@ -44,13 +62,14 @@
    （φ加重・右綴じ順・tilt・inset・character-bleed はスタイルカタログの責任。
    komawari_styles.edn / ADR-2607051530 / ADR-2607172200）。
    ここが genko と komawari の分担線: komawari が「どこに置くか」、genko が「実寸で何を描くか」。"
-  [shots {:keys [style rows locale]}]
-  (let [panels (kw/propose-page-layout rows {:style (or style kw/default-style)})
+  [shots {:keys [style rows locale] :as page}]
+  (let [[_ _ frame _] (bounds (spread? page))
+        panels (kw/propose-page-layout rows {:style (or style kw/default-style)})
         nodes
         (vec
          (mapcat
           (fn [pn]
-            (let [r   (panel->rect (:panel/rect pn))
+            (let [r   (panel->rect (:panel/rect pn) frame)
                   b64 (get shots (or (:shot pn) (:id pn)))
                   poly (:panel/polygon pn)
                   img (when b64
@@ -108,7 +127,7 @@
                           (map vector (range) boxes fs*))))]
               (remove nil? (concat [img pan] fks))))
           panels))]
-    {:pages [{:youshi {:type "b4manga"} :nodes nodes}]}))
+    {:pages [{:youshi {:type "b4manga"} :spread? (spread? page) :nodes nodes}]}))
 
 ;; ---- mangaka: draw op → SVG ---------------------------------------------
 (defn rgba->css [c]
@@ -158,9 +177,8 @@
               " font-family=\"'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif\""
               " fill='#141414'>" (str/replace (str ch) #"[<>&]" "") "</text>"))))))
 
-(defn youshi-svg []
-  (let [p g/youshi-paper-bounds t g/youshi-trim-bounds
-        f g/youshi-frame-bounds s g/youshi-safe-bounds
+(defn youshi-svg [sp?]
+  (let [[p t f s] (bounds sp?)
         guide "rgba(140,199,235,0.85)"]
     (str "<rect x='" (:x1 p) "' y='" (:y1 p) "' width='" (- (:x2 p) (:x1 p))
          "' height='" (- (:y2 p) (:y1 p)) "' fill='#fbfbf9'/>"
@@ -170,7 +188,14 @@
                       "' width='" (.toFixed (- (:x2 r) (:x1 r)) 1)
                       "' height='" (.toFixed (- (:y2 r) (:y1 r)) 1)
                       "' fill='none' stroke='" guide "' stroke-width='" w "'/>"))
-               [[t 1.2] [f 1.0] [s 0.8]])))))
+               [[t 1.2] [f 1.0] [s 0.8]]))
+         ;; ノド（2 枚の紙の境目）。ここを跨いで絵が続くのが見開きの本質なので、
+         ;; 断ち切りではなく**薄い当たり**として引く。
+         (when sp?
+           (let [mx (/ (+ (:x1 p) (:x2 p)) 2.0)]
+             (str "<line x1='" (.toFixed mx 1) "' y1='" (:y1 p)
+                  "' x2='" (.toFixed mx 1) "' y2='" (:y2 p)
+                  "' stroke='" guide "' stroke-width='0.8' stroke-dasharray='6 5'/>"))))))
 
 (defn dir-text-svg
   "絵がまだ無いコマに、ト書きと SFX 指示を薄く置く。
@@ -203,7 +228,8 @@
 (defn render [doc]
   (let [page (first (:pages doc))
         nodes (:nodes page)
-        p g/youshi-paper-bounds
+        sp?  (:spread? page)
+        [p _ _ _] (bounds sp?)
         body (str/join
               (map (fn [n]
                      (let [ds (gr/node->draws n)
@@ -219,7 +245,7 @@
          "viewBox='" (.toFixed (:x1 p) 1) " " (.toFixed (:y1 p) 1) " "
          (.toFixed (- (:x2 p) (:x1 p)) 1) " " (.toFixed (- (:y2 p) (:y1 p)) 1) "' "
          "width='" (.toFixed (* 2 (- (:x2 p) (:x1 p))) 0) "'>"
-         (youshi-svg) body "</svg>")))
+         (youshi-svg sp?) body "</svg>")))
 
 ;; ---- main ----------------------------------------------------------------
 (let [;; nbb の process.argv は [node nbb <script> ...] だが要素数が環境で変わる。
@@ -244,8 +270,9 @@
         n (count (:nodes (first (:pages doc))))
         svg (render doc)]
     (println (str "komawari: style " (:style page) " / 段 " (count (:rows page)) " / コマ " (count beats)))
-    (println (str "genko: node " n " 個（B4 b4manga・内枠 "
-                  (int (- (:x2 g/youshi-safe-bounds) (:x1 g/youshi-safe-bounds))) "×"
+    (println (str "genko: node " n " 個（B4 b4manga"
+                  (if (spread? page) "×2（見開き）・内枠 " "・内枠 ")
+                  (int (let [[_ _ _ sb] (bounds (spread? page))] (- (:x2 sb) (:x1 sb)))) "×"
                   (int (- (:y2 g/youshi-safe-bounds) (:y1 g/youshi-safe-bounds))) "px）"))
     (fs/writeFileSync out svg)
     (println (str "mangaka: " out " (" (Math/round (/ (.-length svg) 1024)) " KB)"))))
