@@ -20,4 +20,10 @@
     :fuki {:type "oval" :tail "left" :lines ["でも、" "タダで 出てくるのだ"]}}]
   [{:id "d6" :beat/weight :large
     :dir "ピコの横顔。なんでもないことのように言う。オーリオはなにも言えない"
-    :fuki {:type "oval" :tail "bottom" :lines ["パン屋の おじさんと" "おなじなのだ"]}}]]}
+    :fuki {:type "oval" :tail "bottom" :lines ["パン屋の おじさんと" "おなじなのだ"]}}]
+  ;; 拡散。**優しさの延長として**起こる——ここが罪の決定的な段。
+  ;; 絵は v7 生成分の後半2コマ（寝転がって端末／座って端末）を吹き出し差し替えで流用。
+  [{:id "d7" :beat/weight :large :beat/intensity 0.7
+    :dir "ピコ、いいことを思いついた顔で端末を叩く。画面ではリンクが枝分かれして増えていく"
+    :sfx "タタタタタ"
+    :fuki {:type "jagged" :tail "left" :lines ["じゃあ、" "みんなにも" "分けてやるのだ！"]}}]]}
