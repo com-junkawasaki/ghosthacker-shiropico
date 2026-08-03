@@ -35,6 +35,50 @@
    ["プロック" ["proc"]]
    ["ラット"   ["rat"]]])
 
+;; **キャラ入れ替わりの再発防止（2026-08-03）。**
+;; 参照画像を渡すだけでは、ショット間で衣装・髪色・持ち物が入れ替わる。実測で
+;; シロとピコが同じ顔になったり、帽子がピコに移ったりした。原因は、プロンプトが
+;; キャラを**名前でしか呼んでいない**こと——モデルは「シロ」が何なのかを参照画像から
+;; 推測するしかなく、ショットが進むと推測がずれる。
+;;
+;; 対策は2つ同時に打つ:
+;;   ① ページ冒頭に **character lock ブロック**を置き、出るキャラの外見を明文化する
+;;   ② 各ショットの本文中で、キャラ名の直後に **英字タグ**（SHIRO 等）を差し込み、
+;;      lock ブロックの記述と結びつける
+;; どちらか片方だけでは効かない（①だけだとショット本文と結びつかず、②だけだと
+;; タグの中身が定義されない）。
+(def CHAR-LOCK
+  [["シロ"     "SHIRO"
+    "small girl, WHITE baseball cap, off-white hoodie with teal-green trim, short silver-white hair, cyan eyes, sleepy half-lidded look"]
+   ["ピコ"     "PICO"
+    "small kid, NO hat, pale grey-green hair with mint highlights and one curled ahoge, LIME GREEN hoodie, very large round eyes, grinning"]
+   ["オーリオ" "OLIO"
+    "very round chubby white dove, lime-green beak and feet, deadpan half-lidded eyes"]
+   ["プロック" "PROC"
+    "extremely fluffy round white sheep, cloud-shaped wool, tiny hooves, calm blue eyes"]
+   ["ラット"   "RAT"
+    "slim figure in a dark hooded coat with round mouse ears on the hood, red scarf, face in shadow"]
+   ["竹内"     "TAKEUCHI"
+    "big quiet man in his 60s, baker, apron, very large hands, stubble"]])
+
+(defn present
+  "そのページに出るキャラの [和名 タグ 説明]。"
+  [beats]
+  (let [txt (str/join " " (map :dir beats))]
+    (filterv (fn [[n _ _]] (str/includes? txt n)) CHAR-LOCK)))
+
+(defn lock-block [chars]
+  (when (seq chars)
+    (str "Character lock — keep each design IDENTICAL in every shot; never swap "
+         "hair colour, clothes or accessories between characters:\n"
+         (str/join "\n" (map (fn [[_ tag desc]] (str "- " tag ": " desc ".")) chars))
+         "\n")))
+
+(defn tag-names
+  "本文中のキャラ名に英字タグを差し込む。lock ブロックと結びつけるため。"
+  [chars t]
+  (reduce (fn [acc [n tag _]] (str/replace acc n (str n "(" tag ")"))) t chars))
+
 (def STYLE
   (str "Japanese shonen manga panel art, black and white, clean ink linework, "
        "screentone shading, no text, no speech bubbles, no watermark, no signature, "
@@ -52,16 +96,20 @@
          (mapv #(str base "/" % ".jpg")))))
 
 (defn prompt-for [page beats]
-  (let [shots (map-indexed
-               (fn [i b] (str "Shot " (inc i) ": " (str/replace (:dir b) #"\s+" " ")))
+  (let [chars (present beats)
+        shots (map-indexed
+               (fn [i b] (str "Shot " (inc i) ": "
+                              (tag-names chars (str/replace (:dir b) #"\s+" " "))))
                beats)
-        head (str STYLE "\n" (count beats)
-                  " consecutive shots, one manga panel each, same characters throughout.\n")
+        head (str STYLE "\n" (lock-block chars)
+                  (count beats) " consecutive shots, one manga panel each. "
+                  "Same characters, same designs throughout.\n")
         p (str head (str/join "\n" shots))]
-    ;; API は 1-2000 字。溢れたら後ろから削るのではなく **ショット数を減らさず各行を詰める**
+    ;; API は 1-2000 字。溢れたら **lock ブロックは削らず**ショット本文を詰める
+    ;; ——lock を落とすと入れ替わりが再発するので、そこは最後まで残す。
     (if (<= (count p) 1990)
       p
-      (let [budget (quot (- 1990 (count head)) (max 1 (count shots)))]
+      (let [budget (max 20 (quot (- 1990 (count head)) (max 1 (count shots))))]
         (str head (str/join "\n" (map #(subs % 0 (min (count %) budget)) shots)))))))
 
 (defn sh [cmd args]
