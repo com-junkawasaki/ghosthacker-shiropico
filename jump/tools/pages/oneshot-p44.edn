@@ -1,0 +1,12 @@
+;; oneshot P.44 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "oneshot P.44"
+ :rows
+ [[{:id "p0", :dir "夜明け。ラットがプロックの もこもこに くるまれて まゆ玉になっている", :fuki {:type "wavy", :tail "right", :lines ["もこもこ" "苦しいチュウ〜"], :who "ラット"}}
+   {:id "p1", :dir "ピコ、パン屋の前に立っている。焼きたての匂い。シャッターは上がったばかり"}]
+
+  [{:id "p2", :dir "ピコ、深く頭を下げる", :fuki {:type "oval", :tail "right", :lines ["たけうちの" "おじさん。" "オレ、いつも" "タダで もらって" "たのだ"], :who "ピコ"}}
+   {:id "p3", :dir "竹内さん、粉だらけの手を止めもせず", :fuki {:type "oval", :tail "left", :lines ["……そうか"], :who "竹内"}}]
+
+  [{:id "p4", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……あれ、" "なんで タダなのだ"], :who "ピコ"}}
+   {:id "p5", :dir "竹内さん、初めて手が止まる。ピコのほうは見ない。窯を見たまま", :fuki {:type "oval", :tail "left", :lines ["……あんたが、" "毎朝 来るからだ"], :who "竹内"}}]]}

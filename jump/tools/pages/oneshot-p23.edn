@@ -1,0 +1,11 @@
+;; oneshot P.23 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "oneshot P.23"
+ :rows
+ [[{:id "p0", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……え?"], :who "ピコ"}}]
+
+  [{:id "p1", :dir "——ふいに、後ろから 竹内さんの低い声", :fuki {:type "oval", :tail "left", :lines ["……坊主"], :who "竹内"}}
+   {:id "p2", :dir "竹内さん、窯にもたれて座り込んでいる", :fuki {:type "oval", :tail "right", :lines ["お前、覚えてねえ" "のか"], :who "竹内"}}]
+
+  [{:id "p3", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["?"], :who "ピコ"}}
+   {:id "p4", :dir "竹内さん", :fuki {:type "oval", :tail "right", :lines ["去年の 夏だ"], :who "竹内"}}]]}

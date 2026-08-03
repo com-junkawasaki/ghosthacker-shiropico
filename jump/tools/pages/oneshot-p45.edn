@@ -1,0 +1,11 @@
+;; oneshot P.45 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "oneshot P.45"
+ :rows
+ [[{:id "p0", :dir "ピコ・大アップ ——タダでは、なかった。", :fuki {:type "square", :tail "top", :lines ["もらってたんじゃ" "、なかったのだ"], :who "M"}}]
+
+  [{:id "p1", :dir "ピコ・M ネットの画面のフラッシュ。観た、遊んだ、広げた。", :fuki {:type "square", :tail "top", :lines ["……オレ、" "なんにも" "返してなかったのだ"], :who "M"}}
+   {:id "p2", :dir "朝。給水塔のてっぺん ピコが、よれよれのノートに鉛筆で大きく「1」と書く。"}]
+
+  [{:id "p3", :dir "ピコ、ノートを閉じて立ち上がる 足元に、買い物袋。ねぎがはみ出している。", :fuki [{:type "oval", :tail "left", :lines ["……行くのだ"], :who "ピコ"} {:type "square", :tail "right", :lines ["はい"], :who "オーリオ"}]}
+   {:id "p4", :dir "ラスト・大ゴマ", :fuki [{:type "square", :tail "right", :lines ["ぜんぶには、" "とどかない。"], :who "M（ピコ）"} {:type "square", :tail "left", :lines ["——でも、" "一個ずつなら。"], :who "M（ピコ）"}]}]]}

@@ -1,0 +1,12 @@
+;; oneshot P.32 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "oneshot P.32"
+ :rows
+ [[{:id "p0", :dir "シロ、ため息をひとつ。指を1本 立てる"}
+   {:id "p1", :dir "店じゅうの糸が、すうっと ほどけて 消えていく", :sfx "すっ"}]
+
+  [{:id "p2", :dir "所要 数秒。シロは手元すら見ていない"}
+   {:id "p3", :dir "ピコ、それを 食い入るように 見ている ——叱られた直後なのに、目が奪われている"}]
+
+  [{:id "p4", :dir "シロ、指を下ろす。もう半目に戻っている", :fuki {:type "oval", :tail "right", :lines ["センス、いいのにね"], :who "シロ"}}
+   {:id "p5", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["……いまの、" "どうやったのだ"], :who "ピコ"}}]]}

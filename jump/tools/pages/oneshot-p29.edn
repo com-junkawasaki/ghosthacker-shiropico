@@ -1,0 +1,12 @@
+;; oneshot P.29 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "oneshot P.29"
+ :rows
+ [[{:id "p0", :dir "シロ、静かに", :fuki {:type "oval", :tail "right", :lines ["作った人が" "いるんだよ"], :who "シロ"}}
+   {:id "p1", :dir "ピコ、振り返れない"}]
+
+  [{:id "p2", :dir "ピコ、それでも 口が動いてしまう  ← テーマ文①の再出", :fuki {:type "oval", :tail "right", :lines ["……でも" "オレ、なんにも" "こわしてないのだ"], :who "ピコ"}}
+   {:id "p3", :dir "間・シロの目だけ"}]
+
+  [{:id "p4", :dir "シロ", :fuki {:type "oval", :tail "right", :lines ["あんた、あれ" "何人に 配った?"], :who "シロ"}}
+   {:id "p5", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["……かぞえてない" "のだ"], :who "ピコ"}}]]}

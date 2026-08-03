@@ -1,0 +1,11 @@
+;; oneshot P.11 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "oneshot P.11"
+ :rows
+ [[{:id "p0", :dir "ピコの部屋の窓 ピコ、外を見て固まっている。"}]
+
+  [{:id "p1", :dir "窓の下を、目をぐるぐるさせた自販機が 歩いて 通り過ぎる"}
+   {:id "p2", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……なに、" "あれ"], :who "ピコ"}}]
+
+  [{:id "p3", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["ピコ様。あれは——"], :who "オーリオ"}}
+   {:id "p4", :dir "ピコ、窓から飛び出す"}]]}

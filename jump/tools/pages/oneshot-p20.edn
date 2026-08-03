@@ -1,0 +1,11 @@
+;; oneshot P.20 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "oneshot P.20"
+ :rows
+ [[{:id "p0", :dir "——起きた窯に、隣の冷蔵庫から 糸が しゅるっと 伸びる"}]
+
+  [{:id "p1", :dir "窯、また眠る", :sfx "すう……"}
+   {:id "p2", :dir "しかも、起こした拍子に 冷蔵庫とレジまで 眠る"}]
+
+  [{:id "p3", :dir "ピコ・パニック", :fuki {:type "oval", :tail "left", :lines ["え、なんで" "増えるのだ!?" "起こすと" "増えるのだ!?"], :who "ピコ"}}
+   {:id "p4", :dir "ピコ、めちゃくちゃに連打。息が上がる", :fuki {:type "jagged", :tail "right", :lines ["もういっかい！" "もういっかい" "なのだ——！"], :who "ピコ"}}]]}

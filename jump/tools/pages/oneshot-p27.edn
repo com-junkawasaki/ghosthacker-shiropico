@@ -1,0 +1,11 @@
+;; oneshot P.27 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "oneshot P.27"
+ :rows
+ [[{:id "p0", :dir "現在。ピコ・大アップ ——顔から、血の気が引いていく。"}]
+
+  [{:id "p1", :dir "ピコ・M", :fuki {:type "square", :tail "top", :lines ["……おぼえてる"], :who "M"}}
+   {:id "p2", :dir "ピコ・M", :fuki {:type "square", :tail "top", :lines ["あの日、たのしか" "ったって、" "おぼえてる"], :who "M"}}]
+
+  [{:id "p3", :dir "ピコ、口が震える", :fuki {:type "oval", :tail "left", :lines ["じゃあ……パン"], :who "ピコ"}}
+   {:id "p4", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["まいあさの、" "あれ……"], :who "ピコ"}}]]}
