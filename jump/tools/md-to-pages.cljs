@@ -155,18 +155,29 @@
                                   acc)))
                             [])
                     (map-indexed parse-panel)
-                    vec)]
+                    vec)
+        ;; **見開きには番号付きコマが無い。** 地の文（【…】と説明行）を拾わないと
+        ;; 生成プロンプトが「見開き・大ゴマ。md 本文を参照」という無意味な文字列になり、
+        ;; 中身と何の関係も無い絵が返る（実測: 洞窟・巨大な卵。P.25 は content filter で落ちた）。
+        prose (->> body
+                   (remove #(re-find #"^\s*(>|-|◀|---|\||\*\*煽り)" %))
+                   (map strip-md)
+                   (remove str/blank?)
+                   (map #(-> % (str/replace #"^【" "") (str/replace #"】" " ")))
+                   (str/join " "))]
     {:n (js/parseInt a 10) :n2 (some-> b (js/parseInt 10))
-     :spread? spread? :panels groups}))
+     :spread? spread? :panels groups :prose prose}))
 
 ;; ---------------------------------------------------------------------------
-(defn edn-str [{:keys [n n2 spread? panels]}]
+(defn edn-str [{:keys [n n2 spread? panels prose]}]
   (let [style (get STYLE n :urasawa)
         label (if n2 (str "oneshot P." n "-" n2) (str "oneshot P." n))
         rows  (if spread?
                 ;; 見開きは1コマの大ゴマとして出す。分割は人が決める。
                 [[{:id "s1" :beat/weight :large :beat/breakout true
-                   :dir (or (:dir (first panels)) "見開き・大ゴマ。md 本文を参照")}]]
+                   :dir (if (str/blank? prose)
+                          (or (:dir (first panels)) "見開き・大ゴマ")
+                          (subs prose 0 (min (count prose) 420)))}]]
                 (split-rows panels))]
     (str ";; " label " — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。\n"
          ";; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。\n"

@@ -3,4 +3,4 @@
 ;; ⚠ 見開きは大ゴマ1つとして出してある。割り方は人が決める。
 {:style :inoue :page "oneshot P.25-26"
  :rows
- [[{:id "s1", :beat/weight :large, :beat/breakout true, :dir "見開き・大ゴマ。md 本文を参照"}]]}
+ [[{:id "s1", :beat/weight :large, :beat/breakout true, :dir "ぶち抜き・夏の屋根の上  小さいピコが、腹をかかえて笑い転げている。 遠くの街の灯りと看板が、ぽつ、ぽつ、と おかしくなっていくのが見える。 右ページ下段・小さく  笑ったまま、ピコが眠ってしまっている。——しあわせそうな寝顔。"}]]}
