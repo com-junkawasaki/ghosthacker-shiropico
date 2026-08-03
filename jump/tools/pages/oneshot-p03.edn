@@ -1,0 +1,13 @@
+;; 読切 P.3（右・5コマ）。2-2-1。最後のコマが「オーリオだけが気づいている」引き。
+[{:shot "c1" :rect [0.5 0 1 0.33]
+  :dir "ピコ、歩きながらパンを頬張っている。幸せそう" :sfx "もぐ もぐ" :fuki nil}
+ {:shot "c2" :rect [0 0 0.5 0.33]
+  :dir "オーリオが、ふわりとピコの肩に降りる" :sfx "ぱさ" :fuki nil}
+ {:shot "c3" :rect [0.5 0.33 1 0.66]
+  :dir "オーリオのアップ。几帳面な無表情" :sfx nil
+  :fuki {:type "square" :tail "bottom" :lines ["ピコ様。" "お代は"]}}
+ {:shot "c4" :rect [0 0.33 0.5 0.66]
+  :dir "ピコ、口いっぱいのまま答える" :sfx nil
+  :fuki {:type "oval" :tail "right" :lines ["くれるのだ。" "いつもなのだ"]}}
+ {:shot "c5" :rect [0 0.66 1 1]
+  :dir "オーリオのアップ。なにも言わず、パン屋のほうを一度だけ振り返っている" :sfx nil :fuki nil}]
