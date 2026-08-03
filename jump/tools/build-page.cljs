@@ -22,7 +22,8 @@
             [clojure.string :as str]
             [kami.mangaka.genko :as g]
             [kami.mangaka.genko-render :as gr]
-            [kami.mangaka.komawari :as kw]))
+            [kami.mangaka.komawari :as kw]
+            [kami.mangaka.tategaki :as tg]))
 
 ;; ---- ネーム P.12（4コマ）------------------------------------------------
 ;; 正本: jump/oneshot-45p.md の P.12。セリフはそこからそのまま持ってくる。
@@ -43,7 +44,7 @@
    （φ加重・右綴じ順・tilt・inset・character-bleed はスタイルカタログの責任。
    komawari_styles.edn / ADR-2607051530 / ADR-2607172200）。
    ここが genko と komawari の分担線: komawari が「どこに置くか」、genko が「実寸で何を描くか」。"
-  [shots {:keys [style rows]}]
+  [shots {:keys [style rows locale]}]
   (let [panels (kw/propose-page-layout rows {:style (or style kw/default-style)})
         nodes
         (vec
@@ -64,19 +65,18 @@
                   fk  (when-let [f (:fuki pn)]
                         (let [w (- (:x2 r) (:x1 r)) h (- (:y2 r) (:y1 r))
                               fs   14.0
-                              colw (* fs 1.45)
-                              cols (count (:lines f))
-                              rows* (apply max (map count (:lines f)))
+                              loc  (or locale :ja)
+                              ;; ギザ/波は輪郭が内側へ食い込むので余白を厚く
                               pad (if (#{"jagged" "wavy"} (:type f)) 2.6 1.6)
-                              bw (+ (* cols colw) (* fs pad))
-                              bh (+ (* rows* fs)  (* fs (+ pad 0.4)))
+                              [bw bh] (tg/box-size (:lines f)
+                                                   {:locale loc :font-size fs :pad pad})
                               bx (if (= "left" (:tail f)) (+ (:x1 r) (* w 0.05))
                                      (- (:x2 r) bw (* w 0.05)))
                               by (+ (:y1 r) (* h 0.05))]
                           {:id (str "fuki" (:id pn)) :type "fukidashi" :visible true
                            :data {:fukiType (:type f) :fukiTail (:tail f)
                                   :x1 bx :y1 by :x2 (+ bx bw) :y2 (+ by bh)
-                                  :_lines (:lines f) :_fs fs :_colw colw}}))]
+                                  :_lines (:lines f) :_fs fs :_locale loc}}))]
               (remove nil? [img pan fk])))
           panels))]
     {:pages [{:youshi {:type "b4manga"} :nodes nodes}]}))
@@ -110,37 +110,24 @@
                 " href='data:image/jpeg;base64," image-b64 "'/>")
     "")))
 
-(def vertical-rotate
-  "縦組みで 90° 回さないといけない字。
-   横組みのまま出すと、長音符が「オ ー リオ」のように横に寝る（実際にそうなった）。
-   括弧・ダッシュ・三点リーダも同じ扱い。"
-  (set "ー〜～－‐—–…‥「」『』（）()【】〔〕〈〉《》＝=｜|─―"))
-
 (defn fuki-text-svg
-  "吹き出しの中身。genko は glyph を描かない（text node は 8x8 のマーカ矩形だけ）ので
-   ここが host の責任。writing-mode='tb' は rsvg 等で位置が揃わなかったため、
-   1文字ずつ座標を出す。列は右から左へ。"
-  [{:keys [x1 y1 x2 y2 _lines _fs _colw]}]
+  "吹き出しの中身。**行組みは kami.mangaka.tategaki に委譲する。**
+   ここは lib が返した :glyphs を SVG にするだけ（グリフを描くのは host の仕事、
+   どの字を回すか・どちらへ流すかは lib の仕事、という分担）。
+   自前で縦組みを書いていたときは長音符が横に寝ていた。"
+  [{:keys [_lines _fs _locale] :as d}]
   (when (seq _lines)
-    (let [fs (or _fs 14.0) colw (or _colw (* fs 1.45))
-          cx (/ (+ x1 x2) 2) cy (/ (+ y1 y2) 2)
-          cols (count _lines)
-          x0 (+ cx (* colw (/ (dec cols) 2.0)))]
+    (let [{:keys [glyphs]} (tg/layout _lines d {:locale (or _locale :ja)
+                                                :font-size (or _fs 14.0)})]
       (str/join
-       (for [[i line] (map-indexed vector _lines)
-             :let [x (- x0 (* i colw))
-                   n (count line)
-                   ytop (- cy (* (/ (dec n) 2.0) fs))]
-             [j ch] (map-indexed vector (seq line))]
-         (let [cy* (+ ytop (* j fs))
-               rot? (contains? vertical-rotate ch)]
-           (str "<text x='" (.toFixed x 1) "' y='" (.toFixed cy* 1)
-                "' font-size='" (.toFixed fs 1) "' text-anchor='middle'"
-                " dominant-baseline='central'"
-                (when rot?
-                  (str " transform='rotate(90 " (.toFixed x 1) " " (.toFixed cy* 1) ")'"))
-                " font-family=\"'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif\""
-                " fill='#141414'>" (str/replace (str ch) #"[<>&]" "") "</text>")))))))
+       (for [{:keys [ch x y rotate?]} glyphs]
+         (str "<text x='" (.toFixed x 1) "' y='" (.toFixed y 1)
+              "' font-size='" (.toFixed (or _fs 14.0) 1) "' text-anchor='middle'"
+              " dominant-baseline='central'"
+              (when rotate?
+                (str " transform='rotate(90 " (.toFixed x 1) " " (.toFixed y 1) ")'"))
+              " font-family=\"'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif\""
+              " fill='#141414'>" (str/replace (str ch) #"[<>&]" "") "</text>"))))))
 
 (defn youshi-svg []
   (let [p g/youshi-paper-bounds t g/youshi-trim-bounds
