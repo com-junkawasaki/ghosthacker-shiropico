@@ -161,7 +161,7 @@
       "id": "pup",
       "name": "Pup（パップ）",
       "rank": "purple",
-      "role": "hidden team member / ex-Wolves / infiltration & intel / middle schooler, Pico's big-brother figure",
+      "role": "hidden team member / ex-Wolves / infiltration & intel / 中学生の女の子、ピコの姉貴分",
       "appearanceRule": "MAIN ではない。15話中6回のみ登場（4・6・9・10・14・15）。戦闘には基本参加させない",
       "silhouette": "tall and narrow; coat draped over the shoulders WITHOUT sleeves (wide shoulder line); long bangs covering one eye",
       "signatureItem": {
@@ -182,19 +182,20 @@
       },
       "hairEyes": "near-black ash hair, long bangs hiding one eye, pale violet #9B87C4 eyes",
       "clothing": "under the coat: nondescript streetwear of no identifiable nationality",
-      "personality": "tries hard to look cool; actually caring. calls Pico 'グリーン'",
+      "personality": "クールに決めたがるかっこつけ。実は面倒見がよい。ピコを「グリーン」と呼ぶ。ステルスからは「アネキ」",
       "signatureLine": "紫は、両方 知ってる色だ。……白には、なれなかったんだ",
       "monochrome": "coat exterior near-beta; the purple lining is CROSS-HATCHED so the texture visibly changes the instant it flips",
       "balloon": "直線的な四角。角が鋭い",
       "ng": "no wide-brimmed hat (dropped in the 2026-08-03 revision). no identifiable national dress",
-      "comfyPrompt": "cool teenage boy, 6-head proportion, near-black ash hair with long bangs covering one eye, pale violet eyes, black long coat draped over shoulders without wearing sleeves showing purple lining, two small ear cuffs on left ear one purple one black, white snake coiled around his neck, stylish streetwear, clean anime line, flat shading"
+      "comfyPrompt": "cool teenage girl, 6-head proportion, near-black ash hair with long bangs covering one eye, pale violet eyes, black long coat draped over shoulders without wearing the sleeves showing purple lining, two small ear cuffs on left ear one purple one black, white snake coiled around her neck, stylish streetwear, clean anime line, flat shading",
+      "gender": "female — 女の子（オーナー判断 2026-08-03）"
     },
     {
       "id": "stealth",
       "name": "ステルス",
       "type": "agent",
       "master": "pup",
-      "role": "white snake / tsukkomi (「〜ッス」) / wants to talk constantly even mid-infiltration",
+      "role": "white snake / tsukkomi (「〜ッス」) / Pup を「アネキ」と呼ぶ / 潜入中なのに喋りたがる",
       "silhouette": "a single long thin line emerging from Pup's collar or sleeve",
       "size": "thin enough to coil around a neck; ~1.5m extended",
       "design": "slender white snake, red eyes, surprisingly expressive face, purple tongue",
