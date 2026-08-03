@@ -1,0 +1,12 @@
+;; oneshot P.31 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "oneshot P.31"
+ :rows
+ [[{:id "p0", :dir "——ぬっと、でかい手が ピコの目の前に出てくる"}
+   {:id "p1", :dir "手のひらに、パンがひとつ まだ ほんのり あたたかい。"}]
+
+  [{:id "p2", :dir "竹内さん、ピコを見ない", :fuki {:type "oval", :tail "right", :lines ["……腹、減ってたろ"], :who "竹内"}}
+   {:id "p3", :dir "ピコ、受け取れない。手が動かない"}]
+
+  [{:id "p4", :dir "オーリオ、ピコの目の前に ふわりと降りる", :fuki [{:type "oval", :tail "right", :lines ["……オーリオ。" "オレ、わるいこと" " したのだ?"], :who "ピコ"} {:type "square", :tail "left", :lines ["はい"], :who "オーリオ"}]}
+   {:id "p5", :dir "オーリオ、まっすぐ", :fuki {:type "square", :tail "left", :lines ["ですが。——それ" "が 分かった今の" "あなたは、" "さっきのあなたで" "は ありません"], :who "オーリオ"}}]]}

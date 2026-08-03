@@ -1,0 +1,11 @@
+;; oneshot P.15 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :araki :page "oneshot P.15"
+ :rows
+ [[{:id "p0", :dir "ラット、電柱から逆さにぶら下がって顔を出す", :fuki {:type "wavy", :tail "right", :lines ["あんたが、" "あな あけてくれ" "た坊やチュウね?"], :who "ラット"}}]
+
+  [{:id "p1", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["……あな"], :who "ピコ"}}
+   {:id "p2", :dir "ラット", :fuki {:type "wavy", :tail "right", :lines ["おれ、こんな" "固い街、自力じゃ" " 入れんかったチ" "ュウ"], :who "ラット"}}]
+
+  [{:id "p3", :dir "ラット・満面の笑み", :fuki {:type "wavy", :tail "left", :lines ["ありがとチュウ。" "恩人チュウ"], :who "ラット"}}
+   {:id "p4", :dir "ピコの顔・大アップ ——笑っていない。この漫画で初めての表情。"}]]}

@@ -1,0 +1,11 @@
+;; oneshot P.30 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "oneshot P.30"
+ :rows
+ [[{:id "p0", :dir "シロ・大アップ ——この漫画で初めて、声を張る。"}]
+
+  [{:id "p1", :dir "シロ", :fuki {:type "oval", :tail "left", :lines ["——こわしてない" "から、タチが" "悪いんじゃん"], :who "シロ"}}
+   {:id "p2", :dir "ピコ、その場に膝をつく"}]
+
+  [{:id "p3", :dir "引き 止まった窯。動かないレジ。うずくまるちいさな背中。"}
+   {:id "p4", :dir "ピコ・M", :fuki {:type "square", :tail "top", :lines ["ぜんぶ、オレなのだ"], :who "M"}}]]}

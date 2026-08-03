@@ -1,0 +1,11 @@
+;; oneshot P.22 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "oneshot P.22"
+ :rows
+ [[{:id "p0", :dir "ピコ", :fuki {:type "jagged", :tail "right", :lines ["な、なんで" "一発なのだ!?" "オレは 増えたの" "に!"], :who "ピコ"}}]
+
+  [{:id "p1", :dir "シロ・半目のまま", :fuki {:type "oval", :tail "left", :lines ["これは、止めてる" "だけ。すぐ起きるよ"], :who "シロ"}}
+   {:id "p2", :dir "ピコ、食ってかかる", :fuki {:type "jagged", :tail "right", :lines ["じゃあ どうすん" "のだ！ ぜんぶ" "やっても" "増えるのだ！"], :who "ピコ"}}]
+
+  [{:id "p3", :dir "シロ、指を1本 立てたまま、ピコを見る"}
+   {:id "p4", :dir "シロ・アップ", :fuki {:type "oval", :tail "right", :lines ["ぜんぶ、やるから" "っしょ"], :who "シロ"}}]]}

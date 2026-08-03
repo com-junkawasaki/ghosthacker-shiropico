@@ -1,0 +1,11 @@
+;; oneshot P.37 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "oneshot P.37"
+ :rows
+ [[{:id "p0", :dir "外・ラット、初めて笑っていない", :fuki {:type "wavy", :tail "right", :lines ["な——"], :who "ラット"}}]
+
+  [{:id "p1", :dir "ラット、両手の糸をぜんぶ引き絞る", :fuki {:type "wavy", :tail "left", :lines ["気づいたチュウか" "。だが遅いチュウ！"], :who "ラット"}}
+   {:id "p2", :dir "街じゅうの機械が いっせいに 店へ向き直る"}]
+
+  [{:id "p3", :dir "シャッターの外・ゾンビの波"}
+   {:id "p4", :dir "ピコ、逃げない。前を見ている"}]]}

@@ -1,0 +1,6 @@
+;; oneshot P.25-26 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+;; ⚠ 見開きは大ゴマ1つとして出してある。割り方は人が決める。
+{:style :inoue :page "oneshot P.25-26"
+ :rows
+ [[{:id "s1", :beat/weight :large, :beat/breakout true, :dir "見開き・大ゴマ。md 本文を参照"}]]}

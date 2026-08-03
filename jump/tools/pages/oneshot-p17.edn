@@ -1,0 +1,11 @@
+;; oneshot P.17 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "oneshot P.17"
+ :rows
+ [[{:id "p0", :dir "商店街 シャッターが半分だけ上がって、途中で止まっている。看板が消えている。"}]
+
+  [{:id "p1", :dir "たけうちベーカリー"}
+   {:id "p2", :dir "ピコ、シャッターの下をくぐって飛び込む"}]
+
+  [{:id "p3", :dir "店の奥 竹内さんが、動かない窯を、でかい手で 何度も 叩いている。"}
+   {:id "p4", :dir "ピコ", :fuki {:type "jagged", :tail "right", :lines ["おじさん！"], :who "ピコ"}}]]}

@@ -1,0 +1,11 @@
+;; oneshot P.39 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "oneshot P.39"
+ :rows
+ [[{:id "p0", :dir "ピコ、肩のオーリオを見る"}]
+
+  [{:id "p1", :dir "ピコ、笑う いたずらの笑いじゃない、初めての笑い方。"}
+   {:id "p2", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["オーリオ。" "おまえ、どこにい" "ても 帰ってくる" "のだ?"], :who "ピコ"}}]
+
+  [{:id "p3", :dir "オーリオ・即答 胸を張る。", :fuki {:type "square", :tail "left", :lines ["当然です"], :who "オーリオ"}}
+   {:id "p4", :dir "ピコ、指を1本、まっすぐ突き出す", :fuki {:type "jagged", :tail "right", :lines ["じゃあ——行って" "、帰ってこい！"], :who "ピコ"}}]]}

@@ -62,22 +62,51 @@
                                     (when-not b64
                                       {:_dir (:dir pn) :_sfx (:sfx pn)
                                        :_fuki? (some? (:fuki pn))}))}
-                  fk  (when-let [f (:fuki pn)]
-                        (let [w (- (:x2 r) (:x1 r)) h (- (:y2 r) (:y1 r))
-                              fs   14.0
-                              loc  (or locale :ja)
-                              ;; ギザ/波は輪郭が内側へ食い込むので余白を厚く
-                              pad (if (#{"jagged" "wavy"} (:type f)) 2.6 1.6)
-                              [bw bh] (tg/box-size (:lines f)
-                                                   {:locale loc :font-size fs :pad pad})
-                              bx (if (= "left" (:tail f)) (+ (:x1 r) (* w 0.05))
-                                     (- (:x2 r) bw (* w 0.05)))
-                              by (+ (:y1 r) (* h 0.05))]
-                          {:id (str "fuki" (:id pn)) :type "fukidashi" :visible true
-                           :data {:fukiType (:type f) :fukiTail (:tail f)
-                                  :x1 bx :y1 by :x2 (+ bx bw) :y2 (+ by bh)
-                                  :_lines (:lines f) :_fs fs :_locale loc}}))]
-              (remove nil? [img pan fk])))
+                  ;; **1コマに複数の吹き出しが入る**（掛け合い・ツッコミ）。
+                  ;; :fuki は map（1つ）でも vector（複数）でもよい。複数のときは
+                  ;; 縦書きなので **右から左へ**並べる＝読み順そのまま。
+                  fks (let [f (:fuki pn)
+                            fs* (cond (map? f) [f] (sequential? f) (vec f) :else [])
+                            w (- (:x2 r) (:x1 r)) h (- (:y2 r) (:y1 r))
+                            fs   14.0
+                            loc  (or locale :ja)
+                            boxes (mapv (fn [f]
+                                          (let [pad (if (#{"jagged" "wavy"} (:type f)) 2.6 1.6)]
+                                            (tg/box-size (:lines f)
+                                                         {:locale loc :font-size fs :pad pad})))
+                                        fs*)
+                            ;; 右端から順に置く。**幅と高さの両方で縮める** ——
+                            ;; 幅だけ見て縮めると、縦組みは行が長いほど背が高くなるので
+                            ;; コマの下、ひどい時は紙の外へ落ちる（実測。P.33 で 3 個の
+                            ;; 吹き出しが基本枠の下へ突き抜けた）。
+                            gap   (* fs 0.4)
+                            need-w (+ (reduce + 0 (map first boxes))
+                                      (* gap (max 0 (dec (count boxes)))))
+                            ;; 段差ぶん（i*0.9fs）も含めて必要な高さを見る
+                            need-h (+ (reduce max 0 (map second boxes))
+                                      (* (max 0 (dec (count boxes))) (* fs 0.9)))
+                            scale (min 1.0
+                                       (/ (* w 0.92) (max need-w 1e-6))
+                                       (/ (* h 0.92) (max need-h 1e-6)))
+                            step  (* fs 0.9 scale)]
+                        (first
+                         (reduce
+                          (fn [[acc x] [i [bw0 bh0] f]]
+                            (let [bw (* bw0 scale) bh (* bh0 scale)
+                                  ;; コマの中へ押し戻す（左端・下端をはみ出さない）
+                                  bx (max (+ (:x1 r) (* w 0.02)) (- x bw))
+                                  ;; 2つめ以降は少し下げて、しっぽ同士がぶつからないように
+                                  by (min (- (:y2 r) bh (* h 0.02))
+                                          (+ (:y1 r) (* h 0.04) (* i step)))]
+                              [(conj acc
+                                     {:id (str "fuki" (:id pn) "-" i) :type "fukidashi" :visible true
+                                      :data {:fukiType (:type f) :fukiTail (:tail f)
+                                             :x1 bx :y1 by :x2 (+ bx bw) :y2 (+ by bh)
+                                             :_lines (:lines f) :_fs (* fs scale) :_locale loc}})
+                               (- bx gap)]))
+                          [[] (- (:x2 r) (* w 0.04))]
+                          (map vector (range) boxes fs*))))]
+              (remove nil? (concat [img pan] fks))))
           panels))]
     {:pages [{:youshi {:type "b4manga"} :nodes nodes}]}))
 

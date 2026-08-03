@@ -1,0 +1,11 @@
+;; oneshot P.36 — jump/oneshot-45p.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "oneshot P.36"
+ :rows
+ [[{:id "p0", :dir "ピコ、かっと目を開く"}]
+
+  [{:id "p1", :dir "ピコの視界 何百本の糸が見える。そのぜんぶが、たった1本から 枝分かれしている。"}
+   {:id "p2", :dir "ピコ ——教わった相手に向かって言う", :fuki {:type "oval", :tail "right", :lines ["師匠。……見えた" " のだ"], :who "ピコ"}}]
+
+  [{:id "p3", :dir "ピコ", :fuki {:type "oval", :tail "left", :lines ["ぜんぶ、1本から" " のびてるのだ"], :who "ピコ"}}
+   {:id "p4", :dir "シロ、ほんのすこしだけ 口角が上がる", :fuki {:type "oval", :tail "right", :lines ["——もう、" "視えてるし"], :who "シロ"}}]]}
