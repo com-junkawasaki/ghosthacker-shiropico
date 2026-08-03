@@ -53,7 +53,13 @@
      :x2 (+ x1 (* nx2 w) (- gutter)) :y2 (+ y1 (* ny2 h) (- gutter))}))
 
 (defn build-doc
-  "genko の doc を組む。{:pages [{:youshi {...} :nodes [...]}]}"
+  "genko の doc を組む。{:pages [{:youshi {...} :nodes [...]}]}
+
+   コマの位置は page EDN の :rect（基本枠内の正規化 [x1 y1 x2 y2]）で明示する。
+   :rect が無いときだけ g/panel-presets の \"2x2\" に落ちる。
+   genko の preset は 1/2h/2v/3h/2x2 しか持たないが、実際の原稿は 5コマ・6コマ・
+   変則が普通に出るので、preset を母数にせず rect を正本にする。
+   **右綴じなので、コマ1 は右**（x1 が大きいほう）に置くこと。"
   [shots koma]
   (let [preset (get g/panel-presets "2x2")
         gutter (* 3.0 g/youshi-px-per-mm)          ; コマ間 3mm
@@ -61,13 +67,17 @@
         (vec
          (mapcat
           (fn [i k]
-            (let [r (norm->rect (nth preset (nth KOMA->PRESET-IDX i)) gutter)
+            (let [r (norm->rect (or (:rect k)
+                                    (nth preset (nth KOMA->PRESET-IDX i)))
+                                gutter)
                   b64 (get shots (:shot k))
                   img (when b64
                         {:id (str "img" i) :type "ai-image" :visible true
                          :data (merge r {:_genImage b64})})
                   pan {:id (str "panel" i) :type "panel" :visible true
-                       :data (merge r {:borderW 3})}
+                       :data (merge r {:borderW 3}
+                                    ;; 絵がまだ無いコマだけ、ト書きを持たせる
+                                    (when-not b64 {:_dir (:dir k) :_sfx (:sfx k) :_fuki? (some? (:fuki k))}))}
                   ;; 吹き出しはコマ内の上寄せ。tail の向きでコマ内の位置を決める。
                   fk  (when-let [f (:fuki k)]
                         ;; 縦書きなので 列数=行の本数、列の長さ=最長行の文字数。
@@ -157,6 +167,34 @@
                       "' fill='none' stroke='" guide "' stroke-width='" w "'/>"))
                [[t 1.2] [f 1.0] [s 0.8]])))))
 
+(defn dir-text-svg
+  "絵がまだ無いコマに、ト書きと SFX 指示を薄く置く。
+   絵が入るまでのあいだ、この出力自体が『実寸のネーム』として読める。"
+  [{:keys [x1 y1 x2 y2 _dir _sfx _fuki?]}]
+  (let [pad 10 fs 11 w (- x2 x1 (* 2 pad))
+        cpl (max 8 (int (/ w (* fs 1.05))))
+        lines (loop [t (or _dir "") acc []]
+                (if (<= (count t) cpl) (conj acc t)
+                    (recur (subs t cpl) (conj acc (subs t 0 cpl)))))
+        sfx (when _sfx (str "SFX  " _sfx))]
+    (str
+     (str/join
+      (map-indexed
+       (fn [i l]
+         (str "<text x='" (.toFixed (+ x1 pad) 1) "' y='" (.toFixed (+ (if _fuki?
+                                                                           ;; 吹き出しがあるコマは下寄せ（重ねない）
+                                                                           (- y2 pad (* fs 1.5 (count lines)) (if _sfx (* fs 1.8) 0))
+                                                                           (+ y1 pad))
+                                                                        fs (* i (* fs 1.5))) 1)
+              "' font-size='" fs "' fill='#9aa3a0'"
+              " font-family=\"'Hiragino Sans','Yu Gothic',sans-serif\">"
+              (str/replace l #"[<>&]" "") "</text>"))
+       lines))
+     (when sfx
+       (str "<text x='" (.toFixed (+ x1 pad) 1) "' y='" (.toFixed (- y2 pad) 1)
+            "' font-size='" (* fs 1.1) "' fill='#c08a5a' letter-spacing='2'"
+            " font-family=\"ui-monospace,monospace\">" (str/replace sfx #"[<>&]" "") "</text>")))))
+
 (defn render [doc]
   (let [page (first (:pages doc))
         nodes (:nodes page)
@@ -166,9 +204,11 @@
                      (let [ds (gr/node->draws n)
                            fk? (= "fukidashi" (:type n))
                            base (str/join (map #(draw->svg % fk?) ds))]
-                       (if fk?
-                         (str base (fuki-text-svg (:data n)))
-                         base)))
+                       (cond
+                         fk? (str base (fuki-text-svg (:data n)))
+                         (and (= "panel" (:type n)) (:_dir (:data n)))
+                         (str base (dir-text-svg (:data n)))
+                         :else base)))
                    nodes))]
     (str "<svg xmlns='http://www.w3.org/2000/svg' "
          "viewBox='" (.toFixed (:x1 p) 1) " " (.toFixed (:y1 p) 1) " "
