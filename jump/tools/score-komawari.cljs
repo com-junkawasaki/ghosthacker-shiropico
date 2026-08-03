@@ -1,0 +1,210 @@
+#!/usr/bin/env nbb
+;; コマ割りとセリフを、システムダイナミクスで数値化する。
+;;
+;;   nbb --classpath "<kami-mangaka-page>/src:<org-oasis-open-xmile>/src" \
+;;       jump/tools/score-komawari.cljs jump/tools/pages/oneshot-p01.edn ... \
+;;       [--coeffs jump/tools/reading-dynamics.edn] [--xmile out.edn]
+;;
+;; なぜダイナミクスか:
+;;   1ページを単体で採点しても「読んでいる体験」は測れない。緊張は前のページから
+;;   持ち越され、疲労は蓄積し、めくる勢いはその差で決まる。つまり**ストック**がある。
+;;   だから点数ではなく stock-and-flow で書き、実際に走らせて軌跡を見る。
+;;
+;; 何が実測で、何が設計値か（ここを混ぜない）:
+;;   - **実測**: コマ数・面積のばらつき・セリフ字数・吹き出し数と種別・無音コマ率・
+;;     SFX 数・めくりコマの重み。すべて page EDN と komawari の提案レイアウトから
+;;     決定論的に数える。捏造しない。
+;;   - **設計値**: それらを緊張/疲労/勢いに変換する係数。これは観測ではなく仮説で、
+;;     **人間が回して直す面**。既定値は jump/tools/reading-dynamics.edn にあり、
+;;     --coeffs で差し替えられる。
+;;   この区別は komawari_styles.edn 自身の grading（:primary / :secondary /
+;;   :consensus / :design-value）と同じ規律。
+;;
+;; シミュレータは自前で書かない: kotoba-lang/org-oasis-open-xmile（OASIS XMILE 1.0）。
+;; dynamics.xmile の docstring が「軌跡が要るなら one-off simulator を作るな」と
+;; 名指ししているので従う。
+
+(ns score-komawari
+  (:require ["fs" :as fs]
+            [clojure.edn :as edn]
+            [clojure.string :as str]
+            [kami.mangaka.komawari :as kw]
+            [xmile.model :as xm]
+            [xmile.execute :as xe]))
+
+;; ---- 既定の係数（設計値。人間が直す面）--------------------------------------
+(def DEFAULT-COEFFS
+  {:grade :design-value
+   :note  "観測ではなく仮説。--coeffs で差し替えて回し、良い dynamics を探すための初期値。"
+   ;; 緊張 tension
+   :hook->tension     0.55   ; めくりコマの重みが緊張に変わる率
+   :intensity->tension 0.40  ; beat の intensity
+   :sfx->tension      0.10   ; SFX 密度
+   :talk->release     0.35   ; セリフが多いほど緊張は解ける（説明は緊張を下げる）
+   :tension-decay     0.22
+   ;; 疲労 fatigue
+   :density->fatigue  0.45   ; 字数密度＋コマ密度
+   :silence->recovery 0.50   ; 無音コマは回復させる
+   :fatigue-decay     0.18
+   ;; 勢い momentum（＝めくる力）
+   :tension->momentum 0.70
+   :fatigue-drag      0.60   ; 疲労が勢いを削る強さ
+   :momentum-decay    0.25
+   ;; メリハリ（面積のばらつき）は緊張の増幅器として効かせる
+   :variance-gain     0.30})
+
+;; ---- 実測 -------------------------------------------------------------------
+(defn- area [[_ _ w h]] (* w h))
+
+(defn measure
+  "page EDN → 実測値。すべて数えられる量だけ。"
+  [page]
+  (let [rows   (:rows page)
+        beats  (vec (mapcat identity rows))
+        panels (kw/propose-page-layout rows {:style (or (:style page) kw/default-style)})
+        areas  (mapv #(area (:panel/rect %)) panels)
+        n      (count panels)
+        mean-a (/ (reduce + areas) (max 1 n))
+        sd     (Math/sqrt (/ (reduce + (map #(let [d (- % mean-a)] (* d d)) areas)) (max 1 n)))
+        fukis  (keep :fuki beats)
+        chars  (reduce + (map #(reduce + (map count (:lines %))) fukis))
+        sfxn   (count (keep :sfx beats))
+        ints   (keep :beat/intensity beats)
+        last-b (last beats)]
+    {:page        (:page page)
+     :style       (:style page)
+     :panels      n
+     :area-cv     (if (pos? mean-a) (/ sd mean-a) 0.0)   ; メリハリ
+     :chars       chars
+     :bubbles     (count fukis)
+     :registers   (count (distinct (map :type fukis)))
+     :silent      (/ (double (- n (count fukis))) (max 1 n))
+     :sfx         sfxn
+     :intensity   (if (seq ints) (/ (reduce + ints) (count ints)) 0.35)
+     :turn-weight (case (:beat/weight last-b :medium)
+                    :large 1.0 :medium 0.6 :small 0.3 0.6)}))
+
+  ;; ---- XMILE モデル -----------------------------------------------------------
+;; ⚠ 時間変化する入力を graphical function で入れる設計にしていたが、
+;;   **org-oasis-open-xmile の xmile.execute は gf を実装していない**
+;;   （xmile.model は :xmile/gf を持てるが execute 側に適用箇所が無く、aux は
+;;   式だけを評価する）。実測: ypts を [0 1 0 1 0] と [9 9 9 9 9] で切り替えても
+;;   出力は両方 [0 1 2 3 4]＝TIME そのままだった。
+;;   これに気づかず出した最初の版は、平板化したページと本番で**スコアが完全に同一**
+;;   になっていた（＝何も測れていない）。
+;;   したがってここでは gf を使わず、**1ページ＝定数入力の1区間**として区切って回し、
+;;   ストックを次ページの初期値へ手で送る（piecewise-constant forcing）。
+
+(defn page-model
+  "1ページぶんのモデル。入力はそのページの実測値で定数。"
+  [m c {:keys [tension fatigue momentum]}]
+  (let [n1 (fn [v mx] (min 1.0 (/ (double v) mx)))]
+    (-> (xm/model "reading-dynamics-page")
+        (xm/set-sim-specs (xm/sim-specs 0 1 {:xmile/dt 0.25}))
+        (xm/add-variable (xm/aux "hook"      (str (:turn-weight m))))
+        (xm/add-variable (xm/aux "intensity" (str (:intensity m))))
+        (xm/add-variable (xm/aux "sfx_d"     (str (n1 (:sfx m) 4))))
+        (xm/add-variable (xm/aux "talk_d"    (str (n1 (:chars m) 40))))
+        (xm/add-variable (xm/aux "panel_d"   (str (n1 (:panels m) 8))))
+        (xm/add-variable (xm/aux "silent"    (str (:silent m))))
+        (xm/add-variable (xm/aux "variance"  (str (min 1.0 (:area-cv m)))))
+        (xm/add-variable (xm/stock "tension" (str tension)
+                                   {:xmile/inflows #{"t_in"} :xmile/outflows #{"t_out"}}))
+        (xm/add-variable (xm/stock "fatigue" (str fatigue)
+                                   {:xmile/inflows #{"f_in"} :xmile/outflows #{"f_out"}}))
+        (xm/add-variable (xm/stock "momentum" (str momentum)
+                                   {:xmile/inflows #{"m_in"} :xmile/outflows #{"m_out"}}))
+        ;; 流入は必ず飽和させる（(1 - stock) を掛ける）。読者の緊張も疲労も 0..1 の
+        ;; 状態量で青天井ではない。飽和項なしだと5ページで tension 9.3 まで発散し、
+        ;; 「点数がページ数に比例するだけ」の無意味な数になった（実測）。
+        (xm/add-variable (xm/flow "t_in"
+                                  (str "(hook * " (:hook->tension c)
+                                       " + intensity * " (:intensity->tension c)
+                                       " + sfx_d * " (:sfx->tension c)
+                                       ") * (1 + variance * " (:variance-gain c) ")"
+                                       " * (1 - tension)")))
+        ;; ストックからの流出は必ずストックに比例させる（絶対量で引かない）。
+        ;; 絶対量で書くと、無音率の高いページで fatigue が負に振れる（実測 -0.37）。
+        ;; 持っていない疲労は抜けない、というのが正しい構造。
+        (xm/add-variable (xm/flow "t_out"
+                                  (str "tension * (" (:tension-decay c)
+                                       " + talk_d * " (:talk->release c) ")")))
+        (xm/add-variable (xm/flow "f_in"
+                                  (str "(talk_d + panel_d) * " (:density->fatigue c)
+                                       " * (1 - fatigue)")))
+        (xm/add-variable (xm/flow "f_out"
+                                  (str "fatigue * (" (:fatigue-decay c)
+                                       " + silent * " (:silence->recovery c) ")")))
+        (xm/add-variable (xm/flow "m_in"
+                                  (str "tension * " (:tension->momentum c)
+                                       " * (1 - fatigue * " (:fatigue-drag c) ")"
+                                       " * (1 - momentum)")))
+        (xm/add-variable (xm/flow "m_out"
+                                  (str "momentum * " (:momentum-decay c)))))))
+
+(defn run-pages
+  "ページを順に回し、ストックを次ページへ送る。"
+  [ms c]
+  (loop [[m & more] ms
+         st {:tension 0.15 :fatigue 0.05 :momentum 0.20}
+         acc []
+         mdls []]
+    (if-not m
+      {:trace acc :models mdls}
+      (let [mdl (page-model m c st)
+            se  (:xmile/series (xe/run mdl))
+            lastv (fn [nm] (last (get se nm)))
+            st'  {:tension (lastv "tension") :fatigue (lastv "fatigue")
+                  :momentum (lastv "momentum")}]
+        (recur more st' (conj acc st') (conj mdls mdl))))))
+
+;; ---- 走らせて要約 -----------------------------------------------------------
+(defn- r2 [x] (/ (Math/round (* 100.0 x)) 100.0))
+
+(defn summarize [trace]
+  (let [ten (mapv :tension trace) fat (mapv :fatigue trace) mom (mapv :momentum trace)]
+    {:tension (mapv r2 ten) :fatigue (mapv r2 fat) :momentum (mapv r2 mom)
+     ;; スコアは3つ。単一の総合点にしない（何を直せばいいか分からなくなる）
+     :scores {:pull (r2 (last mom))
+              :swing (r2 (- (apply max ten) (apply min ten)))
+              :fatigue-peak (r2 (apply max fat))}}))
+
+;; ---- main -------------------------------------------------------------------
+(let [argv (let [a (vec (js->clj js/process.argv))
+                 i (last (keep-indexed #(when (str/ends-with? %2 ".cljs") %1) a))]
+             (vec (drop (inc (or i 1)) a)))
+      opts (into {} (map vec (partition 2 (filter #(or (str/starts-with? % "--")
+                                                       (not (str/ends-with? % ".edn")))
+                                                  argv))))
+      files (vec (filter #(and (str/ends-with? % ".edn")
+                               (not (contains? (set (vals opts)) %))) argv))
+      coeffs (merge DEFAULT-COEFFS
+                    (when-let [f (get opts "--coeffs")]
+                      (edn/read-string (fs/readFileSync f "utf8"))))
+      pages (mapv #(edn/read-string (fs/readFileSync % "utf8")) files)
+      ms    (mapv measure pages)
+      {:keys [trace models]} (run-pages ms coeffs)
+      sm    (summarize trace)]
+  (println "=== 実測（page EDN と komawari の提案レイアウトから決定論的に数えたもの）===")
+  (doseq [m ms]
+    (println (str "  " (:page m) "  style=" (name (:style m))
+                  "  コマ" (:panels m) "  メリハリ" (r2 (:area-cv m))
+                  "  字" (:chars m) "  吹" (:bubbles m) "/" (:registers m) "種"
+                  "  無音" (r2 (:silent m)) "  SFX" (:sfx m)
+                  "  めくり" (:turn-weight m))))
+  (println)
+  (println "=== 軌跡（XMILE で実際に走らせたもの。係数は設計値）===")
+  (println "  緊張 tension  " (:tension sm))
+  (println "  疲労 fatigue  " (:fatigue sm))
+  (println "  勢い momentum " (:momentum sm))
+  (println)
+  (println "=== スコア（単一の総合点にはしない）===")
+  (let [{:keys [pull swing fatigue-peak]} (:scores sm)]
+    (println (str "  pull        " pull "  最後まで引っぱれたか（高いほどよい）"))
+    (println (str "  swing       " swing "  緊張の振れ幅（低いと平坦。高いほどよい）"))
+    (println (str "  fatigue-peak " fatigue-peak "  疲労のピーク（低いほどよい）")))
+  (when-let [out (get opts "--xmile")]
+    (fs/writeFileSync out (pr-str models))
+    (println (str "\nXMILE モデルを " out " に書いた（係数を直して回し直す用）")))
+  (println "\n※ 実測は数えた値。係数は仮説（:design-value）。"
+           "\n   良い dynamics は係数を回して人間が決める — jump/tools/reading-dynamics.edn"))

@@ -21,85 +21,64 @@
             [clojure.edn :as edn]
             [clojure.string :as str]
             [kami.mangaka.genko :as g]
-            [kami.mangaka.genko-render :as gr]))
+            [kami.mangaka.genko-render :as gr]
+            [kami.mangaka.komawari :as kw]))
 
 ;; ---- ネーム P.12（4コマ）------------------------------------------------
 ;; 正本: jump/oneshot-45p.md の P.12。セリフはそこからそのまま持ってくる。
-(def DEFAULT-KOMA
-  [{:shot "k1" :dir "路上。眠った機械の行進のまんなかに、ちいさなピコ。"
-    :fuki nil}
-   {:shot "k2" :dir "ピコ、目がキラキラ"
-    :fuki {:type "jagged" :tail "bottom"
-           :lines ["うっわ、街ぜんぶ" "お寝坊なのだ！" "ウケる！"]}}
-   {:shot "k3" :dir "オーリオ"
-    :fuki {:type "square" :tail "left"
-           :lines ["笑い事では" "ありません"]}}
-   {:shot "k4" :dir "頭上から、声"
-    :fuki {:type "wavy" :tail "top"
-           :lines ["めっけたチュウ"]}}])
-
-;; 右綴じ: コマは右上→左上→右下→左下。preset "2x2" は左上起点なので入れ替える。
-(def KOMA->PRESET-IDX "右綴じ: 右上→左上→右下→左下" [1 0 3 2])
-(def ^:dynamic *koma* nil)
-
-(defn norm->rect
-  "正規化 [x1 y1 x2 y2] を基本枠(frame=印刷領域)の world 矩形へ。gutter は mm 実寸で削る。
-   内枠(safe)は「重要な絵と文字を置いてよい安全域」であってコマ割りの母数ではない
-   ——ここを取り違えると、紙の真ん中に小さくコマが浮く（実際に1回やった）。"
-  [[nx1 ny1 nx2 ny2] gutter]
+(defn panel->rect
+  "komawari の :panel/rect [x y w h]（基本枠内の正規化）→ world 矩形。
+   gutter は komawari 側が既に引いているので、ここでは足さない。"
+  [[nx ny nw nh]]
   (let [{:keys [x1 y1 x2 y2]} g/youshi-frame-bounds
         w (- x2 x1) h (- y2 y1)]
-    {:x1 (+ x1 (* nx1 w) gutter) :y1 (+ y1 (* ny1 h) gutter)
-     :x2 (+ x1 (* nx2 w) (- gutter)) :y2 (+ y1 (* ny2 h) (- gutter))}))
+    {:x1 (+ x1 (* nx w)) :y1 (+ y1 (* ny h))
+     :x2 (+ x1 (* (+ nx nw) w)) :y2 (+ y1 (* (+ ny nh) h))}))
 
 (defn build-doc
-  "genko の doc を組む。{:pages [{:youshi {...} :nodes [...]}]}
+  "genko の doc を組む。
 
-   コマの位置は page EDN の :rect（基本枠内の正規化 [x1 y1 x2 y2]）で明示する。
-   :rect が無いときだけ g/panel-presets の \"2x2\" に落ちる。
-   genko の preset は 1/2h/2v/3h/2x2 しか持たないが、実際の原稿は 5コマ・6コマ・
-   変則が普通に出るので、preset を母数にせず rect を正本にする。
-   **右綴じなので、コマ1 は右**（x1 が大きいほう）に置くこと。"
-  [shots koma]
-  (let [preset (get g/panel-presets "2x2")
-        gutter (* 3.0 g/youshi-px-per-mm)          ; コマ間 3mm
+   **コマ割りは書かない。** page EDN は {:style :rows} で「段 × 読み順の beat」だけを持ち、
+   幾何は kami.mangaka.komawari/propose-page-layout が :style から導く
+   （φ加重・右綴じ順・tilt・inset・character-bleed はスタイルカタログの責任。
+   komawari_styles.edn / ADR-2607051530 / ADR-2607172200）。
+   ここが genko と komawari の分担線: komawari が「どこに置くか」、genko が「実寸で何を描くか」。"
+  [shots {:keys [style rows]}]
+  (let [panels (kw/propose-page-layout rows {:style (or style kw/default-style)})
         nodes
         (vec
          (mapcat
-          (fn [i k]
-            (let [r (norm->rect (or (:rect k)
-                                    (nth preset (nth KOMA->PRESET-IDX i)))
-                                gutter)
-                  b64 (get shots (:shot k))
+          (fn [pn]
+            (let [r   (panel->rect (:panel/rect pn))
+                  b64 (get shots (or (:shot pn) (:id pn)))
+                  poly (:panel/polygon pn)
                   img (when b64
-                        {:id (str "img" i) :type "ai-image" :visible true
+                        {:id (str "img" (:id pn)) :type "ai-image" :visible true
                          :data (merge r {:_genImage b64})})
-                  pan {:id (str "panel" i) :type "panel" :visible true
+                  pan {:id (str "panel" (:id pn)) :type "panel" :visible true
                        :data (merge r {:borderW 3}
-                                    ;; 絵がまだ無いコマだけ、ト書きを持たせる
-                                    (when-not b64 {:_dir (:dir k) :_sfx (:sfx k) :_fuki? (some? (:fuki k))}))}
-                  ;; 吹き出しはコマ内の上寄せ。tail の向きでコマ内の位置を決める。
-                  fk  (when-let [f (:fuki k)]
-                        ;; 縦書きなので 列数=行の本数、列の長さ=最長行の文字数。
-                        ;; 文字寸法から箱を起こす（箱を先に決めて文字を詰めると溢れる）。
+                                    (when poly {:_polygon poly})
+                                    (when-not b64
+                                      {:_dir (:dir pn) :_sfx (:sfx pn)
+                                       :_fuki? (some? (:fuki pn))}))}
+                  fk  (when-let [f (:fuki pn)]
                         (let [w (- (:x2 r) (:x1 r)) h (- (:y2 r) (:y1 r))
                               fs   14.0
                               colw (* fs 1.45)
                               cols (count (:lines f))
-                              rows (apply max (map count (:lines f)))
-                              ;; jagged/wavy は輪郭が内側へ食い込むので余白を厚くする
+                              rows* (apply max (map count (:lines f)))
                               pad (if (#{"jagged" "wavy"} (:type f)) 2.6 1.6)
                               bw (+ (* cols colw) (* fs pad))
-                              bh (+ (* rows fs)   (* fs (+ pad 0.4)))
+                              bh (+ (* rows* fs)  (* fs (+ pad 0.4)))
                               bx (if (= "left" (:tail f)) (+ (:x1 r) (* w 0.05))
                                      (- (:x2 r) bw (* w 0.05)))
                               by (+ (:y1 r) (* h 0.05))]
-                          {:id (str "fuki" i) :type "fukidashi" :visible true
+                          {:id (str "fuki" (:id pn)) :type "fukidashi" :visible true
                            :data {:fukiType (:type f) :fukiTail (:tail f)
                                   :x1 bx :y1 by :x2 (+ bx bw) :y2 (+ by bh)
                                   :_lines (:lines f) :_fs fs :_colw colw}}))]
               (remove nil? [img pan fk])))
-          (range) koma))]
+          panels))]
     {:pages [{:youshi {:type "b4manga"} :nodes nodes}]}))
 
 ;; ---- mangaka: draw op → SVG ---------------------------------------------
@@ -226,18 +205,19 @@
              (vec (drop (inc (or i 1)) a)))
       shots-dir (or (first argv) "shots")
       out (or (second argv) "page.svg")
-      koma  (if-let [f (nth argv 2 nil)]
-              (edn/read-string (fs/readFileSync f "utf8"))
-              DEFAULT-KOMA)
-      _     (set! *koma* koma)
-      shots (into {} (for [k (map :shot koma)
+      page  (edn/read-string (fs/readFileSync (or (nth argv 2 nil)
+                                                  (throw (ex-info "page EDN が要る" {})))
+                                              "utf8"))
+      beats (mapcat identity (:rows page))
+      shots (into {} (for [k (keep #(or (:shot %) (:id %)) beats)
                            :let [f (path/join shots-dir (str k ".jpg"))]
                            :when (fs/existsSync f)]
                        [k (.toString (fs/readFileSync f) "base64")]))]
-  (println (str "animeka: 抜いたカット " (count shots) "/" (count koma)))
-  (let [doc (build-doc shots koma)
+  (println (str "animeka: 抜いたカット " (count shots) "/" (count beats)))
+  (let [doc (build-doc shots page)
         n (count (:nodes (first (:pages doc))))
         svg (render doc)]
+    (println (str "komawari: style " (:style page) " / 段 " (count (:rows page)) " / コマ " (count beats)))
     (println (str "genko: node " n " 個（B4 b4manga・内枠 "
                   (int (- (:x2 g/youshi-safe-bounds) (:x1 g/youshi-safe-bounds))) "×"
                   (int (- (:y2 g/youshi-safe-bounds) (:y1 g/youshi-safe-bounds))) "px）"))

@@ -1,10 +1,9 @@
-[{:shot "k1" :dir "路上。眠った機械の行進のまんなかに、ちいさなピコ。" :fuki nil}
- {:shot "k2" :dir "ピコ、目がキラキラ"
-  :fuki {:type "jagged" :tail "bottom"
-         :lines ["うっわ、街ぜんぶ" "お寝坊なのだ！" "ウケる！"]}}
- {:shot "k3" :dir "オーリオ"
-  :fuki {:type "square" :tail "left"
-         :lines ["笑い事では" "ありません"]}}
- {:shot "k4" :dir "頭上から、声"
-  :fuki {:type "wavy" :tail "top"
-         :lines ["めっけたチュウ"]}}]
+{:style :togashi :page "oneshot P.12"
+ :rows
+ [[{:id "k1" :shot "k1" :dir "路上。眠った機械の行進のまんなかに、ちいさなピコ"}
+   {:id "k2" :shot "k2" :beat/intensity 0.7 :dir "ピコ、目がキラキラ"
+    :fuki {:type "jagged" :tail "bottom" :lines ["うっわ、街ぜんぶ" "お寝坊なのだ！" "ウケる！"]}}]
+  [{:id "k3" :shot "k3" :dir "オーリオ"
+    :fuki {:type "square" :tail "left" :lines ["笑い事では" "ありません"]}}
+   {:id "k4" :shot "k4" :beat/intensity 0.9 :dir "頭上から、声"
+    :fuki {:type "wavy" :tail "top" :lines ["めっけたチュウ"]}}]]}

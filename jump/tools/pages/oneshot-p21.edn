@@ -1,6 +1,8 @@
-[{:shot "s1" :dir "店の入口に、白い影" :fuki nil}
- {:shot "s2" :dir "シロ、音もなくピコと機械の間に立つ。背中だけ" :fuki nil}
- {:shot "s3" :dir "シロ、指を1本、すっと立てる"
-  :fuki {:type "oval" :tail "bottom" :lines ["——《カウント・" "シープ》"]}}
- {:shot "s4" :dir "プロックが店ごとふわりと包む。機械たちが穏やかに眠る"
-  :fuki {:type "cloud" :tail "left" :lines ["いっぴき、" "にひき、" "さんびき……"]}}]
+{:style :togashi :page "oneshot P.21"
+ :rows
+ [[{:id "s1" :shot "s1" :dir "店の入口に、白い影"}
+   {:id "s2" :shot "s2" :dir "シロ、音もなくピコと機械の間に立つ。背中だけ"}]
+  [{:id "s3" :shot "s3" :beat/intensity 0.8 :dir "シロ、指を1本、すっと立てる"
+    :fuki {:type "oval" :tail "bottom" :lines ["——《カウント・" "シープ》"]}}
+   {:id "s4" :shot "s4" :beat/weight :large :dir "プロックが店ごとふわりと包む。機械たちが穏やかに眠る"
+    :fuki {:type "cloud" :tail "left" :lines ["いっぴき、" "にひき、" "さんびき……"]}}]]}
