@@ -79,7 +79,12 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--line);backgr
 
 footer{margin-top:20px;padding-top:26px;border-top:1px solid var(--line);font-size:.77rem;color:var(--muted);max-width:74ch}
 @media (max-width:760px){
+  /* 1列に潰れると DOM 順（左=偶数 → 右=奇数）がそのまま縦に並び、
+     P.2 → P.1 → P.4 → P.3 と右綴じの逆に読めてしまう。order で入れ替える。 */
   .spread{grid-template-columns:1fr;gap:16px}
+  .spread:not(.wide)>.sheet:nth-child(1){order:2}
+  .spread:not(.wide)>.sheet:nth-child(2){order:1}
+  .spread:not(.wide)>.meta{order:3}
   header{padding:48px 0 28px}
   nav{margin-bottom:40px}
 }
