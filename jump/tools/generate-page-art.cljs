@@ -83,7 +83,11 @@
     (str "Character lock — keep each design IDENTICAL in every shot; never swap "
          "hair colour, clothes or accessories between characters:\n"
          (str/join "\n" (map (fn [[_ tag desc]] (str "- " tag ": " desc ".")) chars))
-         "\n")))
+         ;; ⚠ タグは**識別のための札**であって描くものではない。これを言わないと
+         ;; モデルがラテン文字をそのまま絵に焼く（実測 2026-08-04、第1話 P.44 で
+         ;; シロのパーカーの胸に "SHIRO" とプリントされた）。
+         "\nThe ALL-CAPS tags above are identity labels for you only. "
+         "NEVER draw them: no names printed on clothing, bags, signs or props.\n")))
 
 (defn tag-names
   "本文中のキャラ名に英字タグを差し込む。lock ブロックと結びつけるため。"
