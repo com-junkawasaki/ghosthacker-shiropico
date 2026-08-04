@@ -63,6 +63,20 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--line);backgr
 .ttl{font-family:var(--mincho);color:var(--ink)}
 .missing{padding:70px 10px;text-align:center;color:var(--muted);font-size:.78rem;border:1px dashed var(--line)}
 
+/* 版の切り替え。読切と連載第1話は「同じ話の別の組み方」なので、並べずに
+   切り替えて見比べられるようにする（並べると 90 ページぶんの base64 が
+   同時に画面に載り、どちらも読めなくなる）。 */
+.switch{display:inline-flex;margin:30px 0 0;border:1px solid var(--line);background:var(--panel);border-radius:3px;overflow:hidden}
+.switch button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-size:.8rem;
+ padding:9px 20px;cursor:pointer;border-right:1px solid var(--line)}
+.switch button:last-child{border-right:0}
+.switch button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.switch button:focus-visible{outline:2px solid var(--guide);outline-offset:-2px}
+.work[hidden]{display:none}
+.work-head{padding:34px 0 0}
+.work-head .eyebrow{margin:0 0 10px}
+.work-head h2{font-family:var(--mincho);font-weight:600;font-size:clamp(1.2rem,2.6vw,1.7rem);margin:0;line-height:1.3}
+
 footer{margin-top:20px;padding-top:26px;border-top:1px solid var(--line);font-size:.77rem;color:var(--muted);max-width:74ch}
 @media (max-width:760px){
   .spread{grid-template-columns:1fr;gap:16px}
@@ -74,16 +88,13 @@ footer{margin-top:20px;padding-top:26px;border-top:1px solid var(--line);font-si
 
 <div class="wrap">
 <header>
-  <p class="eyebrow">{{EYEBROW}}</p>
-  <h1>GHOST HACKER ― シロとピコ<span class="sub">{{SUB}}</span></h1>
-  <p class="lede">{{LEDE}}</p>
-  <div class="stats">
-    <div class="stat"><b>{{PAGES}}</b><span>ページ</span></div>
-    <div class="stat"><b>{{SPREADS}}</b><span>見開き</span></div>
-    <div class="stat"><b>{{BEATS}}</b><span>コマ</span></div>
-    <div class="stat"><b>{{FUKI}}</b><span>吹き出し</span></div>
-    <div class="stat"><b>{{MEKURI}}</b><span>めくり</span></div>
-  </div>
+  <p class="eyebrow">ネーム原稿</p>
+  <h1>GHOST HACKER ― シロとピコ<span class="sub">同じ話の、2つの組み方</span></h1>
+  <p class="lede">読切 45P と、連載第1話 48P。どちらも同じ制作経路——コマ割りは komawari
+  カタログ（鳥山・冨樫・荒木・浦沢・井上）からページごとに導出し、絵は seedance の
+  マルチショット生成を <b>1 ページ = 1 クリップ</b>で撮って各ショットの中央フレームを抜き、
+  吹き出しは kami-genko の縦組みで焼いています。</p>
+  <div class="switch" role="group" aria-label="版の切り替え">{{SWITCHER}}</div>
 </header>
 
 <p class="note"><b>右綴じで読みます。</b>各見開きは <b>右ページ＝奇数</b>／<b>左ページ＝偶数</b>で、

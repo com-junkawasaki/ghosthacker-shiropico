@@ -1,16 +1,22 @@
 #!/usr/bin/env nbb
 ;; 組んだページ PNG → 右綴じで読める1枚の HTML（Artifact 用）
 ;;
-;;   nbb jump/tools/build-gallery.cljs --work ep01 --pages /tmp/pages-ep01 \
-;;     --out /tmp/ep01-gallery.html --eyebrow "連載第1話ネーム原稿"
+;;   nbb jump/tools/build-gallery.cljs --works oneshot,ep01 \
+;;     --pages oneshot=/tmp/pages-oneshot,ep01=/tmp/pages-ep01 \
+;;     --out /tmp/gallery.html
 ;;
 ;; **右綴じの見開きの組み方。** 奇数＝右ページ、偶数＝左ページで、1つの見開きは
 ;; (奇数, 奇数+1)。画面は左→右に並ぶので **[偶数][奇数] の順に置く**。ここを
 ;; 逆にすると、読者はページをめくる向きを間違えたまま最後まで読む。
 ;; ◆見開き（2ページぶち抜き）はそれ自体が1つの見開きなので、横長1枚で出す。
 ;;
-;; めくり・煽りは**ネームの md から拾う**（ページ EDN には無い情報）。手で
-;; 打ち直すと md と食い違うので、正本から読む。
+;; **複数の版は並べずに切り替える。** 読切 45P と連載第1話 48P は「同じ話の別の
+;; 組み方」なので見比べたい。ただし同時に出すと 90 ページぶんの base64 が1枚の
+;; ページに載り、どちらも読めない（実測: 1 版だけで 10 MB）。切り替え式にすると
+;; DOM には両方あるが、画面には片方しか出ない。
+;;
+;; めくり・煽り・見出しは**ネームの md と works.edn から拾う**（ページ EDN には
+;; 無い情報）。手で打ち直すと正本と食い違う。
 
 (ns build-gallery
   (:require ["fs" :as fs] ["path" :as path] ["child_process" :as cp]
@@ -24,12 +30,16 @@
 
 (defn jpeg-b64
   "PNG → JPEG に落として base64。原稿はモノクロなので JPEG で十分小さくなる。
-   PNG のまま base64 すると 1 ページ 1 MB 級になり、45 ページで開けなくなる。"
-  [png]
+   PNG のまま base64 すると 1 ページ 1 MB 級になり、開けなくなる。
+
+   既定の 1000px は表示幅（2段組で1ページ約 600px）の実質 2 倍。これ以上大きく
+   しても見た目は変わらず base64 だけが膨らむ。**Artifact の上限は 16 MB** なので、
+   2 版（90 ページ）を1枚に載せるときは --width / --quality で落とすこと
+   （実測: 1000px/q78 の2版で 19 MB、900px/q70 で収まる）。吹き出しの縦組みが
+   読めなくなるので 850px より下げない。"
+  [png w q]
   (when (fs/existsSync png)
-    ;; 1000px は表示幅（2段組で1ページ約 600px）の実質 2 倍。これ以上大きくしても
-    ;; 見た目は変わらず、45 ページぶんの base64 だけが膨らんで開くのが重くなる。
-    (let [r (cp/spawnSync "magick" #js [png "-resize" "1000x" "-quality" "78" "jpg:-"])]
+    (let [r (cp/spawnSync "magick" #js [png "-resize" (str w "x") "-quality" (str q) "jpg:-"])]
       (when (zero? (.-status r)) (.toString (.-stdout r) "base64")))))
 
 (defn parse-md
@@ -42,96 +52,129 @@
           [n {:mekuri? (boolean (re-find #"◀\s*めくり" b))
               :aori    (some-> (re-find #"\*\*煽り\*\*[^「]*「([^」]+)」" b) second)}])))
 
+(defn load-pages
+  "その作品のページ EDN 一覧 → ページ情報のベクタ。"
+  [work pdir]
+  (->> (fs/readdirSync PAGES)
+       (filter #(re-find (re-pattern (str "^" (:prefix work) "-p\\d+\\.edn$")) %))
+       sort
+       (mapv (fn [f]
+               (let [d (edn/read-string (fs/readFileSync (path/join PAGES f) "utf8"))
+                     n (js/parseInt (second (re-find #"-p(\d+)\.edn$" f)) 10)
+                     n2 (some-> (re-find #"P\.\d+-(\d+)" (str (:page d))) second (js/parseInt 10))
+                     beats (vec (mapcat identity (:rows d)))]
+                 {:n n :n2 n2 :beats (count beats)
+                  :fuki (reduce + 0 (map #(let [f (:fuki %)]
+                                            (cond (map? f) 1 (sequential? f) (count f) :else 0))
+                                         beats))
+                  :img (path/join pdir (str "p" (if (< n 10) (str "0" n) n) ".png"))})))))
+
+(defn openings
+  "ページ列 → 見開き単位。◆見開きは単独、それ以外は (奇数, 奇数+1)。"
+  [pages]
+  (let [by-n (into {} (map (juxt :n identity) pages))]
+    (loop [ps pages out []]
+      (if-not (seq ps) out
+        (let [p (first ps)]
+          (if (:n2 p)
+            (recur (rest ps) (conj out {:wide p}))
+            (recur (remove #(= (:n %) (inc (:n p))) (rest ps))
+                   (conj out {:right p :left (get by-n (inc (:n p)))}))))))))
+
+(defn render-work [wid work meta* pages iw iq]
+  (let [opens  (openings pages)
+        last-n (apply max (map #(or (:n2 %) (:n %)) pages))
+        cell (fn [p]
+               (if-not p
+                 "<div class=\"sheet empty\"><div class=\"endmark\">裏表紙</div></div>"
+                 (let [b (jpeg-b64 (:img p) iw iq)
+                       mk (when (:mekuri? (get meta* (:n p)))
+                            " <span class=\"mk\">◀ めくり</span>")]
+                   (str "<div class=\"sheet\">"
+                        (if b (str "<img src=\"data:image/jpeg;base64," b "\" alt=\"P." (:n p) "\" loading=\"lazy\">")
+                            "<div class=\"missing\">未生成</div>")
+                        "<div class=\"cap\"><span class=\"pn\">" (:n p) "</span>"
+                        "<span class=\"side\">" (if (odd? (:n p)) "右" "左") "</span>" mk "</div></div>"))))
+        section (fn [{:keys [wide right left]}]
+                  (let [id (str "p" (name wid) "-")]
+                    (if wide
+                      (let [b (jpeg-b64 (:img wide) iw iq) m (get meta* (:n wide))]
+                        (str "<section class=\"spread wide\" id=\"" id (:n wide) "\"><div class=\"sheet full\">"
+                             (if b (str "<img src=\"data:image/jpeg;base64," b "\" alt=\"P." (:n wide) "\" loading=\"lazy\">")
+                                 "<div class=\"missing\">未生成</div>")
+                             "</div><div class=\"meta\"><span class=\"range\">P." (:n wide) "–" (:n2 wide) "</span>"
+                             "<span class=\"tag\">見開き</span>"
+                             (when (:aori m) (str "<span class=\"ttl\">" (esc (:aori m)) "</span>"))
+                             (when (:mekuri? m) " <span class=\"mk\">◀ めくり</span>")
+                             "</div></section>"))
+                      (let [m (or (:aori (get meta* (:n right))) (:aori (get meta* (:n left))))]
+                        (str "<section class=\"spread\" id=\"" id (:n right) "\">"
+                             (cell left) (cell right)
+                             "<div class=\"meta\"><span class=\"range\">P." (:n right)
+                             (when left (str "–" (:n left))) "</span>"
+                             (when m (str "<span class=\"ttl\">" (esc m) "</span>"))
+                             "</div></section>")))))]
+    (str "<div class=\"work\" id=\"w-" (name wid) "\">"
+         "<div class=\"work-head\"><p class=\"eyebrow\">" (esc (:eyebrow work)) "</p>"
+         "<h2>" (esc (:sub work)) "</h2>"
+         "<p class=\"lede\">" (:lede work) "</p>"
+         "<div class=\"stats\">"
+         "<div class=\"stat\"><b>" last-n "</b><span>ページ</span></div>"
+         "<div class=\"stat\"><b>" (count (filter :n2 pages)) "</b><span>見開き</span></div>"
+         "<div class=\"stat\"><b>" (reduce + 0 (map :beats pages)) "</b><span>コマ</span></div>"
+         "<div class=\"stat\"><b>" (reduce + 0 (map :fuki pages)) "</b><span>吹き出し</span></div>"
+         "<div class=\"stat\"><b>" (count (filter :mekuri? (vals meta*))) "</b><span>めくり</span></div>"
+         "</div></div>"
+         "<nav>" (str/join (for [o opens :let [p (or (:wide o) (:right o))]]
+                             (str "<a href=\"#p" (name wid) "-" (:n p) "\">" (:n p)
+                                  (when (:n2 p) (str "–" (:n2 p))) "</a>")))
+         "</nav>"
+         (str/join "\n" (map section opens))
+         "</div>")))
+
 (let [argv (vec (drop-while #(not (str/ends-with? % ".cljs")) (js->clj js/process.argv)))
       a    (rest argv)
       opt  (fn [k d] (or (second (drop-while #(not= k %) a)) d))
-      wid  (keyword (opt "--work" "oneshot"))
-      work (or (get (edn/read-string (fs/readFileSync WORKS "utf8")) wid)
-               (throw (js/Error. (str "works.edn に " wid " が無い"))))
-      pdir (opt "--pages" "/tmp/pages")
+      all  (edn/read-string (fs/readFileSync WORKS "utf8"))
+      wids (mapv keyword (str/split (opt "--works" "oneshot") #","))
+      ;; --pages は "wid=dir,wid=dir"。1作品だけなら "dir" でもよい。
+      pdirs (let [s (opt "--pages" "/tmp/pages")]
+              (if (str/includes? s "=")
+                (into {} (for [kv (str/split s #",")
+                               :let [[k v] (str/split kv #"=" 2)]]
+                           [(keyword k) v]))
+                {(first wids) s}))
       out  (opt "--out" "/tmp/gallery.html")
-      brow (opt "--eyebrow" "ネーム原稿")
-      sub  (opt "--sub" "")
-      lede (opt "--lede" "")
-      meta* (parse-md (:md work))
-      ;; ページ EDN からページの一覧を作る（見開きは :page の "P.13-14" で判る）
-      pages (->> (fs/readdirSync PAGES)
-                 (filter #(re-find (re-pattern (str "^" (:prefix work) "-p\\d+\\.edn$")) %))
-                 sort
-                 (mapv (fn [f]
-                         (let [d (edn/read-string (fs/readFileSync (path/join PAGES f) "utf8"))
-                               n (js/parseInt (second (re-find #"-p(\d+)\.edn$" f)) 10)
-                               n2 (some-> (re-find #"P\.\d+-(\d+)" (str (:page d))) second
-                                          (js/parseInt 10))
-                               beats (vec (mapcat identity (:rows d)))]
-                           {:n n :n2 n2 :beats (count beats)
-                            :fuki (reduce + 0 (map #(let [f (:fuki %)]
-                                                      (cond (map? f) 1 (sequential? f) (count f) :else 0))
-                                                   beats))
-                            :img (path/join pdir (str "p" (if (< n 10) (str "0" n) n) ".png"))}))))
-      by-n  (into {} (map (juxt :n identity) pages))
-      last-n (apply max (map #(or (:n2 %) (:n %)) pages))
-      ;; 見開き単位に畳む: ◆見開きは単独、それ以外は (奇数, 奇数+1)
-      opens (loop [ps pages out* []]
-              (if-not (seq ps) out*
-                (let [p (first ps)]
-                  (if (:n2 p)
-                    (recur (rest ps) (conj out* {:wide p}))
-                    (recur (remove #(= (:n %) (inc (:n p))) (rest ps))
-                           (conj out* {:right p :left (get by-n (inc (:n p)))}))))))
-      cell (fn [p]
-             (if-not p
-               "<div class=\"sheet empty\"><div class=\"endmark\">裏表紙</div></div>"
-               (let [b (jpeg-b64 (:img p))
-                     mk (when (:mekuri? (get meta* (:n p)))
-                          " <span class=\"mk\">◀ めくり</span>")]
-                 (str "<div class=\"sheet\">"
-                      (if b (str "<img src=\"data:image/jpeg;base64," b "\" alt=\"P." (:n p) "\" loading=\"lazy\">")
-                          "<div class=\"missing\">未生成</div>")
-                      "<div class=\"cap\"><span class=\"pn\">" (:n p) "</span>"
-                      "<span class=\"side\">" (if (odd? (:n p)) "右" "左") "</span>" mk "</div></div>"))))
-      section (fn [{:keys [wide right left]}]
-                (if wide
-                  (let [b (jpeg-b64 (:img wide))
-                        m (get meta* (:n wide))]
-                    (str "<section class=\"spread wide\" id=\"p" (:n wide) "\"><div class=\"sheet full\">"
-                         (if b (str "<img src=\"data:image/jpeg;base64," b "\" alt=\"P." (:n wide) "\" loading=\"lazy\">")
-                             "<div class=\"missing\">未生成</div>")
-                         "</div><div class=\"meta\"><span class=\"range\">P." (:n wide) "–" (:n2 wide) "</span>"
-                         "<span class=\"tag\">見開き</span>"
-                         (when (:aori m) (str "<span class=\"ttl\">" (esc (:aori m)) "</span>"))
-                         (when (:mekuri? m) " <span class=\"mk\">◀ めくり</span>")
-                         "</div></section>"))
-                  (let [m (or (:aori (get meta* (:n right))) (:aori (get meta* (:n left))))]
-                    (str "<section class=\"spread\" id=\"p" (:n right) "\">"
-                         (cell left) (cell right)
-                         "<div class=\"meta\"><span class=\"range\">P." (:n right)
-                         (when left (str "–" (:n left))) "</span>"
-                         (when m (str "<span class=\"ttl\">" (esc m) "</span>"))
-                         "</div></section>"))))
+      iw   (js/parseInt (opt "--width" "1000") 10)
+      iq   (js/parseInt (opt "--quality" "78") 10)
+      works (for [wid wids
+                  :let [w (or (get all wid)
+                              (throw (js/Error. (str "works.edn に " wid " が無い"))))
+                        d (or (get pdirs wid)
+                              (throw (js/Error. (str "--pages に " wid " のディレクトリが無い"))))]]
+              [wid w (parse-md (:md w)) (load-pages w d)])
       head (fs/readFileSync "jump/tools/gallery-head.html" "utf8")
-      nav  (str "<nav>" (str/join (for [o opens
-                                        :let [p (or (:wide o) (:right o))]]
-                                    (str "<a href=\"#p" (:n p) "\">" (:n p)
-                                         (when (:n2 p) (str "–" (:n2 p))) "</a>")))
-                "</nav>")
-      html (str (-> head
-                    (str/replace "{{TITLE}}" (esc (str "GHOST HACKER ― シロとピコ ｜ " (:label work))))
-                    (str/replace "{{EYEBROW}}" (esc brow))
-                    (str/replace "{{SUB}}" (esc sub))
-                    (str/replace "{{LEDE}}" lede)
-                    (str/replace "{{PAGES}}" (str last-n))
-                    (str/replace "{{SPREADS}}" (str (count (filter :n2 pages))))
-                    (str/replace "{{BEATS}}" (str (reduce + 0 (map :beats pages))))
-                    (str/replace "{{FUKI}}" (str (reduce + 0 (map :fuki pages))))
-                    (str/replace "{{MEKURI}}" (str (count (filter :mekuri? (vals meta*))))))
-                nav
-                (str/join "\n" (map section opens))
+      switcher (str/join (for [[wid w _ _] works]
+                           (str "<button type=\"button\" data-w=\"w-" (name wid) "\">"
+                                (esc (:tab w)) "</button>")))
+      ;; 切り替えは JS 6 行。CSS の :target や details でも組めるが、どちらも
+      ;; 「いま選ばれている版」をボタン側に反映できず、押しても変わったように
+      ;; 見えない。既定は最初の版を表示する。
+      js (str "<script>(function(){"
+              "var bs=document.querySelectorAll('.switch button');"
+              "function show(id){bs.forEach(function(b){var on=b.dataset.w===id;"
+              "b.setAttribute('aria-pressed',on);document.getElementById(b.dataset.w).hidden=!on;});}"
+              "bs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.w);"
+              "window.scrollTo({top:0,behavior:'smooth'});});});"
+              "show(bs[0].dataset.w);})();</script>")
+      html (str (str/replace head "{{SWITCHER}}" switcher)
+                (str/join "\n" (for [[wid w m ps] works] (render-work wid w m ps iw iq)))
                 "\n<footer>\n"
-                "com-junkawasaki/ghosthacker-shiropico ／ <code>" (:md work) "</code>・"
-                "<code>jump/tools/pages/" (:prefix work) "-*.edn</code><br><br>\n"
-                "絵はネーム段階の当たりで、決定稿ではありません。\n"
-                "</footer>\n</div>\n")]
+                "com-junkawasaki/ghosthacker-shiropico ／ "
+                (str/join "・" (for [[_ w _ _] works] (str "<code>" (:md w) "</code>")))
+                "<br><br>\n絵はネーム段階の当たりで、決定稿ではありません。\n</footer>\n"
+                js "\n</div>\n")]
   (fs/writeFileSync out html)
-  (println (str (name wid) ": 見開き " (count opens) " 組 / " last-n " ページ / "
-                (Math/round (/ (.-size (fs/statSync out)) 1024)) " KB → " out)))
+  (println (str (str/join " / " (for [[wid _ _ ps] works]
+                                  (str (name wid) " " (count (openings ps)) "見開き")))
+                " → " (Math/round (/ (.-size (fs/statSync out)) 1024)) " KB  " out)))
