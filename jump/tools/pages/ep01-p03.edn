@@ -1,0 +1,12 @@
+;; 第1話 P.3 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :toriyama :page "第1話 P.3"
+ :rows
+ [[{:id "p0", :dir "ピコ・きょとん", :fuki {:type "oval", :tail "right", :lines ["はんざい？" "なにそれ、" "おいしいのだ？"], :who "ピコ"}}
+   {:id "p1", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["おいしくありません"], :who "オーリオ"}}]
+
+  [{:id "p2", :dir "ピコの手元・アップ ステッカーだらけの端末。指が残像になるほど速い。", :sfx "タタタタタタタタタ", :fuki {:type "jagged", :tail "right", :lines ["じゃあ次は駅なの" "だ！"], :who "ピコ"}}
+   {:id "p3", :dir "駅・電光掲示板"}]
+
+  [{:id "p4", :dir "ホーム 乗客がざわざわ。駅員が走っていく。"}
+   {:id "p5", :dir "ピコ・ドヤ顔", :fuki {:type "jagged", :tail "left", :lines ["ウケるのだ〜！"], :who "ピコ"}}]]}

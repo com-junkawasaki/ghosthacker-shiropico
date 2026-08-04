@@ -1,0 +1,45 @@
+;; 作品ごとの設定。md-to-pages.cljs / generate-page-art.cljs が --work <id> で引く。
+;;
+;; **なぜ cljs から追い出したか。** 読切だけを通していたころは STYLE を
+;; md-to-pages.cljs に直書きしていたが、連載を通そうとした時点で「話数ぶん
+;; 45〜19 行のマップがコードに積み上がる」ことになった。作品が増えるたびに
+;; 変換器を編集するのは変換器の仕事ではない。ここはデータなので EDN に置く。
+;;
+;;   :md      ネームの正本（このリポジトリのルートからの相対パス）
+;;   :prefix  ページ EDN のファイル名の頭（<prefix>-pNN.edn）
+;;   :label   ページ EDN の :page に入る表示名
+;;   :style   ページ番号 → 作画スタイル。komawari_styles.edn の 5 作家から選ぶ。
+;;            **無指定で全ページ同じにしない** — 通して同じ段組だと読者が飽きる。
+;;            見開きのページ番号は開始ページで引く（P.13-14 なら 13）。
+
+{:oneshot
+ {:md    "jump/oneshot-45p.md"
+  :prefix "oneshot"
+  :label "oneshot"
+  :style {1 :urasawa  2 :urasawa  3 :urasawa  4 :urasawa  5 :togashi
+          6 :araki    7 :araki    8 :urasawa  9 :urasawa 10 :araki
+          11 :urasawa 12 :toriyama 13 :araki  15 :araki  16 :inoue
+          17 :urasawa 18 :urasawa 19 :toriyama 20 :togashi 21 :araki
+          22 :togashi 23 :inoue   24 :inoue   25 :inoue  27 :inoue
+          28 :araki   29 :urasawa 30 :inoue   31 :inoue  32 :urasawa
+          33 :toriyama 34 :araki  35 :araki   36 :togashi 37 :togashi
+          38 :inoue   39 :togashi 40 :togashi 41 :araki  43 :urasawa
+          44 :inoue   45 :inoue}}
+
+ ;; 第1話 48P（見開き3つ＝ページ見出しは45）。
+ ;; 割り当ての方針: ギャグの連打は toriyama（整った段で間を作る）、
+ ;; 不穏・イメージ空間は araki（傾いた段）、感情の大アップは inoue（大きく開ける）、
+ ;; 会話劇は urasawa（均等な段）、アクションの畳みかけは togashi。
+ :ep01
+ {:md    "jump/name-01.md"
+  :prefix "ep01"
+  :label "第1話"
+  :style {1 :inoue    2 :toriyama 3 :toriyama 4 :urasawa  5 :araki
+          6 :araki    7 :urasawa  8 :urasawa  9 :toriyama 10 :urasawa
+          11 :urasawa 12 :araki   13 :inoue   15 :urasawa 16 :togashi
+          17 :inoue   18 :inoue   19 :urasawa 20 :inoue   21 :togashi
+          22 :togashi 23 :araki   24 :inoue   25 :togashi 26 :araki
+          27 :inoue   28 :araki   29 :togashi 30 :inoue   31 :togashi
+          32 :araki   33 :inoue   35 :araki   36 :urasawa 37 :toriyama
+          38 :urasawa 39 :araki   40 :urasawa 41 :toriyama 42 :inoue
+          43 :inoue   44 :toriyama 45 :inoue  46 :urasawa 47 :inoue}}}

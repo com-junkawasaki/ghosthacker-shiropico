@@ -1,0 +1,12 @@
+;; 第1話 P.22 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "第1話 P.22"
+ :rows
+ [[{:id "p0", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["え"], :who "ピコ"}}
+   {:id "p1", :dir "ラット・大笑い 腹をかかえている。", :fuki {:type "wavy", :tail "left", :lines ["むだむだチュウ！" " 糸が繋がっとる" "かぎり、なんべん" "でも寝るチュウ！"], :who "ラット"}}]
+
+  [{:id "p2", :dir "引き 起こした数より、集まってくる数のほうが多い。ゾンビが増えていく。"}
+   {:id "p3", :dir "ピコ・パニック", :fuki {:type "oval", :tail "left", :lines ["なんで増えるのだ" "!? 起こすと増" "えるのだ!?"], :who "ピコ"}}]
+
+  [{:id "p4", :dir "ピコ、めちゃくちゃに連打", :fuki {:type "jagged", :tail "right", :lines ["もういっかい！" "もういっかい！" "もういっかいなの" "だ——！"], :who "ピコ"}}
+   {:id "p5", :dir "ピコ、息切れ 膝に手。", :fuki {:type "oval", :tail "left", :lines ["はぁ…っ、" "はぁ…っ"], :who "ピコ"}}]]}

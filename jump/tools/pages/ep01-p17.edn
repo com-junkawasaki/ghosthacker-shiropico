@@ -1,0 +1,11 @@
+;; 第1話 P.17 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "第1話 P.17"
+ :rows
+ [[{:id "p0", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……あな"], :who "ピコ"}}]
+
+  [{:id "p1", :dir "ラット、ぶら下がったまま", :fuki {:type "wavy", :tail "left", :lines ["おかげでラクさせ" "てもらったチュウ" "。おれ、あんな固" "い街、自力じゃ入" "れんかったチュウよ"], :who "ラット"}}
+   {:id "p2", :dir "ラット・満面の笑み", :fuki {:type "wavy", :tail "right", :lines ["ありがとチュウ。" "恩人チュウ"], :who "ラット"}}]
+
+  [{:id "p3", :dir "ピコの顔・大アップ 笑っていない。この漫画で初めての表情。"}
+   {:id "p4", :dir "ピコ", :fuki {:type "oval", :tail "right", :lines ["……オレが"], :who "ピコ"}}]]}

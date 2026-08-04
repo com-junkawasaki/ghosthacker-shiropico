@@ -1,0 +1,91 @@
+<!-- build-gallery.cljs のテンプレート。{{...}} は差し込み口。
+     Artifact は <!doctype>/<head>/<body> を publish 時に被せるので、ここには書かない。 -->
+<title>{{TITLE}}</title>
+<style>
+:root{
+  --paper:#FBFBF9; --guide:#8CC7EB; --accent:#1FB6A6;
+  --ground:#EFEDE7; --panel:#FFFFFF; --line:#D8D5CC; --ink:#141414; --muted:#6C7175;
+  --mincho:'Hiragino Mincho ProN','Yu Mincho','YuMincho','Noto Serif JP',serif;
+  --gothic:'Hiragino Sans','Yu Gothic','Noto Sans JP',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ground:#131517;--panel:#1C1F22;--line:#2C3034;--ink:#E9E7E2;--muted:#969CA2}
+}
+:root[data-theme="dark"]{--ground:#131517;--panel:#1C1F22;--line:#2C3034;--ink:#E9E7E2;--muted:#969CA2}
+:root[data-theme="light"]{--ground:#EFEDE7;--panel:#FFFFFF;--line:#D8D5CC;--ink:#141414;--muted:#6C7175}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--gothic);line-height:1.7;
+ -webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 110px}
+
+header{padding:76px 0 38px}
+.eyebrow{font-size:.7rem;letter-spacing:.24em;color:var(--muted);margin:0 0 16px}
+h1{font-family:var(--mincho);font-weight:600;font-size:clamp(1.9rem,4.8vw,3.2rem);margin:0;line-height:1.22;text-wrap:balance}
+h1 .sub{display:block;font-size:.4em;letter-spacing:.16em;color:var(--muted);margin-top:16px;font-weight:400}
+.lede{max-width:62ch;margin:26px 0 0;color:var(--muted);font-size:.93rem}
+code{font-size:.9em;background:var(--panel);border:1px solid var(--line);padding:1px 5px;border-radius:2px}
+
+.stats{display:flex;flex-wrap:wrap;margin:34px 0 0;border:1px solid var(--line);background:var(--panel)}
+.stat{flex:1 1 120px;padding:15px 18px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--mincho);font-size:1.55rem;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat span{font-size:.71rem;color:var(--muted);letter-spacing:.07em}
+
+.note{margin:36px 0 30px;padding:17px 20px;border-left:3px solid var(--guide);background:var(--panel);
+ font-size:.87rem;color:var(--muted);max-width:72ch}
+.note b{color:var(--ink);font-weight:600}
+
+nav{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 60px;padding:14px 0;border-top:1px solid var(--line);
+ border-bottom:1px solid var(--line)}
+nav a{font-size:.72rem;font-variant-numeric:tabular-nums;color:var(--muted);text-decoration:none;
+ padding:3px 8px;border:1px solid transparent;border-radius:2px}
+nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--line);background:var(--panel);outline:none}
+
+.spread{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 58px;align-items:start;scroll-margin-top:20px}
+.spread.wide{grid-template-columns:1fr}
+.sheet{background:var(--panel);border:1px solid var(--line);padding:9px 9px 0}
+.sheet.full{padding:9px}
+.sheet.empty{border-style:dashed;opacity:.4;display:grid;place-items:center;min-height:200px}
+.endmark{font-family:var(--mincho);font-size:.8rem;color:var(--muted);letter-spacing:.2em}
+.sheet img{display:block;width:100%;height:auto;background:#fff}
+.cap{display:flex;align-items:baseline;gap:9px;padding:9px 3px 10px;font-size:.71rem;color:var(--muted);
+ font-variant-numeric:tabular-nums}
+.pn{font-family:var(--mincho);font-size:1rem;color:var(--ink)}
+.pn::before{content:"P.";font-size:.72em;color:var(--muted)}
+.side{border:1px solid var(--line);padding:1px 7px;border-radius:2px;letter-spacing:.12em}
+.mk{color:var(--accent);letter-spacing:.05em}
+.meta{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:13px;padding-top:11px;
+ border-top:1px solid var(--line);font-size:.73rem;color:var(--muted)}
+.spread.wide .meta{grid-column:1}
+.range{font-family:var(--mincho);font-size:.92rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.tag{background:var(--guide);color:#0B2733;padding:1px 8px;border-radius:2px;letter-spacing:.11em;font-size:.67rem}
+.ttl{font-family:var(--mincho);color:var(--ink)}
+.missing{padding:70px 10px;text-align:center;color:var(--muted);font-size:.78rem;border:1px dashed var(--line)}
+
+footer{margin-top:20px;padding-top:26px;border-top:1px solid var(--line);font-size:.77rem;color:var(--muted);max-width:74ch}
+@media (max-width:760px){
+  .spread{grid-template-columns:1fr;gap:16px}
+  header{padding:48px 0 28px}
+  nav{margin-bottom:40px}
+}
+</style>
+
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">{{EYEBROW}}</p>
+  <h1>GHOST HACKER ― シロとピコ<span class="sub">{{SUB}}</span></h1>
+  <p class="lede">{{LEDE}}</p>
+  <div class="stats">
+    <div class="stat"><b>{{PAGES}}</b><span>ページ</span></div>
+    <div class="stat"><b>{{SPREADS}}</b><span>見開き</span></div>
+    <div class="stat"><b>{{BEATS}}</b><span>コマ</span></div>
+    <div class="stat"><b>{{FUKI}}</b><span>吹き出し</span></div>
+    <div class="stat"><b>{{MEKURI}}</b><span>めくり</span></div>
+  </div>
+</header>
+
+<p class="note"><b>右綴じで読みます。</b>各見開きは <b>右ページ＝奇数</b>／<b>左ページ＝偶数</b>で、
+コマもセリフも右から左へ流れます。<b>◀ めくり</b> は「ここでページをめくらせる」仕掛けが置かれた
+箇所で、右綴じでは必ず左（偶数）ページの末尾に来ます。見開きは綴じ目（ノド）を跨いで2ページに渡ります。</p>

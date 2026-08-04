@@ -1,0 +1,12 @@
+;; 第1話 P.21 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :togashi :page "第1話 P.21"
+ :rows
+ [[{:id "p0", :dir "ピコ、両手をひろげる", :fuki {:type "jagged", :tail "right", :lines ["いくぞオーリオ！" " 技、《ワイルド" "・ピング》！"], :who "ピコ"}}
+   {:id "p1", :dir "放射状に光がばら撒かれる", :sfx "ビカッ"}]
+
+  [{:id "p2", :dir "近くのゾンビ3体 「ハッ！」と目を覚ます。"}
+   {:id "p3", :dir "ピコ・ガッツポーズ", :fuki {:type "jagged", :tail "left", :lines ["いけるのだ！"], :who "ピコ"}}]
+
+  [{:id "p4", :dir "が—— 起きた3体に、まわりのゾンビから糸がしゅるっと伸びる。"}
+   {:id "p5", :dir "3体、また眠る ぐるん。", :sfx "すう……"}]]}

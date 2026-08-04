@@ -1,0 +1,12 @@
+;; 第1話 P.27 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "第1話 P.27"
+ :rows
+ [[{:id "p0", :dir "黒の中に、白い鳩が1羽だけ浮かんでいる"}
+   {:id "p1", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["ピコ様"], :who "オーリオ"}}]
+
+  [{:id "p2", :dir "オーリオ", :fuki {:type "square", :tail "right", :lines ["——わたしの声だ" "け、聞いてください"], :who "オーリオ"}}
+   {:id "p3", :dir "ピコ・M", :fuki {:type "square", :tail "top", :lines ["……オーリオ"], :who "M"}}]
+
+  [{:id "p4", :dir "黒の中の無数の線が、すうっと遠のいていく"}
+   {:id "p5", :dir "残ったのは、1本だけ 太く、まっすぐ、脈打つように光っている。"}]]}

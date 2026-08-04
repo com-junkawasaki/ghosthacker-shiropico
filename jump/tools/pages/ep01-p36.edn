@@ -1,0 +1,12 @@
+;; 第1話 P.36 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :urasawa :page "第1話 P.36"
+ :rows
+ [[{:id "p0", :dir "街・ロング 糸が消えていく。"}
+   {:id "p1", :dir "自販機 ぱち、と目をあける。", :fuki {:type "oval", :tail "left", :lines ["ふぁ……ぁお？"], :who "自販機"}}]
+
+  [{:id "p2", :dir "信号機 まばたきして、青。"}
+   {:id "p3", :dir "バス", :fuki {:type "oval", :tail "left", :lines ["……つぎ、" "とまります"], :who "バス"}}]
+
+  [{:id "p4", :dir "街じゅうの機械が、いっせいに目を覚ます 一台も壊れていない。"}
+   {:id "p5", :dir "ピコ、その場にぺたんと座り込む", :fuki {:type "oval", :tail "left", :lines ["……起きた"], :who "ピコ"}}]]}

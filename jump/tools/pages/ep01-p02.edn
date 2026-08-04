@@ -1,0 +1,11 @@
+;; 第1話 P.2 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :toriyama :page "第1話 P.2"
+ :rows
+ [[{:id "p0", :dir "商店街・ロング 電光看板が一斉にパチンと切り替わる。", :sfx "パチッ パチッ パチッ"}]
+
+  [{:id "p1", :dir "看板アップ 本日 全品 0円"}
+   {:id "p2", :dir "八百屋の店主と客 口をあけて固まっている。", :fuki [{:type "oval", :tail "right", :lines ["え"], :who "客"} {:type "oval", :tail "left", :lines ["ええーーっ!?"], :who "店主"}]}]
+
+  [{:id "p3", :dir "給水塔・ピコ 腹をかかえて笑っている。", :fuki {:type "jagged", :tail "left", :lines ["見ろオーリオ！" "みんなよろこんで" "るのだ！"], :who "ピコ"}}
+   {:id "p4", :dir "オーリオ・真顔でアップ まったく笑っていない。", :fuki {:type "square", :tail "right", :lines ["ピコ様。それは犯" "罪です"], :who "オーリオ"}}]]}

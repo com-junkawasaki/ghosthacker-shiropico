@@ -1,0 +1,12 @@
+;; 第1話 P.9 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :toriyama :page "第1話 P.9"
+ :rows
+ [[{:id "p0", :dir "シロの背中 フードの中が、もこっと膨らむ。"}
+   {:id "p1", :dir "アップ もこ。"}]
+
+  [{:id "p2", :dir "飛び出す ふわっ、と まんまるの白い羊。", :sfx "ぽふっ"}
+   {:id "p3", :dir "プロック・着地 もちもちしている。", :fuki {:type "oval", :tail "left", :lines ["あかん。シロはん" "、また言えてまへ" "んやん"], :who "プロック"}}]
+
+  [{:id "p4", :dir "ピコ・目がキラキラ", :fuki {:type "jagged", :tail "right", :lines ["もこもこ！！"], :who "ピコ"}}
+   {:id "p5", :dir "プロック、抱きつかれながら", :fuki {:type "oval", :tail "left", :lines ["はいはい、" "もこもこですわ"], :who "プロック"}}]]}

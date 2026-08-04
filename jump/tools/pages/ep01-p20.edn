@@ -1,0 +1,12 @@
+;; 第1話 P.20 — jump/name-01.md から自動生成（md-to-pages.cljs）。
+;; **手で調整したら、このヘッダを消す**（--force なしでは上書きされない）。
+{:style :inoue :page "第1話 P.20"
+ :rows
+ [[{:id "p0", :dir "ピコ、顔を上げる 目が濡れている。"}
+   {:id "p1", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["わたしを拾ったと" "きのあなたも、" "なにも考えていま" "せんでした"], :who "オーリオ"}}]
+
+  [{:id "p2", :dir "回想・雨のダンボールと、差し出された手", :fuki {:type "square", :tail "right", :lines ["ただ、放っておけ" "なかっただけです"], :who "オーリオ"}}
+   {:id "p3", :dir "オーリオ", :fuki {:type "square", :tail "left", :lines ["今も、同じでしょう"], :who "オーリオ"}}]
+
+  [{:id "p4", :dir "ピコ、立ち上がる 袖でごしごし顔を拭く。", :fuki {:type "oval", :tail "right", :lines ["……うん"], :who "ピコ"}}
+   {:id "p5", :dir "ピコ・アップ 前を向く。", :fuki {:type "oval", :tail "left", :lines ["起こすのだ。" "ぜんぶ。"], :who "ピコ"}}]]}
