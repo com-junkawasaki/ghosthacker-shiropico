@@ -8,6 +8,8 @@
 ;;   :md      ネームの正本（このリポジトリのルートからの相対パス）
 ;;   :prefix  ページ EDN のファイル名の頭（<prefix>-pNN.edn）
 ;;   :label   ページ EDN の :page に入る表示名
+;;   :tab     ギャラリーの切り替えボタンに出る名前
+;;   :eyebrow / :sub / :lede  ギャラリーの見出し（build-gallery.cljs が読む）
 ;;   :style   ページ番号 → 作画スタイル。komawari_styles.edn の 5 作家から選ぶ。
 ;;            **無指定で全ページ同じにしない** — 通して同じ段組だと読者が飽きる。
 ;;            見開きのページ番号は開始ページで引く（P.13-14 なら 13）。
@@ -15,7 +17,11 @@
 {:oneshot
  {:md    "jump/oneshot-45p.md"
   :prefix "oneshot"
-  :label "oneshot"
+  :label "読切"
+  :tab   "読切 45P"
+  :eyebrow "週刊少年ジャンプ 読切用ネーム原稿"
+  :sub   "オレ、なんにも こわしてない のだ"
+  :lede  "45 ページ、完結。1話で読み切るために、出会いから決着までを詰めた版。ページ設計の正本は <code>jump/oneshot-45p.md</code>。"
   :style {1 :urasawa  2 :urasawa  3 :urasawa  4 :urasawa  5 :togashi
           6 :araki    7 :araki    8 :urasawa  9 :urasawa 10 :araki
           11 :urasawa 12 :toriyama 13 :araki  15 :araki  16 :inoue
@@ -34,6 +40,10 @@
  {:md    "jump/name-01.md"
   :prefix "ep01"
   :label "第1話"
+  :tab   "連載 第1話 48P"
+  :eyebrow "週刊少年ジャンプ 連載第1話ネーム原稿"
+  :sub   "あけたら、ふさぐのだ"
+  :lede  "48 ページ（巻頭カラー想定）。読切と同じ話を、連載の第1話として組み直した版——決着のあとに <b>Wolves・クロ・デーモン・紫の裏地</b> を置いて次号へ引く。ページ設計の正本は <code>jump/name-01.md</code>。"
   :style {1 :inoue    2 :toriyama 3 :toriyama 4 :urasawa  5 :araki
           6 :araki    7 :urasawa  8 :urasawa  9 :toriyama 10 :urasawa
           11 :urasawa 12 :araki   13 :inoue   15 :urasawa 16 :togashi
