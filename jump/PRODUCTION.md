@@ -1,6 +1,6 @@
 # 制作経路（ネーム → 原稿）
 
-作画規約は `jump/ART-DIRECTION.md`／キャラ設定は `jump/character-design-spec.json`
+作画規約は `jump/ART-DIRECTION.md`／キャラ設定は `jump/character-design-spec.edn`
 
 ---
 

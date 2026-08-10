@@ -88,7 +88,7 @@
 | 😈 Daemon | daemon（常駐）／Maxwell's Demon | 歯車ボディ＋小さな天秤のメカ小人ロボ、角なし。メタルグレー #6B7780＋オレンジ #FF8A3D | 自動起動の"根"を断つ |
 | 🧟 Zombie | zombie process／ボット端末 | 眠ってフリーズした可愛いガジェット（車/家電に目とZzz）、くすみ青 #5B7A99。元は被害者 | やさしく"おこす"「ふぁ〜お！」 |
 
-ComfyUI プロンプトは `character-design-spec.json` 参照。
+ComfyUI プロンプトは `character-design-spec.edn` 参照。
 
 ---
 
@@ -177,9 +177,9 @@ ComfyUI プロンプトは `character-design-spec.json` 参照。
 |---|---|
 | `SERIES-BIBLE.md` | 本書（シリーズ全体設計） |
 | `episode-01.md` | 第1話フル脚本「オネムの暴走、ドバイの夜」 |
-| `character-design-spec.json` | シロ/ピコ/怪物3体のデザインシート＋ComfyUI プロンプト |
-| `henshin-bank.json` | 変身バンク絵コンテ（毎回共通3.5秒・5カット） |
-| `pipeline-specs.json` | mangaka `storyboardFromPrompt` 投入用 JSON（第1話・バンク） |
+| `character-design-spec.edn` | シロ/ピコ/怪物3体のデザインシート＋ComfyUI プロンプト |
+| `henshin-bank.edn` | 変身バンク絵コンテ（毎回共通3.5秒・5カット） |
+| `pipeline-specs.edn` | mangaka `storyboardFromPrompt` 投入用データ（第1話・バンク） |
 | `character-refs/` | 既存シロ/ピコ立ち絵 gen2＋表情12種（生成の参照画像） |
 
 **出典**: `be34e38d-c9b5-40ba-8707-3916fd86b749.jsonl`（design line 3〜249）。

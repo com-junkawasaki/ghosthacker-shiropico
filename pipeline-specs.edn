@@ -1,0 +1,46 @@
+;; pipeline-specs.edn — mangaka storyboardFromPrompt / motion-comic への入力仕様。
+;; 2026-08-10 に pipeline-specs.json から移行（理由は character-design-spec.edn 冒頭）。
+;;
+;; ⚠ :backend/character-refs は 2026-08-03 の ref-policy に合わせてある。
+;;   移行前の JSON は "shiro-gen2 + pico-gen2 + 12-emotion sets" と書いていたが、
+;;   gen2 の 11 枚は同日のオーナー判断で「本作のシロ/ピコではない」として除去済み。
+;;   正本は character-design-spec.edn の :spec/kind "ref-policy" entity。
+
+[{:db/id -1
+  :source/dataset "shiropico-spec"
+  :spec/kind "pipeline-note"
+  :note/text "mangaka storyboardFromPrompt + motion-comic inputs for SHIRO & PICO. style 'shonen' = Naruto/Kimetsu lineage; characters anchored to character-refs/ via ControlNet/IPAdapter."}
+
+ {:db/id -2
+  :source/dataset "shiropico-spec"
+  :spec/kind "backend"
+  :backend/comfyui "https://comfyui.gftd.ai  (fleet 192.168.1.70:8188)"
+  :backend/checkpoint "animagine-xl-4.0.safetensors"
+  :backend/character-refs "character-refs/emotions/{shiro,pico}/ (各12表情) + character-refs/kamishibai-pico.png（ピコ旧世代・基準）"
+  :backend/world-assets "reuse ../ghosthacker/resources/usd/ (cyberspace, tokyo-zenkei, city-street) + yukkuri kamishibai-cyber-bg"}
+
+ {:db/id -3
+  :source/dataset "shiropico-spec"
+  :spec/kind "pipeline-input"
+  :pipeline-input/of "episode01"
+  :pipeline-input/story "白フードの天才ホワイトハッカー・シロと、元クリプトキディーの相棒ピコが、ドバイの未来都市でゾンビ化した自動運転カーの暴走を止める。可愛いチビ絵から変身で等身が上がり、忍/鬼滅級の必殺アクションで解決する痛快サイバー活劇"
+  :pipeline-input/page-count 7
+  :pipeline-input/panels-per-page 5
+  :pipeline-input/style "shonen"
+  :pipeline-input/max-tokens 1800}
+
+ {:db/id -4
+  :source/dataset "shiropico-spec"
+  :spec/kind "pipeline-input"
+  :pipeline-input/of "henshinBank"
+  :pipeline-input/story "チビのシロとピコがハイタッチし、ティールの光の粒子に包まれて等身が上がり、決めポーズを取る変身シーン"
+  :pipeline-input/page-count 1
+  :pipeline-input/panels-per-page 5
+  :pipeline-input/style "shonen"}
+
+ {:db/id -5
+  :source/dataset "shiropico-spec"
+  :spec/kind "motion-comic"
+  :motion-comic/note "mirror Ren's ../ghosthacker/resources/motion-comic/ (panels → .otio → mp4). Pan/zoom/parallax on generated panels; VOICEVOX dialogue (shiro=metan:2, pico=zundamon:3); SFX per cut."
+  :motion-comic/output "resources/motion-comic/sp-ep01-pXX.{mp4,otio}"
+  :motion-comic/persistence "DataLad + git-annex SHA256E + IPFS pin + B2 (ai-gftd-nats); see resources/STYLE-EXPERIMENTS-DATALAD.md"}]
