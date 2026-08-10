@@ -1,6 +1,6 @@
 # 『GHOST HACKER ― シロとピコ』 アートディレクション（ジャンプ版）
 
-キャラ設定データは `jump/character-design-spec.json` ／ 企画書は `jump/SERIES-PROPOSAL.md`
+キャラ設定データは `jump/character-design-spec.edn` ／ 企画書は `jump/SERIES-PROPOSAL.md`
 
 ---
 
@@ -42,7 +42,7 @@
 
 ⚠ **実ファイルの削除はまだできていない。** `ghosthacker-shiropico-assets` は 2026-07-29 に
 GitHub 上で archive され read-only。削除は owner の unarchive 後で、それまでは
-**本節と `character-design-spec.json` の `refPolicy` が「使ってはいけない」の正本**。
+**本節と `character-design-spec.edn` の `refPolicy` が「使ってはいけない」の正本**。
 
 ### この訂正で変わったこと
 
@@ -246,5 +246,5 @@ Wolves のフードに動物の耳を立てる規約自体は、雑魚どうし�
 | `character-refs/emotions/shiro/*.png`（12表情） | **シロの正**。そのまま使う。追加なし |
 | `character-refs/kamishibai-pico.png`（旧世代）＋ `emotions/pico/*.png`（12表情） | **ピコの正**。そのまま使う。イヤーカフを左耳に足すだけ |
 | `character-refs/kamishibai-{shiro,pico}-gen2*.png`（11枚） | **使わない（除去対象）**。→ §0.5 |
-| `../character-design-spec.json`（アニメ版） | **モンスター3種（Ghost/Daemon/Zombie）は流用可**。人物側の「2モード（チビ／バトル）」は**ジャンプ版では採らない** |
-| `jump/character-design-spec.json` | 本ライン用。新キャラ（Pup／ステルス／ハウル／クロ／Wolves 雑魚）はこちらが正 |
+| `../character-design-spec.edn`（アニメ版） | **モンスター3種（Ghost/Daemon/Zombie）は流用可**。人物側の「2モード（チビ／バトル）」は**ジャンプ版では採らない** |
+| `jump/character-design-spec.edn` | 本ライン用。新キャラ（Pup／ステルス／ハウル／クロ／Wolves 雑魚）はこちらが正 |

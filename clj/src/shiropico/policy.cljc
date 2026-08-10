@@ -16,7 +16,7 @@
                                   flagged `:high-stakes?` (e.g. the SHIRO &
                                   PICO henshin-bank transformation sequence,
                                   reused across every episode — SERIES-BIBLE.md
-                                  §henshin-bank.json) → ESCALATE for human
+                                  §henshin-bank.edn) → ESCALATE for human
                                   review even when the render itself
                                   succeeded.")
 

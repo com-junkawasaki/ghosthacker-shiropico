@@ -1,0 +1,133 @@
+;; character-design-spec.edn — SHIRO & PICO のキャラクター/怪物設定の正本。
+;;
+;; 2026-08-10 に character-design-spec.json から移行。JSON をやめた理由は、この
+;; workspace の正本が EDN の datom 面だから（CLAUDE.md「docs / ADR は EDN only +
+;; DataScript query」）。JSON のままだと edn-datomize も edn-query も読めず、
+;; 「どの repo がどの設定を持っているか」を引く手段が名前だけになる。
+;;
+;; トップレベルは tx-data なのでそのまま transact できる:
+;;   (d/transact conn (edn/read-string (slurp "character-design-spec.edn")))
+;;
+;; 入れ子の colors マップは pr-str の blob にせず :character/color-* の scalar へ
+;; 展開してある（blob にすると「シロのアクセント色は何か」が query で引けない）。
+;;
+;; ⚠ 参照画像の正本は :spec/kind "ref-policy" の entity。kamishibai-*-gen2*.png は
+;;   2026-08-03 のオーナー判断で「本作のシロ/ピコではない」として除去済み。
+
+[{:db/id -1
+  :source/dataset "shiropico-spec"
+  :spec/kind "series"
+  :series/name "SHIRO & PICO"
+  :series/universe "GFTD Cyber Universe (sister work to Ren's Ghost Hacker)"}
+
+ {:db/id -2
+  :source/dataset "shiropico-spec"
+  :spec/kind "style-guide"
+  :style/tone "yukkuri-cute chibi + cyber (teal/cyan)"
+  :style/linework "thick, clean, anime; 2-value flat shading"
+  :style/mode-daily "2.5-head chibi"
+  :style/mode-battle "5-6 head, via henshin bank"
+  :style/palette-teal "#1FB6A6"
+  :style/palette-cyan "#29D3C2"
+  :style/palette-dark-base "#0E1B22"
+  :style/palette-white "#F4F8F7"
+  :style/age-rating "7+/PG; no blood/horror/gore, no religious or occult iconography"
+  :style/cultural "single world-wide neutral design (Gulf-safe as-is)"}
+
+ {:db/id -3
+  :source/dataset "shiropico-spec"
+  :spec/kind "character"
+  :character/id "shiro"
+  :character/name "シロ"
+  :character/role "protagonist / world-top white-hat hacker / mentor-guardian (static) — calm, composed (girl)"
+  :character/gender "female (1girl)"
+  :character/ref-images ["character-refs/emotions/shiro/normal.png"
+                         "character-refs/emotions/shiro/（12表情）"]
+  :character/silhouette "白い衣装＋つばの短い白いキャップ、小柄"
+  :character/hair-eyes "銀白の髪にシアンのメッシュ、大きなシアンの目"
+  :character/color-hood "#F4F8F7"
+  :character/color-accent "#1FB6A6"
+  :character/color-inner "#2B3A42"
+  :character/props "thin laptop (teal glow), hood strings like antennae"
+  :character/battle-mode "scale up, hood billows, teal eyes glow strong"
+  :character/pose "single-finger quiet tap — 'もう、視えてる'"
+  :character/ng "weapons, blood, exposure, aggressive angularity, フードをかぶせない（キャップが正）"
+  :character/voice "voicevox:2 (四国めたん)"
+  :character/comfy-prompt "cute chibi girl hacker, silver white hair with cyan streaks, large cyan eyes, white outfit with white cap, calm gentle expression, clean anime line, flat shading"}
+
+ {:db/id -4
+  :source/dataset "shiropico-spec"
+  :spec/kind "character"
+  :character/id "pico"
+  :character/name "ピコ"
+  :character/role "sidekick / ex-crypto-kiddie growing into white-hat (dynamic, audience proxy)"
+  :character/gender "male (1boy)"
+  :character/ref-images ["character-refs/kamishibai-pico.png（旧世代・基準）"
+                         "character-refs/emotions/pico/normal.png"
+                         "character-refs/emotions/pico/（12表情）"]
+  :character/silhouette "small, energetic; spiky hair tuft; dynamic clothing"
+  :character/hair-eyes "グレー〜チャコールの髪に淡い黄緑のハイライト。大きな白目に小さい黒い瞳"
+  :character/color-hair "#7F8A80"
+  :character/color-highlight "#C7E3B0"
+  :character/color-hoodie "#A8E05F"
+  :character/color-accent "#A8E05F"
+  :character/props "ノートPC（常に抱えている）"
+  :character/battle-mode "scale up, gallant; hair bristles, lime speed lines"
+  :character/growth "early=flippant/sloppy → late=careful gestures; color unchanged, growth via expression+posture"
+  :character/ng "delinquent signifiers (cigarettes/weapons); stays mischievous"
+  :character/voice "voicevox:3 (ずんだもん)"
+  :character/personality "genius but a bit airheaded/ditzy kiddie with moments of brilliance (zundamon-like energy)"
+  :character/color-note "ライムは目ではなくパーカー。旧記述の lime eyes は誤り"
+  :character/comfy-prompt "cute chibi boy hacker, messy grey charcoal hair with pale yellow-green highlights, big round eyes with small dark pupils, light lime green hoodie, holding a white laptop, clean anime line, flat shading"}
+
+ {:db/id -5
+  :source/dataset "shiropico-spec"
+  :spec/kind "monster"
+  :monster/id "ghost"
+  :monster/name "Ghost"
+  :monster/origin "data remanence (APT/rootkit); series boss-class"
+  :monster/design "translucent shimmering data-particle blob, sandstorm sprite; limbs faintly blink"
+  :monster/color-body "#29D3C2 translucent"
+  :monster/color-noise "#F4F8F7"
+  :monster/behavior "shy, loves hide-and-seek; vanishes leaving white heat afterimage"
+  :monster/defeat "trace the heat afterimage to 'find' it (do not destroy)"
+  :monster/ng "white sheet, skull, vengeful face — it is a sandstorm spirit"
+  :monster/comfy-prompt "cute translucent data-particle sprite, swirling cyan noise, soft glowing dots forming a round friendly ghost-like blob, no sheet no skull, teal glow, anime"}
+
+ {:db/id -6
+  :source/dataset "shiropico-spec"
+  :spec/kind "monster"
+  :monster/id "daemon"
+  :monster/name "Daemon"
+  :monster/origin "daemon (resident process) / Maxwell's Demon (science episodes)"
+  :monster/design "clockwork robot imp with tiny balance scale, gears, no horns"
+  :monster/color-metal "#6B7780"
+  :monster/color-accent "#FF8A3D"
+  :monster/color-reboot "#FF5630"
+  :monster/behavior "persistent, whack-a-mole pop-ups; scale tips and glows red on reboot (the cost)"
+  :monster/defeat "soothe the auto-start root (persistence point)"
+  :monster/ng "demon horns/tail/trident — it's a clockwork robot"
+  :monster/comfy-prompt "cute clockwork robot imp holding tiny balance scale, gears, no horns, metal grey with orange glow, mischievous mechanical, anime, flat shading"}
+
+ {:db/id -7
+  :source/dataset "shiropico-spec"
+  :spec/kind "monster"
+  :monster/id "zombie"
+  :monster/name "Zombie"
+  :monster/origin "zombie process / botnet device"
+  :monster/design "cute sleeping frozen gadgets (smart-car/devices with closed eyes and Zzz), pale blue blink"
+  :monster/color-body "#5B7A99"
+  :monster/color-zzz "#9FE3DF"
+  :monster/color-controlled "spiral eyes"
+  :monster/behavior "drifting herd; originally normal victims; wakes when C2 is cut"
+  :monster/defeat "gently 'wake' them (save, not kill) — 'ふぁ〜お！'"
+  :monster/ng "rot, zombie skin, moaning, missing parts — just drowsy faces"
+  :monster/comfy-prompt "cute sleepy frozen gadget characters, smart-car and devices with closed eyes and Zzz, dull blue glow, hypnotic spiral eyes when controlled, harmless drowsy, anime"}
+
+ {:db/id -8
+  :source/dataset "shiropico-spec"
+  :spec/kind "ref-policy"
+  :ref-policy/decided-at "2026-08-03"
+  :ref-policy/canonical "character-refs/kamishibai-pico.png（ピコ 旧世代）＋ character-refs/emotions/{shiro,pico}/*.png（各12表情）"
+  :ref-policy/removed "character-refs/kamishibai-{shiro,pico}-gen2*.png（全11枚）— 本作のシロ/ピコではない。オーナー判断で除去"
+  :ref-policy/detail "jump/ART-DIRECTION.md §0.5 が正本"}]

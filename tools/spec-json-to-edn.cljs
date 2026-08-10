@@ -1,0 +1,107 @@
+#!/usr/bin/env nbb
+;; spec-json-to-edn.cljs — 設定 JSON を、この repo の他の .edn と同じ tx-data へ移す。
+;;
+;;   nbb tools/spec-json-to-edn.cljs <in.json> <out.edn> <dataset>
+;;
+;; 変換規則（root の 3 spec を手で移したときの形に合わせてある）:
+;;   - トップレベルの object 値      → 1 entity（:spec/kind はそのキー名）
+;;   - トップレベルの array 値       → 要素ごとに 1 entity（:spec/kind は単数化したキー名）
+;;   - トップレベルの scalar 値      → :spec/kind "series" の entity にまとめる
+;;   - 入れ子の scalar-only object   → 親の属性へ平坦化（:ns/parent-child）
+;;     pr-str の blob にしない。blob にすると「アクセント色は何か」が query で引けない。
+;;   - 文字列だけの array            → cardinality/many としてそのまま持つ
+;;   - それ以外の入れ子              → 最後の手段として pr-str の blob（警告を出す）
+;;
+;; キーは camelCase → kebab-case。値は一切変えない（format 変換であって編集ではない）。
+
+(ns spec-json-to-edn
+  (:require ["fs" :as fs]
+            [clojure.string :as str]))
+
+(defn kebab [s]
+  (-> (str s)
+      (str/replace #"([a-z0-9])([A-Z])" "$1-$2")
+      (str/replace #"[_\s]+" "-")
+      str/lower-case))
+
+(defn singular [s]
+  (cond (str/ends-with? s "ies") (str (subs s 0 (- (count s) 3)) "y")
+        (str/ends-with? s "s")   (subs s 0 (dec (count s)))
+        :else s))
+
+;; nil は datom 面に置けない（datascript は "Cannot store nil as a value" で落ちる）。
+;; JSON の null は「属性が無い」で表す — datom 面ではそれが欠測の書き方。
+(defn scalar? [v] (or (string? v) (number? v) (boolean? v)))
+(defn scalar-map? [v] (and (map? v) (seq v) (every? #(or (nil? %) (scalar? %)) (vals v))))
+(defn string-vec? [v] (and (vector? v) (seq v) (every? string? v)))
+
+(def warnings (atom []))
+
+(defn attrs
+  "1 つの JSON object を、名前空間 ns の属性マップへ。"
+  [ns obj path]
+  (reduce
+    (fn [acc [k v]]
+      (let [a (keyword ns (kebab k))]
+        (cond
+          (nil? v)        acc                      ; null → 属性を出さない
+          (scalar? v)     (assoc acc a v)
+          (string-vec? v) (assoc acc a v)
+          (scalar-map? v) (merge acc (into {} (keep (fn [[k2 v2]]
+                                                      (when-not (nil? v2)
+                                                        [(keyword ns (str (kebab k) "-" (kebab k2))) v2]))
+                                                    v)))
+          :else (do (swap! warnings conj (str path "." k " -> pr-str blob"))
+                    (assoc acc a (pr-str v))))))
+    {} obj))
+
+(defn convert [in-path dataset]
+  (let [doc (js->clj (js/JSON.parse (fs/readFileSync in-path "utf8")))
+        id  (atom 0)
+        next-id! #(swap! id dec)
+        top-scalars (into {} (filter (comp scalar? val) doc))
+        entities
+        (concat
+          (when (seq top-scalars)
+            [(merge {:db/id (next-id!) :source/dataset dataset :spec/kind "series"}
+                    (attrs "series" top-scalars "$"))])
+          (mapcat
+            (fn [[k v]]
+              (cond
+                (map? v) [(merge {:db/id (next-id!) :source/dataset dataset :spec/kind (kebab k)}
+                                 (attrs (kebab k) v (str "$." k)))]
+                (vector? v)
+                (let [kind (singular (kebab k))]
+                  (map-indexed
+                    (fn [i el]
+                      (if (map? el)
+                        (merge {:db/id (next-id!) :source/dataset dataset :spec/kind kind}
+                               (attrs kind el (str "$." k "[" i "]")))
+                        {:db/id (next-id!) :source/dataset dataset :spec/kind kind
+                         (keyword kind "value") el}))
+                    v))
+                :else nil))
+            (remove (comp scalar? val) doc)))]
+    (vec entities)))
+
+(defn pretty [entities]
+  (str "[" (str/join "\n\n " (map (fn [e]
+                                    (str "{"
+                                         (str/join "\n  " (map (fn [[k v]] (str (pr-str k) " " (pr-str v)))
+                                                               e))
+                                         "}"))
+                                  entities))
+       "]\n"))
+
+(let [[in out dataset] (drop 3 (vec (.-argv js/process)))]
+  (when-not (and in out dataset)
+    (println "usage: nbb tools/spec-json-to-edn.cljs <in.json> <out.edn> <dataset>")
+    (js/process.exit 2))
+  (let [entities (convert in dataset)
+        header (str ";; " out " — " in " から移行（2026-08-10、tools/spec-json-to-edn.cljs）。\n"
+                    ";; この workspace の正本は EDN の datom 面なので JSON では query できない。\n"
+                    ";; 値は変えていない（format 変換であって編集ではない）。\n"
+                    ";; トップレベルは tx-data: (d/transact conn (edn/read-string (slurp ...)))\n\n")]
+    (fs/writeFileSync out (str header (pretty entities)))
+    (println (str "wrote " out ": " (count entities) " entities"))
+    (doseq [w @warnings] (println (str "  note: " w)))))

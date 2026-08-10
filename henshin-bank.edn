@@ -1,0 +1,67 @@
+;; henshin-bank.edn — 変身バンク「シロピコ、オン！」の 5 カット定義（毎話同一）。
+;; 2026-08-10 に henshin-bank.json から移行（理由は character-design-spec.edn 冒頭）。
+;; トップレベルは tx-data。カットは 1 カット = 1 entity で :cut/n 順に並ぶ。
+
+[{:db/id -1
+  :source/dataset "shiropico-spec"
+  :spec/kind "henshin-bank"
+  :bank/name "henshin-bank"
+  :bank/title "変身バンク「シロピコ、オン！」"
+  :bank/duration-sec 3.5
+  :bank/reuse "identical cut every episode (kids chant along)"
+  :bank/particle-color "#1FB6A6 (teal, fixed)"
+  :bank/constraints "no religious/occult iconography; world-wide neutral"}
+
+ {:db/id -2
+  :source/dataset "shiropico-spec"
+  :spec/kind "henshin-cut"
+  :cut/n 1
+  :cut/shot "close-up (Pico)"
+  :cut/image "chibi Pico grins, thumbs up"
+  :cut/fx "background switches to teal"
+  :cut/sfx "キュピン"}
+
+ {:db/id -3
+  :source/dataset "shiropico-spec"
+  :spec/kind "henshin-cut"
+  :cut/n 2
+  :cut/shot "close-up (Shiro)"
+  :cut/image "chibi Shiro half-eyes → snaps open"
+  :cut/fx "teal eyes glow"
+  :cut/sfx "ゴゥ…"}
+
+ {:db/id -4
+  :source/dataset "shiropico-spec"
+  :spec/kind "henshin-cut"
+  :cut/n 3
+  :cut/shot "bust 2-shot"
+  :cut/image "'シロピコ、オン！' simultaneous high-five"
+  :cut/fx "light bursts on contact"
+  :cut/sfx "パァン！"}
+
+ {:db/id -5
+  :source/dataset "shiropico-spec"
+  :spec/kind "henshin-cut"
+  :cut/n 4
+  :cut/shot "scale change (MAIN)"
+  :cut/image "chibi → 5-6 head (cocoon of light unravels)"
+  :cut/fx "teal particles spiral up"
+  :cut/sfx "シャアアッ"}
+
+ {:db/id -6
+  :source/dataset "shiropico-spec"
+  :spec/kind "henshin-cut"
+  :cut/n 5
+  :cut/shot "full pose"
+  :cut/image "Shiro (static, single-finger stance) + Pico (dynamic, leaning)"
+  :cut/fx "data ripple at feet, hair billows"
+  :cut/sfx "ドン！"}
+
+ {:db/id -7
+  :source/dataset "shiropico-spec"
+  :spec/kind "pipeline-input"
+  :pipeline-input/of "henshin-bank"
+  :pipeline-input/story "チビのシロとピコがハイタッチし、ティールの光の粒子に包まれて等身が上がり、決めポーズを取る変身シーン"
+  :pipeline-input/page-count 1
+  :pipeline-input/panels-per-page 5
+  :pipeline-input/style "shonen"}]

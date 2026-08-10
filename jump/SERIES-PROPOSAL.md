@@ -300,7 +300,7 @@ Pup が紫である理由と、クロが黒である理由が、同じ根から�
 | `jump/PRODUCTION.md` | **制作経路**（seedance 採用の根拠・費用・参照画像の契約・既知の未了） |
 | `jump/tools/build-page.cljs` ＋ `jump/tools/pages/*.edn` | ネーム → B4原稿を焼くパイプライン |
 | `jump/ART-DIRECTION.md` | **作画規約**（アクセントカラー／シルエット・テスト／**声の吹き出し仕様**／頭身／モノクロ処理／NG） |
-| `jump/character-design-spec.json` | **キャラ設定データ**（既存 refs の流用指定＋新キャラ＋ComfyUI プロンプト） |
+| `jump/character-design-spec.edn` | **キャラ設定データ**（既存 refs の流用指定＋新キャラ＋ComfyUI プロンプト） |
 | `jump/oneshot-45p.md` | **読切ネーム 45P**「かぞえる」※ 連載版とは別構造。45P で完結し、借りを残さない |
 | `jump/arc-01.md` | **Arc 1「みならいの章」全15話**（日本編）の各話プロット・やらかし15種・伏線回収表。**全15話ネーム完成** |
 | `jump/name-01.md` | **第1話ネーム 48P**「あけたら、ふさぐのだ」 |
@@ -319,4 +319,4 @@ Pup が紫である理由と、クロが黒である理由が、同じ根から�
 | `jump/name-14.md` | **第14話ネーム 19P**「ハウル」※ Arc 1 クライマックス |
 | `jump/name-15.md` | **第15話ネーム 19P**「みどりの ままで」※ Arc 1 最終回 |
 | `../SERIES-BIBLE.md` | アニメ版（シロ主役）バイブル ※別ライン |
-| `../character-design-spec.json` | シロ／ピコ／怪物のデザインシート（本作でも流用可） |
+| `../character-design-spec.edn` | シロ／ピコ／怪物のデザインシート（本作でも流用可） |
