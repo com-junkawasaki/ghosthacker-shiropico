@@ -2,4 +2,8 @@
 ;; YouTube の API そのものは kotoba-lang/com-youtube が持つ。この repo は
 ;; 「何を、どの順で、どの安全条件のもとに出すか」だけを持つ。
 {:paths ["tools"]
- :deps {io.github.kotoba-lang/com-youtube {:git/sha "63baf8f6df31403263991d7a2d7d558cdbe5bb02"}}}
+ :deps {io.github.kotoba-lang/com-youtube {:git/sha "63baf8f6df31403263991d7a2d7d558cdbe5bb02"}
+        ;; ffmpeg の argv 組み立て（narrated-concat-cmd / say-cmd / ffprobe）
+        io.github.kotoba-lang/douga      {:git/sha "2e1fefb842a1e9bcf3e0d48c0a8f2e1278885fde"}
+        ;; SubRip の組み立て（[:cue {:from :to} text] -> 番号付き SRT）
+        io.github.kotoba-lang/srt        {:git/sha "9d512b65517d62c721a5363dd09443ac1a400154"}}}
