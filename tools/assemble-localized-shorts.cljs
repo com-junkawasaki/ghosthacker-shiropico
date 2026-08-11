@@ -1,0 +1,57 @@
+#!/usr/bin/env nbb
+;; assemble-localized-shorts — Seedance のクリップとローカライズ音声から
+;; 言語ごとの Shorts master を焼く。
+;;
+;; 2026-08-11 に tools/assemble_localized_shorts.py から移植。ffmpeg の
+;; filter graph は `kotoba-lang/douga` の `narrated-concat-cmd` へ出した ——
+;; 元は**読めない 1 本の文字列リテラル**で、言語ごとに繰り返されていた。
+;; 原稿・音声設定・素材クリップは shorts/narration.edn へ。
+;;
+;;   nbb tools/assemble-localized-shorts.cljs [--episodes 2,3,4,5] [--dry-run]
+
+(ns assemble-localized-shorts
+  (:require ["fs" :as fs]
+            ["path" :as path]
+            ["child_process" :as cp]
+            [clojure.string :as str]
+            [yt.common :as c]
+            [narration :as n]
+            [douga.ffmpeg :as ff]))
+
+(def renders (c/arg "--renders" "shorts/renders"))
+(def masters (c/arg "--masters" "shorts/masters"))
+(def dry-run? (c/flag? "--dry-run"))
+(def episodes
+  (if-let [s (c/arg "--episodes")]
+    (set (map js/parseInt (str/split s #",")))
+    nil))
+
+(defn- run! [argv]
+  (if dry-run?
+    (println (str "  $ " (str/join " " (map #(if (re-find #"\s" %) (pr-str %) %) argv))))
+    (.execFileSync cp (first argv) (clj->js (rest argv)) #js {:stdio "inherit"})))
+
+(defn -main []
+  (let [spec (n/load-narration "shorts/narration.edn")
+        mix (:mix spec)
+        plan (n/plan spec episodes)]
+    (when (empty? plan) (c/die! "nothing to assemble — check --episodes against shorts/narration.edn"))
+    (when-not dry-run? (fs/mkdirSync masters #js {:recursive true}))
+    (doseq [{:keys [episode lang text voice clips]} plan]
+      (let [pad (n/ep2 episode)
+            spoken (path/join masters (str "ep" pad "-" lang ".aiff"))
+            out (path/join masters (str "shiropico-ep" pad "-" lang ".mp4"))
+            clip-paths (mapv #(path/join renders %) clips)
+            missing (remove fs/existsSync clip-paths)]
+        (if (and (seq missing) (not dry-run?))
+          (c/die! (str "missing source clips: " (str/join ", " missing)))
+          (do
+            (run! (ff/say-cmd {:voice (:name voice) :rate (:rate voice) :out spoken :text text}))
+            (run! (ff/narrated-concat-cmd clip-paths spoken out
+                                          {:native-gain (:mix/native-gain mix)
+                                           :voice-gain (:mix/voice-gain mix)
+                                           :voice-delay-ms (:mix/voice-delay-ms mix)
+                                           :seconds (:mix/seconds mix)}))
+            (println out)))))))
+
+(-main)
