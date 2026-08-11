@@ -1,0 +1,5 @@
+;; nbb.edn — 運用スクリプト（tools/*.cljs）の実行環境。
+;; YouTube の API そのものは kotoba-lang/com-youtube が持つ。この repo は
+;; 「何を、どの順で、どの安全条件のもとに出すか」だけを持つ。
+{:paths ["tools"]
+ :deps {io.github.kotoba-lang/com-youtube {:git/sha "63baf8f6df31403263991d7a2d7d558cdbe5bb02"}}}

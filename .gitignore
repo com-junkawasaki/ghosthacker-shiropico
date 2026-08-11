@@ -17,3 +17,6 @@ production-out/
 # 生成したキャラクターアート（バイナリは git 履歴に入れない — 大容量方針）
 # 再生成: nbb jump/tools/generate-character-art.cljs
 jump/art/
+
+# nbb が git dep を展開する先。生成物。
+.nbb/

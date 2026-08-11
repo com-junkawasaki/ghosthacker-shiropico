@@ -1,0 +1,123 @@
+#!/usr/bin/env nbb
+;; youtube-publish — SHIRO & PICO のローカライズ Shorts を、検証済み channel へ出す。
+;;
+;; 2026-08-11 に tools/youtube_publish_short.py と tools/youtube_publish_episodes.py
+;; を統合して移植した。**この 2 本の違いは全部データだった** —— Ep.1 は
+;; shiropico-short-{lang}.mp4 で caption つき、Ep.2-5 は
+;; masters/shiropico-ep{NN}-{lang}.mp4 で caption なし。タイトルも説明文も
+;; Python の dict に埋まっていた。全部 shorts/releases.edn へ出したので、
+;; スクリプトは 1 本で足りる（文言の修正にコード編集が要らなくなる）。
+;;
+;; API は kotoba-lang/com-youtube。channel ガードも同 lib の
+;; youtube.channels/assert-channel!（4 本が同じものを書いていたのを引き上げた）。
+;;
+;;   nbb tools/youtube-publish.cljs --authorized-user <token> --episodes 2,3,4,5 \
+;;       --media-dir shorts/masters --ledger shorts/youtube-uploads-ep02-05.edn \
+;;       [--captions-dir shorts/captions] [--privacy unlisted] [--dry-run]
+;;
+;; 既定は unlisted。public にするのは別の道具（youtube-set-privacy）で、
+;; RULES.md が明示承認の段を要求しているため意図的に分けてある。
+
+(ns youtube-publish
+  (:require ["fs" :as fs]
+            ["path" :as path]
+            [clojure.string :as str]
+            [yt.common :as c]
+            [youtube.channels :as channels]
+            [youtube.client :as client]
+            [youtube.videos :as videos]
+            [youtube.captions :as captions]))
+
+(def token-path (c/require-arg "--authorized-user"))
+(def episodes (mapv js/parseInt (str/split (c/require-arg "--episodes") #",")))
+(def media-dir (c/arg "--media-dir" "shorts/masters"))
+(def ledger-path (c/require-arg "--ledger"))
+(def captions-dir (c/arg "--captions-dir"))
+(def privacy (c/arg "--privacy" "unlisted"))
+(def dry-run? (c/flag? "--dry-run"))
+
+(def rel (c/releases "shorts/releases.edn"))
+(def defaults (:defaults rel))
+
+(defn- planned []
+  (for [ep episodes
+        [[e lang] r] (sort-by key (:by rel))
+        :when (= e ep)]
+    r))
+
+(defn -main []
+  (let [plan (planned)]
+    (when (empty? plan)
+      (c/die! (str "no releases for episodes " (pr-str episodes) " in shorts/releases.edn")))
+    (when dry-run?
+      (println (str "DRY RUN — would publish " (count plan) " video(s) as '" privacy "':"))
+      (doseq [r plan]
+        (println (str "  ep" (:release/episode r) " " (:release/lang r)
+                      "  " (path/join media-dir (str (:release/media-basename r) ".mp4"))
+                      "  " (subs (:release/title r) 0 (min 48 (count (:release/title r)))) "…")))
+      (println "\nRe-run without --dry-run to publish.")
+      (js/process.exit 0))
+
+    (let [http-fn (c/curl-http-fn)
+          opts {:http-fn http-fn}
+          token (client/refresh-access-token! (c/load-credentials token-path) opts)
+          ;; 何かを書く前に channel を確かめる。間違った channel への upload は
+          ;; 削除では取り返せない（配信済みだから）。
+          channel (channels/assert-channel! token (:defaults/channel-id defaults) opts)
+          _ (println (str "channel verified: " (:title channel) " (" (:id channel) ")"))
+          state (atom (let [l (c/ledger ledger-path)]
+                        {:channel (or (:channel l)
+                                      {:source/dataset "shiropico-youtube-uploads"
+                                       :upload/kind "channel"
+                                       :channel/id (:id channel) :channel/title (:title channel)
+                                       :channel/default-privacy privacy})
+                         :uploads (:uploads l)}))
+          failures (atom 0)]
+      (doseq [r plan
+              :let [ep (:release/episode r) lang (:release/lang r)
+                    k [ep lang]]]
+        (if (get-in @state [:uploads k])
+          (println (str "ep" ep " " lang ": already in the ledger, skipping"))
+          (let [mp4 (path/join media-dir (str (:release/media-basename r) ".mp4"))]
+            (if-not (fs/existsSync mp4)
+              (do (swap! failures inc)
+                  (println (str "ep" ep " " lang ": FAILED — no media at " mp4)))
+              (try
+                (let [bytes (js/Uint8Array. (fs/readFileSync mp4))
+                      meta (videos/video-metadata
+                            {:title (:release/title r)
+                             :description (:release/description r)
+                             :tags (:defaults/tags defaults)
+                             :category-id (:defaults/category-id defaults)
+                             :default-language lang
+                             :privacy-status privacy
+                             :made-for-kids? false
+                             :embeddable? true})
+                      video-id (videos/insert-video! token bytes meta opts)]
+                  (swap! state assoc-in [:uploads k]
+                         {:source/dataset "shiropico-youtube-uploads" :upload/kind "short"
+                          :upload/video-id video-id :upload/privacy privacy
+                          :upload/caption "none"})
+                  ;; アップロードごとに書く。中断しても既に live の id を失わない
+                  ;; ——失うと次の run が重複アップロードする。
+                  (c/write-ledger! ledger-path @state)
+                  (println (str "ep" ep " " lang ": https://youtu.be/" video-id))
+                  (when-let [srt (and captions-dir
+                                      (let [p (path/join captions-dir (str (:release/media-basename r) ".srt"))]
+                                        (when (fs/existsSync p) p)))]
+                    (try
+                      (captions/insert-caption! token
+                                                {:youtube-video-id video-id :lang lang
+                                                 :name (:release/caption-name r)}
+                                                (js/Uint8Array. (fs/readFileSync srt)) opts)
+                      (swap! state assoc-in [:uploads k :upload/caption] "uploaded")
+                      (catch :default e
+                        (swap! state assoc-in [:uploads k :upload/caption] (str "failed: " (ex-message e)))))
+                    (c/write-ledger! ledger-path @state)))
+                (catch :default e
+                  (swap! failures inc)
+                  (println (str "ep" ep " " lang ": FAILED — " (ex-message e)))))))))
+      (println (str "done. failures=" @failures))
+      (js/process.exit (if (pos? @failures) 1 0)))))
+
+(-main)
