@@ -1,0 +1,17 @@
+;; shorts/youtube-uploads-ep02-05.edn — ep02-05 ローカライズ shorts の
+;; アップロード記録。2026-08-11 に .json から移行（EDN の datom 面が正本）。
+;; 1 本 = 1 entity なので「どの話のどの言語が public か」を query で引ける。
+
+[{:db/id -1, :source/dataset "shiropico-youtube-uploads", :upload/kind "channel", :channel/id "UCTisE2aPQp3i8i6JUVIUoiw", :channel/title "ゆっくりサイバーch", :channel/default-privacy "public", :channel/note "ep02-05 のローカライズ shorts のアップロード記録。tools/ からは参照されておらず、手で維持されている台帳。"}
+ {:db/id -2, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "2", :upload/lang "ar", :upload/video-id "vZTQgeahbHg", :upload/caption "ar", :upload/privacy "public"}
+ {:db/id -3, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "2", :upload/lang "en", :upload/video-id "kbb63YpOJzI", :upload/caption "en", :upload/privacy "public"}
+ {:db/id -4, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "2", :upload/lang "hi", :upload/video-id "zzaXOyik49U", :upload/caption "hi", :upload/privacy "public"}
+ {:db/id -5, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "3", :upload/lang "ar", :upload/video-id "p7rspanRbZM", :upload/caption "ar", :upload/privacy "public"}
+ {:db/id -6, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "3", :upload/lang "en", :upload/video-id "bp2WRWVN1EU", :upload/caption "en", :upload/privacy "public"}
+ {:db/id -7, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "3", :upload/lang "hi", :upload/video-id "5dCulOcyqVE", :upload/caption "hi", :upload/privacy "public"}
+ {:db/id -8, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "4", :upload/lang "ar", :upload/video-id "mujvb88YEAc", :upload/caption "ar", :upload/privacy "public"}
+ {:db/id -9, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "4", :upload/lang "en", :upload/video-id "ifvdGAIPryw", :upload/caption "en", :upload/privacy "public"}
+ {:db/id -10, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "4", :upload/lang "hi", :upload/video-id "9RVFAJ3w9l8", :upload/caption "hi", :upload/privacy "public"}
+ {:db/id -11, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "5", :upload/lang "ar", :upload/video-id "nLOKlHgj6Aw", :upload/caption "ar", :upload/privacy "public"}
+ {:db/id -12, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "5", :upload/lang "en", :upload/video-id "r1vfNklcOdU", :upload/caption "en", :upload/privacy "public"}
+ {:db/id -13, :source/dataset "shiropico-youtube-uploads", :upload/kind "short", :upload/episode "5", :upload/lang "hi", :upload/video-id "D0tO0KNLoFc", :upload/caption "hi", :upload/privacy "public"}]
