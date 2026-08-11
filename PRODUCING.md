@@ -46,7 +46,7 @@ Only episodes with a shotlist are in the catalog. Episodes 1–10 have scripts
 catalog entry the producer cannot render is worse than an absent one, because
 the loop would admit it and then grade the result.
 
-> `catalog/` (singular, existing) holds `ai-gftd-datasets.json` and is unrelated.
+> `catalog/` (singular, existing) holds `ai-gftd-datasets.edn` and is unrelated.
 > Pointing the channel at it would have listed zero `.edn` files and read as an
 > exhausted catalog — the same trap the yukkuri channel hit with `content/`.
 
