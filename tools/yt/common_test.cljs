@@ -1,0 +1,93 @@
+(ns yt.common-test
+  "What can be checked without touching the live channel.
+
+  The API calls themselves are covered in kotoba-lang/com-youtube (JVM and
+  cljs). What is local to this repo is the ledger, the release table, and the
+  transport — and the ledger is the one that hurts if it is wrong: it is the
+  only record of which videos are already live, so a round-trip that loses an
+  entry makes the next publish run upload duplicates to a public channel.
+
+  Run: nbb tools/yt/common_test.cljs"
+  (:require ["fs" :as fs]
+            ["os" :as os]
+            ["path" :as path]
+            [cljs.test :refer [deftest is testing run-tests]]
+            [clojure.string]
+            [cljs.reader]
+            [yt.common :as c]))
+
+(defn- tmp [] (path/join (os/tmpdir) (str "yt-test-" (js/Date.now) "-" (rand-int 1e6) ".edn")))
+
+(deftest ledger-round-trips
+  (let [p (tmp)
+        state {:channel {:source/dataset "shiropico-youtube-uploads" :upload/kind "channel"
+                         :channel/id "UC-x" :channel/title "Yukkuri"
+                         :channel/default-privacy "unlisted"}
+               :uploads {[2 "en"] {:source/dataset "shiropico-youtube-uploads" :upload/kind "short"
+                                   :upload/video-id "vid-en" :upload/privacy "unlisted"
+                                   :upload/caption "none"}
+                         [2 "hi"] {:source/dataset "shiropico-youtube-uploads" :upload/kind "short"
+                                   :upload/video-id "vid-hi" :upload/privacy "unlisted"
+                                   :upload/caption "uploaded"}}}]
+    (c/write-ledger! p state)
+    (let [back (c/ledger p)]
+      (is (= "UC-x" (get-in back [:channel :channel/id])))
+      (is (= 2 (count (:uploads back))))
+      (testing "the [episode lang] key survives — it is what stops a re-upload"
+        (is (= "vid-en" (get-in back [:uploads [2 "en"] :upload/video-id])))
+        (is (= "vid-hi" (get-in back [:uploads [2 "hi"] :upload/video-id]))))
+      (is (= "uploaded" (get-in back [:uploads [2 "hi"] :upload/caption]))))
+    (fs/unlinkSync p)))
+
+(deftest ledger-is-tx-data
+  (let [p (tmp)]
+    (c/write-ledger! p {:channel {:upload/kind "channel" :channel/id "UC-x"}
+                        :uploads {[1 "en"] {:upload/kind "short" :upload/video-id "v"}}})
+    (let [raw (str (fs/readFileSync p "utf8"))
+          tx (cljs.reader/read-string raw)]
+      (is (vector? tx))
+      (is (every? #(contains? % :db/id) tx))
+      (is (= 2 (count (distinct (map :db/id tx)))) "tempids must be unique"))
+    (fs/unlinkSync p)))
+
+(deftest releases-table-is-complete
+  (let [{:keys [defaults by]} (c/releases "shorts/releases.edn")]
+    (is (= "UCTisE2aPQp3i8i6JUVIUoiw" (:defaults/channel-id defaults)))
+    (is (= "24" (:defaults/category-id defaults)))
+    (testing "ep1 pilot plus ep2-5, three languages each"
+      (is (= 15 (count by)))
+      (doseq [ep [1 2 3 4 5] lang ["en" "hi" "ar"]]
+        (is (some? (get by [ep lang])) (str "missing ep" ep " " lang))))
+    (testing "every release names its media file and carries a caption track name"
+      (doseq [[k r] by]
+        (is (not (clojure.string/blank? (:release/media-basename r))) (str k))
+        (is (not (clojure.string/blank? (:release/title r))) (str k))
+        (is (not (clojure.string/blank? (:release/caption-name r))) (str k))))
+    (testing "ep1 keeps its own media naming, ep2+ use the assembled masters"
+      (is (= "shiropico-short-en" (:release/media-basename (get by [1 "en"]))))
+      (is (= "shiropico-ep02-en" (:release/media-basename (get by [2 "en"])))))))
+
+(deftest credentials-reject-incomplete-files
+  (let [p (tmp)]
+    (fs/writeFileSync p (pr-str {:client-id "a"}))
+    (is (thrown? js/Error (c/load-credentials p)) "a half-written token file must not load")
+    (fs/writeFileSync p (pr-str {:client-id "a" :client-secret "b" :refresh-token "c"}))
+    (is (= {:client-id "a" :client-secret "b" :refresh-token "c"} (c/load-credentials p)))
+    (testing "Google's own JSON shape still loads, so existing tokens keep working"
+      (fs/writeFileSync p (js/JSON.stringify #js {:client_id "a" :client_secret "b" :refresh_token "c"}))
+      (is (= {:client-id "a" :client-secret "b" :refresh-token "c"} (c/load-credentials p))))
+    (fs/unlinkSync p))
+  (is (thrown? js/Error (c/load-credentials "/nonexistent/token.edn"))))
+
+(deftest transport-speaks-http
+  (testing "status, headers and a byte body survive the curl boundary"
+    (let [f (c/curl-http-fn)
+          r (f {:url "https://httpbin.org/post" :method :post
+                :headers {"Content-Type" "application/json"}
+                :body (.encode (js/TextEncoder.) "{\"a\":1}")})]
+      (is (= 200 (:status r)))
+      (is (re-find #"\"a\"" (:body r)))
+      (is (contains? (:response-headers r) "content-type")))))
+
+(let [{:keys [fail error]} (run-tests)]
+  (when (pos? (+ (or fail 0) (or error 0))) (js/process.exit 1)))

@@ -18,6 +18,9 @@
 - Before uploading, call `channels.list?mine=true` and verify the returned
   channel identity. Upload new renders as `unlisted` unless the user explicitly
   authorizes public publication.
-- Use `orgs/kotoba-lang/youtube-upload` for videos, captions, and thumbnails.
+- Use `kotoba-lang/com-youtube` (pinned in `nbb.edn`) for videos, captions and
+  thumbnails, through the `tools/youtube-*.cljs` operators. Do not add a second
+  client: the channel guard and the privacy read-modify-write live in that
+  library precisely so no tool re-derives them.
 
 See `YOUTUBE-PUBLISHING.md` for the operator workflow.

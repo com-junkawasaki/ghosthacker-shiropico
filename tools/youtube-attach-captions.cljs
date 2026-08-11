@@ -1,0 +1,76 @@
+#!/usr/bin/env nbb
+;; youtube-attach-captions — 既に上がっている Shorts に SRT を後付けする。
+;;
+;; 2026-08-11 に tools/youtube_attach_captions.py から移植。
+;;
+;; ep02-05 は SRT がまだ無い状態で publish したので caption 無しで上がっている。
+;; tools/make-captions が実測タイミングで SRT を作り、これが captions.insert で
+;; 貼る。captions.insert には youtube.force-ssl scope が要る（2026-07-25 以前の
+;; token は upload + readonly しか持っておらず invalid_scope で落ちた）。
+;;
+;; 再実行は安全 —— 同じ言語の 2 本目を YouTube が拒否するので、その項目だけ
+;; 失敗として報告し、run 全体は止めない。
+;;
+;;   nbb tools/youtube-attach-captions.cljs --authorized-user <token> \
+;;       --ledger shorts/youtube-uploads-ep02-05.edn --captions-dir shorts/captions
+
+(ns youtube-attach-captions
+  (:require ["fs" :as fs]
+            ["path" :as path]
+            [yt.common :as c]
+            [youtube.channels :as channels]
+            [youtube.client :as client]
+            [youtube.captions :as captions]))
+
+(def token-path (c/require-arg "--authorized-user"))
+(def ledger-path (c/require-arg "--ledger"))
+(def captions-dir (c/require-arg "--captions-dir"))
+(def force? (c/flag? "--force"))
+
+(def rel (c/releases "shorts/releases.edn"))
+
+(defn -main []
+  (let [{:keys [channel uploads]} (c/ledger ledger-path)
+        entries (sort-by key uploads)]
+    (when (empty? entries) (c/die! (str "no uploads in " ledger-path)))
+    (let [http-fn (c/curl-http-fn)
+          opts {:http-fn http-fn}
+          token (client/refresh-access-token! (c/load-credentials token-path) opts)
+          expected (get-in rel [:defaults :defaults/channel-id])
+          verified (channels/assert-channel! token expected opts)
+          _ (println (str "channel verified: " (:title verified) " (" (:id verified) ")"))
+          state (atom {:channel channel :uploads uploads})
+          failures (atom 0)]
+      (doseq [[[ep lang] e] entries
+              :let [vid (:upload/video-id e)
+                    r (get-in rel [:by [ep lang]])
+                    srt (path/join captions-dir (str (:release/media-basename r) ".srt"))]]
+        (cond
+          (and (= "uploaded" (:upload/caption e)) (not force?))
+          (println (str "ep" ep " " lang ": caption already recorded, skipping (--force to retry)"))
+
+          (nil? r)
+          (do (swap! failures inc)
+              (println (str "ep" ep " " lang ": FAILED — no release entry in shorts/releases.edn")))
+
+          (not (fs/existsSync srt))
+          (println (str "ep" ep " " lang ": no SRT at " srt ", skipping"))
+
+          :else
+          (try
+            (captions/insert-caption! token
+                                      {:youtube-video-id vid :lang lang
+                                       :name (:release/caption-name r)}
+                                      (js/Uint8Array. (fs/readFileSync srt)) opts)
+            (swap! state assoc-in [:uploads [ep lang] :upload/caption] "uploaded")
+            (c/write-ledger! ledger-path @state)
+            (println (str "ep" ep " " lang ": caption attached -> https://youtu.be/" vid))
+            (catch :default ex
+              (swap! failures inc)
+              (swap! state assoc-in [:uploads [ep lang] :upload/caption] (str "failed: " (ex-message ex)))
+              (c/write-ledger! ledger-path @state)
+              (println (str "ep" ep " " lang ": FAILED — " (ex-message ex)))))))
+      (println (str "done. failures=" @failures))
+      (js/process.exit (if (pos? @failures) 1 0)))))
+
+(-main)

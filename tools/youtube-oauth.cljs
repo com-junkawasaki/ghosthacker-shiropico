@@ -1,0 +1,118 @@
+#!/usr/bin/env nbb
+;; youtube-oauth — SHIRO & PICO の uploader を最小 scope で認可する。
+;;
+;; 2026-08-11 に tools/youtube_oauth.py（google_auth_oauthlib の
+;; InstalledAppFlow）から移植。**ここだけは com-youtube に相当物が無い** ——
+;; あの lib は refresh token を「もう持っている」前提で、その先を扱う。
+;; 同意フローは 1 回きりの人間が居る手続きなので、この repo に置いている。
+;;
+;; 出力は EDN（従来は Google 形式の JSON）。tools/yt/common.cljs の
+;; load-credentials は両方読めるので、既存の token ファイルはそのまま動く。
+;;
+;;   nbb tools/youtube-oauth.cljs --client-secret <client_secret.json> \
+;;       --output ~/.config/shiropico/youtube-token.edn
+
+(ns youtube-oauth
+  (:require ["fs" :as fs]
+            ["http" :as http]
+            ["path" :as path]
+            ["child_process" :as cp]
+            [clojure.string :as str]
+            [yt.common :as c]
+            [youtube.client :as client]))
+
+(def scopes
+  ["https://www.googleapis.com/auth/youtube.upload"
+   "https://www.googleapis.com/auth/youtube.readonly"
+   ;; captions.insert に要る。2026-07-25 以前の token はこれを持たず invalid_scope で落ちた。
+   "https://www.googleapis.com/auth/youtube.force-ssl"])
+
+(def secret-path (c/require-arg "--client-secret"))
+(def out-path (c/require-arg "--output"))
+
+(defn- client-secrets [p]
+  (let [m (js->clj (js/JSON.parse (str (fs/readFileSync p "utf8"))) :keywordize-keys true)
+        inst (or (:installed m) (:web m) m)]
+    (when-not (and (:client_id inst) (:client_secret inst))
+      (c/die! (str "no client_id/client_secret in " p)))
+    {:client-id (:client_id inst) :client-secret (:client_secret inst)}))
+
+(defn- auth-url [client-id redirect-uri]
+  (str "https://accounts.google.com/o/oauth2/v2/auth"
+       "?client_id=" (client/url-encode client-id)
+       "&redirect_uri=" (client/url-encode redirect-uri)
+       "&response_type=code"
+       "&scope=" (client/url-encode (str/join " " scopes))
+       ;; offline + consent でないと refresh_token が返らない（2 回目以降は特に）
+       "&access_type=offline&prompt=consent%20select_account"))
+
+(defn- open-browser [url]
+  (try (.spawn cp (case (.-platform js/process) "darwin" "open" "win32" "start" "xdg-open")
+                (clj->js [url]) #js {:detached true :stdio "ignore"})
+       (catch :default _ nil)))
+
+(defn- exchange! [{:keys [client-id client-secret]} code redirect-uri]
+  (let [http-fn (c/curl-http-fn)
+        form (str "code=" (client/url-encode code)
+                  "&client_id=" (client/url-encode client-id)
+                  "&client_secret=" (client/url-encode client-secret)
+                  "&redirect_uri=" (client/url-encode redirect-uri)
+                  "&grant_type=authorization_code")
+        resp (http-fn {:url client/token-url :method :post
+                       :headers {"Content-Type" "application/x-www-form-urlencoded"}
+                       :body form})]
+    (when (>= (:status resp) 400)
+      (c/die! (str "token exchange failed (" (:status resp) "): " (:body resp))))
+    (let [m (client/read-json (:body resp))]
+      (when-not (:refresh_token m)
+        (c/die! (str "no refresh_token in the response. Google only returns one with "
+                     "access_type=offline AND prompt=consent — revoke the app at "
+                     "https://myaccount.google.com/permissions and retry.")))
+      m)))
+
+(defn- write-token! [creds tok]
+  (fs/mkdirSync (path/dirname out-path) #js {:recursive true})
+  (fs/writeFileSync out-path
+                    (str ";; SHIRO & PICO YouTube uploader の認可情報。**秘密**。\n"
+                         ";; tools/youtube-oauth.cljs が書く。repo には入れない。\n\n"
+                         (pr-str {:client-id (:client-id creds)
+                                  :client-secret (:client-secret creds)
+                                  :refresh-token (:refresh_token tok)
+                                  :scopes scopes})
+                         "\n")
+                    #js {:mode 0600})
+  (println (str "oauth_result=success -> " out-path " (mode 600)")))
+
+(defn -main []
+  (let [creds (client-secrets secret-path)
+        done (atom false)
+        server (atom nil)]
+    (reset! server
+      (.createServer http
+        (fn [req res]
+          (let [u (js/URL. (.-url req) "http://127.0.0.1")
+                code (.get (.-searchParams u) "code")
+                err (.get (.-searchParams u) "error")]
+            (.writeHead res 200 #js {"Content-Type" "text/plain; charset=utf-8"})
+            (.end res (if code
+                        "SHIRO & PICO YouTube authorization completed. You may close this tab."
+                        (str "authorization failed: " err)))
+            (when-not @done
+              (reset! done true)
+              (.close @server)
+              (if-not code
+                (c/die! (str "authorization failed: " err))
+                (let [port (.-port (.address @server))
+                      redirect (str "http://127.0.0.1:" port)]
+                  (write-token! creds (exchange! creds code redirect))
+                  (js/process.exit 0))))))))
+    (.listen @server 0 "127.0.0.1"
+      (fn []
+        (let [port (.-port (.address @server))
+              redirect (str "http://127.0.0.1:" port)
+              url (auth-url (:client-id creds) redirect)]
+          (println "Opening Google OAuth in your browser...")
+          (println (str "  if it does not open: " url))
+          (open-browser url))))))
+
+(-main)
