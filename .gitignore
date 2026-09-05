@@ -20,3 +20,9 @@ jump/art/
 
 # nbb が git dep を展開する先。生成物。
 .nbb/
+# Binary assets (character refs, generated panels, motion comic) route to
+# DataLad + git-annex (B2/IPFS), not git. See ASSETS-DATALAD.md.
+character-refs/
+resources/
+shorts/renders/
+shorts/masters/
