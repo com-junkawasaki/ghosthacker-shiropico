@@ -3,12 +3,17 @@
   itonami.cacao-test / tsumugu.cacao-test — keep in sync). Server acceptance
   can't be tested here, but the crypto + encoding are fully checkable:
   canonical did:key, a verifying Ed25519 signature over the exact SIWE
-  message, and a well-formed CBOR envelope."
+  message, and a well-formed CBOR envelope. Uses the portable kotoba-lang
+  ed25519 lib (no JCA)."
   (:require [clojure.test :refer [deftest is testing]]
             [clojure.string :as str]
-            [shiropico.cacao :as c])
-  (:import [java.util Base64]
-           [java.security Signature]))
+            [ed25519.sign :as ni]
+            [shiropico.cacao :as c]))
+
+(defn- sign-with-seed [id msg]
+  ;; Re-sign the exact SIWE message using the portable lib's deterministic
+  ;; signer over the identity's raw seed, independent of `c/mint`'s path.
+  (ni/sign (:secret-key id) msg))
 
 (deftest did-key-is-canonical-ed25519
   (let [{:keys [did]} (c/generate-identity)]
@@ -26,9 +31,8 @@
           grant {:cap :cap/read :scope "shiropico"}
           opts  {:aud "https://kotobase.net" :nonce "n1" :issued-at "2026-07-01T00:00:00Z"}
           payload (c/grant->payload grant (assoc opts :iss (:did id)))
-          msg   (.getBytes ^String (c/siwe-message payload) "UTF-8")
-          sig   (let [s (doto (Signature/getInstance "Ed25519") (.initSign (:private-key id)))]
-                  (.update s msg) (.sign s))]
+          msg   (seq (.getBytes ^String (c/siwe-message payload) "UTF-8"))
+          sig   (sign-with-seed id msg)]
       (is (c/verify? (:public-key id) msg sig)))))
 
 (deftest minted-cacao-is-wellformed-cbor
@@ -36,7 +40,7 @@
         cacao (c/mint id {:cap :cap/transact :scope "shiropico"}
                       {:aud "https://kotobase.net" :nonce "n2"
                        :issued-at "2026-07-01T00:00:00Z" :expiry "2026-07-01T01:00:00Z"})
-        bytes (.decode (Base64/getDecoder) cacao)]
+        bytes (.decode (java.util.Base64/getDecoder) cacao)]
     (is (= 0xA3 (bit-and (aget bytes 0) 0xff)) "top-level CBOR is map(3) = {h,p,s}")
     (is (pos? (count cacao)))))
 
