@@ -1,10 +1,11 @@
 (ns shiropico.cacao
-  "Agent-side CACAO issuance (JVM). The shiropico actor mints its OWN
+  "Agent-side CACAO issuance. The shiropico actor mints its OWN
   server-verifiable CACAO to authenticate to a kotoba-server pod (kotobase.net)
   — no human-handed token. Ported from `itonami.cacao` / `tsumugu.cacao` (keep
   in sync); the SIWE/wire builders below are a faithful copy of the proven
   byte-exact pure functions in `kotoba.cacao` (kotoba-auth / kotoba-wasm), and
-  the crypto is JDK Ed25519 + a minimal CBOR encoder.
+  the crypto is kotoba-lang's portable Ed25519/SHA-256/bytes libs plus a
+  minimal CBOR encoder (all pure byte-vector code, no JCA).
 
   Per-actor key model: shiropico generates + persists its OWN Ed25519 key
   (self-sovereign, no owner hand-off), and its graph is the deterministic
@@ -17,13 +18,26 @@
   just changes which bytes get hashed into the graph CID (name-based, not
   raw-pubkey-based), so one actor can own several named graphs instead of
   exactly one. Use `load-or-create-identity!` to bootstrap/persist the
-  actor's key."
+  actor's key.
+
+  Naming: the original JDK port persisted **PKCS8/X.509-wrapped** key material
+  and kept JCA opaque key handles (`:private-key`/`:public-key`). This port
+  switched to the kotoba-lang ed25519 lib's **raw 32-byte** convention: the
+  private `seed` is the 32 raw bytes that expand to the signing state
+  (RFC 8032 §5.1.5), the public key is the 32 raw bytes. `:private-b64` is
+  base64(seed), `:public-b64` is base64(raw pubkey) — different bytes than the
+  old PKCS8/X509 encodings, so any previously persisted identity must be
+  regenerated. The SIWE message, CBOR envelope shape, signature bytes, and
+  did:key derivation (`ed25519.core/did-key-from-pub`) are byte-identical to
+  the kotoba.cacao original, so a freshly minted cacao_b64 still verifies on
+  the PDS exactly as before."
   (:require [clojure.edn :as edn]
-            [clojure.string :as str])
-  (:import [java.security KeyPairGenerator MessageDigest Signature KeyFactory]
-           [java.security.spec PKCS8EncodedKeySpec X509EncodedKeySpec]
-           [java.io ByteArrayOutputStream]
-           [java.util Base64]))
+            [clojure.string :as str]
+            [ed25519.core :as ed25519]
+            [ed25519.sign :as ni]
+            [sha2.core :as sha2]
+            [kotoba.bytes :as bytes])
+  (:import [java.security SecureRandom]))
 
 ;; ───────── pure CACAO builders (mirror of kotoba.cacao) ─────────
 
@@ -63,49 +77,35 @@
    "s" {"t" "EdDSA" "s" (or sig-b64 "")}})
 
 ;; ───────── minimal CBOR (definite-length; serde-deserializable) ─────────
+;; Pure byte-vector (ints 0..255) encoder — matches kotoba.bytes convention,
+;; no ByteArrayOutputStream. Output is byte-identical to the JDK port's stream
+;; builder (same major/head rules, same UTF-8 string bytes).
 
-(defn- cbor-head [^ByteArrayOutputStream o major n]
-  (cond (< n 24)    (.write o (int (+ (bit-shift-left major 5) n)))
-        (< n 256)   (do (.write o (int (+ (bit-shift-left major 5) 24))) (.write o (int n)))
-        (< n 65536) (do (.write o (int (+ (bit-shift-left major 5) 25)))
-                        (.write o (int (bit-and (unsigned-bit-shift-right n 8) 0xff)))
-                        (.write o (int (bit-and n 0xff))))
+(defn- cbor-head [major n]
+  (cond (< n 24)    [(bit-or (bit-shift-left major 5) n)]
+        (< n 256)   [(bit-or (bit-shift-left major 5) 24) n]
+        (< n 65536) [(bit-or (bit-shift-left major 5) 25)
+                     (bit-and (unsigned-bit-shift-right n 8) 0xff)
+                     (bit-and n 0xff)]
         :else (throw (ex-info "cbor len too big" {:n n}))))
 
-(defn- cbor-val [^ByteArrayOutputStream o v]
-  (cond
-    (string? v)     (let [b (.getBytes ^String v "UTF-8")] (cbor-head o 3 (alength b)) (.write o b 0 (alength b)))
-    (map? v)        (do (cbor-head o 5 (count v)) (doseq [[k vv] v] (cbor-val o (name k)) (cbor-val o vv)))
-    (sequential? v) (do (cbor-head o 4 (count v)) (doseq [x v] (cbor-val o x)))
-    :else           (cbor-val o (str v))))
+(declare ^:private cbor-val)
 
-(defn- cbor-bytes ^bytes [v]
-  (let [o (ByteArrayOutputStream.)] (cbor-val o v) (.toByteArray o)))
+(defn- cbor-val [v]
+  (cond
+    (string? v)     (let [b (bytes/utf8-encode v)]
+                      (into (cbor-head 3 (count b)) b))
+    (map? v)        (into (cbor-head 5 (count v))
+                          (mapcat (fn [[k vv]] (concat (cbor-val (name k)) (cbor-val vv))) v))
+    (sequential? v) (into (cbor-head 4 (count v)) (mapcat cbor-val v))
+    :else           (cbor-val (str v))))
+
+(defn- cbor-bytes [v]
+  (vec (cbor-val v)))
 
 ;; ───────── Ed25519 + did:key ─────────
-
-(def ^:private b58 "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
-
-(defn- base58btc [^bytes data]
-  (let [zeros (count (take-while zero? data))
-        sb (StringBuilder.) fifty8 (java.math.BigInteger/valueOf 58)]
-    (loop [n (java.math.BigInteger. 1 data)]
-      (when (pos? (.signum n))
-        (.append sb (.charAt b58 (.intValue (.mod n fifty8))))
-        (recur (.divide n fifty8))))
-    (dotimes [_ zeros] (.append sb \1))
-    (.toString (.reverse sb))))
-
-(defn- raw-pub
-  "Raw 32-byte Ed25519 public key (last 32 bytes of the X.509 SPKI encoding)."
-  ^bytes [pub]
-  (let [enc (.getEncoded pub)] (java.util.Arrays/copyOfRange enc (- (alength enc) 32) (alength enc))))
-
-(defn- did-key [pub]
-  ;; multicodec ed25519-pub = 0xED 0x01, then raw key; base58btc; 'z' multibase.
-  (let [raw (raw-pub pub)
-        framed (byte-array (concat [(unchecked-byte 0xED) (unchecked-byte 0x01)] (seq raw)))]
-    (str "did:key:z" (base58btc framed))))
+;; did:key derivation lives in the ed25519 lib (`ed25519.core/did-key-from-pub`),
+;; which has its own base58btc — no local b58 needed.
 
 ;; ───────── canonical graph CID (per-actor, per-database) ─────────
 ;; The graph handle is the CIDv1/dag-cbor/sha2-256 of the name
@@ -118,13 +118,13 @@
 
 (def ^:private b32 "abcdefghijklmnopqrstuvwxyz234567")
 
-(defn- sha256 ^bytes [^bytes data]
-  (.digest (MessageDigest/getInstance "SHA-256") data))
+(defn- sha256 [data]
+  (sha2/sha256 data))
 
 (defn- base32-lower-no-pad
   "CIDv1 base32-lower, no padding (multibase 'b' payload) — 8-bit input drained
   as 5-bit groups, MSB-first. Ported from `kotobase.cid/base32-lower-no-pad`."
-  [^bytes data]
+  [data]
   (let [sb (StringBuilder.)
         {:keys [bits value]}
         (reduce
@@ -148,10 +148,8 @@
   CIDv1/dag-cbor/sha2-256 header (0x01 0x71 0x12 0x20), base32-lower 'b'.
   Ported from `kotobase.cid/graph-cid-from-name`."
   [^String name]
-  (let [hash (sha256 (.getBytes name "UTF-8"))
-        cid  (byte-array (concat [(unchecked-byte 0x01) (unchecked-byte 0x71)
-                                   (unchecked-byte 0x12) (unchecked-byte 0x20)]
-                                  (seq hash)))]
+  (let [hash (sha256 (bytes/utf8-encode name))
+        cid  (into [0x01 0x71 0x12 0x20] hash)]
     (str "b" (base32-lower-no-pad cid))))
 
 (defn canonical-graph
@@ -166,28 +164,56 @@
   publish ledger."
   "anime")
 
+;; ───────── raw 32-byte Ed25519 (kotoba-lang ed25519) ─────────
+;; The ed25519 lib works on raw 32-byte seeds/pubkeys (RFC 8032 §5.1.5), not
+;; JCA PKCS8/X509 wrapped keys. The private representation is `seed` (the 32
+;; raw bytes that expand to the signing state); `ed25519.sign/public-key`
+;; derives the 32-byte pubkey from it, and `ed25519.sign/sign` signs a message
+;; with the expanded `:secret-key` map (deterministic — RFC 8032). Only the
+;; host CSPRNG (SecureRandom) draws the 32 seed bytes; all crypto sits in the
+;; portable libs.
+
+(def ^:private default-seed-bytes 32)
+
+(defn- random-seed ^bytes []
+  (let [sr (SecureRandom.) b (byte-array default-seed-bytes)] (.nextBytes sr b) b))
+
+(defn- did-key [raw-pub]
+  (ed25519/did-key-from-pub raw-pub))
+
+;; ───────── identity ─────────
+
 (defn generate-identity
   "A fresh Ed25519 identity {:private-key :public-key :did :graph}. For
   owner/test bootstrap — a provisioned agent persists and reloads its key
-  instead."
+  instead. `:private-b64` = base64(raw seed), `:public-b64` = base64(raw pub)."
   []
-  (let [kp (.generateKeyPair (KeyPairGenerator/getInstance "Ed25519"))
-        pub (.getPublic kp)
-        did (did-key pub)]
-    {:private-key (.getPrivate kp) :public-key pub :did did
+  (let [seed (random-seed)
+        sk   (ni/secret-key! seed)        ; {:status :ok :seed :scalar :prefix :public}
+        pub  (:public sk)
+        did  (did-key pub)]
+    {:private-key seed :public-key pub :did did
+     :secret-key sk
      :graph (canonical-graph did default-db-name)
-     :private-b64 (.encodeToString (Base64/getEncoder) (.getEncoded (.getPrivate kp)))
-     :public-b64  (.encodeToString (Base64/getEncoder) (.getEncoded pub))}))
+     ;; ->bytes normalises the signed JVM byte[] to unsigned before base64 —
+     ;; kotoba.bytes/base64-encode assumes unsigned bytes.
+     :private-b64 (bytes/base64-encode (bytes/->bytes seed))
+     :public-b64  (bytes/base64-encode (bytes/->bytes pub))}))
 
 (defn load-identity
-  "Reload a persisted identity from base64 PKCS8 private + X.509 public."
+  "Reload a persisted identity from base64 raw seed + raw pubkey (see
+  `generate-identity`). Cross-checks the stored pubkey against the one derived
+  from the seed (guard against a corrupted persisted record)."
   [{:keys [private-b64 public-b64]}]
-  (let [kf (KeyFactory/getInstance "Ed25519")
-        priv (.generatePrivate kf (PKCS8EncodedKeySpec. (.decode (Base64/getDecoder) private-b64)))
-        pub  (.generatePublic kf (X509EncodedKeySpec. (.decode (Base64/getDecoder) public-b64)))
-        did  (did-key pub)]
-    {:private-key priv :public-key pub :did did
-     :graph (canonical-graph did default-db-name)
+  (let [seed (vec (bytes/base64-decode private-b64))
+        stored-pub (vec (bytes/base64-decode public-b64))
+        sk     (ni/secret-key! seed)
+        pub    (:public sk)]
+    (when (and stored-pub (not= stored-pub (vec pub)))
+      (throw (ex-info "persisted Ed25519 pubkey does not match seed" {})))
+    {:private-key seed :public-key pub :did (did-key pub)
+     :secret-key sk
+     :graph (canonical-graph (did-key pub) default-db-name)
      :private-b64 private-b64 :public-b64 public-b64}))
 
 (defn load-or-create-identity!
@@ -195,7 +221,9 @@
   generate + persist one on first run (only the b64 key material is stored).
   Returns {:private-key :public-key :did :graph …}. This is the 'each actor
   issues its own key' bootstrap — the actor's graph is `canonical-graph(did,
-  default-db-name)`."
+  default-db-name)`.
+  ⚠ NOTE: the persisted key material is raw seed/pubkey b64, NOT the old
+  PKCS8/X.509 encodings — a pre-port identity file must be regenerated."
   [path]
   (let [f (java.io.File. ^String path)]
     (if (.exists f)
@@ -206,24 +234,31 @@
         (spit f (pr-str (select-keys id [:private-b64 :public-b64])))
         id))))
 
-(defn- ed-sign ^bytes [priv ^bytes msg]
-  (let [s (doto (Signature/getInstance "Ed25519") (.initSign priv))] (.update s msg) (.sign s)))
+;; ───────── sign / verify (portable ed25519.sign) ─────────
+
+(defn- ed-sign [sk ^bytes msg]
+  (ni/sign sk msg))
 
 (defn verify? [pub ^bytes msg ^bytes sig]
-  (let [v (doto (Signature/getInstance "Ed25519") (.initVerify pub))] (.update v msg) (.verify v sig)))
+  (ni/verify pub msg sig))
 
 ;; ───────── mint ─────────
 
 (defn mint
   "Mint a base64 cacao_b64 the agent signs itself.
-   identity: {:private-key :public-key :did}
+   identity: {:private-key :public-key :did :secret-key}
    grant:    {:cap :cap/read|:cap/transact|:cap/admin :scope <graph>}
    opts:     {:aud <server did/uri> :nonce :issued-at :expiry}"
-  [{:keys [private-key did]} grant {:keys [aud nonce issued-at expiry]}]
+  [{:keys [secret-key did]} grant {:keys [aud nonce issued-at expiry]}]
   (let [payload (grant->payload grant {:iss did :aud aud :nonce nonce
                                        :issued-at issued-at :expiry expiry})
         msg     (siwe-message payload)
-        sig     (ed-sign private-key (.getBytes ^String msg "UTF-8"))
-        sig-b64 (.encodeToString (.withoutPadding (Base64/getUrlEncoder)) sig)
+        sig     (ed-sign secret-key (bytes/utf8-encode msg))
+        ;; CACAO signs the EdDSA `s` base64url (no padding) — same as the
+        ;; original `Base64/getUrlEncoder` `.withoutPadding`.
+        sig-b64 (-> (bytes/base64-encode (seq sig))
+                    (.replace "+" "-")
+                    (.replace "/" "_")
+                    (.replace "=" ""))
         wire    (->wire payload sig-b64)]
-    (.encodeToString (Base64/getEncoder) (cbor-bytes wire))))
+    (bytes/base64-encode (cbor-bytes wire))))
