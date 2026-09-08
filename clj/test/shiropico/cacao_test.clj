@@ -6,7 +6,7 @@
   message, and a well-formed CBOR envelope. Uses the portable kotoba-lang
   ed25519 lib (no JCA)."
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [ed25519.sign :as ni]
             [shiropico.cacao :as c]))
 

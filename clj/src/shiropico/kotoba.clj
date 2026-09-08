@@ -15,7 +15,7 @@
   shiropico is depth-1 self-sovereign: it always connects with `:identity`
   (never a handed :token), self-minting a `:cap/transact` CACAO scoped to its
   own graph — no owner hand-off, no shared secret."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [kotoba.lang.http :as http]
             [kotoba.lang.time :as t]
             [langchain.kotoba-db :as kdb]
@@ -67,7 +67,7 @@
             bdy (get req :http/body)
             b (HttpRequest/newBuilder (URI/create (str u)))]
         (doseq [[k v] h] (.header b (str k) (str v)))
-        (let [r (-> b (.method (str/upper-case (name (or m :post)))
+        (let [r (-> b (.method (str/upper (name (or m :post)))
                                (if bdy
                                  (HttpRequest$BodyPublishers/ofString bdy)
                                  (HttpRequest$BodyPublishers/noBody)))

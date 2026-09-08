@@ -17,7 +17,7 @@
   fixed keyword set. `attr-ns` reconstructs it from the episode number and the
   language, which is why the catalog plan carries the template instead of every
   plan repeating ten literal keyword sets."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn attr-ns
   "Episode number + language -> the attribute namespace those shotlist entries
@@ -26,7 +26,7 @@
   change here.
 
   Substitution is positional over the `%s` holes, NOT `str/replace` per value:
-  `clojure.string/replace` with a string match replaces every occurrence, so
+  `str/replace` with a string match replaces every occurrence, so
   substituting the episode first turned `shotlist.episode%s.%s` into
   `shotlist.episode11.11` and every shot silently read as a non-scene. The
   shotlist parsed to zero rows and the producer would have reported an empty

@@ -32,7 +32,7 @@
   the kotoba.cacao original, so a freshly minted cacao_b64 still verifies on
   the PDS exactly as before."
   (:require [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [ed25519.core :as ed25519]
             [ed25519.sign :as ni]
             [sha2.core :as sha2]
