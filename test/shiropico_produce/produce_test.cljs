@@ -8,7 +8,7 @@
 ;; A producer whose failure mode is "reports a clean run that did nothing" needs
 ;; its honesty pinned, not just its happy path.
 (ns shiropico-produce.produce-test
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing run-tests]]
             [shiropico-produce.legs :as legs]
             [shiropico-produce.prompt :as prompt]
             [shiropico-produce.shotlist :as shotlist]))
@@ -79,13 +79,13 @@
         t (prompt/tags p)]
     (testing "the subject stops being buried mid-clause"
       (is (= "Aerial wide shot" (first t)))
-      (is (some #(clojure.string/includes? % "geothermal power plant") t)))
+      (is (some #(kotoba.lang.text/includes? % "geothermal power plant") t)))
     (testing "short fragments are left alone — `pale sky` is already a tag"
       (is (some #(= "pale sky" %) t)))
     (testing "nothing is invented"
       (doseq [tag t]
-        (is (clojure.string/includes? (clojure.string/lower-case p)
-                                      (clojure.string/lower-case tag))
+        (is (kotoba.lang.text/includes? (kotoba.lang.text/lower p)
+                                      (kotoba.lang.text/lower tag))
             (str tag " came from the prose"))))))
 
 (deftest only-the-first-joint-is-cut

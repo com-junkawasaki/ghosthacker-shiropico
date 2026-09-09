@@ -17,7 +17,7 @@
             ["http" :as http]
             ["path" :as path]
             ["child_process" :as cp]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [yt.common :as c]
             [youtube.client :as client]))
 

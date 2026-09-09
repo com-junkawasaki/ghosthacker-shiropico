@@ -16,7 +16,7 @@
             ["path" :as path]
             ["child_process" :as cp]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [yt.common :as c]))
 
 (def stage (first (remove #(str/starts-with? % "--") c/argv)))

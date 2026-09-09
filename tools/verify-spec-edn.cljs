@@ -22,7 +22,7 @@
 (ns verify-spec-edn
   (:require ["fs" :as fs]
             [clojure.edn :as edn]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (def specs ["character-design-spec.edn"
             "henshin-bank.edn"

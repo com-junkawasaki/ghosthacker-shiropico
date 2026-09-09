@@ -31,7 +31,7 @@
             ["path" :as path]
             ["child_process" :as cp]
             [clojure.edn :as edn]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (def argv (vec (drop 2 (js->clj js/process.argv))))
 (defn- arg [flag default]

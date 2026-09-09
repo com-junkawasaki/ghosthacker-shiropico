@@ -12,7 +12,7 @@
             ["path" :as path]
             ["child_process" :as cp]
             [clojure.edn :as edn]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 ;; ---------------------------------------------------------------------------
 ;; transport
@@ -44,7 +44,7 @@
                         "--dump-header" out-hdr
                         "--write-out" "\n%{http_code}"
                         "--max-time" "900"
-                        "--request" (str/upper-case (name method))]
+                        "--request" (str/upper (name method))]
                  body-file (into ["--data-binary" (str "@" body-file)])
                  true (conj url))]
       (try
@@ -57,7 +57,7 @@
               hmap (into {} (for [line (str/split-lines raw-headers)
                                   :let [i (str/index-of line ":")]
                                   :when (and i (pos? i))]
-                              [(str/lower-case (str/trim (subs line 0 i)))
+                              [(str/lower (str/trim (subs line 0 i)))
                                (str/trim (subs line (inc i)))]))]
           {:status status :body resp-body :response-headers hmap})
         (finally

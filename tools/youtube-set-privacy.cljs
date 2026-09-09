@@ -16,7 +16,7 @@
 ;;       --ledger shorts/youtube-uploads-ep02-05.edn --privacy public [--confirm]
 
 (ns youtube-set-privacy
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [yt.common :as c]
             [youtube.channels :as channels]
             [youtube.client :as client]

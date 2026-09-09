@@ -13,7 +13,7 @@
   (:require ["fs" :as fs]
             ["path" :as path]
             ["child_process" :as cp]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [yt.common :as c]
             [narration :as n]
             [douga.ffmpeg :as ff]))

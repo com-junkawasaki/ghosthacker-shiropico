@@ -20,7 +20,7 @@
 
 (ns build-gallery
   (:require ["fs" :as fs] ["path" :as path] ["child_process" :as cp]
-            [clojure.edn :as edn] [clojure.string :as str]))
+            [clojure.edn :as edn] [kotoba.lang.text :as str]))
 
 (def PAGES "jump/tools/pages")
 (def WORKS "jump/tools/works.edn")

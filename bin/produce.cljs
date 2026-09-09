@@ -17,7 +17,7 @@
   (:require ["fs" :as fs]
             ["path" :as path]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [comfyui.native-client :as comfy]
             [shiropico-produce.legs :as legs]
             [shiropico-produce.prompt :as prompt]

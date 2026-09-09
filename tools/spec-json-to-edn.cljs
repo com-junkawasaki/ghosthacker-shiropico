@@ -16,13 +16,13 @@
 
 (ns spec-json-to-edn
   (:require ["fs" :as fs]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (defn kebab [s]
   (-> (str s)
       (str/replace #"([a-z0-9])([A-Z])" "$1-$2")
       (str/replace #"[_\s]+" "-")
-      str/lower-case))
+      str/lower))
 
 (defn singular [s]
   (cond (str/ends-with? s "ies") (str (subs s 0 (- (count s) 3)) "y")

@@ -19,7 +19,7 @@
 
 (ns generate-page-art
   (:require ["fs" :as fs] ["path" :as path] ["child_process" :as cp]
-            [clojure.edn :as edn] [clojure.string :as str]))
+            [clojure.edn :as edn] [kotoba.lang.text :as str]))
 
 (def API   "https://generation.murakumo.cloud/api/v1/generation")
 (def MODEL "seedance-2.0-fast")

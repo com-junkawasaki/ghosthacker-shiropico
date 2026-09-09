@@ -6,7 +6,7 @@
   voice-delay-ms を読む**ことが要点 —— master を焼いた声と、そこから測った
   caption のタイミングが別々に drift したら、字幕は静かにずれる。"
   (:require ["fs" :as fs]
-            [clojure.string]
+            [kotoba.lang.text]
             [clojure.edn :as edn]))
 
 (defn ep2 [n] (if (< n 10) (str "0" n) (str n)))
@@ -45,6 +45,6 @@
   [text]
   (let [ms (vec (re-seq sentence-re text))
         consumed (reduce + 0 (map count ms))
-        tail (clojure.string/trim (subs text (min consumed (count text))))]
-    (cond-> (mapv clojure.string/trim ms)
-      (not (clojure.string/blank? tail)) (conj tail))))
+        tail (kotoba.lang.text/trim (subs text (min consumed (count text))))]
+    (cond-> (mapv kotoba.lang.text/trim ms)
+      (not (kotoba.lang.text/blank? tail)) (conj tail))))
