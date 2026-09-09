@@ -17,7 +17,7 @@
   fixed keyword set. `attr-ns` reconstructs it from the episode number and the
   language, which is why the catalog plan carries the template instead of every
   plan repeating ten literal keyword sets."
-  (:require [kotoba.lang.text :as str]))
+  (:require [clojure.string :as str]))
 
 (defn attr-ns
   "Episode number + language -> the attribute namespace those shotlist entries

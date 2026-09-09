@@ -27,7 +27,7 @@
 
   Empty was never right here — that is a manga's shape. A line that could not be
   spoken should be visible as degraded, not absent."
-  (:require [kotoba.lang.text :as str]))
+  (:require [clojure.string :as str]))
 
 (defn leg
   "One outcome -> its leg. `outcome` is
