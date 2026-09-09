@@ -18,7 +18,7 @@
 
 (ns md-to-pages
   (:require ["fs" :as fs] ["path" :as path]
-            [clojure.edn :as edn] [clojure.string :as str]))
+            [clojure.edn :as edn] [kotoba.lang.text :as str]))
 
 (def OUT   "jump/tools/pages")
 (def WORKS "jump/tools/works.edn")

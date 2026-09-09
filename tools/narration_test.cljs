@@ -1,7 +1,7 @@
 (ns narration-test
   "Run: nbb tools/narration_test.cljs"
   (:require [cljs.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [narration :as n]
             [douga.ffmpeg :as ff]))
 

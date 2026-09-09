@@ -36,7 +36,7 @@
             ["path" :as path]
             ["child_process" :as cp]
             [clojure.edn :as edn]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 ;; nbb の process.argv は [node nbb <script>.cljs & args...]。位置引数を使うので
 ;; script 名の次から取る（"drop 2" だと script 名が第1引数になり、mode が常に

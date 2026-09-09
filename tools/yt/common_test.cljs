@@ -12,7 +12,7 @@
             ["os" :as os]
             ["path" :as path]
             [cljs.test :refer [deftest is testing run-tests]]
-            [clojure.string]
+            [kotoba.lang.text]
             [cljs.reader]
             [yt.common :as c]))
 
@@ -60,9 +60,9 @@
         (is (some? (get by [ep lang])) (str "missing ep" ep " " lang))))
     (testing "every release names its media file and carries a caption track name"
       (doseq [[k r] by]
-        (is (not (clojure.string/blank? (:release/media-basename r))) (str k))
-        (is (not (clojure.string/blank? (:release/title r))) (str k))
-        (is (not (clojure.string/blank? (:release/caption-name r))) (str k))))
+        (is (not (kotoba.lang.text/blank? (:release/media-basename r))) (str k))
+        (is (not (kotoba.lang.text/blank? (:release/title r))) (str k))
+        (is (not (kotoba.lang.text/blank? (:release/caption-name r))) (str k))))
     (testing "ep1 keeps its own media naming, ep2+ use the assembled masters"
       (is (= "shiropico-short-en" (:release/media-basename (get by [1 "en"]))))
       (is (= "shiropico-ep02-en" (:release/media-basename (get by [2 "en"])))))))

@@ -21,7 +21,7 @@
 (ns youtube-publish
   (:require ["fs" :as fs]
             ["path" :as path]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [yt.common :as c]
             [youtube.channels :as channels]
             [youtube.client :as client]

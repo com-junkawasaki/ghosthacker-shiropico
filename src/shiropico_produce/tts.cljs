@@ -10,7 +10,7 @@
   caller reports a `:silent` leg rather than a spoken one."
   (:require ["fs" :as fs]
             ["path" :as path]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (defn base-url
   "Env -> the speech root, or nil.
@@ -37,7 +37,7 @@
 (def narration-voice "af_nicole")
 
 (defn voice-for [speaker]
-  (get voices (str/lower-case (str speaker)) narration-voice))
+  (get voices (str/lower (str speaker)) narration-voice))
 
 (defn speak!
   "A line -> a promise of {:ok? bool :file path :reason ...}."

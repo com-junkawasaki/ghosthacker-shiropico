@@ -27,7 +27,7 @@
 (ns score-komawari
   (:require ["fs" :as fs]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [kami.mangaka.komawari :as kw]
             [xmile.model :as xm]
             [xmile.execute :as xe]))

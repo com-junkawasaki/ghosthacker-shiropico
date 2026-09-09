@@ -15,7 +15,7 @@
   separate a subject from its setting. Nothing is invented and nothing is
   dropped — this only re-segments what the author wrote, which is why it is a
   pure function with a test rather than a model call."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def ^:private clause-split
   "Prepositional joints that separate a subject from where/when it sits.
@@ -60,7 +60,7 @@
                   (if (> (count frag) long-fragment) (split-clause frag) [frag])))
         (map clean)
         (remove str/blank?)
-        (remove #(contains? noise (str/lower-case %)))
+        (remove #(contains? noise (str/lower %)))
         vec)))
 
 (def style-tags

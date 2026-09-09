@@ -19,7 +19,7 @@
   (:require ["fs" :as fs]
             ["path" :as path]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [kami.mangaka.genko :as g]
             [kami.mangaka.genko-render :as gr]
             [kami.mangaka.komawari :as kw]

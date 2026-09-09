@@ -25,7 +25,7 @@
             ["os" :as os]
             ["path" :as path]
             ["child_process" :as cp]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [yt.common :as c]
             [narration :as n]
             [douga.ffmpeg :as ff]
@@ -36,7 +36,7 @@
 (def masters (c/arg "--masters" "shorts/masters"))
 (def episodes
   (if-let [s (c/arg "--episodes")]
-    (set (map js/parseInt (clojure.string/split s #",")))
+    (set (map js/parseInt (str/split s #",")))
     nil))
 
 (defn- sh [argv]
