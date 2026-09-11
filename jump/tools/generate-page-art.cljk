@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; ページ EDN → seedance マルチショット動画 → コマ画像
 ;;
-;;   MURAKUMO_GENERATION_TOKEN=... nbb jump/tools/generate-page-art.cljk \
+;;   MURAKUMO_GENERATION_TOKEN=... kbb --backend sci jump/tools/generate-page-art.cljk \
 ;;     --pages 6,7,8 [--dry-run] [--out <dir>] [--refs <base-url>]
 ;;
 ;; **1ページ = 1クリップ。** seedance はマルチショット生成なので、コマごとに

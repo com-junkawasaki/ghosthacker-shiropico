@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; コマ割りとセリフを、システムダイナミクスで数値化する。
 ;;
-;;   nbb --classpath "<kami-mangaka-page>/src:<org-oasis-open-xmile>/src" \
+;;   kbb --backend sci --classpath "<kami-mangaka-page>/src:<org-oasis-open-xmile>/src" \
 ;;       jump/tools/score-komawari.cljk jump/tools/pages/oneshot-p01.edn ... \
 ;;       [--coeffs jump/tools/reading-dynamics.edn] [--xmile out.edn]
 ;;

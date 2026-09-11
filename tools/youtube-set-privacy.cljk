@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; youtube-set-privacy — 既に上がっている Shorts の privacyStatus を変える。
 ;;
 ;; 2026-08-11 に tools/youtube_set_privacy.py から移植。
@@ -12,7 +12,7 @@
 ;; embeddable / license が API 既定に戻る —— 子供向け channel では誰も
 ;; 頼んでいないコンプライアンス変更になる。
 ;;
-;;   nbb tools/youtube-set-privacy.cljk --authorized-user <token> \
+;;   kbb --backend sci tools/youtube-set-privacy.cljk --authorized-user <token> \
 ;;       --ledger shorts/youtube-uploads-ep02-05.edn --privacy public [--confirm]
 
 (ns youtube-set-privacy

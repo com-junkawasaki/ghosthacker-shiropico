@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; make-captions — ep02-05 のローカライズ Shorts 用 SRT を作る。
 ;;
 ;; 2026-08-11 に tools/make_captions.py から移植。SRT の組み立ては
@@ -18,7 +18,7 @@
 ;; 大きくずれていたらプレフィックス法が `say` の実挙動と合わなくなっており、
 ;; タイミングを信用してはいけない。
 ;;
-;;   nbb tools/make-captions.cljk [--out-dir shorts/captions] [--tolerance 0.6]
+;;   kbb --backend sci tools/make-captions.cljk [--out-dir shorts/captions] [--tolerance 0.6]
 
 (ns make-captions
   (:require ["fs" :as fs]

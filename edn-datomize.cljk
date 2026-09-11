@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; edn-datomize.cljk — EDN → Datomic/Datascript tx-data 変換ツール。
 ;;
 ;; 2026-08-11 に edn-datomize.bb から移植。babashka は ADR-2607173000 で
@@ -19,11 +19,11 @@
 ;; schema.edn（リポジトリルート）に自動登録する。
 ;;
 ;; 使い方:
-;;   nbb edn-datomize.cljk wrap-map <path> <ns>     — map 1個のファイルを変換
-;;   nbb edn-datomize.cljk wrap-vec <path> <ns>     — vector-of-maps ファイルを変換
-;;   nbb edn-datomize.cljk adr-dir  <dir>           — ADR frontmatter/body を変換
-;;   nbb edn-datomize.cljk adr-file <path>          — ADR 1ファイルを変換
-;;   nbb edn-datomize.cljk schema-from-tx <path>... — 既に tx-data のファイルから
+;;   kbb --backend sci edn-datomize.cljk wrap-map <path> <ns>     — map 1個のファイルを変換
+;;   kbb --backend sci edn-datomize.cljk wrap-vec <path> <ns>     — vector-of-maps ファイルを変換
+;;   kbb --backend sci edn-datomize.cljk adr-dir  <dir>           — ADR frontmatter/body を変換
+;;   kbb --backend sci edn-datomize.cljk adr-file <path>          — ADR 1ファイルを変換
+;;   kbb --backend sci edn-datomize.cljk schema-from-tx <path>... — 既に tx-data のファイルから
 ;;                                                    属性を schema.edn へ登録する
 ;;
 ;; schema-from-tx は移植で足した。手で書いた tx-data（character-design-spec.edn 等、
@@ -229,6 +229,6 @@
                  (merge-schema! (:attrs @report))
                  (println @report))
     "schema-from-tx" (schema-from-tx! (cons a more))
-    (do (println (str "usage: nbb edn-datomize.cljk [wrap-map <path> <ns> | wrap-vec <path> <ns>"
+    (do (println (str "usage: kbb --backend sci edn-datomize.cljk [wrap-map <path> <ns> | wrap-vec <path> <ns>"
                       " | adr-dir <dir> | adr-file <path> | schema-from-tx <path>...]"))
         (js/process.exit 1))))

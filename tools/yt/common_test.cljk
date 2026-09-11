@@ -7,7 +7,7 @@
   only record of which videos are already live, so a round-trip that loses an
   entry makes the next publish run upload duplicates to a public channel.
 
-  Run: nbb tools/yt/common_test.cljk"
+  Run: kbb --backend sci tools/yt/common_test.cljk"
   (:require ["fs" :as fs]
             ["os" :as os]
             ["path" :as path]

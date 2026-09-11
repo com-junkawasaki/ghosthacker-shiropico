@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; ネームの md（正本）→ jump/tools/pages/<prefix>-pNN.edn（コマ割りの入力）
 ;;
-;;   nbb jump/tools/md-to-pages.cljk [--work ep01] [--force] [--only 6,7,8]
+;;   kbb --backend sci jump/tools/md-to-pages.cljk [--work ep01] [--force] [--only 6,7,8]
 ;;
 ;; 作品（読切 / 各話）の定義は jump/tools/works.edn。--work 無指定は :oneshot。
 ;;

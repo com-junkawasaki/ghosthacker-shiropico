@@ -1,5 +1,5 @@
 (ns narration-test
-  "Run: nbb tools/narration_test.cljk"
+  "Run: kbb --backend sci tools/narration_test.cljk"
   (:require [cljs.test :refer [deftest is testing run-tests]]
             [kotoba.lang.text :as str]
             [narration :as n]

@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; ジャンプ版キャラクターアートを murakumo generation で生成する。
 ;;
-;;   nbb jump/tools/generate-character-art.cljk [--out DIR] [--only id,id] [--all]
+;;   kbb --backend sci jump/tools/generate-character-art.cljk [--out DIR] [--only id,id] [--all]
 ;;
 ;; プロンプトの正本は jump/tools/character-art-prompts.edn（実測メモつき）。
 ;; 既定では :status :approved のものだけを回す。:needs-work も含めるなら --all。
@@ -11,7 +11,7 @@
 ;;   持っていなければ発行する（署名鍵は kagi、compartment gftdcojp):
 ;;     SECRET=$(KAGI_HOME=$HOME/.kagi orgs/kotoba-lang/kagi/bin/kagi get MURAKUMO_GENERATION_TOKEN_SECRET)
 ;;     cd orgs/gftdcojp/cloud-murakumo
-;;     MURAKUMO_TOKEN_SECRET=$SECRET clojure -M:token issue <sub> generation 604800
+;;     MURAKUMO_TOKEN_SECRET=$SECRET kbb -M:token issue <sub> generation 604800
 ;;
 ;; ホストの注意: 実 API は generation.murakumo.cloud。
 ;; API が返す statusUrl / artifact url は murakumo.cloud を指すので、
@@ -38,7 +38,7 @@
 (defn auth-headers [] #js {"authorization" (str "Bearer " token)})
 
 (defn args []
-  ;; nbb の process.argv は [node nbb script.cljs ...] だが要素数が環境で変わるので、
+  ;; nbb の process.argv は [node kbb --backend sci script.cljk ...] だが要素数が環境で変わるので、
   ;; 位置ではなく「最初の --foo」以降を引数とみなす（実測: drop 2 だとスクリプト名が
   ;; 先頭に残り、以降の対がすべて 1 つずれて --out/--only が黙って無視された）。
   (let [a (->> (js->clj js/process.argv)

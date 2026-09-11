@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; youtube-oauth — SHIRO & PICO の uploader を最小 scope で認可する。
 ;;
 ;; 2026-08-11 に tools/youtube_oauth.py（google_auth_oauthlib の
@@ -9,7 +9,7 @@
 ;; 出力は EDN（従来は Google 形式の JSON）。tools/yt/common.cljk の
 ;; load-credentials は両方読めるので、既存の token ファイルはそのまま動く。
 ;;
-;;   nbb tools/youtube-oauth.cljk --client-secret <client_secret.json> \
+;;   kbb --backend sci tools/youtube-oauth.cljk --client-secret <client_secret.json> \
 ;;       --output ~/.config/shiropico/youtube-token.edn
 
 (ns youtube-oauth

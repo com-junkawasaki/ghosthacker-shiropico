@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; b2-catalog — ai-gftd-datasets バケットにある SHIRO & PICO の制作資産の
 ;; 在庫と drift 検査。2026-08-11 に tools/b2_catalog.py から移植（Python を
 ;; 新規に置かない / 運用 script は nbb、ADR-2607173000）。出力も JSON から
@@ -23,8 +23,8 @@
 ;; だけにスコープされている。**service 名を狙い撃ちで 1 件引く**（vault を総当たり
 ;; しない — CLAUDE.md 安全床⑦）。
 ;;
-;;   nbb tools/b2-catalog.cljk --generate   # catalog/ai-gftd-datasets.edn を更新
-;;   nbb tools/b2-catalog.cljk --verify     # drift があれば exit 1
+;;   kbb --backend sci tools/b2-catalog.cljk --generate   # catalog/ai-gftd-datasets.edn を更新
+;;   kbb --backend sci tools/b2-catalog.cljk --verify     # drift があれば exit 1
 
 (ns b2-catalog
   (:require ["fs" :as fs]
@@ -150,7 +150,7 @@
 (defn- write-catalog! [objects]
   (let [tx (->tx objects)
         body (str ";; catalog/ai-gftd-datasets.edn — 生成物。手で編集しない。\n"
-                  ";;   nbb tools/b2-catalog.cljk --generate\n"
+                  ";;   kbb --backend sci tools/b2-catalog.cljk --generate\n"
                   ";; 1 オブジェクト = 1 entity。トップレベルは tx-data。\n\n"
                   "[" (str/join "\n " (map pr-str tx)) "]\n")]
     (fs/mkdirSync (path/dirname catalog-path) #js {:recursive true})

@@ -25,7 +25,7 @@ to annex automatically via `.gitattributes`.
 
 ```bash
 ROOT=<superproject root>
-eval "$(cd "$ROOT" && nbb --classpath "$ROOT:$ROOT/scripts/nbb_compat:$ROOT/orgs/kotoba-lang/secret-resolve/src" \
+eval "$(cd "$ROOT" && kbb --backend sci --classpath "$ROOT:$ROOT/scripts/nbb_compat:$ROOT/orgs/kotoba-lang/secret-resolve/src" \
   "$ROOT/scripts/b2-creds.cljs")"
 
 datalad save -m "add ..."     # annex + commit (content still local only)
@@ -35,7 +35,7 @@ datalad get  <path>           # restore from B2
 ```
 
 From the superproject, the west-integrated equivalents are
-`nbb manifest/west_annex.cljs annex-get` / `annex-drop`.
+`kbb --backend sci manifest/west_annex.cljk annex-get` / `annex-drop`.
 
 ## History / recovery leads for ep01
 
