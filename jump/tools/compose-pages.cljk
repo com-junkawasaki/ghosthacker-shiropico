@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; ページ EDN + コマ画像 → 原稿 SVG → PNG（1作品ぶんまとめて）
 ;;
-;;   nbb jump/tools/compose-pages.cljk --work ep01 \
+;;   kbb --backend sci jump/tools/compose-pages.cljk --work ep01 \
 ;;     --art /tmp/art-ep01 --out /tmp/pages-ep01 \
 ;;     --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src"
 ;;

@@ -100,7 +100,7 @@ grading 規律と同じで、「計算済みと称する数値は実データに
 
 ### 使い方
 ```bash
-nbb --classpath "<kami-mangaka-page>/src:<org-oasis-open-xmile>/src" \
+kbb --backend sci --classpath "<kami-mangaka-page>/src:<org-oasis-open-xmile>/src" \
     jump/tools/score-komawari.cljk jump/tools/pages/oneshot-p0{1,2,3,4,5}.edn \
     [--coeffs jump/tools/reading-dynamics.edn] [--xmile out.edn]
 ```

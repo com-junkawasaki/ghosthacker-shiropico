@@ -1,9 +1,9 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; shiropico producer — the command `loop-ka-production` invokes for this
 ;; channel. The loop owns cadence, admission and verdict; this owns producing
 ;; one episode and reporting honestly what its legs actually did.
 ;;
-;;   nbb --classpath src:../../kotoba-lang/comfyui/src bin/produce.cljk \
+;;   kbb --backend sci --classpath src:../../kotoba-lang/comfyui/src bin/produce.cljk \
 ;;       episode-11 [--lang en] [--dry-run] [--limit N]
 ;;
 ;; Image rendering goes to ComfyUI's NATIVE protocol via kotoba-lang/comfyui's

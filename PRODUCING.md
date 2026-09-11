@@ -11,10 +11,10 @@ the `shiropico` channel. The split is the loop's, not ours:
 
 ```bash
 CP=src:../../kotoba-lang/comfyui/src
-nbb --classpath $CP bin/produce.cljk episode-11              # render what is missing
-nbb --classpath $CP bin/produce.cljk episode-12 --lang zh
-nbb --classpath $CP bin/produce.cljk episode-11 --dry-run    # report without rendering
-nbb --classpath $CP bin/produce.cljk episode-11 --limit 2    # bound a run
+kbb --backend sci --classpath $CP bin/produce.cljk episode-11              # render what is missing
+kbb --backend sci --classpath $CP bin/produce.cljk episode-12 --lang zh
+kbb --backend sci --classpath $CP bin/produce.cljk episode-11 --dry-run    # report without rendering
+kbb --backend sci --classpath $CP bin/produce.cljk episode-11 --limit 2    # bound a run
 ```
 
 `kotoba-lang/comfyui` supplies `comfyui.native` / `comfyui.native-client` — the
@@ -139,7 +139,7 @@ loop's to settle.
 ## Tests
 
 ```bash
-nbb --classpath src:test test/shiropico_produce/produce_test.cljk
+kbb --backend sci --classpath src:test test/shiropico_produce/produce_test.cljk
 ```
 
 Each case pins one bug the first working version shipped with, none of which

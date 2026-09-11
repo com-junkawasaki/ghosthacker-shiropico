@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; verify-spec-edn.cljs — 設定 EDN が datom 面に載る形のままであることを検査する。
 ;;
-;;   nbb tools/verify-spec-edn.cljk
+;;   kbb --backend sci tools/verify-spec-edn.cljk
 ;;
 ;; 見るのは「EDN として読める」ではなく「transact できる」。この 2 つは違い、
 ;; 差は静かに出る — nil を 1 個書くと読めるが transact で落ちる（移行時に実際に

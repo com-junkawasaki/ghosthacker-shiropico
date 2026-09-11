@@ -1,5 +1,5 @@
 ;; catalog/ai-gftd-datasets.edn — 生成物。手で編集しない。
-;;   nbb tools/b2-catalog.cljk --generate
+;;   kbb --backend sci tools/b2-catalog.cljk --generate
 ;; 1 オブジェクト = 1 entity。トップレベルは tx-data。
 
 [{:db/id -1, :source/dataset "shiropico-b2-catalog", :catalog/kind "summary", :catalog/bucket "ai-gftd-datasets", :catalog/prefix "ghosthacker-shiropico/", :catalog/files 297, :catalog/bytes 10382188991, :catalog/note "在庫のみ — バイトは annex 管理下に無い。生成は tools/b2-catalog.cljk。"}

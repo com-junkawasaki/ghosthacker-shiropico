@@ -7,9 +7,9 @@
 ——md のパス・ページ EDN の接頭辞・表示名・ページごとの作画スタイルがそこにある。
 
 ```bash
-nbb jump/tools/md-to-pages.cljk   --work ep01          # → pages/ep01-pNN.edn
-nbb jump/tools/generate-page-art.cljk --work ep01 --pages 1,2,3
-nbb jump/tools/compose-pages.cljk --work ep01 --art /tmp/art-ep01 --out /tmp/pages-ep01 \
+kbb --backend sci jump/tools/md-to-pages.cljk   --work ep01          # → pages/ep01-pNN.edn
+kbb --backend sci jump/tools/generate-page-art.cljk --work ep01 --pages 1,2,3
+kbb --backend sci jump/tools/compose-pages.cljk --work ep01 --art /tmp/art-ep01 --out /tmp/pages-ep01 \
   --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src"
 ```
 
@@ -25,14 +25,14 @@ cd <scratchpad>/refhost && npx wrangler deploy
 
 # 2) トークンを mint（kagi の署名 secret から）
 MURAKUMO_TOKEN_SECRET=$(KAGI_HOME=$HOME/.kagi kagi get MURAKUMO_GENERATION_TOKEN_SECRET) \
-  clojure -M:token issue shiropico generation 7200   # in orgs/gftdcojp/cloud-murakumo
+  kbb -M:token issue shiropico generation 7200   # in orgs/gftdcojp/cloud-murakumo
 
 # 3) 中身を確認してから生成
-nbb jump/tools/generate-page-art.cljk --pages 6,7,8 --dry-run
-MURAKUMO_GENERATION_TOKEN=... nbb jump/tools/generate-page-art.cljk --pages 6,7,8 --out jump/tools/art
+kbb --backend sci jump/tools/generate-page-art.cljk --pages 6,7,8 --dry-run
+MURAKUMO_GENERATION_TOKEN=... kbb --backend sci jump/tools/generate-page-art.cljk --pages 6,7,8 --out jump/tools/art
 
 # 4) 原稿に組む
-nbb --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src" \
+kbb --backend sci --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src" \
   jump/tools/build-page.cljk jump/tools/art/p6 out.svg jump/tools/pages/oneshot-p06.edn
 ```
 

@@ -77,7 +77,7 @@ seedance  →  animeka  →  genko  →  mangaka
 # 2) seedance に 1ページ＝1クリップで投げる（SHOT 1..4 を1プロンプトに）
 # 3) ffmpeg で4フレーム抜いて <shots-dir>/{k1..k4}.jpg に置く
 # 4) 原稿に組む
-nbb --classpath "<kami-genko>/src:<canvaskit>/src" \
+kbb --backend sci --classpath "<kami-genko>/src:<canvaskit>/src" \
     jump/tools/build-page.cljk <shots-dir> out.svg jump/tools/pages/oneshot-p12.edn
 rsvg-convert -w 1000 out.svg -o out.png
 ```

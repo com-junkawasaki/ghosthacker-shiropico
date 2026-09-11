@@ -1,4 +1,4 @@
-;; nbb --classpath src:test test/shiropico_produce/produce_test.cljk
+;; kbb --backend sci --classpath src:test test/shiropico_produce/produce_test.cljk
 ;;
 ;; Every case here is one of the three bugs the first working version shipped
 ;; with, all of which were invisible until the producer was actually run:

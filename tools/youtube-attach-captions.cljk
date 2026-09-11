@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; youtube-attach-captions — 既に上がっている Shorts に SRT を後付けする。
 ;;
 ;; 2026-08-11 に tools/youtube_attach_captions.py から移植。
@@ -11,7 +11,7 @@
 ;; 再実行は安全 —— 同じ言語の 2 本目を YouTube が拒否するので、その項目だけ
 ;; 失敗として報告し、run 全体は止めない。
 ;;
-;;   nbb tools/youtube-attach-captions.cljk --authorized-user <token> \
+;;   kbb --backend sci tools/youtube-attach-captions.cljk --authorized-user <token> \
 ;;       --ledger shorts/youtube-uploads-ep02-05.edn --captions-dir shorts/captions
 
 (ns youtube-attach-captions
