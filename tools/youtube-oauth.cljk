@@ -6,10 +6,10 @@
 ;; あの lib は refresh token を「もう持っている」前提で、その先を扱う。
 ;; 同意フローは 1 回きりの人間が居る手続きなので、この repo に置いている。
 ;;
-;; 出力は EDN（従来は Google 形式の JSON）。tools/yt/common.cljs の
+;; 出力は EDN（従来は Google 形式の JSON）。tools/yt/common.cljk の
 ;; load-credentials は両方読めるので、既存の token ファイルはそのまま動く。
 ;;
-;;   nbb tools/youtube-oauth.cljs --client-secret <client_secret.json> \
+;;   nbb tools/youtube-oauth.cljk --client-secret <client_secret.json> \
 ;;       --output ~/.config/shiropico/youtube-token.edn
 
 (ns youtube-oauth
@@ -74,7 +74,7 @@
   (fs/mkdirSync (path/dirname out-path) #js {:recursive true})
   (fs/writeFileSync out-path
                     (str ";; SHIRO & PICO YouTube uploader の認可情報。**秘密**。\n"
-                         ";; tools/youtube-oauth.cljs が書く。repo には入れない。\n\n"
+                         ";; tools/youtube-oauth.cljk が書く。repo には入れない。\n\n"
                          (pr-str {:client-id (:client-id creds)
                                   :client-secret (:client-secret creds)
                                   :refresh-token (:refresh_token tok)

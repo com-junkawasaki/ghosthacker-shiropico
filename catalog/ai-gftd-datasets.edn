@@ -1,8 +1,8 @@
 ;; catalog/ai-gftd-datasets.edn — 生成物。手で編集しない。
-;;   nbb tools/b2-catalog.cljs --generate
+;;   nbb tools/b2-catalog.cljk --generate
 ;; 1 オブジェクト = 1 entity。トップレベルは tx-data。
 
-[{:db/id -1, :source/dataset "shiropico-b2-catalog", :catalog/kind "summary", :catalog/bucket "ai-gftd-datasets", :catalog/prefix "ghosthacker-shiropico/", :catalog/files 297, :catalog/bytes 10382188991, :catalog/note "在庫のみ — バイトは annex 管理下に無い。生成は tools/b2-catalog.cljs。"}
+[{:db/id -1, :source/dataset "shiropico-b2-catalog", :catalog/kind "summary", :catalog/bucket "ai-gftd-datasets", :catalog/prefix "ghosthacker-shiropico/", :catalog/files 297, :catalog/bytes 10382188991, :catalog/note "在庫のみ — バイトは annex 管理下に無い。生成は tools/b2-catalog.cljk。"}
  {:db/id -2, :source/dataset "shiropico-b2-catalog", :catalog/kind "object", :object/path "ASSETS-DATALAD.md", :object/size 1848, :object/sha1 "unverified:01509f979ba7c7d2bd6bf470e69ceac19c8e4d2d", :object/uploaded 1781964153089}
  {:db/id -3, :source/dataset "shiropico-b2-catalog", :catalog/kind "object", :object/path "SERIES-BIBLE.md", :object/size 12908, :object/sha1 "unverified:e0c43446aecaf4332c8cbda8e901a1201c7812b6", :object/uploaded 1781964150933}
  {:db/id -4, :source/dataset "shiropico-b2-catalog", :catalog/kind "object", :object/path "ads/ep01-ads-plan.csv", :object/size 5066, :object/sha1 "unverified:4b2dd9aee3966f56d635b6ffaece4515dde5a59f", :object/uploaded 1782359675835}

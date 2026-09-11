@@ -29,7 +29,7 @@ op document get mrisveluwnqtoeezu5xxog3nnm \
 Run the local-browser OAuth consent flow with the project helper:
 
 ```sh
-nbb tools/youtube-oauth.cljs \
+nbb tools/youtube-oauth.cljk \
   --client-secret "$SHIROPICO_OAUTH_DIR/client-secret.json" \
   --output "$SHIROPICO_OAUTH_DIR/authorized-user.edn"
 ```
@@ -47,11 +47,11 @@ For each release:
 1. The tools refuse to write until `youtube.channels/assert-channel!` has
    confirmed the token acts for exactly the SHIRO & PICO channel — you do not
    have to remember to check.
-3. Upload the video as `unlisted` with `nbb tools/youtube-publish.cljs`
+3. Upload the video as `unlisted` with `nbb tools/youtube-publish.cljk`
    (the API client is `kotoba-lang/com-youtube`, pinned in `nbb.edn`).
-4. Attach the matching SRT track with `nbb tools/youtube-attach-captions.cljs`.
+4. Attach the matching SRT track with `nbb tools/youtube-attach-captions.cljk`.
 5. Verify playback, audio, captions, title, description, and Shorts framing.
-6. Change visibility with `nbb tools/youtube-set-privacy.cljs --privacy public
+6. Change visibility with `nbb tools/youtube-set-privacy.cljk --privacy public
    --confirm`, only when explicitly authorized. Without `--confirm` it prints
    what it would do and changes nothing.
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
 ;; 組んだページ PNG → 右綴じで読める1枚の HTML（Artifact 用）
 ;;
-;;   nbb jump/tools/build-gallery.cljs --works oneshot,ep01 \
+;;   nbb jump/tools/build-gallery.cljk --works oneshot,ep01 \
 ;;     --pages oneshot=/tmp/pages-oneshot,ep01=/tmp/pages-ep01 \
 ;;     --out /tmp/gallery.html
 ;;

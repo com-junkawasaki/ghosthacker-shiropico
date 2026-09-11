@@ -18,7 +18,7 @@
 ;; 大きくずれていたらプレフィックス法が `say` の実挙動と合わなくなっており、
 ;; タイミングを信用してはいけない。
 ;;
-;;   nbb tools/make-captions.cljs [--out-dir shorts/captions] [--tolerance 0.6]
+;;   nbb tools/make-captions.cljk [--out-dir shorts/captions] [--tolerance 0.6]
 
 (ns make-captions
   (:require ["fs" :as fs]

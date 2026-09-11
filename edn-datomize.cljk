@@ -1,5 +1,5 @@
 #!/usr/bin/env nbb
-;; edn-datomize.cljs — EDN → Datomic/Datascript tx-data 変換ツール。
+;; edn-datomize.cljk — EDN → Datomic/Datascript tx-data 変換ツール。
 ;;
 ;; 2026-08-11 に edn-datomize.bb から移植。babashka は ADR-2607173000 で
 ;; script host から退役しており、この repo に残っていた最後の 1 本だった。
@@ -19,11 +19,11 @@
 ;; schema.edn（リポジトリルート）に自動登録する。
 ;;
 ;; 使い方:
-;;   nbb edn-datomize.cljs wrap-map <path> <ns>     — map 1個のファイルを変換
-;;   nbb edn-datomize.cljs wrap-vec <path> <ns>     — vector-of-maps ファイルを変換
-;;   nbb edn-datomize.cljs adr-dir  <dir>           — ADR frontmatter/body を変換
-;;   nbb edn-datomize.cljs adr-file <path>          — ADR 1ファイルを変換
-;;   nbb edn-datomize.cljs schema-from-tx <path>... — 既に tx-data のファイルから
+;;   nbb edn-datomize.cljk wrap-map <path> <ns>     — map 1個のファイルを変換
+;;   nbb edn-datomize.cljk wrap-vec <path> <ns>     — vector-of-maps ファイルを変換
+;;   nbb edn-datomize.cljk adr-dir  <dir>           — ADR frontmatter/body を変換
+;;   nbb edn-datomize.cljk adr-file <path>          — ADR 1ファイルを変換
+;;   nbb edn-datomize.cljk schema-from-tx <path>... — 既に tx-data のファイルから
 ;;                                                    属性を schema.edn へ登録する
 ;;
 ;; schema-from-tx は移植で足した。手で書いた tx-data（character-design-spec.edn 等、
@@ -106,7 +106,7 @@
                                 by-ident new-attrs)
         merged (vec (sort-by (comp str :db/ident) (vals merged-by-ident)))]
     (spit* (schema-path)
-           (str ";; schema.edn — Datomic/Datascript 互換スキーマ定義（自動生成 by edn-datomize.cljs）\n"
+           (str ";; schema.edn — Datomic/Datascript 互換スキーマ定義（自動生成 by edn-datomize.cljk）\n"
                 ";; :db/ident 属性定義のリスト。Datomic 固有キー(:db.install/_attribute 等)は使わない。\n"
                 ";; 手編集禁止 — 再生成すると上書きされる。\n\n"
                 (pr-str merged) "\n"))
@@ -229,6 +229,6 @@
                  (merge-schema! (:attrs @report))
                  (println @report))
     "schema-from-tx" (schema-from-tx! (cons a more))
-    (do (println (str "usage: nbb edn-datomize.cljs [wrap-map <path> <ns> | wrap-vec <path> <ns>"
+    (do (println (str "usage: nbb edn-datomize.cljk [wrap-map <path> <ns> | wrap-vec <path> <ns>"
                       " | adr-dir <dir> | adr-file <path> | schema-from-tx <path>...]"))
         (js/process.exit 1))))

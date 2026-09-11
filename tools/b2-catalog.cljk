@@ -23,8 +23,8 @@
 ;; だけにスコープされている。**service 名を狙い撃ちで 1 件引く**（vault を総当たり
 ;; しない — CLAUDE.md 安全床⑦）。
 ;;
-;;   nbb tools/b2-catalog.cljs --generate   # catalog/ai-gftd-datasets.edn を更新
-;;   nbb tools/b2-catalog.cljs --verify     # drift があれば exit 1
+;;   nbb tools/b2-catalog.cljk --generate   # catalog/ai-gftd-datasets.edn を更新
+;;   nbb tools/b2-catalog.cljk --verify     # drift があれば exit 1
 
 (ns b2-catalog
   (:require ["fs" :as fs]
@@ -132,7 +132,7 @@
             :catalog/prefix prefix
             :catalog/files (count objects)
             :catalog/bytes total
-            :catalog/note "在庫のみ — バイトは annex 管理下に無い。生成は tools/b2-catalog.cljs。"}]
+            :catalog/note "在庫のみ — バイトは annex 管理下に無い。生成は tools/b2-catalog.cljk。"}]
           (map-indexed (fn [i o]
                          (cond-> {:db/id (- (+ i 2))
                                   :source/dataset dataset
@@ -150,7 +150,7 @@
 (defn- write-catalog! [objects]
   (let [tx (->tx objects)
         body (str ";; catalog/ai-gftd-datasets.edn — 生成物。手で編集しない。\n"
-                  ";;   nbb tools/b2-catalog.cljs --generate\n"
+                  ";;   nbb tools/b2-catalog.cljk --generate\n"
                   ";; 1 オブジェクト = 1 entity。トップレベルは tx-data。\n\n"
                   "[" (str/join "\n " (map pr-str tx)) "]\n")]
     (fs/mkdirSync (path/dirname catalog-path) #js {:recursive true})

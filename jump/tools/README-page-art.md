@@ -7,9 +7,9 @@
 ——md のパス・ページ EDN の接頭辞・表示名・ページごとの作画スタイルがそこにある。
 
 ```bash
-nbb jump/tools/md-to-pages.cljs   --work ep01          # → pages/ep01-pNN.edn
-nbb jump/tools/generate-page-art.cljs --work ep01 --pages 1,2,3
-nbb jump/tools/compose-pages.cljs --work ep01 --art /tmp/art-ep01 --out /tmp/pages-ep01 \
+nbb jump/tools/md-to-pages.cljk   --work ep01          # → pages/ep01-pNN.edn
+nbb jump/tools/generate-page-art.cljk --work ep01 --pages 1,2,3
+nbb jump/tools/compose-pages.cljk --work ep01 --art /tmp/art-ep01 --out /tmp/pages-ep01 \
   --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src"
 ```
 
@@ -28,12 +28,12 @@ MURAKUMO_TOKEN_SECRET=$(KAGI_HOME=$HOME/.kagi kagi get MURAKUMO_GENERATION_TOKEN
   clojure -M:token issue shiropico generation 7200   # in orgs/gftdcojp/cloud-murakumo
 
 # 3) 中身を確認してから生成
-nbb jump/tools/generate-page-art.cljs --pages 6,7,8 --dry-run
-MURAKUMO_GENERATION_TOKEN=... nbb jump/tools/generate-page-art.cljs --pages 6,7,8 --out jump/tools/art
+nbb jump/tools/generate-page-art.cljk --pages 6,7,8 --dry-run
+MURAKUMO_GENERATION_TOKEN=... nbb jump/tools/generate-page-art.cljk --pages 6,7,8 --out jump/tools/art
 
 # 4) 原稿に組む
 nbb --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src" \
-  jump/tools/build-page.cljs jump/tools/art/p6 out.svg jump/tools/pages/oneshot-p06.edn
+  jump/tools/build-page.cljk jump/tools/art/p6 out.svg jump/tools/pages/oneshot-p06.edn
 ```
 
 ## 踏んだ落とし穴（繰り返さないために）

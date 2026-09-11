@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
 ;; ジャンプ版キャラクターアートを murakumo generation で生成する。
 ;;
-;;   nbb jump/tools/generate-character-art.cljs [--out DIR] [--only id,id] [--all]
+;;   nbb jump/tools/generate-character-art.cljk [--out DIR] [--only id,id] [--all]
 ;;
 ;; プロンプトの正本は jump/tools/character-art-prompts.edn（実測メモつき）。
 ;; 既定では :status :approved のものだけを回す。:needs-work も含めるなら --all。

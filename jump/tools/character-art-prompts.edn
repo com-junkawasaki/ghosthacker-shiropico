@@ -1,6 +1,6 @@
 ;; ジャンプ版キャラクターアート生成プロンプト集
 ;;
-;; 実行: jump/tools/generate-character-art.cljs（README は同ディレクトリ）
+;; 実行: jump/tools/generate-character-art.cljk（README は同ディレクトリ）
 ;; 設定の正本は jump/character-design-spec.edn ／ 作画規約は jump/ART-DIRECTION.md
 ;;
 ;; 実測で分かったこと（2026-08-03、murakumo generation で 9 枚生成した結果）:

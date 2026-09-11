@@ -1,4 +1,4 @@
-;; jump/character-design-spec.edn — jump/character-design-spec.edn から移行（2026-08-10、tools/spec-json-to-edn.cljs）。
+;; jump/character-design-spec.edn — jump/character-design-spec.edn から移行（2026-08-10、tools/spec-json-to-edn.cljk）。
 ;; この workspace の正本は EDN の datom 面なので JSON では query できない。
 ;; 値は変えていない（format 変換であって編集ではない）。
 ;; トップレベルは tx-data: (d/transact conn (edn/read-string (slurp ...)))

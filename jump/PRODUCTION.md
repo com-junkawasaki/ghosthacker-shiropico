@@ -50,7 +50,7 @@ seedance  →  animeka  →  genko  →  mangaka
 | **seedance** | カットの映像 | `POST generation.murakumo.cloud/api/v1/generation` |
 | **animeka** | 映像 → 静止カット | ffmpeg で代表フレームを抜く（尺の 60% 付近） |
 | **genko** | 原稿の幾何 | **`kotoba-lang/kami-genko`** が SSoT（B4実寸・コマ割り・吹き出し） |
-| **mangaka** | draw op → 画 | `jump/tools/build-page.cljs`（SVG を焼く。host の仕事） |
+| **mangaka** | draw op → 画 | `jump/tools/build-page.cljk`（SVG を焼く。host の仕事） |
 
 **genko はグリフを描かない。** `node->draws` は text ノードに 8×8 のマーカ矩形しか出さない。
 文字を置くのは host の責任なので、縦書きは1文字ずつ座標を出している。ここを混ぜない。
@@ -78,7 +78,7 @@ seedance  →  animeka  →  genko  →  mangaka
 # 3) ffmpeg で4フレーム抜いて <shots-dir>/{k1..k4}.jpg に置く
 # 4) 原稿に組む
 nbb --classpath "<kami-genko>/src:<canvaskit>/src" \
-    jump/tools/build-page.cljs <shots-dir> out.svg jump/tools/pages/oneshot-p12.edn
+    jump/tools/build-page.cljk <shots-dir> out.svg jump/tools/pages/oneshot-p12.edn
 rsvg-convert -w 1000 out.svg -o out.png
 ```
 

@@ -1,6 +1,6 @@
 # Producing an episode
 
-`bin/produce.cljs` is the command `kotoba-lang/loop-ka-production` invokes for
+`bin/produce.cljk` is the command `kotoba-lang/loop-ka-production` invokes for
 the `shiropico` channel. The split is the loop's, not ours:
 
 | owns | where |
@@ -11,10 +11,10 @@ the `shiropico` channel. The split is the loop's, not ours:
 
 ```bash
 CP=src:../../kotoba-lang/comfyui/src
-nbb --classpath $CP bin/produce.cljs episode-11              # render what is missing
-nbb --classpath $CP bin/produce.cljs episode-12 --lang zh
-nbb --classpath $CP bin/produce.cljs episode-11 --dry-run    # report without rendering
-nbb --classpath $CP bin/produce.cljs episode-11 --limit 2    # bound a run
+nbb --classpath $CP bin/produce.cljk episode-11              # render what is missing
+nbb --classpath $CP bin/produce.cljk episode-12 --lang zh
+nbb --classpath $CP bin/produce.cljk episode-11 --dry-run    # report without rendering
+nbb --classpath $CP bin/produce.cljk episode-11 --limit 2    # bound a run
 ```
 
 `kotoba-lang/comfyui` supplies `comfyui.native` / `comfyui.native-client` — the
@@ -126,7 +126,7 @@ through all four checkpoints the server has (2026-07-31,
 
 Illustrious is a **character** model, which is why it kept dropping industrial
 subjects; shiropico's shots are establishing shots. `scene-config` in
-`bin/produce.cljs` overrides the library default for this channel.
+`bin/produce.cljk` overrides the library default for this channel.
 
 ghosthacker deliberately keeps Illustrious: its panels are character-heavy manga
 and 255 of arc0-1's 257 are already drawn with that look, so switching would
@@ -139,7 +139,7 @@ loop's to settle.
 ## Tests
 
 ```bash
-nbb --classpath src:test test/shiropico_produce/produce_test.cljs
+nbb --classpath src:test test/shiropico_produce/produce_test.cljk
 ```
 
 Each case pins one bug the first working version shipped with, none of which
