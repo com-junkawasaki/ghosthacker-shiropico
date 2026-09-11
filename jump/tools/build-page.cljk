@@ -3,7 +3,7 @@
 ;;
 ;; 読切ネーム P.12（4コマ）を1枚の原稿に組む。
 ;;
-;;   nbb --classpath "<kami-genko>/src:<canvaskit>/src" jump/tools/build-page.cljs <shots-dir> <out.svg> [page.edn]
+;;   nbb --classpath "<kami-genko>/src:<canvaskit>/src" jump/tools/build-page.cljk <shots-dir> <out.svg> [page.edn]
 ;;
 ;; 各層の役割（勝手に混ぜない）:
 ;;   seedance : カットの映像を作る（murakumo generation、既に生成済みの mp4 を読む）

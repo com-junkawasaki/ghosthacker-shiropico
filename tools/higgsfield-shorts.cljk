@@ -7,7 +7,7 @@
 ;; 往復 2 プロセス。しかも bb は ADR-2607173000 で退役済みなので、この道具は
 ;; 方針上すでに壊れていた。nbb では EDN がそのまま読めるので、その全部が消える。
 ;;
-;;   nbb tools/higgsfield-shorts.cljs keyframes|clips \
+;;   nbb tools/higgsfield-shorts.cljk keyframes|clips \
 ;;       [--manifest shorts/episodes-02-05-higgsfield.edn] \
 ;;       [--ledger shorts/higgsfield-jobs.edn] [--dry-run]
 
@@ -29,7 +29,7 @@
 
 (defn- write-ledger! [m]
   (fs/writeFileSync ledger-path
-                    (str ";; 生成物 — tools/higgsfield-shorts.cljs が書く。手で編集しない。\n\n"
+                    (str ";; 生成物 — tools/higgsfield-shorts.cljk が書く。手で編集しない。\n\n"
                          (with-out-str (cljs.pprint/pprint m)))))
 
 (defn- run-json
@@ -52,7 +52,7 @@
 
 (defn -main []
   (when-not (#{"keyframes" "clips"} stage)
-    (c/die! "usage: nbb tools/higgsfield-shorts.cljs keyframes|clips [--manifest ...] [--ledger ...]"))
+    (c/die! "usage: nbb tools/higgsfield-shorts.cljk keyframes|clips [--manifest ...] [--ledger ...]"))
   (let [spec (or (read-edn manifest-path) (c/die! (str "manifest not found: " manifest-path)))
         ledger (atom (or (read-edn ledger-path) {:jobs {}}))]
     (fs/mkdirSync renders #js {:recursive true})

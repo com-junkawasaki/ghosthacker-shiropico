@@ -11,7 +11,7 @@
 ;; 再実行は安全 —— 同じ言語の 2 本目を YouTube が拒否するので、その項目だけ
 ;; 失敗として報告し、run 全体は止めない。
 ;;
-;;   nbb tools/youtube-attach-captions.cljs --authorized-user <token> \
+;;   nbb tools/youtube-attach-captions.cljk --authorized-user <token> \
 ;;       --ledger shorts/youtube-uploads-ep02-05.edn --captions-dir shorts/captions
 
 (ns youtube-attach-captions

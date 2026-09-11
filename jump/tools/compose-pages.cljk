@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
 ;; ページ EDN + コマ画像 → 原稿 SVG → PNG（1作品ぶんまとめて）
 ;;
-;;   nbb jump/tools/compose-pages.cljs --work ep01 \
+;;   nbb jump/tools/compose-pages.cljk --work ep01 \
 ;;     --art /tmp/art-ep01 --out /tmp/pages-ep01 \
 ;;     --classpath "<kami-genko>/src:<kami-mangaka-page>/src:<canvaskit>/src"
 ;;
@@ -44,7 +44,7 @@
           shots (path/join art (str "p" n))
           svg  (path/join out (str "p" (if (< n 10) (str "0" n) n) ".svg"))
           png  (str/replace svg #"\.svg$" ".png")
-          r1   (sh "nbb" ["--classpath" cp* "jump/tools/build-page.cljs"
+          r1   (sh "nbb" ["--classpath" cp* "jump/tools/build-page.cljk"
                           shots svg (path/join PAGES f)])
           ;; rsvg-convert は SVG を実寸で焼く。原稿は B4 なので幅で揃える。
           r2   (when (zero? (:code r1))

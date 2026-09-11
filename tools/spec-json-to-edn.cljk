@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
 ;; spec-json-to-edn.cljs — 設定 JSON を、この repo の他の .edn と同じ tx-data へ移す。
 ;;
-;;   nbb tools/spec-json-to-edn.cljs <in.json> <out.edn> <dataset>
+;;   nbb tools/spec-json-to-edn.cljk <in.json> <out.edn> <dataset>
 ;;
 ;; 変換規則（root の 3 spec を手で移したときの形に合わせてある）:
 ;;   - トップレベルの object 値      → 1 entity（:spec/kind はそのキー名）
@@ -95,10 +95,10 @@
 
 (let [[in out dataset] (drop 3 (vec (.-argv js/process)))]
   (when-not (and in out dataset)
-    (println "usage: nbb tools/spec-json-to-edn.cljs <in.json> <out.edn> <dataset>")
+    (println "usage: nbb tools/spec-json-to-edn.cljk <in.json> <out.edn> <dataset>")
     (js/process.exit 2))
   (let [entities (convert in dataset)
-        header (str ";; " out " — " in " から移行（2026-08-10、tools/spec-json-to-edn.cljs）。\n"
+        header (str ";; " out " — " in " から移行（2026-08-10、tools/spec-json-to-edn.cljk）。\n"
                     ";; この workspace の正本は EDN の datom 面なので JSON では query できない。\n"
                     ";; 値は変えていない（format 変換であって編集ではない）。\n"
                     ";; トップレベルは tx-data: (d/transact conn (edn/read-string (slurp ...)))\n\n")]

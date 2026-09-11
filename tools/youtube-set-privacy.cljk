@@ -12,7 +12,7 @@
 ;; embeddable / license が API 既定に戻る —— 子供向け channel では誰も
 ;; 頼んでいないコンプライアンス変更になる。
 ;;
-;;   nbb tools/youtube-set-privacy.cljs --authorized-user <token> \
+;;   nbb tools/youtube-set-privacy.cljk --authorized-user <token> \
 ;;       --ledger shorts/youtube-uploads-ep02-05.edn --privacy public [--confirm]
 
 (ns youtube-set-privacy

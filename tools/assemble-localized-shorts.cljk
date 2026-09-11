@@ -7,7 +7,7 @@
 ;; 元は**読めない 1 本の文字列リテラル**で、言語ごとに繰り返されていた。
 ;; 原稿・音声設定・素材クリップは shorts/narration.edn へ。
 ;;
-;;   nbb tools/assemble-localized-shorts.cljs [--episodes 2,3,4,5] [--dry-run]
+;;   nbb tools/assemble-localized-shorts.cljk [--episodes 2,3,4,5] [--dry-run]
 
 (ns assemble-localized-shorts
   (:require ["fs" :as fs]

@@ -298,7 +298,7 @@ Pup が紫である理由と、クロが黒である理由が、同じ根から�
 | `jump/SERIES-PROPOSAL.md` | 本書（連載企画書） |
 | `jump/KOMAWARI-DESIGN.md` | **コマ割りの設計と読書体験の数値化**（作家カタログの採用／beats→幾何／XMILE スコアラ） |
 | `jump/PRODUCTION.md` | **制作経路**（seedance 採用の根拠・費用・参照画像の契約・既知の未了） |
-| `jump/tools/build-page.cljs` ＋ `jump/tools/pages/*.edn` | ネーム → B4原稿を焼くパイプライン |
+| `jump/tools/build-page.cljk` ＋ `jump/tools/pages/*.edn` | ネーム → B4原稿を焼くパイプライン |
 | `jump/ART-DIRECTION.md` | **作画規約**（アクセントカラー／シルエット・テスト／**声の吹き出し仕様**／頭身／モノクロ処理／NG） |
 | `jump/character-design-spec.edn` | **キャラ設定データ**（既存 refs の流用指定＋新キャラ＋ComfyUI プロンプト） |
 | `jump/oneshot-45p.md` | **読切ネーム 45P**「かぞえる」※ 連載版とは別構造。45P で完結し、借りを残さない |

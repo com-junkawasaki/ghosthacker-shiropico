@@ -11,7 +11,7 @@
 ;; API は kotoba-lang/com-youtube。channel ガードも同 lib の
 ;; youtube.channels/assert-channel!（4 本が同じものを書いていたのを引き上げた）。
 ;;
-;;   nbb tools/youtube-publish.cljs --authorized-user <token> --episodes 2,3,4,5 \
+;;   nbb tools/youtube-publish.cljk --authorized-user <token> --episodes 2,3,4,5 \
 ;;       --media-dir shorts/masters --ledger shorts/youtube-uploads-ep02-05.edn \
 ;;       [--captions-dir shorts/captions] [--privacy unlisted] [--dry-run]
 ;;
